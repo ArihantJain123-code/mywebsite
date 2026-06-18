@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EdVidya | Compare & Choose Top Online Degree Programs</title>
+  <meta name="description" content="Find the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- --- HEADER & NAVIGATION --- -->
+  <header>
+    <div class="container navbar">
+      <div class="logo-container" id="navbar-logo">
+        <div class="logo-icon">E</div>
+        <div class="logo-text">Ed<span class="logo-subtext">Vidya</span></div>
+      </div>
+      
+      <div class="menu-toggle" id="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link active" data-target="home">Home</a></li>
+        <li><a class="nav-link" data-target="catalog">Find Degrees</a></li>
+        <li>
+          <a class="nav-link compare-badge-container" data-target="compare">
+            Compare Board
+            <span class="compare-badge" id="nav-compare-badge" style="display: none;">0</span>
+          </a>
+        </li>
+        <li><a class="nav-link" data-target="wizard">AI Matchmaker</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <a href="#wizard" class="btn btn-accent" style="padding: 10px 20px; font-size: 0.9rem;">
+          <i class="fas fa-magic"></i> Counseling Quiz
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- --- VIEW 1: HOME PAGE --- -->
+  <main>
+    <section id="home-view" class="view-section active">
+      <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+          <div class="hero-tag">UGC-DEB & AICTE Approved Degrees</div>
+          <h1>Find & Compare the Best <span>Online Universities</span></h1>
+          <p class="hero-subtitle">Make an informed decision. Compare fees, approvals, placement records, and learning management systems of top online colleges in India.</p>
+          
+          <!-- Quick Search Bar -->
+          <div class="search-container">
+            <div class="search-input-wrapper">
+              <i class="fas fa-search"></i>
+              <input type="text" id="home-search-input" placeholder="Search for courses or universities..." onkeyup="if(event.key === 'Enter') { window.location.hash = '#catalog'; document.getElementById('catalog-search').value = this.value; state.filters.searchQuery = this.value.toLowerCase(); renderCatalog(); }">
+            </div>
+            <button class="btn btn-primary" onclick="const q = document.getElementById('home-search-input').value; window.location.hash = '#catalog'; document.getElementById('catalog-search').value = q; state.filters.searchQuery = q.toLowerCase(); renderCatalog();">Search</button>
+          </div>
+          
+          <div class="hero-cta-group">
+            <button id="home-counseling-cta" class="btn btn-accent">
+              <i class="fas fa-compass"></i> Try AI Matchmaker Wizard
+            </button>
+            <button id="home-browse-cta" class="btn btn-outline">
+              Browse Courses
+            </button>
+          </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-badge-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h3>100% Approved Degrees</h3>
+            <p>All featured courses are UGC-DEB and AICTE approved, ensuring equivalent validity to regular degrees.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-badge-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <h3>Side-by-Side Comparison</h3>
+            <p>Compare universities across 15+ parameters including budget, curriculum, approvals, and LMS tools.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-badge-icon">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <h3>Free Expert Counseling</h3>
+            <p>Connect with expert counselors who guide you through fees, scholarships, and admissions support.</p>
+          </div>
+        </div>
+
+        <!-- Popular Online Degrees Section -->
+        <div class="section-header">
+          <h2>Popular Online Degree Programs</h2>
+          <p>Select a course below to explore and compare top accredited universities offering that curriculum.</p>
+        </div>
+        
+        <div class="degree-grid">
+          <div class="degree-card" data-course="mba">
+            <div class="degree-icon"><i class="fas fa-briefcase"></i></div>
+            <h3>Online MBA</h3>
+            <p>Boost your management skills. Leading specializations include Finance, Marketing, HR, and Analytics.</p>
+            <div class="degree-meta">
+              <span><i class="far fa-clock"></i> 2 Years</span>
+              <span>Avg Salary: 6-15 LPA</span>
+            </div>
+          </div>
+          
+          <div class="degree-card" data-course="bca">
+            <div class="degree-icon"><i class="fas fa-code"></i></div>
+            <h3>Online BCA</h3>
+            <p>Start your IT journey. Learn web design, database management, and programming languages.</p>
+            <div class="degree-meta">
+              <span><i class="far fa-clock"></i> 3 Years</span>
+              <span>Avg Salary: 3-7 LPA</span>
+            </div>
+          </div>
+          
+          <div class="degree-card" data-course="bba">
+            <div class="degree-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Online BBA</h3>
+            <p>Build a core foundation in business administration, administration strategies, and commerce values.</p>
+            <div class="degree-meta">
+              <span><i class="far fa-clock"></i> 3 Years</span>
+              <span>Avg Salary: 3-8 LPA</span>
+            </div>
+          </div>
+          
+          <div class="degree-card" data-course="mca">
+            <div class="degree-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Online MCA</h3>
+            <p>Master advanced software engineering, cloud architecture, and artificial intelligence tracks.</p>
+            <div class="degree-meta">
+              <span><i class="far fa-clock"></i> 2 Years</span>
+              <span>Avg Salary: 5-12 LPA</span>
+            </div>
+          </div>
+          
+          <div class="degree-card" data-course="mcom">
+            <div class="degree-icon"><i class="fas fa-calculator"></i></div>
+            <h3>Online M.Com</h3>
+            <p>Deepen your academic expertise in financial accounting, statistics, banking, and commercial law.</p>
+            <div class="degree-meta">
+              <span><i class="far fa-clock"></i> 2 Years</span>
+              <span>Avg Salary: 4-9 LPA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust Stats strip -->
+        <div class="stats-strip">
+          <div class="stat-box">
+            <div class="stat-number">25,000+</div>
+            <div class="stat-label">Students Counseled</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Approved Programs</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">12+</div>
+            <div class="stat-label">Top Online Partners</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">4.8★</div>
+            <div class="stat-label">Student Reviews</div>
+          </div>
+        </div>
+
+        <!-- Reviews / Testimonials Section -->
+        <div class="section-header">
+          <h2>What Students Say</h2>
+          <p>Read experiences from students who selected their universities using our counseling and comparison boards.</p>
+        </div>
+        
+        <div class="reviews-scroller">
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="review-text">"EdVidya made comparing fees incredibly easy. I saved nearly ₹50,000 by choosing Chandigarh University Online over a premium portal, with identical course accreditation."</p>
+            <div class="review-author">
+              <div class="author-avatar">A</div>
+              <div class="author-info">
+                <h4>Amit Sengupta</h4>
+                <p>Online MCA | Chandigarh University</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="review-text">"The AI Matchmaker wizard recommended Manipal Online based on my high preference for live lectures and budget. The counseling assistance was free and smooth."</p>
+            <div class="review-author">
+              <div class="author-avatar">R</div>
+              <div class="author-info">
+                <h4>Rachna Pillai</h4>
+                <p>Online MBA | Manipal Online</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="review-text">"I was confused between Amity Online and LPU Online. Using the side-by-side comparison sheet helped me realize the exact differences in LMS accessibility and placement partners."</p>
+            <div class="review-author">
+              <div class="author-avatar">S</div>
+              <div class="author-info">
+                <h4>Saurav Roy</h4>
+                <p>Online BCA | Amity Online</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- VIEW 2: COURSE CATALOG & LISTING --- -->
+    <section id="catalog-view" class="view-section">
+      <div class="container">
+        <!-- Course Header Summary -->
+        <div style="background-color: var(--primary-light); padding: 32px; border-radius: var(--radius-lg); margin-bottom: 32px; border: 1px solid rgba(79, 70, 229, 0.15);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:20px;">
+            <div style="flex: 1; min-width: 300px;">
+              <h2 id="catalog-course-name" style="font-size:2.2rem; color:var(--primary); margin-bottom:10px;">Online MBA</h2>
+              <p id="catalog-course-desc" style="color:var(--text-muted); font-size:1.05rem; max-width:750px;">Boost your management skills. Leading specializations include Finance, Marketing, HR, and Analytics.</p>
+            </div>
+            <div style="display:flex; gap:16px; background-color:white; padding: 16px 24px; border-radius:var(--radius-md); box-shadow:var(--shadow-sm); border:1px solid var(--border-color);">
+              <div style="text-align:center; padding-right:16px; border-right:1px solid var(--border-light);">
+                <div style="font-size:0.75rem; color:var(--text-light); font-weight:600;">DURATION</div>
+                <div id="course-meta-duration" style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main);">2 Years</div>
+              </div>
+              <div style="text-align:center; padding-right:16px; border-right:1px solid var(--border-light);">
+                <div style="font-size:0.75rem; color:var(--text-light); font-weight:600;">AVG SALARY</div>
+                <div id="course-meta-salary" style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800; color:var(--text-main);">6-15 LPA</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:0.75rem; color:var(--text-light); font-weight:600;">ELIGIBILITY</div>
+                <div id="course-meta-eligibility" style="font-size:0.85rem; font-weight:600; color:var(--text-main); max-width:180px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="Graduation Degree">Graduation Degree</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="catalog-layout">
+          <!-- Left Column: Filters Sidebar -->
+          <aside class="catalog-sidebar">
+            <div class="sidebar-title">
+              <h3>Filters</h3>
+              <button class="filter-clear-btn" id="clear-filters-btn">Clear All</button>
+            </div>
+            
+            <!-- Course Select Dropdown -->
+            <div class="filter-group">
+              <h4 style="margin-bottom:8px;">Switch Degree</h4>
+              <select id="catalog-course-select" style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); cursor:pointer;">
+                <option value="mba">Online MBA</option>
+                <option value="bca">Online BCA</option>
+                <option value="bba">Online BBA</option>
+                <option value="mca">Online MCA</option>
+                <option value="mcom">Online M.Com</option>
+              </select>
+            </div>
+            
+            <!-- Total Fee Budget -->
+            <div class="filter-group">
+              <h4>Max Course Fee</h4>
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-light); margin-bottom:8px;">
+                <span>₹10,000</span>
+                <span id="filter-fee-value" style="font-weight:700; color:var(--primary);">₹2,50,000</span>
+              </div>
+              <input type="range" id="filter-fee" min="15000" max="250000" step="5000" value="250000" style="width:100%; accent-color:var(--primary); cursor:pointer;">
+            </div>
+            
+            <!-- NAAC Grade -->
+            <div class="filter-group">
+              <h4>NAAC Grade</h4>
+              <div class="filter-options">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-naac" value="A++">
+                  <span>NAAC A++</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-naac" value="A+">
+                  <span>NAAC A+</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-naac" value="A">
+                  <span>NAAC A</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Approvals -->
+            <div class="filter-group">
+              <h4>Accreditation</h4>
+              <div class="filter-options">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-approval" value="UGC-DEB">
+                  <span>UGC-DEB Approved</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-approval" value="AICTE">
+                  <span>AICTE Approved</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-approval" value="WES">
+                  <span>WES Approved (Global)</span>
+                </label>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-approval" value="QS">
+                  <span>QS Stars Ranked</span>
+                </label>
+              </div>
+            </div>
+          </aside>
+          
+          <!-- Right Column: University Cards Grid -->
+          <div class="catalog-main">
+            <!-- Header actions -->
+            <div class="catalog-content-header">
+              <div style="flex:1; max-width:320px; position:relative;">
+                <i class="fas fa-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-light); font-size:0.9rem;"></i>
+                <input type="text" id="catalog-search" placeholder="Search university by name..." style="width:100%; padding:10px 10px 10px 36px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-size:0.9rem;">
+              </div>
+              <div class="catalog-sort">
+                <label for="catalog-sort-select">Sort By:</label>
+                <select id="catalog-sort-select">
+                  <option value="rating">Student Rating (High to Low)</option>
+                  <option value="fee-low">Total Fee (Low to High)</option>
+                  <option value="fee-high">Total Fee (High to Low)</option>
+                  <option value="placement">Placement Rate (High to Low)</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Dynamic University List -->
+            <div class="universities-list" id="universities-list-container">
+              <!-- JS Injected Cards -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- VIEW 3: COMPARE VIEW --- -->
+    <section id="compare-view" class="view-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>University Comparison Board</h2>
+          <p>Detailed, side-by-side matrices comparing tuition fees, accreditation status, academic quality parameters, and support channels.</p>
+        </div>
+        
+        <!-- Compare Table Container -->
+        <div id="compare-matrix-container">
+          <!-- JS Injected Matrix -->
+        </div>
+      </div>
+    </section>
+
+    <!-- --- VIEW 4: AI COUNSELING / MATCHMAKER WIZARD --- -->
+    <section id="wizard-view" class="view-section">
+      <div class="container">
+        <div class="wizard-container">
+          <!-- Wizard Banner -->
+          <div class="wizard-header">
+            <h2>AI-Powered University Matchmaker</h2>
+            <p>Answer a few questions to find the most suitable UGC-approved online universities for your profile.</p>
+          </div>
+          
+          <!-- Progress tracker -->
+          <div class="wizard-progress-bar-container">
+            <div class="wizard-progress-bar" id="wizard-progress-bar"></div>
+          </div>
+          
+          <!-- Wizard Body -->
+          <div class="wizard-body">
+            
+            <!-- STEP 1: Qualification -->
+            <div class="wizard-step active" id="wizard-step-1">
+              <div class="wizard-question">1. What is your current highest education qualification?</div>
+              <div class="wizard-options-grid">
+                <div class="wizard-option-card" onclick="selectWizardOption('qualification', '12th', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Class 12th / Higher Secondary Passed</span>
+                    <span class="wizard-option-desc">Looking for Bachelor's Degrees (BCA, BBA, B.Com)</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('qualification', 'graduate', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Graduation Completed</span>
+                    <span class="wizard-option-desc">Looking for Master's Degrees (MBA, MCA, M.Com)</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('qualification', 'postgraduate', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Postgraduation Completed</span>
+                    <span class="wizard-option-desc">Looking for Executive Programs or Second Masters</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- STEP 2: Course selection -->
+            <div class="wizard-step" id="wizard-step-2">
+              <div class="wizard-question">2. Which online degree are you planning to pursue?</div>
+              <div class="wizard-options-grid">
+                <div class="wizard-option-card" onclick="selectWizardOption('course', 'mba', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Online MBA (Management)</span>
+                    <span class="wizard-option-desc">Finance, Marketing, HR, Analytics specializations</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('course', 'bca', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Online BCA (IT & Software)</span>
+                    <span class="wizard-option-desc">Programming, Cloud, Cyber Security focuses</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('course', 'bba', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Online BBA (Business)</span>
+                    <span class="wizard-option-desc">Administration, Sales, Entrepreneurship foundations</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('course', 'mca', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Online MCA (Advanced Tech)</span>
+                    <span class="wizard-option-desc">Artificial Intelligence, Cyber Security, Full-stack engineering</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('course', 'mcom', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Online M.Com (Commerce)</span>
+                    <span class="wizard-option-desc">Advanced Finance, Taxation, Accountancy study</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- STEP 3: Budget Range -->
+            <div class="wizard-step" id="wizard-step-3">
+              <div class="wizard-question">3. What is your total budget limit for the entire degree?</div>
+              <div class="wizard-options-grid">
+                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-low', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Budget Friendly (Under ₹60,000 Total)</span>
+                    <span class="wizard-option-desc">Economical distance & government universities (e.g. IGNOU)</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-mid', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Moderate Fees (₹60,000 - ₹1,20,000 Total)</span>
+                    <span class="wizard-option-desc">Accredited private colleges with robust digital LMS portals</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-high', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>Premium Value (₹1,20,000 - ₹1,70,000 Total)</span>
+                    <span class="wizard-option-desc">Top-ranked tier-1 colleges with standard placement assistance</span>
+                  </div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-premium', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>
+                    <span>No bar / Executive Tier (Above ₹1,70,000 Total)</span>
+                    <span class="wizard-option-desc">Top global accreditations, international faculty & placement cell</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- STEP 4: Career Objective & Form -->
+            <div class="wizard-step" id="wizard-step-4">
+              <div class="wizard-question">4. What is your primary career goal and contact info?</div>
+              <div class="wizard-options-grid" style="margin-bottom:24px;">
+                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-job', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>Job Assistance & Placements</div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-hike', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>Career Hike / Salary Promotion in Current Job</div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-degree', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>Need standard UGC Degree for CV Validation</div>
+                </div>
+                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-study', this)">
+                  <div class="wizard-radio-circle"></div>
+                  <div>Preparing for UPSC / Govt Exams side-by-side</div>
+                </div>
+              </div>
+              
+              <!-- Contact Details before Recommendation -->
+              <form class="wizard-form" id="wizard-contact-form" onsubmit="submitWizardContact(event)">
+                <div style="border-top:1px solid var(--border-light); padding-top:20px; margin-top:20px; font-weight:600; font-size:0.95rem; color:var(--text-main);">
+                  Enter contact details to instantly unlock matching report:
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                  <div class="form-group">
+                    <label for="wiz-name">Full Name</label>
+                    <input type="text" id="wiz-name" required placeholder="Enter name">
+                  </div>
+                  <div class="form-group">
+                    <label for="wiz-phone">Mobile Number</label>
+                    <input type="tel" id="wiz-phone" required placeholder="10-digit number">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="wiz-email">Email Address</label>
+                  <input type="email" id="wiz-email" required placeholder="Enter email">
+                </div>
+                <button type="submit" style="display:none;" id="wizard-form-submit-hidden-btn"></button>
+              </form>
+            </div>
+            
+            <!-- STEP 5: RECOMMENDATIONS -->
+            <div class="wizard-step" id="wizard-step-5">
+              <div style="text-align:center; margin-bottom:24px;">
+                <div style="width: 60px; height: 60px; border-radius:50%; background-color:var(--secondary-light); color:var(--secondary); display:inline-flex; align-items:center; justify-content:center; font-size:1.8rem; margin-bottom:12px;">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 style="font-size:1.4rem;">Top Recommended Universities for You</h3>
+                <p style="color:var(--text-light); font-size:0.9rem;">Based on your career criteria, budget tiers, and study constraints.</p>
+              </div>
+              
+              <!-- Match List -->
+              <div id="wizard-recommendations-list" class="recs-list">
+                <!-- Injected Recommendations -->
+              </div>
+              
+              <div style="text-align:center;">
+                <button class="btn btn-outline" onclick="resetWizard()">Restart Quiz</button>
+              </div>
+            </div>
+
+            <!-- Footer navigation buttons inside wizard -->
+            <div class="wizard-footer-nav">
+              <button class="btn btn-text" id="wizard-prev-btn" style="display:none;"><i class="fas fa-arrow-left"></i> Previous</button>
+              <!-- Show trigger for form submit when on step 4, else standard trigger -->
+              <button class="btn btn-primary" id="wizard-next-btn" onclick="if(state.wizard.currentStep === 4) { document.getElementById('wizard-form-submit-hidden-btn').click(); }">Next Step <i class="fas fa-arrow-right"></i></button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- --- FLOATING COMPARE BOTTOM TRAY --- -->
+  <div class="compare-tray" id="compare-tray">
+    <div class="compare-tray-items" id="compare-tray-items">
+      <!-- pills -->
+    </div>
+    <button class="btn btn-accent" id="compare-tray-action-btn">Compare Now (0/3)</button>
+  </div>
+
+  <!-- --- UNIVERSITY DETAIL MODAL OVERLAY --- -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-content-container">
+      <!-- Close Btn -->
+      <div class="modal-close-btn" id="modal-detail-close">
+        <i class="fas fa-times"></i>
+      </div>
+      
+      <!-- Modal Banner -->
+      <div class="modal-hero-banner">
+        <div style="display:flex; align-items:center; gap:20px; margin-bottom:16px;">
+          <div class="uni-logo-badge" id="modal-banner-logo" style="width:70px; height:70px; font-size:2rem;">MU</div>
+          <div>
+            <h2 id="modal-uni-name">Manipal University Online</h2>
+            <div class="modal-hero-meta">
+              <span id="modal-banner-naac">NAAC A+</span>
+              <span id="modal-banner-rating"><i class="fas fa-star" style="color: #FBBF24;"></i> 4.8 (342 reviews)</span>
+              <span><i class="fas fa-shield-alt"></i> UGC-DEB Approved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tabs Navigation -->
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" data-tab="overview">Overview</button>
+        <button class="modal-tab-btn" data-tab="fees">Fees Structure</button>
+        <button class="modal-tab-btn" data-tab="placements">Placements</button>
+        <button class="modal-tab-btn" data-tab="reviews">Reviews</button>
+      </div>
+      
+      <!-- Tabs Content Wrapper -->
+      <div class="modal-tab-content-wrapper">
+        
+        <!-- Tab: Overview -->
+        <div class="modal-tab-pane active" id="tab-overview">
+          <div class="overview-grid">
+            <div class="overview-left">
+              <h3 class="detail-section-title">About the University</h3>
+              <p id="modal-overview-desc" style="color: var(--text-muted); margin-bottom:24px;">University description goes here...</p>
+              
+              <h3 class="detail-section-title">Key Highlights</h3>
+              <ul class="features-list-detail" id="modal-overview-features-list">
+                <!-- Injected Features -->
+              </ul>
+              
+              <h3 class="detail-section-title">Prominent Hiring Partners</h3>
+              <div class="partners-logos-grid" id="modal-overview-partners-grid">
+                <!-- Injected Logos -->
+              </div>
+            </div>
+            
+            <!-- Sidebar: Inquiry callback Form -->
+            <div class="overview-right">
+              <div class="detail-cta-box">
+                <h3 style="color:var(--primary); font-weight:700;"><i class="fas fa-headset"></i> Quick Advisory</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted);">Get free university brochure, fee installment details, and eligibility criteria checks.</p>
+                <form>
+                  <input type="text" id="detail-form-name" placeholder="Full Name" required>
+                  <input type="tel" id="detail-form-phone" placeholder="Mobile Number" required>
+                  <button type="submit" class="btn btn-primary" id="modal-cta-submit-btn" style="padding:10px; font-size:0.85rem;">Request Callback</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tab: Fees & Course Lists -->
+        <div class="modal-tab-pane" id="tab-fees">
+          <h3 class="detail-section-title">Tuition Fee Details</h3>
+          <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom:16px;">Detailed fees for the selected program. Tuition fee schedules include LMS tools and academic certifications.</p>
+          
+          <table class="fee-table">
+            <thead>
+              <tr>
+                <th>Program Name</th>
+                <th>Course Duration</th>
+                <th>Fee Per Semester</th>
+                <th>Total Course Fee</th>
+              </tr>
+            </thead>
+            <tbody id="modal-fees-table-tbody">
+              <!-- Injected Tuition row -->
+            </tbody>
+          </table>
+          
+          <div id="modal-fees-emi-detail" style="background-color: var(--border-light); padding:16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+            <!-- Emi text dynamic -->
+          </div>
+        </div>
+        
+        <!-- Tab: Placements -->
+        <div class="modal-tab-pane" id="tab-placements">
+          <div style="display:flex; align-items:center; gap:24px; background-color:var(--secondary-light); border:1px solid rgba(13, 148, 136, 0.15); padding:20px; border-radius:var(--radius-md); margin-bottom:24px;">
+            <div style="font-size: 3rem; color: var(--secondary); font-weight:800; font-family:var(--font-heading);" id="modal-placement-rate-val">88%</div>
+            <div>
+              <h3 style="font-size:1.15rem; color:var(--secondary-hover);">Average Placement Assistance Rate</h3>
+              <p style="color:var(--text-muted); font-size:0.85rem;">Includes career preparation bootcamps, resume vetting, mock tests, and exclusive access to virtual recruitment portals.</p>
+            </div>
+          </div>
+          
+          <h3 class="detail-section-title">Top Companies Hiring from this Campus</h3>
+          <div class="partners-logos-grid" id="modal-placement-partners-list" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+            <!-- Partners dynamic list -->
+          </div>
+        </div>
+        
+        <!-- Tab: Reviews -->
+        <div class="modal-tab-pane" id="tab-reviews">
+          <div class="reviews-tab-container">
+            <!-- Reviews Container list -->
+            <div>
+              <h3 class="detail-section-title">What Students Say</h3>
+              <div id="modal-reviews-list" style="margin-top:16px;">
+                <!-- List of student reviews -->
+              </div>
+            </div>
+            
+            <!-- Submit Review Form -->
+            <div class="add-review-section">
+              <h3 style="font-size:1.1rem; margin-bottom:10px;"><i class="fas fa-edit"></i> Write a Student Review</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Share your learning experience, comments on course curriculum, or placement cell support.</p>
+              
+              <form id="modal-add-review-form">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                  <div class="form-group">
+                    <label for="rev-author">Student Name</label>
+                    <input type="text" id="rev-author" required placeholder="Enter your name">
+                  </div>
+                  <div class="form-group">
+                    <label>Overall Course Rating</label>
+                    <div class="rating-select-wrapper" style="margin-top:6px;">
+                      <!-- star selection buttons injected dynamically -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="rev-text">Student Feedback</label>
+                  <textarea id="rev-text" required placeholder="Describe LMS quality, live lectures, fees transparency, exams schedule etc..." rows="3" style="width:100%; padding:12px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="align-self:flex-start; font-size:0.88rem; padding:10px 20px;">Submit Student Review</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- --- FOOTER --- -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <div class="logo-container">
+          <div class="logo-icon" style="background:var(--secondary)">E</div>
+          <div class="logo-text">Ed<span class="logo-subtext">Vidya</span></div>
+        </div>
+        <p class="footer-desc">India's premium online degree comparison portal. Empowering working professionals and students to match academic goals with fully accredited UGC-DEB universities.</p>
+      </div>
+      
+      <div class="footer-links-col">
+        <h4>Degree Courses</h4>
+        <ul>
+          <li><a href="#catalog?course=mba">Online MBA</a></li>
+          <li><a href="#catalog?course=bca">Online BCA</a></li>
+          <li><a href="#catalog?course=bba">Online BBA</a></li>
+          <li><a href="#catalog?course=mca">Online MCA</a></li>
+          <li><a href="#catalog?course=mcom">Online M.Com</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-links-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#compare">Compare Board</a></li>
+          <li><a href="#wizard">AI Matchmaker</a></li>
+          <li><a href="#home">Success Stories</a></li>
+          <li><a href="#catalog">Free Counseling</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-newsletter-col">
+        <h4>Weekly Newsletter</h4>
+        <p>Subscribe to receive news about admission deadlines, scholarship updates, and distance degree regulations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully! Thank you for choosing EdVidya.'); this.reset();">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary" style="padding:10px 16px;"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <div>&copy; 2026 EdVidya. All Rights Reserved. Made for modern digital education comparisons.</div>
+      <div class="footer-socials">
+        <a class="social-icon" href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a class="social-icon" href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a class="social-icon" href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a class="social-icon" href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- --- SCRIPTS INJECTION --- -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
