@@ -485,8 +485,8 @@ window.toggleCompare = function(uniId, event) {
     state.compareList.splice(index, 1);
   } else {
     // Add
-    if (state.compareList.length >= 3) {
-      alert("You can compare a maximum of 3 universities at once!");
+    if (state.compareList.length >= 2) {
+      alert("You can compare a maximum of 2 universities at once!");
       return;
     }
     state.compareList.push(uniId);
@@ -522,7 +522,7 @@ function updateCompareTray() {
   }
   
   tray.classList.add("show");
-  container.innerHTML = `<span class="compare-tray-title">Compare (Max 3):</span>`;
+  container.innerHTML = `<span class="compare-tray-title">Compare (Max 2):</span>`;
   
   state.compareList.forEach(id => {
     const uni = UNIVERSITIES.find(u => u.id === id);
@@ -542,147 +542,303 @@ function updateCompareTray() {
   // Update action button text
   const actionBtn = document.getElementById("compare-tray-action-btn");
   if (actionBtn) {
-    actionBtn.textContent = `Compare Now (${count}/3)`;
+    actionBtn.textContent = `Compare Now (${count}/2)`;
   }
 }
 
 // --- Render Comparison Matrix Page ---
+// Helper to estimate average package range per course and university rating/placement
+function getUniversityAvgSalary(uni, course) {
+  const baseSalaries = {
+    "mba": { min: 4, max: 12 },
+    "mca": { min: 4, max: 10 },
+    "bca": { min: 3, max: 6 },
+    "bba": { min: 3, max: 7 },
+    "mcom": { min: 3.5, max: 7.5 }
+  };
+  const courseRange = baseSalaries[course] || { min: 3, max: 8 };
+  
+  // Calculate a factor between 0.1 and 1.0 based on placement rate and rating
+  const factor = ((uni.placementRate || 80) - 70) / 20 * 0.5 + ((uni.rating || 4.0) - 4.0) * 0.5;
+  const scaledFactor = Math.max(0.1, Math.min(1.0, factor));
+  
+  const minSalary = courseRange.min + scaledFactor * (courseRange.max - courseRange.min) * 0.8;
+  const maxSalary = minSalary + 1.5 + (1 - scaledFactor) * 1.5;
+  
+  return {
+    min: Math.round(minSalary * 10) / 10,
+    max: Math.round(maxSalary * 10) / 10
+  };
+}
+
+// --- Render Comparison Matrix Page ---
 function renderCompareMatrix() {
-  const container = document.getElementById("compare-matrix-container");
-  if (!container) return;
+  const select1 = document.getElementById("compare-select-1");
+  const select2 = document.getElementById("compare-select-2");
   
-  container.innerHTML = "";
+  if (!select1 || !select2) return;
   
-  if (state.compareList.length === 0) {
-    container.innerHTML = `
-      <div class="compare-empty-state">
-        <i class="fas fa-balance-scale"></i>
-        <h3>Your Comparison Board is Empty</h3>
-        <p>Go to the course listing page, check the "Compare" box on up to 3 universities, and see their stats side-by-side.</p>
-        <button class="btn btn-primary" style="margin-top: 20px;" onclick="window.location.hash='#catalog'">Go to Course Catalog</button>
-      </div>
-    `;
-    return;
+  // 1. Populate selectors dynamically if they are empty
+  if (select1.options.length === 0) {
+    UNIVERSITIES.forEach(uni => {
+      const opt1 = new Option(uni.name, uni.id);
+      const opt2 = new Option(uni.name, uni.id);
+      select1.add(opt1);
+      select2.add(opt2);
+    });
+    
+    // Bind change events
+    select1.addEventListener("change", () => {
+      state.compareList[0] = select1.value;
+      updateSelectDisables(select1, select2);
+      updateCompareTray();
+      renderCompareData();
+    });
+    
+    select2.addEventListener("change", () => {
+      state.compareList[1] = select2.value;
+      updateSelectDisables(select1, select2);
+      updateCompareTray();
+      renderCompareData();
+    });
   }
   
-  // Load compared university profiles
-  const comparedUnis = state.compareList.map(id => UNIVERSITIES.find(u => u.id === id)).filter(Boolean);
+  // 2. Set initial values based on global comparison state
+  if (state.compareList.length >= 2) {
+    select1.value = state.compareList[0];
+    select2.value = state.compareList[1];
+  } else if (state.compareList.length === 1) {
+    select1.value = state.compareList[0];
+    // Find a different default for the second select
+    const default2 = UNIVERSITIES.find(u => u.id !== state.compareList[0])?.id || UNIVERSITIES[0].id;
+    select2.value = default2;
+    state.compareList = [state.compareList[0], default2];
+  } else {
+    // Both empty, pick first two
+    select1.value = UNIVERSITIES[0]?.id;
+    select2.value = UNIVERSITIES[1]?.id;
+    state.compareList = [UNIVERSITIES[0]?.id, UNIVERSITIES[1]?.id];
+  }
   
-  // Prepare Table Structure
-  const table = document.createElement("table");
-  table.className = "compare-table";
+  updateSelectDisables(select1, select2);
+  updateCompareTray();
+  renderCompareData();
+}
+
+function updateSelectDisables(select1, select2) {
+  const val1 = select1.value;
+  const val2 = select2.value;
   
-  // 1. HEADERS ROW (Logo, Name, Remove btn)
-  let headerHtml = `<th class="compare-th-label">University Profile</th>`;
-  comparedUnis.forEach(uni => {
-    headerHtml += `
-      <th class="compare-header-cell">
-        <button class="compare-remove-btn" onclick="toggleCompare('${uni.id}', event)"><i class="fas fa-times-circle"></i></button>
-        <div class="compare-uni-card-header">
-          <div class="uni-logo-badge" style="background: ${uni.logoColor}; margin: 0 auto; width: 60px; height: 60px; font-size: 1.5rem;">${uni.logoInitials}</div>
-          <div class="compare-uni-name" style="text-align: center;">${uni.name}</div>
-        </div>
-      </th>
-    `;
+  Array.from(select1.options).forEach(opt => {
+    opt.disabled = (opt.value === val2);
   });
+  Array.from(select2.options).forEach(opt => {
+    opt.disabled = (opt.value === val1);
+  });
+}
+
+function renderCompareData() {
+  const select1 = document.getElementById("compare-select-1");
+  const select2 = document.getElementById("compare-select-2");
+  if (!select1 || !select2) return;
   
-  // Build details rows
-  const fields = [
-    { label: "NAAC Grade", key: "naacGrade", type: "text" },
-    { 
-      label: "Course Fee Total", 
-      key: "feeTotal", 
-      type: "custom",
-      render: (uni) => {
-        const fee = uni.courses[state.selectedCourse]?.feeTotal;
-        return fee ? `<span class="compare-fee-val">₹${fee.toLocaleString("en-IN")}</span>` : "N/A";
-      }
-    },
-    { 
-      label: "Semester Fee", 
-      key: "feeSemester", 
-      type: "custom",
-      render: (uni) => {
-        const fee = uni.courses[state.selectedCourse]?.feeSemester;
-        return fee ? `₹${fee.toLocaleString("en-IN")}` : "N/A";
-      }
-    },
-    { 
-      label: "Approvals", 
-      key: "approvals", 
-      type: "custom",
-      render: (uni) => {
-        const list = uni.approvals.map(app => `<div class="compare-approval-item">${app}</div>`).join("");
-        return `<div class="compare-approvals-list">${list}</div>`;
-      }
-    },
-    { 
-      label: "LMS Quality Rating", 
-      key: "lmsRating", 
-      type: "custom",
-      render: (uni) => `<strong>${uni.lmsRating} / 5.0</strong>`
-    },
-    { 
-      label: "Placement Assistance", 
-      key: "placementRate", 
-      type: "custom",
+  const id1 = select1.value;
+  const id2 = select2.value;
+  
+  const uniA = UNIVERSITIES.find(u => u.id === id1);
+  const uniB = UNIVERSITIES.find(u => u.id === id2);
+  if (!uniA || !uniB) return;
+  
+  const course = state.selectedCourse || "mba";
+  
+  // --- A. Render Performance & Value Charts ---
+  // Average Salary
+  const salaryA = getUniversityAvgSalary(uniA, course);
+  const salaryB = getUniversityAvgSalary(uniB, course);
+  const salaryTextA = `₹${salaryA.min}-${salaryA.max} LPA`;
+  const salaryTextB = `₹${salaryB.min}-${salaryB.max} LPA`;
+  
+  const maxSalaryScale = 16.0;
+  const salaryPctA = Math.min(100, (salaryA.max / maxSalaryScale) * 100);
+  const salaryPctB = Math.min(100, (salaryB.max / maxSalaryScale) * 100);
+  
+  const salaryBarsContainer = document.getElementById("compare-salary-bars");
+  if (salaryBarsContainer) {
+    salaryBarsContainer.innerHTML = `
+      <div class="chart-bar-item">
+        <div class="chart-bar-label-row">
+          <span class="chart-bar-uni-name">${uniA.name}</span>
+          <span class="chart-bar-value salary">${salaryTextA}</span>
+        </div>
+        <div class="chart-bar-track">
+          <div class="chart-bar-fill fill-salary-1" style="width: ${salaryPctA}%"></div>
+        </div>
+      </div>
+      <div class="chart-bar-item">
+        <div class="chart-bar-label-row">
+          <span class="chart-bar-uni-name">${uniB.name}</span>
+          <span class="chart-bar-value salary">${salaryTextB}</span>
+        </div>
+        <div class="chart-bar-track">
+          <div class="chart-bar-fill fill-salary-2" style="width: ${salaryPctB}%"></div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // Total Tuition Fee
+  const feeTotalA = uniA.courses[course]?.feeTotal || 0;
+  const feeTotalB = uniB.courses[course]?.feeTotal || 0;
+  const feeTextA = `₹${(feeTotalA / 100000).toFixed(2)} Lakhs`;
+  const feeTextB = `₹${(feeTotalB / 100000).toFixed(2)} Lakhs`;
+  
+  const maxFeeScale = 250000.0;
+  const feePctA = Math.min(100, (feeTotalA / maxFeeScale) * 100);
+  const feePctB = Math.min(100, (feeTotalB / maxFeeScale) * 100);
+  
+  const feeBarsContainer = document.getElementById("compare-fee-bars");
+  if (feeBarsContainer) {
+    feeBarsContainer.innerHTML = `
+      <div class="chart-bar-item">
+        <div class="chart-bar-label-row">
+          <span class="chart-bar-uni-name">${uniA.name}</span>
+          <span class="chart-bar-value fee">${feeTextA}</span>
+        </div>
+        <div class="chart-bar-track">
+          <div class="chart-bar-fill fill-fee" style="width: ${feePctA}%"></div>
+        </div>
+      </div>
+      <div class="chart-bar-item">
+        <div class="chart-bar-label-row">
+          <span class="chart-bar-uni-name">${uniB.name}</span>
+          <span class="chart-bar-value fee">${feeTextB}</span>
+        </div>
+        <div class="chart-bar-track">
+          <div class="chart-bar-fill fill-fee" style="width: ${feePctB}%"></div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // --- B. Render Comparison Table ---
+  const table = document.getElementById("compare-table-element");
+  if (!table) return;
+  
+  // Table Head
+  const headHtml = `
+    <thead>
+      <tr>
+        <th>Features</th>
+        <th>
+          <div class="compare-header-card">
+            <div class="compare-header-logo" style="background: ${uniA.logoColor}">${uniA.logoInitials}</div>
+            <div class="compare-header-info">
+              <h3>${uniA.name}</h3>
+              <div class="compare-header-stars">
+                <i class="fas fa-star"></i>
+                <span>★ ${uniA.rating} / 5.0</span>
+              </div>
+            </div>
+          </div>
+        </th>
+        <th>
+          <div class="compare-header-card">
+            <div class="compare-header-logo" style="background: ${uniB.logoColor}">${uniB.logoInitials}</div>
+            <div class="compare-header-info">
+              <h3>${uniB.name}</h3>
+              <div class="compare-header-stars">
+                <i class="fas fa-star"></i>
+                <span>★ ${uniB.rating} / 5.0</span>
+              </div>
+            </div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+  `;
+  
+  // Table rows fields
+  const rows = [
+    {
+      label: "Accreditations",
       render: (uni) => `
-        <div class="compare-rating-val">${uni.placementRate}% Placement</div>
-        <div style="font-size: 0.8rem; margin-top: 4px; color: var(--text-light)">Top partners: ${uni.placementPartners.slice(0, 3).join(", ")}</div>
+        <span class="compare-emerald-tag">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          UGC-DEB, NAAC ${uni.naacGrade}
+        </span>
       `
     },
-    { 
-      label: "Key Features", 
-      key: "features", 
-      type: "custom",
-      render: (uni) => {
-        const list = uni.features.map(f => `<li>${f}</li>`).join("");
-        return `<ul class="compare-features-list">${list}</ul>`;
-      }
+    {
+      label: "Total Fee Program",
+      render: (uni) => `<span class="compare-detail-fee">₹${(uni.courses[course]?.feeTotal || 0).toLocaleString("en-IN")}</span>`
     },
-    { 
-      label: "EMI Starts At", 
-      key: "emiStarts", 
-      type: "text"
+    {
+      label: "Semester Fee",
+      render: (uni) => `<span class="compare-sem-fee">₹${(uni.courses[course]?.feeSemester || 0).toLocaleString("en-IN")} / Sem</span>`
+    },
+    {
+      label: "Average Package",
+      render: (uni) => `<span class="compare-pkg-text">${uni === uniA ? salaryTextA : salaryTextB}</span>`
+    },
+    {
+      label: "Approvals",
+      render: (uni) => `
+        <div class="compare-approval-bubble-list">
+          ${uni.approvals.map(app => `<span class="compare-approval-bubble">${app}</span>`).join("")}
+        </div>
+      `
+    },
+    {
+      label: "LMS Quality Rating",
+      render: (uni) => `<strong>${uni.lmsRating} / 5.0</strong>`
+    },
+    {
+      label: "Placement Rate",
+      render: (uni) => `
+        <strong>${uni.placementRate}% Placement Assistance</strong>
+        <div style="font-size: 0.75rem; color: #64748b; margin-top: 4px;">Top Hiring Partners: ${uni.placementPartners.slice(0, 3).join(", ")}</div>
+      `
+    },
+    {
+      label: "Key Features",
+      render: (uni) => `
+        <ul class="compare-features-bullet-list">
+          ${uni.features.map(f => `<li><i class="fas fa-check"></i> <span>${f}</span></li>`).join("")}
+        </ul>
+      `
+    },
+    {
+      label: "EMI Option",
+      render: (uni) => `Starts at <strong>${uni.emiStarts}</strong>`
     },
     {
       label: "Action",
-      key: "action",
-      type: "custom",
       render: (uni) => `
-        <div style="display:flex; flex-direction:column; gap: 8px;">
-          <button class="btn btn-primary" style="padding: 8px 16px; font-size:0.85rem;" onclick="openModal('${uni.id}')">View Details</button>
-          <button class="btn btn-accent" style="padding: 8px 16px; font-size:0.85rem;" onclick="startCounselingWithUni('${uni.id}')">Get counseling</button>
+        <div class="compare-actions-cell">
+          <button class="btn btn-primary" onclick="openModal('${uni.id}')">View Details</button>
+          <button class="btn btn-accent" onclick="startCounselingWithUni('${uni.id}')">Get Counseling</button>
         </div>
       `
     }
   ];
   
   let rowsHtml = "";
-  fields.forEach(field => {
-    rowsHtml += `<tr><td class="compare-th-label">${field.label}</td>`;
-    comparedUnis.forEach(uni => {
-      let cellVal = "";
-      if (field.type === "text") {
-        cellVal = uni[field.key] || "N/A";
-      } else if (field.type === "custom") {
-        cellVal = field.render(uni);
-      }
-      rowsHtml += `<td class="compare-value-cell">${cellVal}</td>`;
-    });
-    rowsHtml += `</tr>`;
+  rows.forEach(row => {
+    rowsHtml += `
+      <tr>
+        <td>${row.label}</td>
+        <td>${row.render(uniA)}</td>
+        <td>${row.render(uniB)}</td>
+      </tr>
+    `;
   });
   
   table.innerHTML = `
-    <thead>
-      <tr>${headerHtml}</tr>
-    </thead>
+    ${headHtml}
     <tbody>
       ${rowsHtml}
     </tbody>
   `;
-  
-  container.appendChild(table);
 }
 
 // --- AI COUNSELING / MATCHMAKER WIZARD ---
