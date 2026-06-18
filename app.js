@@ -834,10 +834,10 @@ function calculateRecommendations() {
     } else if (answers.goal === "goal-degree") {
       // Weight low fee structure & brand name
       if (courseFee < 100000) score += 20;
-      if (uni.id === "ignou") score += 15; // standard govt degree
+      if (uni.id === "andhra_university_online" || uni.id === "kurukshetra_university_online") score += 15; // standard govt degree
     } else if (answers.goal === "goal-study") {
       // Academics focus
-      if (uni.id === "ignou" || uni.id === "manipal") score += 20;
+      if (uni.id === "andhra_university_online" || uni.id === "kurukshetra_university_online" || uni.id === "manipal_university_jaipur_online") score += 20;
     }
     
     // Cap score at 99%, minimum at 40%
