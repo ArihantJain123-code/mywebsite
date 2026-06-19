@@ -466,7 +466,57 @@ function setupEventListeners() {
     });
   }
 
-  // Accordion FAQs toggle logic
+// --- INQUIRY MODAL LOGIC ---
+const inquiryModal = document.getElementById("inquiry-modal");
+const inquiryOpenBtn = document.getElementById("open-inquiry-modal");
+const inquiryCloseBtn = document.getElementById("inquiry-modal-close");
+const inquiryForm = document.getElementById("inquiry-form");
+const inquirySuccess = document.getElementById("inquiry-success");
+const inquiryResetBtn = document.getElementById("inquiry-reset-btn");
+
+if (inquiryOpenBtn) {
+  inquiryOpenBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (inquiryModal) inquiryModal.style.display = "flex";
+  });
+}
+if (inquiryCloseBtn) {
+  inquiryCloseBtn.addEventListener("click", () => {
+    if (inquiryModal) inquiryModal.style.display = "none";
+  });
+}
+if (inquiryForm) {
+  inquiryForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("inquiry-name").value.trim();
+    const email = document.getElementById("inquiry-email").value.trim();
+    const phone = document.getElementById("inquiry-phone").value.trim();
+    const location = document.getElementById("inquiry-location").value.trim();
+    const budget = document.getElementById("inquiry-budget").value;
+    const course = document.getElementById("inquiry-course").value;
+    const message = document.getElementById("inquiry-message").value.trim();
+    const inquiry = { name, email, phone, location, budget, course, message, date: new Date().toISOString() };
+    let inquiries = [];
+    const stored = localStorage.getItem("portal_inquiry_submissions");
+    if (stored) inquiries = JSON.parse(stored);
+    inquiries.push(inquiry);
+    localStorage.setItem("portal_inquiry_submissions", JSON.stringify(inquiries));
+    inquiryForm.style.display = "none";
+    if (inquirySuccess) inquirySuccess.style.display = "block";
+  });
+}
+if (inquiryResetBtn) {
+  inquiryResetBtn.addEventListener("click", () => {
+    if (inquiryForm) {
+      inquiryForm.reset();
+      inquiryForm.style.display = "flex";
+    }
+    if (inquirySuccess) inquirySuccess.style.display = "none";
+    if (inquiryModal) inquiryModal.style.display = "none";
+  });
+}
+
+// --- Accordion FAQs toggle logic
   const accordionTitles = document.querySelectorAll(".contact-accordion .accordion-title");
   accordionTitles.forEach(title => {
     title.addEventListener("click", () => {
