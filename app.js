@@ -1088,193 +1088,21 @@ function renderCompareData() {
   `;
 }
 
-
-
 window.startCounselingWithUni = function(uniId) {
-  const uni = UNIVERSITIES.find(u => u.id === uniId);
-  if (!uni) return;
-  
-  // Open details and focus overview/counseling tab, or trigger counseling form
-  openModal(uniId);
-  // Auto-scroll to sidebar form in modal
-  setTimeout(() => {
-    const formName = document.getElementById("detail-form-name");
-    if (formName) {
-      formName.scrollIntoView({ behavior: "smooth" });
-      formName.focus();
-    }
-  }, 400);
+  // Open inquiry modal directly
+  const inquiryModal = document.getElementById("inquiry-modal");
+  if (inquiryModal) {
+    inquiryModal.style.display = "flex";
+  }
 };
 
 // --- UNIVERSITY DETAIL MODAL ACTIONS ---
 window.openModal = function(uniId) {
-  const uni = UNIVERSITIES.find(u => u.id === uniId);
-  if (!uni) return;
-  
-  const overlay = document.getElementById("modal-overlay");
-  const bannerName = document.getElementById("modal-uni-name");
-  const bannerNaac = document.getElementById("modal-banner-naac");
-  const bannerRating = document.getElementById("modal-banner-rating");
-  const bannerLogo = document.getElementById("modal-banner-logo");
-  
-  if (!overlay) return;
-  
-  // Reset tabs to Overview
-  document.querySelectorAll(".modal-tab-btn").forEach(btn => btn.classList.remove("active"));
-  document.querySelectorAll(".modal-tab-pane").forEach(pane => pane.classList.remove("active"));
-  
-  const overviewTabBtn = document.querySelector('.modal-tab-btn[data-tab="overview"]');
-  const overviewPane = document.getElementById("tab-overview");
-  if (overviewTabBtn) overviewTabBtn.classList.add("active");
-  if (overviewPane) overviewPane.classList.add("active");
-  
-  // Set modal header details
-  bannerName.textContent = uni.name;
-  bannerNaac.textContent = `NAAC ${uni.naacGrade}`;
-  bannerRating.innerHTML = `<i class="fas fa-star" style="color: #FBBF24;"></i> ${uni.rating} (${uni.reviewsCount} reviews)`;
-  
-  bannerLogo.style.background = uni.logoColor;
-  bannerLogo.textContent = uni.logoInitials;
-  
-  // Populate Tab 1: Overview
-  document.getElementById("modal-overview-desc").textContent = uni.description;
-  
-  const featuresList = document.getElementById("modal-overview-features-list");
-  featuresList.innerHTML = uni.features.map(f => `<li>${f}</li>`).join("");
-  
-  const partnersGrid = document.getElementById("modal-overview-partners-grid");
-  partnersGrid.innerHTML = uni.placementPartners.map(p => `
-    <div class="partner-logo-item">${p}</div>
-  `).join("");
-  
-  // Set inline form target hidden field
-  const modalCtaBtn = document.getElementById("modal-cta-submit-btn");
-  if (modalCtaBtn) {
-    modalCtaBtn.onclick = (e) => {
-      e.preventDefault();
-      const name = document.getElementById("detail-form-name").value;
-      const phone = document.getElementById("detail-form-phone").value;
-      if (!name || !phone) {
-        alert("Please enter your name and phone number.");
-        return;
-      }
-      alert(`Success! Advisors for ${uni.name} will call you back on ${phone} to assist with the admission process.`);
-      // Clear form
-      document.getElementById("detail-form-name").value = "";
-      document.getElementById("detail-form-phone").value = "";
-    };
+  // Open inquiry modal instead of the university detail modal
+  const inquiryModal = document.getElementById("inquiry-modal");
+  if (inquiryModal) {
+    inquiryModal.style.display = "flex";
   }
-  
-  // Populate Tab 2: Fees & Course List
-  const courseDetails = uni.courses[state.selectedCourse];
-  const feesTbody = document.getElementById("modal-fees-table-tbody");
-  if (feesTbody) {
-    feesTbody.innerHTML = `
-      <tr>
-        <td><strong>${COURSES_DATA[state.selectedCourse]?.name || state.selectedCourse.toUpperCase()}</strong></td>
-        <td>${courseDetails?.duration || 'N/A'}</td>
-        <td>₹${courseDetails ? courseDetails.feeSemester.toLocaleString("en-IN") : 'N/A'}</td>
-        <td><strong>₹${courseDetails ? courseDetails.feeTotal.toLocaleString("en-IN") : 'N/A'}</strong></td>
-      </tr>
-    `;
-  }
-  
-  const emiText = document.getElementById("modal-fees-emi-detail");
-  if (emiText) {
-    emiText.innerHTML = `
-      <div class="uni-highlight-item" style="font-size: 1rem; color: var(--text-main); font-weight:600;">
-        <i class="fas fa-wallet" style="color:var(--secondary);"></i>
-        <span>Flexible Payment Options: EMI starts at just <strong>${uni.emiStarts}</strong>. No-cost financing options available on all major credit cards.</span>
-      </div>
-    `;
-  }
-  
-  // Populate Tab 3: Placements
-  const placementRateVal = document.getElementById("modal-placement-rate-val");
-  if (placementRateVal) {
-    placementRateVal.textContent = `${uni.placementRate}%`;
-  }
-  const placementPartnersList = document.getElementById("modal-placement-partners-list");
-  if (placementPartnersList) {
-    placementPartnersList.innerHTML = uni.placementPartners.map(p => `
-      <div class="partner-logo-item" style="padding: 16px; font-size:1rem; font-weight:700;">${p}</div>
-    `).join("");
-  }
-  
-  // Populate Tab 4: Reviews
-  renderModalReviews(uniId);
-  
-  // Handle Review submission in modal
-  const reviewForm = document.getElementById("modal-add-review-form");
-  if (reviewForm) {
-    // Unbind previous listener to avoid multiple handles
-    const newForm = reviewForm.cloneNode(true);
-    reviewForm.parentNode.replaceChild(newForm, reviewForm);
-    
-    // Set active review rating selector
-    let selectedRating = 5;
-    const starContainer = newForm.querySelector(".rating-select-wrapper");
-    if (starContainer) {
-      starContainer.innerHTML = "";
-      for (let i = 1; i <= 5; i++) {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "rating-star-btn selected";
-        btn.innerHTML = `<i class="fas fa-star"></i>`;
-        btn.setAttribute("data-rating", i);
-        btn.onclick = () => {
-          selectedRating = i;
-          // Color stars
-          starContainer.querySelectorAll(".rating-star-btn").forEach((s, idx) => {
-            if (idx < i) {
-              s.classList.add("selected");
-            } else {
-              s.classList.remove("selected");
-            }
-          });
-        };
-        starContainer.appendChild(btn);
-      }
-    }
-    
-    newForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const author = newForm.querySelector("#rev-author").value;
-      const text = newForm.querySelector("#rev-text").value;
-      
-      if (!author || !text) {
-        alert("Please fill in both name and feedback fields.");
-        return;
-      }
-      
-      const newReview = {
-        student: author,
-        course: COURSES_DATA[state.selectedCourse].name,
-        rating: selectedRating,
-        date: new Date().toISOString().split('T')[0],
-        comment: text
-      };
-      
-      // Save review to DB state and localStorage
-      if (!state.reviewsDb[uniId]) {
-        state.reviewsDb[uniId] = [];
-      }
-      state.reviewsDb[uniId].unshift(newReview);
-      localStorage.setItem("portal_university_reviews", JSON.stringify(state.reviewsDb));
-      
-      // Clear inputs
-      newForm.querySelector("#rev-author").value = "";
-      newForm.querySelector("#rev-text").value = "";
-      
-      // Re-render
-      renderModalReviews(uniId);
-      alert("Thank you! Your student review has been posted successfully.");
-    });
-  }
-
-  // Display overlay
-  overlay.style.display = "flex";
-  document.body.style.overflow = "hidden"; // Disable page scroll
 };
 
 function renderModalReviews(uniId) {
