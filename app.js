@@ -1245,15 +1245,34 @@ function renderBlogsList() {
     }
   }
   
+  // Hide categories card if BLOGS_DATA is empty
+  const categoryContainer = document.getElementById("blog-categories-list");
+  if (categoryContainer) {
+    const categoryCard = categoryContainer.closest(".blog-sidebar-card");
+    if (categoryCard) {
+      categoryCard.style.display = BLOGS_DATA.length === 0 ? "none" : "block";
+    }
+  }
+
   // Render empty state if needed
   if (filteredBlogs.length === 0) {
-    grid.innerHTML = `
-      <div class="no-results" style="grid-column: 1 / -1; width: 100%;">
-        <i class="fas fa-search"></i>
-        <h3>No Articles Found</h3>
-        <p>We couldn't find any articles matching your search query or category. Try search terms like 'MBA', 'Validity', or 'NAAC'.</p>
-      </div>
-    `;
+    if (BLOGS_DATA.length === 0) {
+      grid.innerHTML = `
+        <div class="no-results" style="grid-column: 1 / -1; width: 100%;">
+          <i class="fas fa-book-open"></i>
+          <h3>No Articles Published</h3>
+          <p>Stay tuned! Expert guides, legal validity checks, and placement analytics will be published here soon.</p>
+        </div>
+      `;
+    } else {
+      grid.innerHTML = `
+        <div class="no-results" style="grid-column: 1 / -1; width: 100%;">
+          <i class="fas fa-search"></i>
+          <h3>No Articles Found</h3>
+          <p>We couldn't find any articles matching your search query or category. Try search terms like 'MBA', 'Validity', or 'NAAC'.</p>
+        </div>
+      `;
+    }
     return;
   }
   
@@ -1374,6 +1393,14 @@ function renderTrendingBlogs() {
   if (!container) return;
   
   container.innerHTML = "";
+  
+  // Hide popular card if BLOGS_DATA is empty
+  const card = container.closest(".blog-sidebar-card");
+  if (card) {
+    card.style.display = BLOGS_DATA.length === 0 ? "none" : "block";
+  }
+  
+  if (BLOGS_DATA.length === 0) return;
   
   // Take first 3 blogs as popular/trending posts
   const trending = BLOGS_DATA.slice(0, 3);
