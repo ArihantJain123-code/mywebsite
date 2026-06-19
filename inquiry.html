@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inquiry | OnlineDegrees</title>
+  <meta name="description" content="Submit an inquiry to get personalized guidance on online degree programs. Fill out the form and our advisors will contact you.">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header (same as site) -->
+  <header>
+    <div class="container navbar">
+      <div class="logo-container" id="navbar-logo">
+        <div class="logo-icon">O</div>
+        <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" data-target="home">Home</a></li>
+        <li><a class="nav-link" data-target="catalog">Find Degrees</a></li>
+        <li><a class="nav-link" data-target="compare">Compare Board</a></li>
+        <li><a class="nav-link" data-target="blog">Blogs</a></li>
+        <li><a class="nav-link" data-target="contact">Contact Us</a></li>
+        <li><a class="nav-link" data-target="inquiry">Inquiry</a></li>
+        <li class="nav-phone-item"><a href="tel:6375079973" class="nav-phone-link"><i class="fas fa-phone-alt"></i> <span>6375079973</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="view-section active" id="inquiry-view">
+      <div class="container">
+        <h1 class="section-header"><span>Inquiry</span></h1>
+        <p class="hero-subtitle" style="max-width:720px;margin:auto;text-align:center;">Fill out the form below and one of our academic advisors will get back to you with a personalized program recommendation.</p>
+        <div class="inquiry-form">
+          <form id="inquiry-form" class="premium-form">
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="inquiry-name">Full Name *</label>
+                <div class="input-wrapper"><i class="far fa-user"></i><input type="text" id="inquiry-name" placeholder="John Doe" required></div>
+              </div>
+              <div class="form-group">
+                <label for="inquiry-email">Email *</label>
+                <div class="input-wrapper"><i class="far fa-envelope"></i><input type="email" id="inquiry-email" placeholder="john@example.com" required></div>
+              </div>
+            </div>
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="inquiry-phone">Phone *</label>
+                <div class="input-wrapper"><i class="fas fa-phone-alt"></i><input type="tel" id="inquiry-phone" placeholder="9876543210" pattern="[0-9]{10}" title="Ten digit mobile number" required></div>
+              </div>
+              <div class="form-group">
+                <label for="inquiry-course">Preferred Degree *</label>
+                <div class="input-wrapper select-wrapper"><i class="fas fa-graduation-cap"></i>
+                  <select id="inquiry-course" required>
+                    <option value="" disabled selected>Select a degree</option>
+                    <option value="mba">Online MBA</option>
+                    <option value="bca">Online BCA</option>
+                    <option value="bba">Online BBA</option>
+                    <option value="mca">Online MCA</option>
+                    <option value="mcom">Online M.Com</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inquiry-message">Message *</label>
+              <textarea id="inquiry-message" rows="4" placeholder="Briefly describe your goals, budget, or any questions..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Send Inquiry</button>
+          </form>
+          <div id="inquiry-success" class="contact-success-card" style="display:none;">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h3>Thank You!</h3>
+            <p>Your inquiry has been submitted. An advisor will contact you shortly.</p>
+            <button type="button" class="btn btn-secondary" id="inquiry-reset-btn" style="margin-top:16px;">Submit Another Inquiry</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (reuse same as index) -->
+  <footer>
+    <div class="container">
+      <div class="footer-links-col">
+        <h4>Degree Courses</h4>
+        <ul>
+          <li><a href="#catalog?course=mba">Online MBA</a></li>
+          <li><a href="#catalog?course=bca">Online BCA</a></li>
+          <li><a href="#catalog?course=bba">Online BBA</a></li>
+          <li><a href="#catalog?course=mca">Online MCA</a></li>
+          <li><a href="#catalog?course=mcom">Online M.Com</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#compare">Compare Board</a></li>
+          <li><a href="#home">Success Stories</a></li>
+          <li><a href="#catalog">Free Counseling</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="inquiry.html">Inquiry</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter-col">
+        <h4>Weekly Newsletter</h4>
+        <p>Subscribe to receive news about admission deadlines, scholarship updates, and distance degree regulations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!'); this.reset();">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit" class="btn btn-primary" style="padding:10px 16px;"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>&copy; 2026 OnlineDegrees. All Rights Reserved. Made for modern digital education comparisons.</div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Simple client‑side handling for the inquiry form (no backend)
+    const form = document.getElementById('inquiry-form');
+    const success = document.getElementById('inquiry-success');
+    const resetBtn = document.getElementById('inquiry-reset-btn');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      // In a real project you would POST to a server endpoint here.
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+    resetBtn.addEventListener('click', () => {
+      success.style.display = 'none';
+      form.reset();
+      form.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
