@@ -50,6 +50,13 @@
           </a>
         </li>
         <li><a class="nav-link" data-target="blog">Blogs</a></li>
+        <li><a class="nav-link" data-target="contact">Contact Us</a></li>
+        <li class="nav-phone-item">
+          <a href="tel:6375079973" class="nav-phone-link">
+            <i class="fas fa-phone-alt"></i>
+            <span>6375079973</span>
+          </a>
+        </li>
       </ul>
     </div>
   </header>
@@ -556,6 +563,127 @@
         </div>
       </div>
     </section>
+
+    <!-- --- VIEW 6: CONTACT US PAGE --- -->
+    <section id="contact-view" class="view-section">
+      <div class="container">
+        <div class="contact-header">
+          <h1>Get In Touch With <span>Our Advising Experts</span></h1>
+          <p>Have questions about courses, university approvals, or comparison features? Contact us directly. Our counselor team is here to assist you.</p>
+        </div>
+        
+        <div class="contact-grid">
+          <!-- Left Column: Contact Cards -->
+          <div class="contact-info-panel">
+            <div class="info-card">
+              <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
+              <div class="info-card-details">
+                <h3>Call Our Counselor</h3>
+                <p class="info-highlight"><a href="tel:6375079973">6375079973</a></p>
+                <p>Timing: 9:00 AM to 7:00 PM (Mon-Sat)</p>
+              </div>
+            </div>
+            
+            <div class="info-card">
+              <div class="info-card-icon"><i class="fas fa-envelope"></i></div>
+              <div class="info-card-details">
+                <h3>Email Support</h3>
+                <p class="info-highlight"><a href="mailto:support@onlinedegrees.com">support@onlinedegrees.com</a></p>
+                <p>Get a response within 24 hours.</p>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="info-card-details">
+                <h3>Our Headquarters</h3>
+                <p class="info-text">OnlineDegrees Learning Hub, 5th Floor, Sector 62, Noida, UP, India - 201301</p>
+              </div>
+            </div>
+            
+            <div class="info-card faqs-card">
+              <h3>Frequently Asked Questions</h3>
+              <div class="contact-accordion">
+                <div class="accordion-item">
+                  <div class="accordion-title">Are the counseling sessions free? <i class="fas fa-chevron-down"></i></div>
+                  <div class="accordion-content">Yes, 100% free. OnlineDegrees partners directly with approved universities to helper enrollment without charging students.</div>
+                </div>
+                <div class="accordion-item">
+                  <div class="accordion-title">How do I compare university LMS features? <i class="fas fa-chevron-down"></i></div>
+                  <div class="accordion-content">You can select two universities and add them to the comparison board using the catalog page checkbox, then tap "Compare Now".</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right Column: Interactive Form -->
+          <div class="contact-form-panel">
+            <h2>Send A Message</h2>
+            <p>Fill out the form below and one of our academic advisors will get back to you with personalized university options.</p>
+            
+            <form id="contact-form" class="premium-form">
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="contact-name">Full Name *</label>
+                  <div class="input-wrapper">
+                    <i class="far fa-user"></i>
+                    <input type="text" id="contact-name" placeholder="John Doe" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="contact-email">Email Address *</label>
+                  <div class="input-wrapper">
+                    <i class="far fa-envelope"></i>
+                    <input type="email" id="contact-email" placeholder="john@example.com" required>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="contact-phone">Phone Number *</label>
+                  <div class="input-wrapper">
+                    <i class="fas fa-phone-alt"></i>
+                    <input type="tel" id="contact-phone" placeholder="9876543210" pattern="[0-9]{10}" title="Ten digit mobile number" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="contact-course">Preferred Degree Course *</label>
+                  <div class="input-wrapper select-wrapper">
+                    <i class="fas fa-graduation-cap"></i>
+                    <select id="contact-course" required>
+                      <option value="" disabled selected>Select a degree</option>
+                      <option value="mba">Online MBA</option>
+                      <option value="bca">Online BCA</option>
+                      <option value="bba">Online BBA</option>
+                      <option value="mca">Online MCA</option>
+                      <option value="mcom">Online M.Com</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="contact-message">Message *</label>
+                <textarea id="contact-message" rows="4" placeholder="Briefly describe your career goals, budget, or any questions about universities..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-paper-plane"></i> Send Inquiry Message
+              </button>
+            </form>
+            
+            <!-- Success Message Toast/Card -->
+            <div id="contact-success" class="contact-success-card" style="display: none;">
+              <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+              <h3>Thank You!</h3>
+              <p>Your counseling inquiry has been successfully submitted. Our counselor will contact you shortly on your registered phone number or email.</p>
+              <button type="button" class="btn btn-secondary" id="contact-reset-btn" style="margin-top: 16px;">Submit Another Inquiry</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- --- FLOATING COMPARE BOTTOM TRAY --- -->
@@ -725,6 +853,10 @@
           <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
         </div>
         <p class="footer-desc">India's premium online degree comparison portal. Empowering working professionals and students to match academic goals with fully accredited UGC-DEB universities.</p>
+        <div class="footer-contact-info">
+          <p><i class="fas fa-phone-alt"></i> Call Us: <a href="tel:6375079973">6375079973</a></p>
+          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:support@onlinedegrees.com">support@onlinedegrees.com</a></p>
+        </div>
       </div>
       
       <div class="footer-links-col">
@@ -744,6 +876,7 @@
           <li><a href="#compare">Compare Board</a></li>
           <li><a href="#home">Success Stories</a></li>
           <li><a href="#catalog">Free Counseling</a></li>
+          <li><a href="#contact">Contact Us</a></li>
         </ul>
       </div>
       

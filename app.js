@@ -414,6 +414,74 @@ function setupEventListeners() {
       }
     });
   }
+
+  // --- CONTACT FORM EVENT LISTENERS ---
+  const contactForm = document.getElementById("contact-form");
+  const contactSuccess = document.getElementById("contact-success");
+  const contactResetBtn = document.getElementById("contact-reset-btn");
+  
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById("contact-name").value.trim();
+      const email = document.getElementById("contact-email").value.trim();
+      const phone = document.getElementById("contact-phone").value.trim();
+      const course = document.getElementById("contact-course").value;
+      const message = document.getElementById("contact-message").value.trim();
+      
+      const inquiry = {
+        name,
+        email,
+        phone,
+        course,
+        message,
+        date: new Date().toISOString()
+      };
+      
+      let inquiries = [];
+      const stored = localStorage.getItem("portal_contact_inquiries");
+      if (stored) {
+        inquiries = JSON.parse(stored);
+      }
+      inquiries.push(inquiry);
+      localStorage.setItem("portal_contact_inquiries", JSON.stringify(inquiries));
+      
+      contactForm.style.display = "none";
+      if (contactSuccess) {
+        contactSuccess.style.display = "block";
+      }
+    });
+  }
+  
+  if (contactResetBtn) {
+    contactResetBtn.addEventListener("click", () => {
+      if (contactForm) {
+        contactForm.reset();
+        contactForm.style.display = "flex";
+      }
+      if (contactSuccess) {
+        contactSuccess.style.display = "none";
+      }
+    });
+  }
+
+  // Accordion FAQs toggle logic
+  const accordionTitles = document.querySelectorAll(".contact-accordion .accordion-title");
+  accordionTitles.forEach(title => {
+    title.addEventListener("click", () => {
+      const item = title.parentElement;
+      const isOpen = item.classList.contains("open");
+      
+      document.querySelectorAll(".contact-accordion .accordion-item").forEach(el => {
+        el.classList.remove("open");
+      });
+      
+      if (!isOpen) {
+        item.classList.add("open");
+      }
+    });
+  });
 }
 
 // --- Filter Operations ---
