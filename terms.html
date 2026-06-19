@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions | OnlineDegrees</title>
+  <meta name="description" content="Read the Terms and Conditions for OnlineDegrees. Understand the rules governing your use of our platform, counseling services, and comparison tools.">
+
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ── Terms Page Specific Styles ── */
+    .terms-hero {
+      background: linear-gradient(135deg, var(--bg-footer) 0%, #1e1b4b 100%);
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terms-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,70,229,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .terms-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(13,148,136,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .terms-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(79,70,229,0.18);
+      color: #a5b4fc;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 18px;
+      border-radius: 100px;
+      border: 1px solid rgba(79,70,229,0.35);
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .terms-hero h1 {
+      font-size: 3rem;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .terms-hero h1 span {
+      background: linear-gradient(135deg, #a5b4fc, #5eead4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .terms-hero p {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .terms-meta-bar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 0;
+    }
+
+    .terms-meta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .terms-meta-inner span {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .terms-meta-inner i {
+      color: var(--primary);
+    }
+
+    .terms-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      padding: 60px 0 80px;
+      align-items: start;
+    }
+
+    /* Table of Contents Sidebar */
+    .terms-toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: sticky;
+      top: 96px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .terms-toc h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      font-weight: 700;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .toc-list a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition-fast);
+      font-weight: 500;
+    }
+
+    .toc-list a:hover,
+    .toc-list a.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .toc-list a i {
+      font-size: 0.7rem;
+      width: 14px;
+      color: var(--primary);
+      opacity: 0;
+      transition: var(--transition-fast);
+    }
+
+    .toc-list a:hover i,
+    .toc-list a.active i {
+      opacity: 1;
+    }
+
+    .toc-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-light);
+      min-width: 20px;
+    }
+
+    /* Main Content */
+    .terms-content {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .terms-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 100px;
+      transition: border-color var(--transition-fast);
+    }
+
+    .terms-section:hover {
+      border-color: rgba(79,70,229,0.2);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: var(--radius-md);
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .section-heading h2 {
+      font-size: 1.4rem;
+      color: var(--text-main);
+    }
+
+    .section-heading .section-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 10px;
+      border-radius: 100px;
+      margin-left: auto;
+    }
+
+    .terms-section p {
+      color: var(--text-muted);
+      font-size: 0.97rem;
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .terms-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .terms-section ul, .terms-section ol {
+      margin: 16px 0 16px 0;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .terms-section ul li, .terms-section ol li {
+      display: flex;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+
+    .terms-section ul li::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin-top: 8px;
+    }
+
+    .terms-section ol {
+      counter-reset: terms-ol;
+    }
+
+    .terms-section ol li {
+      counter-increment: terms-ol;
+    }
+
+    .terms-section ol li::before {
+      content: counter(terms-ol) ".";
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 22px;
+      font-size: 0.9rem;
+    }
+
+    .terms-highlight-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .terms-highlight-box p {
+      color: var(--primary);
+      font-weight: 600;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .terms-warning-box {
+      background: #fff7ed;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .terms-warning-box i {
+      color: var(--accent);
+      margin-top: 2px;
+      font-size: 1rem;
+    }
+
+    .terms-warning-box p {
+      color: #9a3412;
+      font-weight: 500;
+      margin: 0;
+      font-size: 0.93rem;
+    }
+
+    .contact-callout {
+      background: linear-gradient(135deg, var(--bg-footer) 0%, #1e1b4b 100%);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-callout::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,70,229,0.2) 0%, transparent 70%);
+    }
+
+    .contact-callout h3 {
+      font-size: 1.6rem;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .contact-callout p {
+      color: #94a3b8;
+      font-size: 0.97rem;
+      margin-bottom: 28px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-callout-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-callout-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: var(--transition-normal);
+    }
+
+    .btn-callout-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.7);
+    }
+
+    /* Back to Top */
+    .back-to-top-row {
+      text-align: center;
+      padding: 12px 0 60px;
+    }
+
+    .back-to-top-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: var(--transition-fast);
+    }
+
+    .back-to-top-btn:hover {
+      color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .terms-layout {
+        grid-template-columns: 1fr;
+      }
+      .terms-toc {
+        position: static;
+        display: none;
+      }
+      .terms-hero h1 {
+        font-size: 2.2rem;
+      }
+      .terms-section {
+        padding: 28px 22px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .terms-hero {
+        padding: 60px 0 40px;
+      }
+      .terms-hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo-container" id="navbar-logo" style="text-decoration:none;">
+        <div class="logo-icon">O</div>
+        <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu" style="gap:24px;">
+        <li><a class="nav-link" href="index.html#home">Home</a></li>
+        <li><a class="nav-link" href="index.html#catalog">Find Degrees</a></li>
+        <li><a class="nav-link" href="index.html#blog">Blogs</a></li>
+        <li><a class="nav-link" href="index.html#contact">Contact Us</a></li>
+      </ul>
+
+      <div class="menu-toggle" id="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── HERO ─── -->
+  <section class="terms-hero" id="top">
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="terms-hero-tag">
+        <i class="fas fa-file-contract"></i>
+        Legal Document
+      </div>
+      <h1>Terms &amp; <span>Conditions</span></h1>
+      <p>Please read these terms carefully before using OnlineDegrees. By accessing our platform you agree to be bound by these terms.</p>
+    </div>
+  </section>
+
+  <!-- ─── META BAR ─── -->
+  <div class="terms-meta-bar">
+    <div class="container terms-meta-inner">
+      <span><i class="fas fa-calendar-check"></i> Effective Date: June 19, 2026</span>
+      <span><i class="fas fa-sync-alt"></i> Last Updated: June 19, 2026</span>
+      <span><i class="fas fa-globe-asia"></i> Jurisdiction: India</span>
+      <span><i class="fas fa-building"></i> OnlineDegrees.com</span>
+    </div>
+  </div>
+
+  <!-- ─── MAIN CONTENT ─── -->
+  <main>
+    <div class="container">
+      <div class="terms-layout">
+
+        <!-- Table of Contents -->
+        <aside class="terms-toc">
+          <h3>Table of Contents</h3>
+          <ul class="toc-list">
+            <li><a href="#acceptance"><span class="toc-number">01</span> Acceptance of Terms <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#services"><span class="toc-number">02</span> Our Services <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#eligibility"><span class="toc-number">03</span> Eligibility &amp; Use <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#information"><span class="toc-number">04</span> Information Accuracy <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#counseling"><span class="toc-number">05</span> Free Counseling <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#data-privacy"><span class="toc-number">06</span> Data &amp; Privacy <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#intellectual-property"><span class="toc-number">07</span> Intellectual Property <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#prohibited"><span class="toc-number">08</span> Prohibited Conduct <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#disclaimer"><span class="toc-number">09</span> Disclaimers <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#liability"><span class="toc-number">10</span> Limitation of Liability <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#amendments"><span class="toc-number">11</span> Amendments <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#governing"><span class="toc-number">12</span> Governing Law <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="#contact-legal"><span class="toc-number">13</span> Contact &amp; Grievance <i class="fas fa-chevron-right"></i></a></li>
+          </ul>
+        </aside>
+
+        <!-- Sections -->
+        <div class="terms-content">
+
+          <!-- 1. Acceptance -->
+          <div class="terms-section" id="acceptance">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-handshake"></i></div>
+              <h2>1. Acceptance of Terms</h2>
+              <span class="section-num">§01</span>
+            </div>
+            <p>Welcome to <strong>OnlineDegrees</strong> ("Platform", "we", "us", "our"), an online university comparison and counseling portal operated for students and working professionals in India. These Terms &amp; Conditions ("Terms") govern your access to and use of our website available at <strong>getonlinedegrees.online</strong> and any related services.</p>
+            <div class="terms-highlight-box">
+              <p><i class="fas fa-info-circle" style="margin-right:8px;"></i>By accessing or using OnlineDegrees in any way — including browsing, submitting an inquiry form, or using our comparison tools — you confirm that you have read, understood, and agree to be legally bound by these Terms.</p>
+            </div>
+            <p>If you do not agree with any part of these Terms, please do not access or use our Platform. Your continued use of the Platform following any changes to these Terms constitutes your acceptance of such changes.</p>
+          </div>
+
+          <!-- 2. Our Services -->
+          <div class="terms-section" id="services">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-graduation-cap"></i></div>
+              <h2>2. Our Services</h2>
+              <span class="section-num">§02</span>
+            </div>
+            <p>OnlineDegrees provides the following informational and advisory services:</p>
+            <ul>
+              <li>A curated database of UGC-DEB, AICTE, and WES-approved online universities in India, including fee structures, placement statistics, and learning management system (LMS) details.</li>
+              <li>An interactive comparison tool that allows users to compare two universities side-by-side across multiple academic and financial parameters.</li>
+              <li>Free educational counseling and course guidance services, delivered via phone, email, or our inquiry form.</li>
+              <li>Blog articles and guides covering online education regulations, degree validity, career planning, and university reviews.</li>
+              <li>A newsletter service that delivers admission deadline updates and regulatory news.</li>
+            </ul>
+            <p>All services listed above are offered free of charge to students and prospective learners. OnlineDegrees operates as an independent information aggregator and does not act as an official representative, agent, or affiliate of any university listed on the Platform unless explicitly stated.</p>
+          </div>
+
+          <!-- 3. Eligibility -->
+          <div class="terms-section" id="eligibility">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-user-check"></i></div>
+              <h2>3. Eligibility &amp; Acceptable Use</h2>
+              <span class="section-num">§03</span>
+            </div>
+            <p>By using OnlineDegrees, you represent and warrant that:</p>
+            <ul>
+              <li>You are at least <strong>13 years of age</strong>. Users below 18 years of age should use the Platform only with the knowledge and guidance of a parent or legal guardian.</li>
+              <li>You are using the Platform for personal, non-commercial, educational research and inquiry purposes only.</li>
+              <li>All information you provide through inquiry or contact forms is accurate, truthful, and up-to-date to the best of your knowledge.</li>
+              <li>You will not attempt to impersonate any other person, entity, or university counselor.</li>
+            </ul>
+            <p>We reserve the right to suspend or terminate access for users who violate these conditions, without notice.</p>
+          </div>
+
+          <!-- 4. Information Accuracy -->
+          <div class="terms-section" id="information">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-database"></i></div>
+              <h2>4. Information Accuracy &amp; University Data</h2>
+              <span class="section-num">§04</span>
+            </div>
+            <p>OnlineDegrees makes every reasonable effort to ensure that university data published on the Platform — including fees, accreditation status, placement records, and program eligibility — is accurate and current.</p>
+            <div class="terms-warning-box">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>However, university fee structures, approvals, and program availability change frequently. We strongly recommend verifying all critical information directly with the respective university before making any enrollment decision. OnlineDegrees is not liable for decisions made solely on the basis of data displayed on this Platform.</p>
+            </div>
+            <p>Data on our Platform is sourced from publicly available university websites, NAAC reports, AICTE or UGC-DEB portals, and verified placement reports. Our team conducts periodic reviews, but we cannot guarantee real-time accuracy for all listed data points.</p>
+          </div>
+
+          <!-- 5. Counseling -->
+          <div class="terms-section" id="counseling">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-headset"></i></div>
+              <h2>5. Free Counseling Services</h2>
+              <span class="section-num">§05</span>
+            </div>
+            <p>OnlineDegrees offers <strong>100% free</strong> academic counseling to students exploring online degrees. Our counselors help you:</p>
+            <ul>
+              <li>Identify suitable universities based on your budget, career goals, and academic background.</li>
+              <li>Understand the difference between UGC-DEB approved and non-approved online programs.</li>
+              <li>Compare LMS tools, placement support, and fee payment schedules across institutions.</li>
+              <li>Navigate the admission process and scholarship opportunities at partner universities.</li>
+            </ul>
+            <p>Counseling guidance is purely advisory in nature. OnlineDegrees does not guarantee admission to any university. Final admission decisions rest solely with the respective institution. By submitting an inquiry or contacting us, you consent to receiving a follow-up call or email from our academic advisors.</p>
+            <div class="terms-highlight-box">
+              <p><i class="fas fa-shield-alt" style="margin-right:8px;"></i>We will never charge students any fee for counseling sessions. If anyone claiming to represent OnlineDegrees requests payment, please report this immediately to support@onlinedegrees.com.</p>
+            </div>
+          </div>
+
+          <!-- 6. Data & Privacy -->
+          <div class="terms-section" id="data-privacy">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-lock"></i></div>
+              <h2>6. Data Collection &amp; Privacy</h2>
+              <span class="section-num">§06</span>
+            </div>
+            <p>When you use our inquiry form, contact form, or newsletter subscription, we collect personal information such as your name, email address, phone number, city, and preferred course. This data is used exclusively to:</p>
+            <ul>
+              <li>Provide the counseling or informational response you requested.</li>
+              <li>Send relevant newsletter content if you subscribed to our mailing list.</li>
+              <li>Improve Platform features and understand user behaviour through aggregated analytics.</li>
+            </ul>
+            <p>We do not sell, rent, or trade your personal data to third parties. We may share basic lead information (name, phone, course preference) with our partner universities solely for the purpose of fulfilling your counseling request, subject to equivalent data protection standards.</p>
+            <p>You may request deletion of your data at any time by emailing <a href="mailto:support@onlinedegrees.com" style="color:var(--primary);font-weight:600;">support@onlinedegrees.com</a>. We will process your request within 30 days. Our practices are consistent with applicable Indian data protection regulations.</p>
+          </div>
+
+          <!-- 7. Intellectual Property -->
+          <div class="terms-section" id="intellectual-property">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-copyright"></i></div>
+              <h2>7. Intellectual Property</h2>
+              <span class="section-num">§07</span>
+            </div>
+            <p>All content on OnlineDegrees — including but not limited to text, blog articles, comparison data compilations, visual design, UI layouts, graphics, code, and branding — is the exclusive intellectual property of OnlineDegrees or its content contributors, and is protected under applicable Indian and international copyright laws.</p>
+            <p>You are granted a limited, non-exclusive, non-transferable, revocable licence to access and use the Platform for personal, non-commercial educational research. This licence does not permit you to:</p>
+            <ul>
+              <li>Reproduce, republish, or redistribute any Platform content without prior written consent.</li>
+              <li>Scrape, crawl, or use automated tools to extract data from the Platform at scale.</li>
+              <li>Create derivative works based on our compiled comparison datasets or blog articles.</li>
+              <li>Use the OnlineDegrees brand, logo, or trademarks without explicit written authorisation.</li>
+            </ul>
+            <p>University logos and trademarks displayed on our Platform remain the property of their respective institutions and are used for identification purposes only.</p>
+          </div>
+
+          <!-- 8. Prohibited Conduct -->
+          <div class="terms-section" id="prohibited">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-ban"></i></div>
+              <h2>8. Prohibited Conduct</h2>
+              <span class="section-num">§08</span>
+            </div>
+            <p>You agree not to engage in any of the following activities when using the Platform:</p>
+            <ol>
+              <li>Uploading, submitting, or transmitting any content that is unlawful, defamatory, obscene, or otherwise harmful.</li>
+              <li>Attempting to gain unauthorised access to any server, database, or account associated with OnlineDegrees.</li>
+              <li>Using the Platform to impersonate a university, counselor, or OnlineDegrees staff member.</li>
+              <li>Submitting false or misleading information through any form on the Platform.</li>
+              <li>Interfering with or disrupting the integrity or performance of the Platform through any technical means.</li>
+              <li>Using the Platform in any way that violates applicable local, national, or international laws or regulations.</li>
+              <li>Harvesting or collecting personal information of other users.</li>
+            </ol>
+            <p>Violation of this section may result in immediate termination of access and, where applicable, referral to law enforcement authorities.</p>
+          </div>
+
+          <!-- 9. Disclaimers -->
+          <div class="terms-section" id="disclaimer">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-exclamation-circle"></i></div>
+              <h2>9. Disclaimers</h2>
+              <span class="section-num">§09</span>
+            </div>
+            <p>The Platform and all content therein are provided on an <strong>"as is" and "as available"</strong> basis without warranties of any kind, either express or implied. Specifically, we disclaim all warranties, including but not limited to:</p>
+            <ul>
+              <li>Warranties of merchantability, fitness for a particular purpose, or non-infringement.</li>
+              <li>Guarantees that the Platform will be uninterrupted, error-free, or free of viruses.</li>
+              <li>Guarantees regarding the completeness, accuracy, or timeliness of any university data.</li>
+            </ul>
+            <div class="terms-warning-box">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>OnlineDegrees is not an accreditation body. We do not certify or endorse any university. Decisions regarding enrollment should be made after independently verifying accreditation status directly with UGC-DEB, AICTE, or the respective institution.</p>
+            </div>
+          </div>
+
+          <!-- 10. Limitation of Liability -->
+          <div class="terms-section" id="liability">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-balance-scale"></i></div>
+              <h2>10. Limitation of Liability</h2>
+              <span class="section-num">§10</span>
+            </div>
+            <p>To the fullest extent permitted by applicable Indian law, OnlineDegrees, its owners, employees, advisors, and affiliates shall not be liable for any:</p>
+            <ul>
+              <li>Direct, indirect, incidental, special, consequential, or punitive damages arising from your use or inability to use the Platform.</li>
+              <li>Losses resulting from reliance on any university data, counseling advice, or blog content published on the Platform.</li>
+              <li>Disputes between users and any university whose information is listed on the Platform.</li>
+              <li>Financial losses arising from enrollment decisions made on the basis of Platform information.</li>
+            </ul>
+            <p>In no event shall our total aggregate liability to you exceed the amount of <strong>₹0 (zero rupees)</strong>, reflecting the free nature of our services.</p>
+          </div>
+
+          <!-- 11. Amendments -->
+          <div class="terms-section" id="amendments">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-edit"></i></div>
+              <h2>11. Amendments to These Terms</h2>
+              <span class="section-num">§11</span>
+            </div>
+            <p>OnlineDegrees reserves the right to modify, update, or replace these Terms at any time at our sole discretion. Any changes will be posted on this page with a revised "Last Updated" date at the top of the document.</p>
+            <p>For material changes that substantially affect user rights or obligations, we will make reasonable efforts to notify registered users (e.g., via email or a prominent notice on the Platform). Your continued use of the Platform after any amendment constitutes acceptance of the revised Terms.</p>
+            <p>We encourage you to periodically review this page to stay informed of the latest Terms governing your use of the Platform.</p>
+          </div>
+
+          <!-- 12. Governing Law -->
+          <div class="terms-section" id="governing">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-gavel"></i></div>
+              <h2>12. Governing Law &amp; Dispute Resolution</h2>
+              <span class="section-num">§12</span>
+            </div>
+            <p>These Terms shall be governed by and construed in accordance with the laws of <strong>India</strong>, without regard to its conflict of law provisions. Any disputes arising out of or relating to these Terms or your use of the Platform shall be subject to the exclusive jurisdiction of the courts located in <strong>Rajasthan, India</strong>.</p>
+            <p>Before initiating any formal legal proceedings, both parties agree to attempt good-faith resolution of any dispute by contacting our grievance team at <a href="mailto:support@onlinedegrees.com" style="color:var(--primary);font-weight:600;">support@onlinedegrees.com</a> within 30 days of the dispute arising.</p>
+          </div>
+
+          <!-- 13. Contact -->
+          <div class="terms-section" id="contact-legal">
+            <div class="section-heading">
+              <div class="section-icon"><i class="fas fa-envelope-open-text"></i></div>
+              <h2>13. Contact &amp; Grievance Officer</h2>
+              <span class="section-num">§13</span>
+            </div>
+            <p>If you have any questions, concerns, or grievances regarding these Terms, your data, or our services, please reach out through any of the following channels:</p>
+            <ul>
+              <li><strong>Email:</strong> <a href="mailto:support@onlinedegrees.com" style="color:var(--primary);font-weight:600;">support@onlinedegrees.com</a></li>
+              <li><strong>Phone:</strong> <a href="tel:6375079973" style="color:var(--primary);font-weight:600;">6375079973</a> (Mon–Sat, 9:00 AM – 7:00 PM)</li>
+              <li><strong>Website:</strong> <a href="index.html#contact" style="color:var(--primary);font-weight:600;">Contact Us Page</a></li>
+            </ul>
+            <p>We are committed to addressing your concerns promptly and transparently. Grievances related to data privacy will be acknowledged within 7 business days and resolved within 30 days.</p>
+          </div>
+
+          <!-- Contact Callout -->
+          <div class="contact-callout">
+            <h3>Have Questions About These Terms?</h3>
+            <p>Our team is happy to clarify any part of our Terms &amp; Conditions. Reach out and we'll respond within 24 hours.</p>
+            <div class="contact-callout-actions">
+              <a href="index.html#contact" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Contact Us
+              </a>
+              <a href="tel:6375079973" class="btn-callout-outline">
+                <i class="fas fa-phone-alt"></i> Call: 6375079973
+              </a>
+            </div>
+          </div>
+
+          <!-- Back to Top -->
+          <div class="back-to-top-row">
+            <a href="#top" class="back-to-top-btn">
+              <i class="fas fa-arrow-up"></i> Back to Top
+            </a>
+          </div>
+
+        </div><!-- /terms-content -->
+      </div><!-- /terms-layout -->
+    </div><!-- /container -->
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <div class="logo-container">
+          <div class="logo-icon" style="background:var(--secondary)">O</div>
+          <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+        </div>
+        <p class="footer-desc">India's premium online degree comparison portal. Empowering working professionals and students to match academic goals with fully accredited UGC-DEB universities.</p>
+        <div class="footer-contact-info">
+          <p><i class="fas fa-phone-alt"></i> Call Us: <a href="tel:6375079973">6375079973</a></p>
+          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:support@onlinedegrees.com">support@onlinedegrees.com</a></p>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Degree Courses</h4>
+        <ul>
+          <li><a href="index.html#catalog?course=mba">Online MBA</a></li>
+          <li><a href="index.html#catalog?course=bca">Online BCA</a></li>
+          <li><a href="index.html#catalog?course=bba">Online BBA</a></li>
+          <li><a href="index.html#catalog?course=mca">Online MCA</a></li>
+          <li><a href="index.html#catalog?course=mcom">Online M.Com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="index.html#compare">Compare Board</a></li>
+          <li><a href="index.html#home">Success Stories</a></li>
+          <li><a href="index.html#catalog">Free Counseling</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="terms.html" style="color:var(--secondary);">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-newsletter-col">
+        <h4>Weekly Newsletter</h4>
+        <p>Subscribe to receive news about admission deadlines, scholarship updates, and distance degree regulations.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully! Thank you for choosing OnlineDegrees.'); this.reset();">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary" style="padding:10px 16px;"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 OnlineDegrees. All Rights Reserved. Made for modern digital education comparisons.</div>
+      <div style="margin-top:8px;font-size:0.85rem;color:#475569;">
+        <a href="terms.html" style="color:var(--secondary);">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Highlight active TOC item on scroll
+    const sections = document.querySelectorAll('.terms-section');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const id = entry.target.id;
+          const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+          if (activeLink) activeLink.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-100px 0px -60% 0px' });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+      document.getElementById('nav-menu').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
