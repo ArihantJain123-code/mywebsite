@@ -35,14 +35,7 @@
             <span class="compare-badge" id="nav-compare-badge" style="display: none;">0</span>
           </a>
         </li>
-        <li><a class="nav-link" data-target="wizard">AI Matchmaker</a></li>
       </ul>
-      
-      <div class="nav-actions">
-        <a href="#wizard" class="btn btn-accent" style="padding: 10px 20px; font-size: 0.9rem;">
-          <i class="fas fa-magic"></i> Counseling Quiz
-        </a>
-      </div>
     </div>
   </header>
 
@@ -66,10 +59,7 @@
           </div>
           
           <div class="hero-cta-group">
-            <button id="home-counseling-cta" class="btn btn-accent">
-              <i class="fas fa-compass"></i> Try AI Matchmaker Wizard
-            </button>
-            <button id="home-browse-cta" class="btn btn-outline">
+            <button id="home-browse-cta" class="btn btn-primary">
               Browse Courses
             </button>
           </div>
@@ -203,7 +193,7 @@
             <div class="review-stars">
               <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
             </div>
-            <p class="review-text">"The AI Matchmaker wizard recommended Manipal Online based on my high preference for live lectures and budget. The counseling assistance was free and smooth."</p>
+            <p class="review-text">"The counseling assistance recommended Manipal Online based on my high preference for live lectures and budget. The process was free and smooth."</p>
             <div class="review-author">
               <div class="author-avatar">R</div>
               <div class="author-info">
@@ -440,206 +430,6 @@
         </div>
       </div>
     </section>
-
-    <!-- --- VIEW 4: AI COUNSELING / MATCHMAKER WIZARD --- -->
-    <section id="wizard-view" class="view-section">
-      <div class="container">
-        <div class="wizard-container">
-          <!-- Wizard Banner -->
-          <div class="wizard-header">
-            <h2>AI-Powered University Matchmaker</h2>
-            <p>Answer a few questions to find the most suitable UGC-approved online universities for your profile.</p>
-          </div>
-          
-          <!-- Progress tracker -->
-          <div class="wizard-progress-bar-container">
-            <div class="wizard-progress-bar" id="wizard-progress-bar"></div>
-          </div>
-          
-          <!-- Wizard Body -->
-          <div class="wizard-body">
-            
-            <!-- STEP 1: Qualification -->
-            <div class="wizard-step active" id="wizard-step-1">
-              <div class="wizard-question">1. What is your current highest education qualification?</div>
-              <div class="wizard-options-grid">
-                <div class="wizard-option-card" onclick="selectWizardOption('qualification', '12th', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Class 12th / Higher Secondary Passed</span>
-                    <span class="wizard-option-desc">Looking for Bachelor's Degrees (BCA, BBA, B.Com)</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('qualification', 'graduate', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Graduation Completed</span>
-                    <span class="wizard-option-desc">Looking for Master's Degrees (MBA, MCA, M.Com)</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('qualification', 'postgraduate', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Postgraduation Completed</span>
-                    <span class="wizard-option-desc">Looking for Executive Programs or Second Masters</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- STEP 2: Course selection -->
-            <div class="wizard-step" id="wizard-step-2">
-              <div class="wizard-question">2. Which online degree are you planning to pursue?</div>
-              <div class="wizard-options-grid">
-                <div class="wizard-option-card" onclick="selectWizardOption('course', 'mba', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Online MBA (Management)</span>
-                    <span class="wizard-option-desc">Finance, Marketing, HR, Analytics specializations</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('course', 'bca', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Online BCA (IT & Software)</span>
-                    <span class="wizard-option-desc">Programming, Cloud, Cyber Security focuses</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('course', 'bba', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Online BBA (Business)</span>
-                    <span class="wizard-option-desc">Administration, Sales, Entrepreneurship foundations</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('course', 'mca', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Online MCA (Advanced Tech)</span>
-                    <span class="wizard-option-desc">Artificial Intelligence, Cyber Security, Full-stack engineering</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('course', 'mcom', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Online M.Com (Commerce)</span>
-                    <span class="wizard-option-desc">Advanced Finance, Taxation, Accountancy study</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- STEP 3: Budget Range -->
-            <div class="wizard-step" id="wizard-step-3">
-              <div class="wizard-question">3. What is your total budget limit for the entire degree?</div>
-              <div class="wizard-options-grid">
-                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-low', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Budget Friendly (Under ₹60,000 Total)</span>
-                    <span class="wizard-option-desc">Economical distance & government universities (e.g. IGNOU)</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-mid', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Moderate Fees (₹60,000 - ₹1,20,000 Total)</span>
-                    <span class="wizard-option-desc">Accredited private colleges with robust digital LMS portals</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-high', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>Premium Value (₹1,20,000 - ₹1,70,000 Total)</span>
-                    <span class="wizard-option-desc">Top-ranked tier-1 colleges with standard placement assistance</span>
-                  </div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('budget', 'budget-premium', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>
-                    <span>No bar / Executive Tier (Above ₹1,70,000 Total)</span>
-                    <span class="wizard-option-desc">Top global accreditations, international faculty & placement cell</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- STEP 4: Career Objective & Form -->
-            <div class="wizard-step" id="wizard-step-4">
-              <div class="wizard-question">4. What is your primary career goal and contact info?</div>
-              <div class="wizard-options-grid" style="margin-bottom:24px;">
-                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-job', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>Job Assistance & Placements</div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-hike', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>Career Hike / Salary Promotion in Current Job</div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-degree', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>Need standard UGC Degree for CV Validation</div>
-                </div>
-                <div class="wizard-option-card" onclick="selectWizardOption('goal', 'goal-study', this)">
-                  <div class="wizard-radio-circle"></div>
-                  <div>Preparing for UPSC / Govt Exams side-by-side</div>
-                </div>
-              </div>
-              
-              <!-- Contact Details before Recommendation -->
-              <form class="wizard-form" id="wizard-contact-form" onsubmit="submitWizardContact(event)">
-                <div style="border-top:1px solid var(--border-light); padding-top:20px; margin-top:20px; font-weight:600; font-size:0.95rem; color:var(--text-main);">
-                  Enter contact details to instantly unlock matching report:
-                </div>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
-                  <div class="form-group">
-                    <label for="wiz-name">Full Name</label>
-                    <input type="text" id="wiz-name" required placeholder="Enter name">
-                  </div>
-                  <div class="form-group">
-                    <label for="wiz-phone">Mobile Number</label>
-                    <input type="tel" id="wiz-phone" required placeholder="10-digit number">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="wiz-email">Email Address</label>
-                  <input type="email" id="wiz-email" required placeholder="Enter email">
-                </div>
-                <button type="submit" style="display:none;" id="wizard-form-submit-hidden-btn"></button>
-              </form>
-            </div>
-            
-            <!-- STEP 5: RECOMMENDATIONS -->
-            <div class="wizard-step" id="wizard-step-5">
-              <div style="text-align:center; margin-bottom:24px;">
-                <div style="width: 60px; height: 60px; border-radius:50%; background-color:var(--secondary-light); color:var(--secondary); display:inline-flex; align-items:center; justify-content:center; font-size:1.8rem; margin-bottom:12px;">
-                  <i class="fas fa-check-circle"></i>
-                </div>
-                <h3 style="font-size:1.4rem;">Top Recommended Universities for You</h3>
-                <p style="color:var(--text-light); font-size:0.9rem;">Based on your career criteria, budget tiers, and study constraints.</p>
-              </div>
-              
-              <!-- Match List -->
-              <div id="wizard-recommendations-list" class="recs-list">
-                <!-- Injected Recommendations -->
-              </div>
-              
-              <div style="text-align:center;">
-                <button class="btn btn-outline" onclick="resetWizard()">Restart Quiz</button>
-              </div>
-            </div>
-
-            <!-- Footer navigation buttons inside wizard -->
-            <div class="wizard-footer-nav">
-              <button class="btn btn-text" id="wizard-prev-btn" style="display:none;"><i class="fas fa-arrow-left"></i> Previous</button>
-              <!-- Show trigger for form submit when on step 4, else standard trigger -->
-              <button class="btn btn-primary" id="wizard-next-btn" onclick="if(state.wizard.currentStep === 4) { document.getElementById('wizard-form-submit-hidden-btn').click(); }">Next Step <i class="fas fa-arrow-right"></i></button>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- --- FLOATING COMPARE BOTTOM TRAY --- -->
@@ -826,7 +616,6 @@
         <h4>Resources</h4>
         <ul>
           <li><a href="#compare">Compare Board</a></li>
-          <li><a href="#wizard">AI Matchmaker</a></li>
           <li><a href="#home">Success Stories</a></li>
           <li><a href="#catalog">Free Counseling</a></li>
         </ul>

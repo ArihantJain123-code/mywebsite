@@ -13,21 +13,6 @@ const state = {
     searchQuery: ""
   },
   sortBy: "rating",
-  wizard: {
-    currentStep: 1,
-    totalSteps: 5,
-    answers: {
-      qualification: "",
-      course: "",
-      budget: "",
-      goal: ""
-    },
-    userContact: {
-      name: "",
-      email: "",
-      phone: ""
-    }
-  },
   reviewsDb: {} // Will hold user reviews in memory, supplemented by local storage
 };
 
@@ -115,8 +100,6 @@ function navigate(viewName, params = {}) {
     renderCatalog();
   } else if (viewName === "compare") {
     renderCompareMatrix();
-  } else if (viewName === "wizard") {
-    resetWizard();
   }
   
   // Scroll to top
@@ -141,13 +124,7 @@ function setupEventListeners() {
     });
   });
 
-  // Main Home CTA - Counseling Wizard
-  const homeCta = document.getElementById("home-counseling-cta");
-  if (homeCta) {
-    homeCta.addEventListener("click", () => {
-      window.location.hash = "#wizard";
-    });
-  }
+
 
   // Browse Courses CTA
   const browseCta = document.getElementById("home-browse-cta");
@@ -244,11 +221,7 @@ function setupEventListeners() {
     });
   }
 
-  // Wizard Navigation
-  const nextBtn = document.getElementById("wizard-next-btn");
-  const prevBtn = document.getElementById("wizard-prev-btn");
-  if (nextBtn) nextBtn.addEventListener("click", handleWizardNext);
-  if (prevBtn) prevBtn.addEventListener("click", handleWizardPrev);
+
 
   // Close Modal Detail
   const modalClose = document.getElementById("modal-detail-close");
@@ -841,225 +814,7 @@ function renderCompareData() {
   `;
 }
 
-// --- AI COUNSELING / MATCHMAKER WIZARD ---
-function resetWizard() {
-  state.wizard.currentStep = 1;
-  state.wizard.answers = { qualification: "", course: "", budget: "", goal: "" };
-  state.wizard.userContact = { name: "", email: "", phone: "" };
-  
-  updateWizardUI();
-}
 
-function updateWizardUI() {
-  const currentStep = state.wizard.currentStep;
-  const totalSteps = state.wizard.totalSteps;
-  
-  // Update progress bar
-  const pct = (currentStep / totalSteps) * 100;
-  const progressBar = document.getElementById("wizard-progress-bar");
-  if (progressBar) progressBar.style.width = `${pct}%`;
-  
-  // Show active step, hide others
-  document.querySelectorAll(".wizard-step").forEach((step, idx) => {
-    if (idx + 1 === currentStep) {
-      step.classList.add("active");
-    } else {
-      step.classList.remove("active");
-    }
-  });
-  
-  // Handle footer navigation buttons
-  const prevBtn = document.getElementById("wizard-prev-btn");
-  const nextBtn = document.getElementById("wizard-next-btn");
-  
-  if (prevBtn) {
-    prevBtn.style.display = currentStep === 1 || currentStep === totalSteps ? "none" : "block";
-  }
-  
-  if (nextBtn) {
-    if (currentStep === totalSteps - 1) {
-      nextBtn.textContent = "See Recommendations";
-    } else if (currentStep === totalSteps) {
-      nextBtn.style.display = "none"; // Final slide has no next
-    } else {
-      nextBtn.textContent = "Next Step";
-    }
-  }
-}
-
-window.selectWizardOption = function(questionKey, value, element) {
-  // Save answer
-  state.wizard.answers[questionKey] = value;
-  
-  // Toggle CSS active class in grid options
-  const container = element.parentElement;
-  container.querySelectorAll(".wizard-option-card").forEach(card => {
-    card.classList.remove("selected");
-  });
-  element.classList.add("selected");
-  
-  // Auto-advance after a brief delay for smoother UX (steps 1, 2, 3, 4)
-  setTimeout(() => {
-    handleWizardNext();
-  }, 300);
-};
-
-function handleWizardNext() {
-  const currentStep = state.wizard.currentStep;
-  
-  // Validations before moving forward
-  if (currentStep === 1 && !state.wizard.answers.qualification) {
-    alert("Please select your current qualification.");
-    return;
-  }
-  if (currentStep === 2 && !state.wizard.answers.course) {
-    alert("Please select a course of interest.");
-    return;
-  }
-  if (currentStep === 3 && !state.wizard.answers.budget) {
-    alert("Please select your budget limit.");
-    return;
-  }
-  if (currentStep === 4 && !state.wizard.answers.goal) {
-    alert("Please select your primary career goal.");
-    return;
-  }
-  
-  // If moving from form validation (Step 4 -> Step 5 result trigger)
-  if (currentStep === 4) {
-    state.wizard.currentStep = 5;
-    calculateRecommendations();
-    updateWizardUI();
-    return;
-  }
-  
-  // Increment step
-  if (state.wizard.currentStep < state.wizard.totalSteps) {
-    state.wizard.currentStep++;
-    updateWizardUI();
-  }
-}
-
-function handleWizardPrev() {
-  if (state.wizard.currentStep > 1) {
-    state.wizard.currentStep--;
-    updateWizardUI();
-  }
-}
-
-// Recommendation Engine algorithm
-function calculateRecommendations() {
-  const answers = state.wizard.answers;
-  const course = answers.course.toLowerCase(); // mba, bca, bba, etc.
-  
-  // Filter base list of universities offering this course
-  let matchingUnis = UNIVERSITIES.filter(uni => uni.courses[course]);
-  
-  const scoredUnis = matchingUnis.map(uni => {
-    let score = 50; // Starting baseline
-    const courseFee = uni.courses[course].feeTotal;
-    
-    // 1. Budget Matching Scoring
-    // Budget values: "budget-low" (<60k), "budget-mid" (60k-1.2L), "budget-high" (1.2L-1.7L), "budget-premium" (>1.7L)
-    if (answers.budget === "budget-low") {
-      if (courseFee <= 60000) score += 40;
-      else if (courseFee <= 100000) score += 20;
-      else score -= 20;
-    } else if (answers.budget === "budget-mid") {
-      if (courseFee > 60000 && courseFee <= 120000) score += 40;
-      else if (courseFee <= 60000) score += 30; // lower is fine
-      else score -= 10;
-    } else if (answers.budget === "budget-high") {
-      if (courseFee > 100000 && courseFee <= 170000) score += 40;
-      else if (courseFee <= 100000) score += 30; // lower is fine
-      else score -= 5;
-    } else if (answers.budget === "budget-premium") {
-      if (courseFee > 150000) score += 40;
-      else score += 25; // Any is fine
-    }
-    
-    // 2. Career Goal Matching Scoring
-    // Goals: "goal-job" (Placement), "goal-hike" (Hike), "goal-degree" (Resume), "goal-study" (Govt/CA)
-    if (answers.goal === "goal-job") {
-      // Weight placement support highly
-      score += (uni.placementRate - 50) * 0.8; 
-    } else if (answers.goal === "goal-hike") {
-      // Weight LMS Quality & Academics (NAAC grade)
-      score += (uni.lmsRating / 5.0) * 30;
-      if (uni.naacGrade === "A++") score += 10;
-    } else if (answers.goal === "goal-degree") {
-      // Weight low fee structure & brand name
-      if (courseFee < 100000) score += 20;
-      if (uni.id === "andhra_university_online" || uni.id === "kurukshetra_university_online") score += 15; // standard govt degree
-    } else if (answers.goal === "goal-study") {
-      // Academics focus
-      if (uni.id === "andhra_university_online" || uni.id === "kurukshetra_university_online" || uni.id === "manipal_university_jaipur_online") score += 20;
-    }
-    
-    // Cap score at 99%, minimum at 40%
-    const finalScore = Math.min(99, Math.max(40, Math.round(score)));
-    
-    return {
-      uni,
-      score: finalScore
-    };
-  });
-  
-  // Sort by score high to low
-  scoredUnis.sort((a, b) => b.score - a.score);
-  
-  // Select top 3 recommendations
-  const topRecommendations = scoredUnis.slice(0, 3);
-  
-  // Render details onto final step DOM
-  const container = document.getElementById("wizard-recommendations-list");
-  if (!container) return;
-  
-  container.innerHTML = "";
-  
-  topRecommendations.forEach((rec, index) => {
-    const uni = rec.uni;
-    const div = document.createElement("div");
-    div.className = "rec-item-card";
-    
-    div.innerHTML = `
-      <div class="rec-item-left">
-        <div class="rec-rank-badge">#${index + 1}</div>
-        <div class="uni-logo-badge" style="background: ${uni.logoColor}; width: 45px; height: 45px; font-size: 1.1rem;">${uni.logoInitials}</div>
-        <div class="rec-uni-info">
-          <h4>${uni.name}</h4>
-          <p>Total Course Fee: <strong>₹${uni.courses[course].feeTotal.toLocaleString("en-IN")}</strong> | Rating: <strong>${uni.rating}★</strong></p>
-          <span class="rec-match-score">${rec.score}% Match Quality</span>
-        </div>
-      </div>
-      <div style="display:flex; gap:8px;">
-        <button class="btn btn-secondary" style="padding: 8px 14px; font-size:0.8rem;" onclick="openModal('${uni.id}')">Details</button>
-        <button class="btn btn-accent" style="padding: 8px 14px; font-size:0.8rem;" onclick="submitCounselingInquiry('${uni.id}')">Talk to Expert</button>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
-
-window.submitWizardContact = function(event) {
-  event.preventDefault();
-  
-  // Save contact state
-  state.wizard.userContact.name = document.getElementById("wiz-name").value;
-  state.wizard.userContact.email = document.getElementById("wiz-email").value;
-  state.wizard.userContact.phone = document.getElementById("wiz-phone").value;
-  
-  // Go to step 5 results page
-  handleWizardNext();
-};
-
-window.submitCounselingInquiry = function(uniId) {
-  const uni = UNIVERSITIES.find(u => u.id === uniId);
-  const uniName = uni ? uni.name : "featured college";
-  
-  // Mock counseling registration
-  alert(`Thank you! Your request for free counseling at ${uniName} has been received. Our senior academic advisors will call you back on your registered number within 15 minutes!`);
-};
 
 window.startCounselingWithUni = function(uniId) {
   const uni = UNIVERSITIES.find(u => u.id === uniId);
@@ -1294,5 +1049,4 @@ function closeModal() {
 
 // Attach helpers to window for easy inline access in HTML templates
 window.startCounselingWithUni = startCounselingWithUni;
-window.submitCounselingInquiry = submitCounselingInquiry;
 window.resetFilters = resetFilters;
