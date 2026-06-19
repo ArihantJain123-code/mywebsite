@@ -8,7 +8,7 @@ const COURSES_DATA = {
     duration: "2 Years",
     description: "Equip yourself with leadership and management skills to accelerate your career or launch business ventures.",
     specializations: ["Finance", "Marketing", "Human Resource Management", "Operations", "Information Technology", "Business Analytics"],
-    avgSalary: "â‚¹6 LPA - â‚¹15 LPA",
+    avgSalary: "₹6 LPA - ₹15 LPA",
     eligibility: "Bachelor's degree with minimum 50% marks (45% for reserved categories) from a recognized university."
   },
   "bca": {
@@ -18,7 +18,7 @@ const COURSES_DATA = {
     duration: "3 Years",
     description: "Launch your career in IT, software development, web design, or systems administration with computer applications expertise.",
     specializations: ["Software Engineering", "Data Science", "Cyber Security", "Cloud Computing"],
-    avgSalary: "â‚¹3 LPA - â‚¹7 LPA",
+    avgSalary: "₹3 LPA - ₹7 LPA",
     eligibility: "10+2 passing certificate from a recognized board (Maths background preferred but not mandatory for most universities)."
   },
   "bba": {
@@ -28,7 +28,7 @@ const COURSES_DATA = {
     duration: "3 Years",
     description: "Establish a solid foundation in business operations, finance, marketing, and human resource management.",
     specializations: ["Finance & Accounts", "Marketing & Sales", "Human Resource", "Digital Marketing"],
-    avgSalary: "â‚¹3.5 LPA - â‚¹8 LPA",
+    avgSalary: "₹3.5 LPA - ₹8 LPA",
     eligibility: "10+2 passing certificate from a recognized board in any stream."
   },
   "mca": {
@@ -38,7 +38,7 @@ const COURSES_DATA = {
     duration: "2 Years",
     description: "Deep dive into advanced computer science, application development, cloud database structures, and artificial intelligence.",
     specializations: ["Artificial Intelligence & Machine Learning", "Cyber Security", "Cloud Computing", "Full Stack Development"],
-    avgSalary: "â‚¹5 LPA - â‚¹12 LPA",
+    avgSalary: "₹5 LPA - ₹12 LPA",
     eligibility: "Bachelor's degree in BCA/B.Sc/B.Com/B.A. with Mathematics at 10+2 level or graduation level."
   },
   "mcom": {
@@ -48,7 +48,7 @@ const COURSES_DATA = {
     duration: "2 Years",
     description: "Gain advanced academic understanding of economics, finance, accounting, taxation, and business laws.",
     specializations: ["Financial Accounting", "International Business", "Taxation"],
-    avgSalary: "â‚¹4 LPA - â‚¹9 LPA",
+    avgSalary: "₹4 LPA - ₹9 LPA",
     eligibility: "Bachelor's degree in Commerce (B.Com) or related stream from a recognized university."
   }
 };
