@@ -13,7 +13,9 @@ const state = {
     searchQuery: ""
   },
   sortBy: "rating",
-  reviewsDb: {} // Will hold user reviews in memory, supplemented by local storage
+  reviewsDb: {}, // Will hold user reviews in memory, supplemented by local storage
+  blogQuery: "",
+  blogCategory: "all"
 };
 
 // --- Initialization ---
@@ -75,7 +77,7 @@ function navigate(viewName, params = {}) {
   // Update navigation link active class
   document.querySelectorAll(".nav-link").forEach(link => {
     link.classList.remove("active");
-    if (link.getAttribute("data-target") === viewName) {
+    if (link.getAttribute("data-target") === viewName || (viewName === "blog-detail" && link.getAttribute("data-target") === "blog")) {
       link.classList.add("active");
     }
   });
@@ -100,6 +102,52 @@ function navigate(viewName, params = {}) {
     renderCatalog();
   } else if (viewName === "compare") {
     renderCompareMatrix();
+  } else if (viewName === "blog") {
+    if (params.search) {
+      state.blogQuery = decodeURIComponent(params.search).toLowerCase().trim();
+      // Update inputs
+      const navSearch = document.getElementById("nav-blog-search");
+      const mobSearch = document.getElementById("mobile-blog-search");
+      if (navSearch) navSearch.value = params.search;
+      if (mobSearch) mobSearch.value = params.search;
+      // Toggle nav search clear button
+      const clearBtn = document.getElementById("nav-blog-search-clear");
+      if (clearBtn) clearBtn.style.display = params.search ? "inline-flex" : "none";
+    } else {
+      state.blogQuery = "";
+      const navSearch = document.getElementById("nav-blog-search");
+      const mobSearch = document.getElementById("mobile-blog-search");
+      if (navSearch) navSearch.value = "";
+      if (mobSearch) mobSearch.value = "";
+      const clearBtn = document.getElementById("nav-blog-search-clear");
+      if (clearBtn) clearBtn.style.display = "none";
+    }
+    
+    if (params.category) {
+      state.blogCategory = decodeURIComponent(params.category);
+    } else {
+      state.blogCategory = "all";
+    }
+    
+    // Sync category sidebar buttons visually
+    const catBtns = document.querySelectorAll(".blog-category-btn");
+    catBtns.forEach(btn => {
+      if (btn.getAttribute("data-category") === state.blogCategory) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+
+    renderBlogsList();
+    renderTrendingBlogs();
+  } else if (viewName === "blog-detail") {
+    const blogId = params.id;
+    if (blogId) {
+      renderBlogDetail(blogId);
+    } else {
+      window.location.hash = "#blog";
+    }
   }
   
   // Scroll to top
@@ -256,6 +304,114 @@ function setupEventListeners() {
   if (menuToggle && navMenu) {
     menuToggle.addEventListener("click", () => {
       navMenu.classList.toggle("show");
+    });
+  }
+
+  // --- BLOG EVENT LISTENERS ---
+  // Desktop Nav Search
+  const navBlogSearchInput = document.getElementById("nav-blog-search");
+  const navBlogSearchClear = document.getElementById("nav-blog-search-clear");
+  
+  if (navBlogSearchInput) {
+    navBlogSearchInput.addEventListener("input", (e) => {
+      const value = e.target.value;
+      state.blogQuery = value.toLowerCase().trim();
+      
+      // Update mobile search input as well to stay in sync
+      const mobBlogSearchInput = document.getElementById("mobile-blog-search");
+      if (mobBlogSearchInput) mobBlogSearchInput.value = value;
+      
+      if (navBlogSearchClear) {
+        navBlogSearchClear.style.display = value ? "inline-flex" : "none";
+      }
+      
+      if (state.currentView !== "blog" && state.currentView !== "blog-detail") {
+        window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+      } else {
+        if (state.currentView === "blog-detail") {
+          window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+        } else {
+          renderBlogsList();
+        }
+      }
+    });
+  }
+  
+  if (navBlogSearchClear) {
+    navBlogSearchClear.addEventListener("click", () => {
+      if (navBlogSearchInput) navBlogSearchInput.value = "";
+      const mobBlogSearchInput = document.getElementById("mobile-blog-search");
+      if (mobBlogSearchInput) mobBlogSearchInput.value = "";
+      navBlogSearchClear.style.display = "none";
+      state.blogQuery = "";
+      if (state.currentView === "blog") {
+        renderBlogsList();
+      } else {
+        window.location.hash = "#blog";
+      }
+    });
+  }
+
+  // Mobile Nav Search
+  const mobBlogSearchInput = document.getElementById("mobile-blog-search");
+  if (mobBlogSearchInput) {
+    mobBlogSearchInput.addEventListener("input", (e) => {
+      const value = e.target.value;
+      state.blogQuery = value.toLowerCase().trim();
+      
+      // Sync desktop search input
+      if (navBlogSearchInput) navBlogSearchInput.value = value;
+      if (navBlogSearchClear) navBlogSearchClear.style.display = value ? "inline-flex" : "none";
+      
+      if (state.currentView !== "blog" && state.currentView !== "blog-detail") {
+        window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+      } else {
+        if (state.currentView === "blog-detail") {
+          window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+        } else {
+          renderBlogsList();
+        }
+      }
+    });
+  }
+
+  // Blog Page Search Status Clear Button
+  const blogStatusClearBtn = document.getElementById("blog-search-clear-btn");
+  if (blogStatusClearBtn) {
+    blogStatusClearBtn.addEventListener("click", () => {
+      if (navBlogSearchInput) navBlogSearchInput.value = "";
+      if (mobBlogSearchInput) mobBlogSearchInput.value = "";
+      if (navBlogSearchClear) navBlogSearchClear.style.display = "none";
+      state.blogQuery = "";
+      renderBlogsList();
+    });
+  }
+
+  // Blog Categories buttons
+  const categoryContainer = document.getElementById("blog-categories-list");
+  if (categoryContainer) {
+    categoryContainer.addEventListener("click", (e) => {
+      const btn = e.target.closest(".blog-category-btn");
+      if (!btn) return;
+      
+      categoryContainer.querySelectorAll(".blog-category-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      
+      state.blogCategory = btn.getAttribute("data-category");
+      renderBlogsList();
+    });
+  }
+
+  // Blog Detail Back Button
+  const blogDetailBackBtn = document.getElementById("blog-detail-back-btn");
+  if (blogDetailBackBtn) {
+    blogDetailBackBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (state.blogQuery) {
+        window.location.hash = `#blog?search=${encodeURIComponent(state.blogQuery)}`;
+      } else {
+        window.location.hash = "#blog";
+      }
     });
   }
 }
@@ -1050,3 +1206,195 @@ function closeModal() {
 // Attach helpers to window for easy inline access in HTML templates
 window.startCounselingWithUni = startCounselingWithUni;
 window.resetFilters = resetFilters;
+
+// --- BLOG PAGE RENDERING FUNCTIONS ---
+function renderBlogsList() {
+  const grid = document.getElementById("blog-posts-grid");
+  const statusContainer = document.getElementById("blog-search-status");
+  const searchTermSpan = document.getElementById("blog-search-term");
+  
+  if (!grid) return;
+  
+  grid.innerHTML = "";
+  
+  // Filter blogs
+  let filteredBlogs = BLOGS_DATA;
+  
+  // Filter by category
+  if (state.blogCategory !== "all") {
+    filteredBlogs = filteredBlogs.filter(blog => blog.category === state.blogCategory);
+  }
+  
+  // Filter by search query
+  if (state.blogQuery) {
+    filteredBlogs = filteredBlogs.filter(blog => 
+      blog.title.toLowerCase().includes(state.blogQuery) ||
+      blog.excerpt.toLowerCase().includes(state.blogQuery) ||
+      blog.category.toLowerCase().includes(state.blogQuery) ||
+      blog.content.toLowerCase().includes(state.blogQuery)
+    );
+  }
+  
+  // Show / Hide search status
+  if (statusContainer && searchTermSpan) {
+    if (state.blogQuery) {
+      searchTermSpan.textContent = state.blogQuery;
+      statusContainer.style.display = "flex";
+    } else {
+      statusContainer.style.display = "none";
+    }
+  }
+  
+  // Render empty state if needed
+  if (filteredBlogs.length === 0) {
+    grid.innerHTML = `
+      <div class="no-results" style="grid-column: 1 / -1; width: 100%;">
+        <i class="fas fa-search"></i>
+        <h3>No Articles Found</h3>
+        <p>We couldn't find any articles matching your search query or category. Try search terms like 'MBA', 'Validity', or 'NAAC'.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  // Render cards
+  filteredBlogs.forEach(blog => {
+    const card = document.createElement("div");
+    card.className = "blog-card";
+    card.addEventListener("click", () => {
+      window.location.hash = `#blog-detail?id=${blog.id}`;
+    });
+    
+    // Format date nicely
+    const dateFormatted = new Date(blog.date).toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+    
+    card.innerHTML = `
+      <div class="blog-card-meta">
+        <span class="blog-card-category">${blog.category}</span>
+        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${blog.readTime}</span>
+      </div>
+      <h3>${blog.title}</h3>
+      <p>${blog.excerpt}</p>
+      <div class="blog-card-footer">
+        <span class="blog-card-author">By ${blog.author}</span>
+        <span class="blog-card-more-btn">Read Article <i class="fas fa-arrow-right"></i></span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderBlogDetail(blogId) {
+  const blog = BLOGS_DATA.find(b => b.id === blogId);
+  if (!blog) {
+    window.location.hash = "#blog";
+    return;
+  }
+  
+  // Inject details
+  const titleEl = document.getElementById("blog-article-title");
+  const catEl = document.getElementById("blog-article-category");
+  const readEl = document.getElementById("blog-article-readtime");
+  const authorEl = document.getElementById("blog-article-author");
+  const dateEl = document.getElementById("blog-article-date");
+  const avatarEl = document.getElementById("blog-article-avatar");
+  const bodyEl = document.getElementById("blog-article-body");
+  
+  if (titleEl) titleEl.textContent = blog.title;
+  if (catEl) {
+    catEl.textContent = blog.category;
+    catEl.style.cursor = "pointer";
+    catEl.onclick = () => {
+      window.location.hash = `#blog?category=${encodeURIComponent(blog.category)}`;
+    };
+  }
+  if (readEl) readEl.innerHTML = `<i class="far fa-clock"></i> ${blog.readTime}`;
+  if (authorEl) authorEl.textContent = blog.author;
+  if (dateEl) {
+    const formattedDate = new Date(blog.date).toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+    dateEl.textContent = `Posted on ${formattedDate}`;
+  }
+  if (avatarEl) avatarEl.textContent = blog.author.charAt(0);
+  if (bodyEl) bodyEl.innerHTML = blog.content;
+  
+  // Render Related Posts
+  renderRelatedBlogs(blog);
+}
+
+function renderRelatedBlogs(currentBlog) {
+  const grid = document.getElementById("blog-related-grid");
+  if (!grid) return;
+  
+  grid.innerHTML = "";
+  
+  // Filter other blogs matching category
+  let related = BLOGS_DATA.filter(b => b.id !== currentBlog.id && b.category === currentBlog.category);
+  
+  // If we don't have enough, pull in other posts
+  if (related.length < 3) {
+    const fillers = BLOGS_DATA.filter(b => b.id !== currentBlog.id && b.category !== currentBlog.category);
+    related = [...related, ...fillers].slice(0, 3);
+  } else {
+    related = related.slice(0, 3);
+  }
+  
+  related.forEach(blog => {
+    const card = document.createElement("div");
+    card.className = "blog-card";
+    card.addEventListener("click", () => {
+      window.location.hash = `#blog-detail?id=${blog.id}`;
+    });
+    
+    card.innerHTML = `
+      <div class="blog-card-meta">
+        <span class="blog-card-category" style="font-size:0.75rem; padding: 2px 8px;">${blog.category}</span>
+        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${blog.readTime}</span>
+      </div>
+      <h3 style="font-size: 1.1rem; line-height: 1.3;">${blog.title}</h3>
+      <p style="font-size: 0.85rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${blog.excerpt}</p>
+      <div class="blog-card-footer">
+        <span class="blog-card-author">By ${blog.author}</span>
+        <span class="blog-card-more-btn" style="font-size:0.75rem;">Read <i class="fas fa-arrow-right"></i></span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderTrendingBlogs() {
+  const container = document.getElementById("blog-popular-list");
+  if (!container) return;
+  
+  container.innerHTML = "";
+  
+  // Take first 3 blogs as popular/trending posts
+  const trending = BLOGS_DATA.slice(0, 3);
+  
+  trending.forEach(blog => {
+    const item = document.createElement("div");
+    item.className = "blog-popular-item";
+    item.addEventListener("click", () => {
+      window.location.hash = `#blog-detail?id=${blog.id}`;
+    });
+    
+    const formattedDate = new Date(blog.date).toLocaleDateString("en-IN", {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    });
+    
+    item.innerHTML = `
+      <h4>${blog.title}</h4>
+      <span>${formattedDate} &bull; ${blog.readTime}</span>
+    `;
+    container.appendChild(item);
+  });
+}
