@@ -1826,6 +1826,7 @@ footer {
 .blog-card-author {
   font-weight: 600;
   color: var(--text-main);
+  display: none;
 }
 
 .blog-card-date {
@@ -2083,6 +2084,10 @@ footer {
 .blog-author-info p {
   font-size: 0.8rem;
   color: var(--text-light);
+}
+
+#blog-article-avatar, #blog-article-author {
+  display: none !important;
 }
 
 .blog-article-content-body {
