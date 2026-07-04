@@ -660,9 +660,31 @@
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) leads = JSON.parse(stored);
     } catch (e) {}
-    leads.push({ ...lead, date: new Date().toISOString(), source: "AI Chatbot" });
+    
+    const timestamp = new Date().toISOString();
+    leads.push({ ...lead, date: timestamp, source: "AI Chatbot" });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
     console.log("📋 New lead captured:", lead);
+
+    // Map lead to the unified structure used by the dispatcher
+    const inquiry = {
+      formType: "AI Chatbot Lead",
+      name: lead.name || "",
+      email: lead.email || "",
+      phone: lead.phone || "",
+      location: lead.location || "AI Chatbot Session",
+      budget: lead.budget || "",
+      course: lead.course || "",
+      message: lead.message || "Lead captured during conversational counseling session.",
+      date: timestamp
+    };
+
+    // Send to global dispatcher if defined in app.js
+    if (typeof window.submitLeadToIntegrations === "function") {
+      window.submitLeadToIntegrations(inquiry);
+    } else {
+      console.warn("Global lead integrations dispatcher not found.");
+    }
   }
 
   function saveSession() {

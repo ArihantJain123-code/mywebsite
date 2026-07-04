@@ -1,6 +1,88 @@
 // College Vidya Style - Online Degree Education Portal
 // Core Application Logic
 
+// --- Integrations Configuration ---
+// Paste your deployed Google Apps Script Web App URL here to save submissions to Google Sheets.
+// For setup guide, see: google_sheets_setup.md
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwlWgDbbFjwQoHyTlrFA61VG-bupBF9arcwcGoDj2tp5AATzjEN4-LYvbCeBVI8cjAU/exec";
+
+// Paste your deployed Activepieces Webhook URL here to trigger automations.
+// For setup guide, see: activepieces_setup.md
+const ACTIVEPIECES_WEBHOOK_URL = "";
+
+// --- Global Integration Helpers ---
+function sendInquiryToGoogleSheet(inquiryData) {
+  if (!GOOGLE_SCRIPT_URL) {
+    console.log("Google Sheets Integration: URL is not configured. Submission saved locally only.", inquiryData);
+    return;
+  }
+
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain"
+    },
+    body: JSON.stringify(inquiryData)
+  })
+    .then(() => {
+      console.log("Google Sheets Integration: Request sent successfully (no-cors).");
+    })
+    .catch(error => {
+      console.error("Google Sheets Integration Error:", error);
+    });
+}
+
+function sendInquiryToActivepieces(inquiryData) {
+  if (!ACTIVEPIECES_WEBHOOK_URL) {
+    console.log("Activepieces Integration: Webhook URL is not configured. Submission saved locally only.", inquiryData);
+    return;
+  }
+
+  fetch(ACTIVEPIECES_WEBHOOK_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(inquiryData)
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log("Activepieces Integration: Request sent successfully.");
+      } else {
+        console.error("Activepieces Integration failed with status:", response.status);
+      }
+    })
+    .catch(error => {
+      console.error("Activepieces Integration Error:", error);
+    });
+}
+
+// --- WhatsApp Redirection Helper ---
+function redirectLeadToWhatsApp(inquiryData) {
+  const adminPhone = "916375079973"; // Admin phone number with country code (91 for India)
+  
+  let message = `*New Lead Inquiry - OnlineDegrees*\n\n`;
+  if (inquiryData.formType) message += `*Source:* ${inquiryData.formType}\n`;
+  if (inquiryData.name) message += `*Name:* ${inquiryData.name}\n`;
+  if (inquiryData.email) message += `*Email:* ${inquiryData.email}\n`;
+  if (inquiryData.phone) message += `*Phone:* ${inquiryData.phone}\n`;
+  if (inquiryData.location) message += `*Location:* ${inquiryData.location}\n`;
+  if (inquiryData.budget) message += `*Budget:* ${inquiryData.budget}\n`;
+  if (inquiryData.course) message += `*Course:* ${inquiryData.course}\n`;
+  if (inquiryData.message) message += `*Message:* ${inquiryData.message}\n`;
+  
+  const waUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+  window.open(waUrl, "_blank");
+}
+
+// Unified dispatcher accessible from chatbot.js
+window.submitLeadToIntegrations = function(inquiryData) {
+  sendInquiryToGoogleSheet(inquiryData);
+  sendInquiryToActivepieces(inquiryData);
+  redirectLeadToWhatsApp(inquiryData);
+};
+
 // --- Global Application State ---
 const state = {
   currentView: "home",
@@ -23,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initReviews();
   initRouter();
   setupEventListeners();
-  
+
   // Render default catalog course name on load
   updateCatalogCourseInfo();
 });
@@ -46,11 +128,11 @@ function initReviews() {
 function initRouter() {
   const handleRouteChange = () => {
     const hash = window.location.hash || "#home";
-    
+
     // Parse query params if any, e.g. #catalog?course=bca
     const parts = hash.split("?");
     const viewName = parts[0].substring(1);
-    
+
     let params = {};
     if (parts[1]) {
       const searchParams = new URLSearchParams(parts[1]);
@@ -58,12 +140,12 @@ function initRouter() {
         params[key] = value;
       }
     }
-    
+
     navigate(viewName, params);
   };
-  
+
   window.addEventListener("hashchange", handleRouteChange);
-  
+
   // Trigger on initial load
   handleRouteChange();
 }
@@ -73,7 +155,7 @@ function navigate(viewName, params = {}) {
   document.querySelectorAll(".view-section").forEach(sec => {
     sec.classList.remove("active");
   });
-  
+
   // Update navigation link active class
   document.querySelectorAll(".nav-link").forEach(link => {
     link.classList.remove("active");
@@ -81,7 +163,7 @@ function navigate(viewName, params = {}) {
       link.classList.add("active");
     }
   });
-  
+
   // Activate target section
   const targetSection = document.getElementById(`${viewName}-view`);
   if (targetSection) {
@@ -92,7 +174,7 @@ function navigate(viewName, params = {}) {
     document.getElementById("home-view").classList.add("active");
     state.currentView = "home";
   }
-  
+
   // Handle specific view parameters
   if (viewName === "catalog") {
     if (params.course) {
@@ -122,13 +204,13 @@ function navigate(viewName, params = {}) {
       const clearBtn = document.getElementById("nav-blog-search-clear");
       if (clearBtn) clearBtn.style.display = "none";
     }
-    
+
     if (params.category) {
       state.blogCategory = decodeURIComponent(params.category);
     } else {
       state.blogCategory = "all";
     }
-    
+
     // Sync category sidebar buttons visually
     const catBtns = document.querySelectorAll(".blog-category-btn");
     catBtns.forEach(btn => {
@@ -149,7 +231,7 @@ function navigate(viewName, params = {}) {
       window.location.hash = "#blog";
     }
   }
-  
+
   // Scroll to top
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -276,7 +358,7 @@ function setupEventListeners() {
   if (modalClose) {
     modalClose.addEventListener("click", closeModal);
   }
-  
+
   // Close modal when clicking overlay
   const modalOverlay = document.getElementById("modal-overlay");
   if (modalOverlay) {
@@ -289,10 +371,10 @@ function setupEventListeners() {
   document.querySelectorAll(".modal-tab-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const targetTab = e.target.getAttribute("data-tab");
-      
+
       document.querySelectorAll(".modal-tab-btn").forEach(b => b.classList.remove("active"));
       document.querySelectorAll(".modal-tab-pane").forEach(p => p.classList.remove("active"));
-      
+
       e.target.classList.add("active");
       document.getElementById(`tab-${targetTab}`).classList.add("active");
     });
@@ -311,20 +393,20 @@ function setupEventListeners() {
   // Desktop Nav Search
   const navBlogSearchInput = document.getElementById("nav-blog-search");
   const navBlogSearchClear = document.getElementById("nav-blog-search-clear");
-  
+
   if (navBlogSearchInput) {
     navBlogSearchInput.addEventListener("input", (e) => {
       const value = e.target.value;
       state.blogQuery = value.toLowerCase().trim();
-      
+
       // Update mobile search input as well to stay in sync
       const mobBlogSearchInput = document.getElementById("mobile-blog-search");
       if (mobBlogSearchInput) mobBlogSearchInput.value = value;
-      
+
       if (navBlogSearchClear) {
         navBlogSearchClear.style.display = value ? "inline-flex" : "none";
       }
-      
+
       if (state.currentView !== "blog" && state.currentView !== "blog-detail") {
         window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
       } else {
@@ -336,7 +418,7 @@ function setupEventListeners() {
       }
     });
   }
-  
+
   if (navBlogSearchClear) {
     navBlogSearchClear.addEventListener("click", () => {
       if (navBlogSearchInput) navBlogSearchInput.value = "";
@@ -358,11 +440,11 @@ function setupEventListeners() {
     mobBlogSearchInput.addEventListener("input", (e) => {
       const value = e.target.value;
       state.blogQuery = value.toLowerCase().trim();
-      
+
       // Sync desktop search input
       if (navBlogSearchInput) navBlogSearchInput.value = value;
       if (navBlogSearchClear) navBlogSearchClear.style.display = value ? "inline-flex" : "none";
-      
+
       if (state.currentView !== "blog" && state.currentView !== "blog-detail") {
         window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
       } else {
@@ -393,10 +475,10 @@ function setupEventListeners() {
     categoryContainer.addEventListener("click", (e) => {
       const btn = e.target.closest(".blog-category-btn");
       if (!btn) return;
-      
+
       categoryContainer.querySelectorAll(".blog-category-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      
+
       state.blogCategory = btn.getAttribute("data-category");
       renderBlogsList();
     });
@@ -419,18 +501,19 @@ function setupEventListeners() {
   const contactForm = document.getElementById("contact-form");
   const contactSuccess = document.getElementById("contact-success");
   const contactResetBtn = document.getElementById("contact-reset-btn");
-  
+
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      
+
       const name = document.getElementById("contact-name").value.trim();
       const email = document.getElementById("contact-email").value.trim();
       const phone = document.getElementById("contact-phone").value.trim();
       const course = document.getElementById("contact-course").value;
       const message = document.getElementById("contact-message").value.trim();
-      
+
       const inquiry = {
+        formType: "Contact Form",
         name,
         email,
         phone,
@@ -438,7 +521,7 @@ function setupEventListeners() {
         message,
         date: new Date().toISOString()
       };
-      
+
       let inquiries = [];
       const stored = localStorage.getItem("portal_contact_inquiries");
       if (stored) {
@@ -446,14 +529,17 @@ function setupEventListeners() {
       }
       inquiries.push(inquiry);
       localStorage.setItem("portal_contact_inquiries", JSON.stringify(inquiries));
-      
+
+      // Send to integrations (Google Sheets + Activepieces)
+      window.submitLeadToIntegrations(inquiry);
+
       contactForm.style.display = "none";
       if (contactSuccess) {
         contactSuccess.style.display = "block";
       }
     });
   }
-  
+
   if (contactResetBtn) {
     contactResetBtn.addEventListener("click", () => {
       if (contactForm) {
@@ -466,67 +552,85 @@ function setupEventListeners() {
     });
   }
 
-// --- INQUIRY MODAL LOGIC ---
-const inquiryModal = document.getElementById("inquiry-modal");
-const inquiryOpenBtn = document.getElementById("open-inquiry-modal");
-const inquiryCloseBtn = document.getElementById("inquiry-modal-close");
-const inquiryForm = document.getElementById("inquiry-form");
-const inquirySuccess = document.getElementById("inquiry-success");
-const inquiryResetBtn = document.getElementById("inquiry-reset-btn");
+  // --- INQUIRY MODAL LOGIC ---
+  const inquiryModal = document.getElementById("inquiry-modal");
+  const inquiryOpenBtn = document.getElementById("open-inquiry-modal");
+  const inquiryCloseBtn = document.getElementById("inquiry-modal-close");
+  const inquiryForm = document.getElementById("inquiry-form");
+  const inquirySuccess = document.getElementById("inquiry-success");
+  const inquiryResetBtn = document.getElementById("inquiry-reset-btn");
 
-if (inquiryOpenBtn) {
-  inquiryOpenBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (inquiryModal) inquiryModal.style.display = "flex";
-  });
-}
-if (inquiryCloseBtn) {
-  inquiryCloseBtn.addEventListener("click", () => {
-    if (inquiryModal) inquiryModal.style.display = "none";
-  });
-}
-if (inquiryForm) {
-  inquiryForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("inquiry-name").value.trim();
-    const email = document.getElementById("inquiry-email").value.trim();
-    const phone = document.getElementById("inquiry-phone").value.trim();
-    const location = document.getElementById("inquiry-location").value.trim();
-    const budget = document.getElementById("inquiry-budget").value;
-    const course = document.getElementById("inquiry-course").value;
-    const message = document.getElementById("inquiry-message").value.trim();
-    const inquiry = { name, email, phone, location, budget, course, message, date: new Date().toISOString() };
-    let inquiries = [];
-    const stored = localStorage.getItem("portal_inquiry_submissions");
-    if (stored) inquiries = JSON.parse(stored);
-    inquiries.push(inquiry);
-    localStorage.setItem("portal_inquiry_submissions", JSON.stringify(inquiries));
-    inquiryForm.style.display = "none";
-    if (inquirySuccess) inquirySuccess.style.display = "block";
-  });
-}
-if (inquiryResetBtn) {
-  inquiryResetBtn.addEventListener("click", () => {
-    if (inquiryForm) {
-      inquiryForm.reset();
-      inquiryForm.style.display = "flex";
-    }
-    if (inquirySuccess) inquirySuccess.style.display = "none";
-    if (inquiryModal) inquiryModal.style.display = "none";
-  });
-}
+  if (inquiryOpenBtn) {
+    inquiryOpenBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (inquiryModal) inquiryModal.style.display = "flex";
+    });
+  }
+  if (inquiryCloseBtn) {
+    inquiryCloseBtn.addEventListener("click", () => {
+      if (inquiryModal) inquiryModal.style.display = "none";
+    });
+  }
+  if (inquiryForm) {
+    inquiryForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("inquiry-name").value.trim();
+      const email = document.getElementById("inquiry-email").value.trim();
+      const phone = document.getElementById("inquiry-phone").value.trim();
+      const location = document.getElementById("inquiry-location").value.trim();
+      const budget = document.getElementById("inquiry-budget").value;
+      const course = document.getElementById("inquiry-course").value;
+      const message = document.getElementById("inquiry-message").value.trim();
 
-// --- Accordion FAQs toggle logic
+      const inquiry = {
+        formType: "Inquiry Form",
+        name,
+        email,
+        phone,
+        location,
+        budget,
+        course,
+        message,
+        date: new Date().toISOString()
+      };
+
+      let inquiries = [];
+      const stored = localStorage.getItem("portal_inquiry_submissions");
+      if (stored) inquiries = JSON.parse(stored);
+      inquiries.push(inquiry);
+      localStorage.setItem("portal_inquiry_submissions", JSON.stringify(inquiries));
+
+      // Send to integrations (Google Sheets + Activepieces)
+      window.submitLeadToIntegrations(inquiry);
+
+      inquiryForm.style.display = "none";
+      if (inquirySuccess) inquirySuccess.style.display = "block";
+    });
+  }
+  if (inquiryResetBtn) {
+    inquiryResetBtn.addEventListener("click", () => {
+      if (inquiryForm) {
+        inquiryForm.reset();
+        inquiryForm.style.display = "flex";
+      }
+      if (inquirySuccess) inquirySuccess.style.display = "none";
+      if (inquiryModal) inquiryModal.style.display = "none";
+    });
+  }
+
+  // (Integration helpers moved to global scope at the top of app.js)
+
+  // --- Accordion FAQs toggle logic
   const accordionTitles = document.querySelectorAll(".contact-accordion .accordion-title");
   accordionTitles.forEach(title => {
     title.addEventListener("click", () => {
       const item = title.parentElement;
       const isOpen = item.classList.contains("open");
-      
+
       document.querySelectorAll(".contact-accordion .accordion-item").forEach(el => {
         el.classList.remove("open");
       });
-      
+
       if (!isOpen) {
         item.classList.add("open");
       }
@@ -540,43 +644,43 @@ function resetFilters() {
   state.filters.naacGrades = [];
   state.filters.approvals = [];
   state.filters.searchQuery = "";
-  
+
   // Reset DOM elements
   const feeSlider = document.getElementById("filter-fee");
   if (feeSlider) feeSlider.value = 250000;
-  
+
   const feeValue = document.getElementById("filter-fee-value");
   if (feeValue) feeValue.textContent = "₹2,50,000";
-  
+
   document.querySelectorAll(".filter-naac, .filter-approval").forEach(chk => {
     chk.checked = false;
   });
-  
+
   const searchInput = document.getElementById("catalog-search");
   if (searchInput) searchInput.value = "";
-  
+
   renderCatalog();
 }
 
 function updateCatalogCourseInfo() {
   const courseMeta = COURSES_DATA[state.selectedCourse];
   if (!courseMeta) return;
-  
+
   // Update selects and titles
   const select = document.getElementById("catalog-course-select");
   if (select) select.value = state.selectedCourse;
-  
+
   const headerName = document.getElementById("catalog-course-name");
   if (headerName) headerName.textContent = courseMeta.name;
-  
+
   const desc = document.getElementById("catalog-course-desc");
   if (desc) desc.textContent = courseMeta.description;
-  
+
   // Catalog meta stats box
   const duration = document.getElementById("course-meta-duration");
   const salary = document.getElementById("course-meta-salary");
   const eligibility = document.getElementById("course-meta-eligibility");
-  
+
   if (duration) duration.textContent = courseMeta.duration;
   if (salary) salary.textContent = courseMeta.avgSalary;
   if (eligibility) eligibility.textContent = courseMeta.eligibility;
@@ -586,20 +690,20 @@ function updateCatalogCourseInfo() {
 function renderCatalog() {
   const container = document.getElementById("universities-list-container");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
+
   // Get universities offering the selected course
   let list = UNIVERSITIES.filter(uni => uni.courses[state.selectedCourse]);
-  
+
   // Filter 1: Max Fee
   list = list.filter(uni => uni.courses[state.selectedCourse].feeTotal <= state.filters.feeMax);
-  
+
   // Filter 2: NAAC Grade
   if (state.filters.naacGrades.length > 0) {
     list = list.filter(uni => state.filters.naacGrades.includes(uni.naacGrade));
   }
-  
+
   // Filter 3: Approvals
   if (state.filters.approvals.length > 0) {
     list = list.filter(uni => {
@@ -609,15 +713,15 @@ function renderCatalog() {
       });
     });
   }
-  
+
   // Filter 4: Search query
   if (state.filters.searchQuery) {
-    list = list.filter(uni => 
+    list = list.filter(uni =>
       uni.name.toLowerCase().includes(state.filters.searchQuery) ||
       uni.shortName.toLowerCase().includes(state.filters.searchQuery)
     );
   }
-  
+
   // Sorting
   if (state.sortBy === "rating") {
     list.sort((a, b) => b.rating - a.rating);
@@ -628,7 +732,7 @@ function renderCatalog() {
   } else if (state.sortBy === "placement") {
     list.sort((a, b) => b.placementRate - a.placementRate);
   }
-  
+
   // Check empty state
   if (list.length === 0) {
     container.innerHTML = `
@@ -641,19 +745,19 @@ function renderCatalog() {
     `;
     return;
   }
-  
+
   // Render cards
   list.forEach(uni => {
     const courseDetail = uni.courses[state.selectedCourse];
     const isCompared = state.compareList.includes(uni.id);
-    
+
     const card = document.createElement("div");
     card.className = "uni-card";
     card.setAttribute("data-id", uni.id);
-    
+
     // Generate inline approvals HTML
     const approvalsHtml = uni.approvals.map(app => `<span class="uni-approval-tag">${app}</span>`).join("");
-    
+
     // Generate features list
     const featuresHtml = uni.features.slice(0, 2).map(f => `
       <div class="uni-highlight-item">
@@ -661,7 +765,7 @@ function renderCatalog() {
         <span>${f}</span>
       </div>
     `).join("");
-    
+
     card.innerHTML = `
       <!-- Compare Checkbox -->
       <label class="uni-compare-checkbox ${isCompared ? 'checked' : ''}" onclick="toggleCompare('${uni.id}', event)">
@@ -718,15 +822,15 @@ function renderCatalog() {
 }
 
 // --- Comparison Logic ---
-window.toggleCompare = function(uniId, event) {
+window.toggleCompare = function (uniId, event) {
   // Prevent label default double-trigger when nested inside grid
   if (event) {
     event.preventDefault();
     event.stopPropagation();
   }
-  
+
   const index = state.compareList.indexOf(uniId);
-  
+
   if (index > -1) {
     // Remove
     state.compareList.splice(index, 1);
@@ -738,9 +842,9 @@ window.toggleCompare = function(uniId, event) {
     }
     state.compareList.push(uniId);
   }
-  
+
   updateCompareTray();
-  
+
   // Re-render only checkboxes visually to save reflow if in catalog
   if (state.currentView === "catalog") {
     renderCatalog();
@@ -752,29 +856,29 @@ function updateCompareTray() {
   const container = document.getElementById("compare-tray-items");
   const countBadge = document.getElementById("compare-badge-count");
   const navBadge = document.getElementById("nav-compare-badge");
-  
+
   if (!tray || !container) return;
-  
+
   const count = state.compareList.length;
-  
+
   // Update navbar badge
   if (navBadge) {
     navBadge.textContent = count;
     navBadge.style.display = count > 0 ? "flex" : "none";
   }
-  
+
   if (count === 0) {
     tray.classList.remove("show");
     return;
   }
-  
+
   tray.classList.add("show");
   container.innerHTML = `<span class="compare-tray-title">Compare (Max 2):</span>`;
-  
+
   state.compareList.forEach(id => {
     const uni = UNIVERSITIES.find(u => u.id === id);
     if (!uni) return;
-    
+
     const pill = document.createElement("div");
     pill.className = "compare-pill";
     pill.innerHTML = `
@@ -785,7 +889,7 @@ function updateCompareTray() {
     `;
     container.appendChild(pill);
   });
-  
+
   // Update action button text
   const actionBtn = document.getElementById("compare-tray-action-btn");
   if (actionBtn) {
@@ -804,14 +908,14 @@ function getUniversityAvgSalary(uni, course) {
     "mcom": { min: 3.5, max: 7.5 }
   };
   const courseRange = baseSalaries[course] || { min: 3, max: 8 };
-  
+
   // Calculate a factor between 0.1 and 1.0 based on placement rate and rating
   const factor = ((uni.placementRate || 80) - 70) / 20 * 0.5 + ((uni.rating || 4.0) - 4.0) * 0.5;
   const scaledFactor = Math.max(0.1, Math.min(1.0, factor));
-  
+
   const minSalary = courseRange.min + scaledFactor * (courseRange.max - courseRange.min) * 0.8;
   const maxSalary = minSalary + 1.5 + (1 - scaledFactor) * 1.5;
-  
+
   return {
     min: Math.round(minSalary * 10) / 10,
     max: Math.round(maxSalary * 10) / 10
@@ -822,9 +926,9 @@ function getUniversityAvgSalary(uni, course) {
 function renderCompareMatrix() {
   const select1 = document.getElementById("compare-select-1");
   const select2 = document.getElementById("compare-select-2");
-  
+
   if (!select1 || !select2) return;
-  
+
   // 1. Populate selectors dynamically if they are empty
   if (select1.options.length === 0) {
     UNIVERSITIES.forEach(uni => {
@@ -833,7 +937,7 @@ function renderCompareMatrix() {
       select1.add(opt1);
       select2.add(opt2);
     });
-    
+
     // Bind change events
     select1.addEventListener("change", () => {
       state.compareList[0] = select1.value;
@@ -841,7 +945,7 @@ function renderCompareMatrix() {
       updateCompareTray();
       renderCompareData();
     });
-    
+
     select2.addEventListener("change", () => {
       state.compareList[1] = select2.value;
       updateSelectDisables(select1, select2);
@@ -849,7 +953,7 @@ function renderCompareMatrix() {
       renderCompareData();
     });
   }
-  
+
   // 2. Set initial values based on global comparison state
   if (state.compareList.length >= 2) {
     select1.value = state.compareList[0];
@@ -866,7 +970,7 @@ function renderCompareMatrix() {
     select2.value = UNIVERSITIES[1]?.id;
     state.compareList = [UNIVERSITIES[0]?.id, UNIVERSITIES[1]?.id];
   }
-  
+
   updateSelectDisables(select1, select2);
   updateCompareTray();
   renderCompareData();
@@ -875,7 +979,7 @@ function renderCompareMatrix() {
 function updateSelectDisables(select1, select2) {
   const val1 = select1.value;
   const val2 = select2.value;
-  
+
   Array.from(select1.options).forEach(opt => {
     opt.disabled = (opt.value === val2);
   });
@@ -888,27 +992,27 @@ function renderCompareData() {
   const select1 = document.getElementById("compare-select-1");
   const select2 = document.getElementById("compare-select-2");
   if (!select1 || !select2) return;
-  
+
   const id1 = select1.value;
   const id2 = select2.value;
-  
+
   const uniA = UNIVERSITIES.find(u => u.id === id1);
   const uniB = UNIVERSITIES.find(u => u.id === id2);
   if (!uniA || !uniB) return;
-  
+
   const course = state.selectedCourse || "mba";
-  
+
   // --- A. Render Performance & Value Charts ---
   // Average Salary
   const salaryA = getUniversityAvgSalary(uniA, course);
   const salaryB = getUniversityAvgSalary(uniB, course);
   const salaryTextA = `₹${salaryA.min}-${salaryA.max} LPA`;
   const salaryTextB = `₹${salaryB.min}-${salaryB.max} LPA`;
-  
+
   const maxSalaryScale = 16.0;
   const salaryPctA = Math.min(100, (salaryA.max / maxSalaryScale) * 100);
   const salaryPctB = Math.min(100, (salaryB.max / maxSalaryScale) * 100);
-  
+
   const salaryBarsContainer = document.getElementById("compare-salary-bars");
   if (salaryBarsContainer) {
     salaryBarsContainer.innerHTML = `
@@ -932,17 +1036,17 @@ function renderCompareData() {
       </div>
     `;
   }
-  
+
   // Total Tuition Fee
   const feeTotalA = uniA.courses[course]?.feeTotal || 0;
   const feeTotalB = uniB.courses[course]?.feeTotal || 0;
   const feeTextA = `₹${(feeTotalA / 100000).toFixed(2)} Lakhs`;
   const feeTextB = `₹${(feeTotalB / 100000).toFixed(2)} Lakhs`;
-  
+
   const maxFeeScale = 250000.0;
   const feePctA = Math.min(100, (feeTotalA / maxFeeScale) * 100);
   const feePctB = Math.min(100, (feeTotalB / maxFeeScale) * 100);
-  
+
   const feeBarsContainer = document.getElementById("compare-fee-bars");
   if (feeBarsContainer) {
     feeBarsContainer.innerHTML = `
@@ -966,11 +1070,11 @@ function renderCompareData() {
       </div>
     `;
   }
-  
+
   // --- B. Render Comparison Table ---
   const table = document.getElementById("compare-table-element");
   if (!table) return;
-  
+
   // Table Head
   const headHtml = `
     <thead>
@@ -1003,7 +1107,7 @@ function renderCompareData() {
       </tr>
     </thead>
   `;
-  
+
   // Table rows fields
   const rows = [
     {
@@ -1068,7 +1172,7 @@ function renderCompareData() {
       `
     }
   ];
-  
+
   let rowsHtml = "";
   rows.forEach(row => {
     rowsHtml += `
@@ -1079,7 +1183,7 @@ function renderCompareData() {
       </tr>
     `;
   });
-  
+
   table.innerHTML = `
     ${headHtml}
     <tbody>
@@ -1088,7 +1192,7 @@ function renderCompareData() {
   `;
 }
 
-window.startCounselingWithUni = function(uniId) {
+window.startCounselingWithUni = function (uniId) {
   // Open inquiry modal directly
   const inquiryModal = document.getElementById("inquiry-modal");
   if (inquiryModal) {
@@ -1097,7 +1201,7 @@ window.startCounselingWithUni = function(uniId) {
 };
 
 // --- UNIVERSITY DETAIL MODAL ACTIONS ---
-window.openModal = function(uniId) {
+window.openModal = function (uniId) {
   // Open inquiry modal instead of the university detail modal
   const inquiryModal = document.getElementById("inquiry-modal");
   if (inquiryModal) {
@@ -1108,26 +1212,26 @@ window.openModal = function(uniId) {
 function renderModalReviews(uniId) {
   const container = document.getElementById("modal-reviews-list");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
+
   const reviews = state.reviewsDb[uniId] || [];
-  
+
   if (reviews.length === 0) {
     container.innerHTML = `<p style="color:var(--text-light); text-align:center; padding: 20px;">No reviews yet. Be the first to add a review!</p>`;
     return;
   }
-  
+
   reviews.forEach(rev => {
     const div = document.createElement("div");
     div.className = "review-card";
     div.style.marginBottom = "16px";
-    
+
     let starsHtml = "";
     for (let i = 1; i <= 5; i++) {
       starsHtml += `<i class="fas fa-star" style="color: ${i <= rev.rating ? '#FBBF24' : '#E2E8F0'}"></i>`;
     }
-    
+
     div.innerHTML = `
       <div class="review-stars">${starsHtml}</div>
       <p class="review-text">"${rev.comment}"</p>
@@ -1158,29 +1262,29 @@ function renderBlogsList() {
   const grid = document.getElementById("blog-posts-grid");
   const statusContainer = document.getElementById("blog-search-status");
   const searchTermSpan = document.getElementById("blog-search-term");
-  
+
   if (!grid) return;
-  
+
   grid.innerHTML = "";
-  
+
   // Filter blogs
   let filteredBlogs = BLOGS_DATA;
-  
+
   // Filter by category
   if (state.blogCategory !== "all") {
     filteredBlogs = filteredBlogs.filter(blog => blog.category === state.blogCategory);
   }
-  
+
   // Filter by search query
   if (state.blogQuery) {
-    filteredBlogs = filteredBlogs.filter(blog => 
+    filteredBlogs = filteredBlogs.filter(blog =>
       blog.title.toLowerCase().includes(state.blogQuery) ||
       blog.excerpt.toLowerCase().includes(state.blogQuery) ||
       blog.category.toLowerCase().includes(state.blogQuery) ||
       blog.content.toLowerCase().includes(state.blogQuery)
     );
   }
-  
+
   // Show / Hide search status
   if (statusContainer && searchTermSpan) {
     if (state.blogQuery) {
@@ -1190,7 +1294,7 @@ function renderBlogsList() {
       statusContainer.style.display = "none";
     }
   }
-  
+
   // Hide categories card if BLOGS_DATA is empty
   const categoryContainer = document.getElementById("blog-categories-list");
   if (categoryContainer) {
@@ -1221,7 +1325,7 @@ function renderBlogsList() {
     }
     return;
   }
-  
+
   // Render cards
   filteredBlogs.forEach(blog => {
     const card = document.createElement("div");
@@ -1229,14 +1333,14 @@ function renderBlogsList() {
     card.addEventListener("click", () => {
       window.location.hash = `#blog-detail?id=${blog.id}`;
     });
-    
+
     // Format date nicely
     const dateFormatted = new Date(blog.date).toLocaleDateString("en-IN", {
       year: "numeric",
       month: "long",
       day: "numeric"
     });
-    
+
     card.innerHTML = `
       <div class="blog-card-meta">
         <span class="blog-card-category">${blog.category}</span>
@@ -1259,7 +1363,7 @@ function renderBlogDetail(blogId) {
     window.location.hash = "#blog";
     return;
   }
-  
+
   // Inject details
   const titleEl = document.getElementById("blog-article-title");
   const catEl = document.getElementById("blog-article-category");
@@ -1268,7 +1372,7 @@ function renderBlogDetail(blogId) {
   const dateEl = document.getElementById("blog-article-date");
   const avatarEl = document.getElementById("blog-article-avatar");
   const bodyEl = document.getElementById("blog-article-body");
-  
+
   if (titleEl) titleEl.textContent = blog.title;
   if (catEl) {
     catEl.textContent = blog.category;
@@ -1289,7 +1393,7 @@ function renderBlogDetail(blogId) {
   }
   if (avatarEl) avatarEl.textContent = blog.author.charAt(0);
   if (bodyEl) bodyEl.innerHTML = blog.content;
-  
+
   // Render Related Posts
   renderRelatedBlogs(blog);
 }
@@ -1297,12 +1401,12 @@ function renderBlogDetail(blogId) {
 function renderRelatedBlogs(currentBlog) {
   const grid = document.getElementById("blog-related-grid");
   if (!grid) return;
-  
+
   grid.innerHTML = "";
-  
+
   // Filter other blogs matching category
   let related = BLOGS_DATA.filter(b => b.id !== currentBlog.id && b.category === currentBlog.category);
-  
+
   // If we don't have enough, pull in other posts
   if (related.length < 3) {
     const fillers = BLOGS_DATA.filter(b => b.id !== currentBlog.id && b.category !== currentBlog.category);
@@ -1310,14 +1414,14 @@ function renderRelatedBlogs(currentBlog) {
   } else {
     related = related.slice(0, 3);
   }
-  
+
   related.forEach(blog => {
     const card = document.createElement("div");
     card.className = "blog-card";
     card.addEventListener("click", () => {
       window.location.hash = `#blog-detail?id=${blog.id}`;
     });
-    
+
     card.innerHTML = `
       <div class="blog-card-meta">
         <span class="blog-card-category" style="font-size:0.75rem; padding: 2px 8px;">${blog.category}</span>
@@ -1337,33 +1441,33 @@ function renderRelatedBlogs(currentBlog) {
 function renderTrendingBlogs() {
   const container = document.getElementById("blog-popular-list");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
+
   // Hide popular card if BLOGS_DATA is empty
   const card = container.closest(".blog-sidebar-card");
   if (card) {
     card.style.display = BLOGS_DATA.length === 0 ? "none" : "block";
   }
-  
+
   if (BLOGS_DATA.length === 0) return;
-  
+
   // Take first 3 blogs as popular/trending posts
   const trending = BLOGS_DATA.slice(0, 3);
-  
+
   trending.forEach(blog => {
     const item = document.createElement("div");
     item.className = "blog-popular-item";
     item.addEventListener("click", () => {
       window.location.hash = `#blog-detail?id=${blog.id}`;
     });
-    
+
     const formattedDate = new Date(blog.date).toLocaleDateString("en-IN", {
       month: "short",
       day: "numeric",
       year: "numeric"
     });
-    
+
     item.innerHTML = `
       <h4>${blog.title}</h4>
       <span>${formattedDate} &bull; ${blog.readTime}</span>
