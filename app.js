@@ -175,6 +175,24 @@ function navigate(viewName, params = {}) {
     state.currentView = "home";
   }
 
+  // Update document title dynamically for SEO
+  let pageTitle = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
+  if (viewName === "catalog") {
+    pageTitle = "Find Online Degree Programs | OnlineDegrees";
+  } else if (viewName === "compare") {
+    pageTitle = "Compare Online Universities Side-by-Side | OnlineDegrees";
+  } else if (viewName === "blog") {
+    pageTitle = "Expert Blogs & Guides on Online Education | OnlineDegrees";
+  } else if (viewName === "blog-detail") {
+    const blogId = params.id;
+    const blog = BLOGS_DATA.find(b => b.id === blogId);
+    if (blog) {
+      pageTitle = `${blog.title} | OnlineDegrees`;
+    }
+  }
+  document.title = pageTitle;
+
+
   // Handle specific view parameters
   if (viewName === "catalog") {
     if (params.course) {
