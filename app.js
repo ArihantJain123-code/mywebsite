@@ -175,28 +175,39 @@ function navigate(viewName, params = {}) {
     state.currentView = "home";
   }
 
-  // Update document title dynamically for SEO
-  let pageTitle = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
-  if (viewName === "catalog") {
-    pageTitle = "Find Online Degree Programs | OnlineDegrees";
-  } else if (viewName === "compare") {
-    pageTitle = "Compare Online Universities Side-by-Side | OnlineDegrees";
-  } else if (viewName === "blog") {
-    pageTitle = "Expert Blogs & Guides on Online Education | OnlineDegrees";
-  } else if (viewName === "blog-detail") {
-    const blogId = params.id;
-    const blog = BLOGS_DATA.find(b => b.id === blogId);
-    if (blog) {
-      pageTitle = `${blog.title} | OnlineDegrees`;
-    }
-  }
-  document.title = pageTitle;
+  // Update SEO metadata dynamically
+  updateSEO(viewName, params);
 
 
   // Handle specific view parameters
   if (viewName === "catalog") {
     if (params.course) {
       state.selectedCourse = params.course.toLowerCase();
+      state.filters.searchQuery = "";
+      const searchInput = document.getElementById("catalog-search");
+      if (searchInput) searchInput.value = "";
+    } else if (params.university) {
+      const university = UNIVERSITIES.find(u => u.id === params.university);
+      if (university) {
+        state.filters.searchQuery = university.name.toLowerCase();
+        const searchInput = document.getElementById("catalog-search");
+        if (searchInput) searchInput.value = university.name;
+        
+        // Ensure the active course is one that this university offers
+        if (university.courses && !university.courses[state.selectedCourse]) {
+          const offered = Object.keys(university.courses);
+          if (offered.length > 0) {
+            state.selectedCourse = offered[0];
+            // Sync course select dropdown visually
+            const courseSelect = document.getElementById("catalog-course-select");
+            if (courseSelect) courseSelect.value = offered[0];
+          }
+        }
+      }
+    } else {
+      state.filters.searchQuery = "";
+      const searchInput = document.getElementById("catalog-search");
+      if (searchInput) searchInput.value = "";
     }
     updateCatalogCourseInfo();
     renderCatalog();
@@ -1492,4 +1503,194 @@ function renderTrendingBlogs() {
     `;
     container.appendChild(item);
   });
+}
+
+// --- Dynamic SEO and Meta Tag Updates ---
+function updateSEO(viewName, params = {}) {
+  let title = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
+  let description = "Find the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.";
+  let ogType = "website";
+  let ogImage = "https://www.getonlinedegrees.online/assets/logo.png";
+  let schemaData = null;
+
+  // Determine dynamic metadata based on the active viewName
+  if (viewName === "catalog") {
+    if (params.course) {
+      const courseUpper = params.course.toUpperCase();
+      title = `Best Online ${courseUpper} Programs | Fees & Reviews | OnlineDegrees`;
+      description = `Compare top UGC-DEB and AICTE approved Online ${courseUpper} programs in India. Compare semester fees, duration, LMS platforms, and placement support.`;
+      
+      // Dynamic Course Schema
+      schemaData = {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": `Online ${courseUpper}`,
+        "description": description,
+        "provider": {
+          "@type": "Organization",
+          "name": "OnlineDegrees",
+          "url": "https://www.getonlinedegrees.online/"
+        }
+      };
+    } else if (params.university) {
+      // Find university details to personalize SEO
+      const uniId = params.university;
+      const university = UNIVERSITIES.find(u => u.id === uniId);
+      if (university) {
+        title = `${university.name} Online Programs, Fees & Placements | OnlineDegrees`;
+        description = `Explore programs offered by ${university.name} Online. Read real student reviews, check total tuition fees, EMI options, NAAC rating, and hiring partners.`;
+        
+        // Dynamic Educational Organization Schema
+        schemaData = {
+          "@context": "https://schema.org",
+          "@type": "EducationalOrganization",
+          "name": university.name,
+          "description": description,
+          "url": `https://www.getonlinedegrees.online/#catalog?university=${uniId}`,
+          "logo": ogImage,
+          "sameAs": university.website || "",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": university.rating || "4.5",
+            "reviewCount": university.reviews ? university.reviews.length : "10"
+          }
+        };
+      } else {
+        title = "Accredited Online University Programs | OnlineDegrees";
+        description = "Find and filter UGC approved online degrees (MBA, MCA, BCA, BBA, M.Com) from top-rated online colleges in India.";
+      }
+    } else {
+      title = "Find Online Degree Programs | Compare Colleges | OnlineDegrees";
+      description = "Find and filter UGC approved online degrees (MBA, MCA, BCA, BBA, M.Com) from top-rated online colleges in India.";
+    }
+  } else if (viewName === "compare") {
+    title = "Compare Online Universities Side-by-Side | OnlineDegrees";
+    description = "Use our comparison board to compare fees, approvals, placement ratings, student support, and learning systems of top online colleges.";
+  } else if (viewName === "blog") {
+    if (params.category && params.category !== "all") {
+      title = `${params.category} - Expert Guides & Insights | OnlineDegrees`;
+      description = `Browse our expert guides, comparisons, and reviews on online degree programs under the category: ${params.category}.`;
+    } else {
+      title = "Expert Blogs & Guides on Online Education | OnlineDegrees";
+      description = "Stay informed with expert insights, university reviews, career guidelines, and distance education regulations in India.";
+    }
+  } else if (viewName === "blog-detail") {
+    const blogId = params.id;
+    const blog = BLOGS_DATA.find(b => b.id === blogId);
+    if (blog) {
+      title = `${blog.title} | OnlineDegrees`;
+      description = blog.excerpt || "Read our educational insight and guide on online degree programs and top accredited universities in India.";
+      ogType = "article";
+      
+      // Dynamic Article Schema
+      schemaData = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": blog.title,
+        "description": description,
+        "datePublished": blog.date,
+        "author": {
+          "@type": "Person",
+          "name": blog.author || "Academic Counselors Team"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "OnlineDegrees",
+          "logo": {
+            "@type": "ImageObject",
+            "url": ogImage
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": window.location.href
+        }
+      };
+    }
+  } else if (viewName === "contact") {
+    title = "Free Expert Counseling & Contact Support | OnlineDegrees";
+    description = "Have queries about online degrees, tuition fees, or admission deadlines? Get in touch with our counseling experts today for 100% free guidance.";
+  } else {
+    // Default / Home
+    title = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
+    description = "Find the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.";
+    
+    // Website and Organization Schema
+    schemaData = [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "OnlineDegrees",
+        "url": "https://www.getonlinedegrees.online/"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "OnlineDegrees",
+        "url": "https://www.getonlinedegrees.online/",
+        "logo": ogImage,
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-6375079973",
+          "contactType": "customer service"
+        }
+      }
+    ];
+  }
+
+  // 1. Update Title tag
+  document.title = title;
+
+  // 2. Update Meta Description
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.setAttribute("content", description);
+  }
+
+  // 3. Update Canonical Link
+  const canonicalLink = document.querySelector('link[rel="canonical"]');
+  if (canonicalLink) {
+    canonicalLink.setAttribute("href", window.location.origin + window.location.pathname + window.location.hash);
+  }
+
+  // 4. Update Open Graph Meta Tags
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute("content", title);
+
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute("content", description);
+
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute("content", window.location.href);
+
+  const ogTypeTag = document.querySelector('meta[property="og:type"]');
+  if (ogTypeTag) ogTypeTag.setAttribute("content", ogType);
+
+  const ogImageTag = document.querySelector('meta[property="og:image"]');
+  if (ogImageTag) ogImageTag.setAttribute("content", ogImage);
+
+  // 5. Update Twitter Meta Tags
+  const twTitle = document.querySelector('meta[property="twitter:title"]');
+  if (twTitle) twTitle.setAttribute("content", title);
+
+  const twDesc = document.querySelector('meta[property="twitter:description"]');
+  if (twDesc) twDesc.setAttribute("content", description);
+
+  const twUrl = document.querySelector('meta[property="twitter:url"]');
+  if (twUrl) twUrl.setAttribute("content", window.location.href);
+
+  // 6. Inject dynamic JSON-LD Schema
+  let schemaScript = document.getElementById("seo-schema-ld-json");
+  if (!schemaScript) {
+    schemaScript = document.createElement("script");
+    schemaScript.type = "application/ld+json";
+    schemaScript.id = "seo-schema-ld-json";
+    document.head.appendChild(schemaScript);
+  }
+
+  if (schemaData) {
+    schemaScript.textContent = JSON.stringify(schemaData, null, 2);
+  } else {
+    schemaScript.textContent = "";
+  }
 }
