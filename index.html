@@ -702,6 +702,245 @@
         </div>
       </div>
     </section>
+
+    <!-- --- VIEW 7: RESUME BUILDER PAGE --- -->
+    <section id="resume-builder-view" class="view-section">
+      <div class="container resume-builder-container">
+        <!-- Header & Action Controls -->
+        <div class="resume-builder-header">
+          <div class="header-info">
+            <h1>Interactive <span>Resume Builder</span></h1>
+            <p>Create a professional, ATS-friendly resume in real-time. Choose a premium template, customize styling, and export directly to PDF.</p>
+          </div>
+          <div class="header-actions">
+            <button type="button" class="btn btn-secondary" id="btn-load-sample">
+              <i class="fas fa-magic"></i> Load Sample Data
+            </button>
+            <button type="button" class="btn btn-outline-danger" id="btn-clear-resume">
+              <i class="fas fa-trash-alt"></i> Clear All
+            </button>
+            <button type="button" class="btn btn-primary" id="btn-download-pdf">
+              <i class="fas fa-download"></i> Download PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Split Screen Workspace -->
+        <div class="resume-workspace">
+          <!-- Editor Panel -->
+          <aside class="resume-editor-panel">
+            
+            <!-- Section 1: Template & Styles -->
+            <details class="editor-section" open>
+              <summary class="editor-section-header">
+                <h3><i class="fas fa-palette"></i> Template &amp; Styling</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </summary>
+              <div class="editor-section-content">
+                <div class="form-group">
+                  <label for="resume-template-select">Select Design Template</label>
+                  <div class="select-wrapper">
+                    <select id="resume-template-select" class="form-control" style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); cursor:pointer;">
+                      <option value="modern">Modern Minimalist</option>
+                      <option value="classic">Classic Professional</option>
+                      <option value="elegant-slate">Elegant Header</option>
+                      <option value="two-column">Sleek Two-Column</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="resume-font-select">Typography Font</label>
+                    <div class="select-wrapper">
+                      <select id="resume-font-select" class="form-control" style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); cursor:pointer;">
+                        <option value="font-inter">Inter (Modern Clean)</option>
+                        <option value="font-outfit">Outfit (Stylish Tech)</option>
+                        <option value="font-georgia">Georgia (Classic Editorial)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="resume-spacing-select">Layout Spacing</label>
+                    <div class="select-wrapper">
+                      <select id="resume-spacing-select" class="form-control" style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); cursor:pointer;">
+                        <option value="spacing-compact">Compact</option>
+                        <option value="spacing-normal" selected>Normal</option>
+                        <option value="spacing-spacious">Spacious</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Accent Color Theme</label>
+                  <div class="accent-color-picker">
+                    <button type="button" class="accent-color-btn active" data-color="#4F46E5" style="background-color: #4F46E5;" title="Indigo"></button>
+                    <button type="button" class="accent-color-btn" data-color="#0D9488" style="background-color: #0D9488;" title="Teal"></button>
+                    <button type="button" class="accent-color-btn" data-color="#EA580C" style="background-color: #EA580C;" title="Coral Orange"></button>
+                    <button type="button" class="accent-color-btn" data-color="#1E293B" style="background-color: #1E293B;" title="Dark Slate"></button>
+                    <button type="button" class="accent-color-btn" data-color="#059669" style="background-color: #059669;" title="Emerald Green"></button>
+                    <div style="display: flex; align-items: center; margin-left: 10px;">
+                      <label for="custom-accent-color" style="font-size: 0.75rem; margin-right: 5px; margin-bottom: 0;">Custom:</label>
+                      <input type="color" id="custom-accent-color" value="#4F46E5" style="width:30px; height:30px; border:none; padding:0; background:none; cursor:pointer;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <!-- Section 2: Personal Info -->
+            <details class="editor-section" open>
+              <summary class="editor-section-header">
+                <h3><i class="far fa-user"></i> Personal Details</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </summary>
+              <div class="editor-section-content">
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="resume-name">Full Name</label>
+                    <input type="text" id="resume-name" placeholder="John Doe" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="resume-title">Professional Title</label>
+                    <input type="text" id="resume-title" placeholder="Senior Software Engineer" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="resume-email">Email Address</label>
+                    <input type="email" id="resume-email" placeholder="john.doe@example.com" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="resume-phone">Phone Number</label>
+                    <input type="text" id="resume-phone" placeholder="+91 9876543210" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="resume-location">Location (City, State)</label>
+                    <input type="text" id="resume-location" placeholder="New Delhi, India" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="resume-website">Portfolio Website</label>
+                    <input type="text" id="resume-website" placeholder="johndoe.dev" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group">
+                    <label for="resume-linkedin">LinkedIn (Username/URL)</label>
+                    <input type="text" id="resume-linkedin" placeholder="linkedin.com/in/johndoe" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="resume-github">GitHub (Username/URL)</label>
+                    <input type="text" id="resume-github" placeholder="github.com/johndoe" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="resume-summary">Professional Summary</label>
+                  <textarea id="resume-summary" rows="3" placeholder="Write a short summary highlighting your expertise and career goals..." class="form-control"></textarea>
+                </div>
+              </div>
+            </details>
+
+            <!-- Section 3: Work Experience -->
+            <details class="editor-section">
+              <summary class="editor-section-header">
+                <h3><i class="fas fa-briefcase"></i> Work Experience</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </summary>
+              <div class="editor-section-content">
+                <div id="experience-list-container">
+                  <!-- Injected Work Experience Items -->
+                </div>
+                <button type="button" class="btn btn-outline-primary btn-block" id="btn-add-experience">
+                  <i class="fas fa-plus"></i> Add Work Experience
+                </button>
+              </div>
+            </details>
+
+            <!-- Section 4: Education -->
+            <details class="editor-section">
+              <summary class="editor-section-header">
+                <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </summary>
+              <div class="editor-section-content">
+                <div id="education-list-container">
+                  <!-- Injected Education Items -->
+                </div>
+                <button type="button" class="btn btn-outline-primary btn-block" id="btn-add-education">
+                  <i class="fas fa-plus"></i> Add Education
+                </button>
+              </div>
+            </details>
+
+            <!-- Section 5: Projects -->
+            <details class="editor-section">
+              <summary class="editor-section-header">
+                <h3><i class="fas fa-laptop-code"></i> Projects</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </summary>
+              <div class="editor-section-content">
+                <div id="projects-list-container">
+                  <!-- Injected Projects Items -->
+                </div>
+                <button type="button" class="btn btn-outline-primary btn-block" id="btn-add-project">
+                  <i class="fas fa-plus"></i> Add Project
+                </button>
+              </div>
+            </details>
+
+            <!-- Section 6: Skills -->
+            <details class="editor-section">
+              <summary class="editor-section-header">
+                <h3><i class="fas fa-tools"></i> Skills</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </summary>
+              <div class="editor-section-content">
+                <div class="form-group">
+                  <label for="resume-skills-input">Technical Skills (comma-separated)</label>
+                  <textarea id="resume-skills-input" rows="3" placeholder="JavaScript, Python, React, Node.js, SQL, AWS, Git" class="form-control"></textarea>
+                  <small style="color:var(--text-light); font-size:0.75rem;">Separate skills with commas. They will automatically render as premium badges.</small>
+                </div>
+              </div>
+            </details>
+
+            <!-- Section 7: Certifications & Languages -->
+            <details class="editor-section">
+              <summary class="editor-section-header">
+                <h3><i class="fas fa-certificate"></i> Certifications &amp; Languages</h3>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+              </summary>
+              <div class="editor-section-content">
+                <div class="form-group">
+                  <label for="resume-certs-input">Certifications (comma-separated)</label>
+                  <textarea id="resume-certs-input" rows="2" placeholder="AWS Certified Solutions Architect, Scrum Master" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="resume-langs-input">Languages (comma-separated)</label>
+                  <input type="text" id="resume-langs-input" placeholder="English (Fluent), Hindi (Native), Spanish (Basic)" class="form-control">
+                </div>
+              </div>
+            </details>
+
+          </aside>
+
+          <!-- Live Preview Panel -->
+          <main class="resume-preview-panel">
+            <div class="preview-actions">
+              <span><i class="far fa-eye"></i> Live A4 Sheet Preview</span>
+              <span id="preview-sheet-page-count" style="font-size:0.8rem; color:var(--text-light);">A4 Standard Grid</span>
+            </div>
+            
+            <div class="resume-preview-viewport">
+              <!-- Beautiful sheet that renders actual HTML -->
+              <div class="resume-preview-sheet" id="resume-preview-sheet-element">
+                <!-- Reactively Injected Structure -->
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- --- FLOATING COMPARE BOTTOM TRAY --- -->
@@ -748,6 +987,7 @@
           <li><a href="#home">Success Stories</a></li>
           <li><a href="#catalog">Free Counseling</a></li>
           <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#resume-builder">Resume Builder</a></li>
           <li><a href="terms.html" style="color:var(--secondary);">Terms &amp; Conditions</a></li>
           <li><a href="privacy.html" style="color:var(--secondary);">Privacy Policy</a></li>
         </ul>

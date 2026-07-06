@@ -259,6 +259,8 @@ function navigate(viewName, params = {}) {
     } else {
       window.location.hash = "#blog";
     }
+  } else if (viewName === "resume-builder") {
+    initResumeBuilder();
   }
 
   // Scroll to top
@@ -1610,6 +1612,9 @@ function updateSEO(viewName, params = {}) {
   } else if (viewName === "contact") {
     title = "Free Expert Counseling & Contact Support | OnlineDegrees";
     description = "Have queries about online degrees, tuition fees, or admission deadlines? Get in touch with our counseling experts today for 100% free guidance.";
+  } else if (viewName === "resume-builder") {
+    title = "Free Interactive Resume Builder | OnlineDegrees";
+    description = "Create a premium, professional, ATS-friendly resume in real-time. Choose templates, fonts, accents, and export to PDF instantly.";
   } else {
     // Default / Home
     title = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
@@ -1692,5 +1697,829 @@ function updateSEO(viewName, params = {}) {
     schemaScript.textContent = JSON.stringify(schemaData, null, 2);
   } else {
     schemaScript.textContent = "";
+  }
+}
+
+// ==========================================================================
+// RESUME BUILDER ENGINE & CONTROLLERS
+// ==========================================================================
+
+const SAMPLE_RESUME_DATA = {
+  template: "modern",
+  font: "font-inter",
+  spacing: "spacing-normal",
+  accentColor: "#4F46E5",
+  personal: {
+    name: "Amit Sengupta",
+    title: "Lead Software Architect",
+    email: "amit.sengupta@email.com",
+    phone: "+91 98765 43210",
+    location: "Bengaluru, Karnataka",
+    website: "amitsengupta.dev",
+    linkedin: "linkedin.com/in/amitsengupta",
+    github: "github.com/amitsengupta",
+    summary: "Dynamic and results-driven Software Architect with 8+ years of experience designing scalable web applications and cloud architectures. Expertise in JavaScript/TypeScript ecosystems, Node.js, React, and AWS cloud solutions. Passionate about writing clean, maintainable code and mentoring junior engineers."
+  },
+  experience: [
+    {
+      id: "exp-1",
+      title: "Senior Software Engineer / Team Lead",
+      company: "Tech Mahindra Online Solutions",
+      location: "Bengaluru",
+      start: "Jan 2023",
+      end: "Present",
+      desc: "• Architected and developed a micro-frontend educational platform servicing over 100k monthly active users.\n• Promoted to Team Lead within 1 year; managed a cross-functional team of 6 software engineers.\n• Integrated headless CMS and AWS Cognito, reducing loading latency by 35% and improving security audits."
+    },
+    {
+      id: "exp-2",
+      title: "Software Engineer II",
+      company: "Wipro Digital Hub",
+      location: "Pune",
+      start: "Jun 2020",
+      end: "Dec 2022",
+      desc: "• Built responsive web interfaces using React.js, Tailwind CSS, and Redux Toolkit.\n• Implemented automated CI/CD pipelines using GitHub Actions, decreasing build failures by 20%.\n• Optimized database query speeds by 40% through indexing and caching with Redis."
+    }
+  ],
+  education: [
+    {
+      id: "edu-1",
+      degree: "Online MCA (Master of Computer Applications)",
+      school: "Chandigarh University Online",
+      location: "Chandigarh, India",
+      date: "2023 - 2025",
+      grade: "CGPA: 9.1/10"
+    },
+    {
+      id: "edu-2",
+      degree: "Bachelor of Computer Applications (BCA)",
+      school: "Sikkim Manipal University Online",
+      location: "Sikkim, India",
+      date: "2017 - 2020",
+      grade: "Grade: First Class"
+    }
+  ],
+  projects: [
+    {
+      id: "proj-1",
+      title: "Cloud Compare Engine",
+      tech: "React, Node.js, Express, AWS",
+      link: "cloudcompare.onlinedegrees.com",
+      desc: "An interactive side-by-side comparison engine analyzing cloud pricing databases, utilized by over 50 enterprise clients."
+    },
+    {
+      id: "proj-2",
+      title: "Open Education Portal",
+      tech: "Next.js, GraphQL, PostgreSQL",
+      link: "github.com/amitsengupta/open-edu",
+      desc: "Contributed to an open-source platform hosting digital textbooks, integrating international translation APIs."
+    }
+  ],
+  skills: "JavaScript, TypeScript, React, Node.js, HTML5/CSS3, Python, PostgreSQL, AWS (S3/EC2/Lambda), Docker, Git, RESTful APIs, System Design",
+  certs: "AWS Certified Solutions Architect (Associate), Certified Scrum Master (CSM)",
+  langs: "English (Professional), Hindi (Native)"
+};
+
+function initResumeBuilder() {
+  const saved = localStorage.getItem("online_degrees_resume");
+  if (saved) {
+    state.resumeData = JSON.parse(saved);
+  } else {
+    state.resumeData = JSON.parse(JSON.stringify(SAMPLE_RESUME_DATA));
+    saveResumeState();
+  }
+  
+  syncStateToForm();
+  renderResumePreview();
+  setupResumeBuilderEventListeners();
+}
+
+function saveResumeState() {
+  localStorage.setItem("online_degrees_resume", JSON.stringify(state.resumeData));
+}
+
+function loadResumeSampleData() {
+  state.resumeData = JSON.parse(JSON.stringify(SAMPLE_RESUME_DATA));
+  saveResumeState();
+  syncStateToForm();
+  renderResumePreview();
+}
+
+function clearResumeState() {
+  state.resumeData = {
+    template: "modern",
+    font: "font-inter",
+    spacing: "spacing-normal",
+    accentColor: "#4F46E5",
+    personal: {
+      name: "",
+      title: "",
+      email: "",
+      phone: "",
+      location: "",
+      website: "",
+      linkedin: "",
+      github: "",
+      summary: ""
+    },
+    experience: [],
+    education: [],
+    projects: [],
+    skills: "",
+    certs: "",
+    langs: ""
+  };
+  saveResumeState();
+  syncStateToForm();
+  renderResumePreview();
+}
+
+function syncStateToForm() {
+  const data = state.resumeData;
+  const p = data.personal || {};
+  
+  // Personal Details fields
+  const setName = document.getElementById("resume-name");
+  if (setName) setName.value = p.name || "";
+  const setTitle = document.getElementById("resume-title");
+  if (setTitle) setTitle.value = p.title || "";
+  const setEmail = document.getElementById("resume-email");
+  if (setEmail) setEmail.value = p.email || "";
+  const setPhone = document.getElementById("resume-phone");
+  if (setPhone) setPhone.value = p.phone || "";
+  const setLoc = document.getElementById("resume-location");
+  if (setLoc) setLoc.value = p.location || "";
+  const setWeb = document.getElementById("resume-website");
+  if (setWeb) setWeb.value = p.website || "";
+  const setLnk = document.getElementById("resume-linkedin");
+  if (setLnk) setLnk.value = p.linkedin || "";
+  const setGit = document.getElementById("resume-github");
+  if (setGit) setGit.value = p.github || "";
+  const setSum = document.getElementById("resume-summary");
+  if (setSum) setSum.value = p.summary || "";
+
+  // Dynamic Lists fields
+  renderExperienceFormList();
+  renderEducationFormList();
+  renderProjectsFormList();
+
+  // Skills, Certs, Languages fields
+  const setSkl = document.getElementById("resume-skills-input");
+  if (setSkl) setSkl.value = data.skills || "";
+  const setCrt = document.getElementById("resume-certs-input");
+  if (setCrt) setCrt.value = data.certs || "";
+  const setLng = document.getElementById("resume-langs-input");
+  if (setLng) setLng.value = data.langs || "";
+
+  // Style Property fields
+  const setTpl = document.getElementById("resume-template-select");
+  if (setTpl) setTpl.value = data.template || "modern";
+  const setFnt = document.getElementById("resume-font-select");
+  if (setFnt) setFnt.value = data.font || "font-inter";
+  const setSpc = document.getElementById("resume-spacing-select");
+  if (setSpc) setSpc.value = data.spacing || "spacing-normal";
+  const setCol = document.getElementById("custom-accent-color");
+  if (setCol) setCol.value = data.accentColor || "#4F46E5";
+
+  // Sync active accent color class preset circles
+  document.querySelectorAll(".accent-color-btn").forEach(btn => {
+    if (btn.getAttribute("data-color") === data.accentColor) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+}
+
+function renderExperienceFormList() {
+  const container = document.getElementById("experience-list-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const items = state.resumeData.experience || [];
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "dynamic-item-card";
+    card.innerHTML = `
+      <button type="button" class="btn-remove-item" data-id="${item.id}">
+        <i class="fas fa-times"></i> Remove
+      </button>
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Job Title</label>
+          <input type="text" class="form-control exp-input" data-id="${item.id}" data-field="title" value="${item.title || ''}" placeholder="e.g. Senior Developer">
+        </div>
+        <div class="form-group">
+          <label>Company / Employer</label>
+          <input type="text" class="form-control exp-input" data-id="${item.id}" data-field="company" value="${item.company || ''}" placeholder="e.g. Wipro Solutions">
+        </div>
+      </div>
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="text" class="form-control exp-input" data-id="${item.id}" data-field="start" value="${item.start || ''}" placeholder="e.g. Jan 2023">
+        </div>
+        <div class="form-group">
+          <label>End Date</label>
+          <input type="text" class="form-control exp-input" data-id="${item.id}" data-field="end" value="${item.end || ''}" placeholder="e.g. Present or Dec 2024">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Location (Optional)</label>
+        <input type="text" class="form-control exp-input" data-id="${item.id}" data-field="location" value="${item.location || ''}" placeholder="e.g. Bengaluru">
+      </div>
+      <div class="form-group">
+        <label>Description / Achievements</label>
+        <textarea class="form-control exp-input" data-id="${item.id}" data-field="desc" rows="3" placeholder="Key responsibilities and achievements...">${item.desc || ''}</textarea>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Attach event listeners to exp inputs
+  container.querySelectorAll(".exp-input").forEach(input => {
+    input.addEventListener("input", (e) => {
+      const id = e.target.getAttribute("data-id");
+      const field = e.target.getAttribute("data-field");
+      const val = e.target.value;
+      const targetItem = state.resumeData.experience.find(i => i.id === id);
+      if (targetItem) {
+        targetItem[field] = val;
+        saveResumeState();
+        renderResumePreview();
+      }
+    });
+  });
+
+  // Attach event listener to delete button
+  container.querySelectorAll(".btn-remove-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      state.resumeData.experience = state.resumeData.experience.filter(i => i.id !== id);
+      saveResumeState();
+      renderExperienceFormList();
+      renderResumePreview();
+    });
+  });
+}
+
+function renderEducationFormList() {
+  const container = document.getElementById("education-list-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const items = state.resumeData.education || [];
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "dynamic-item-card";
+    card.innerHTML = `
+      <button type="button" class="btn-remove-item" data-id="${item.id}">
+        <i class="fas fa-times"></i> Remove
+      </button>
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Degree / Qualification</label>
+          <input type="text" class="form-control edu-input" data-id="${item.id}" data-field="degree" value="${item.degree || ''}" placeholder="e.g. Online MCA">
+        </div>
+        <div class="form-group">
+          <label>School / University</label>
+          <input type="text" class="form-control edu-input" data-id="${item.id}" data-field="school" value="${item.school || ''}" placeholder="e.g. Chandigarh University Online">
+        </div>
+      </div>
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Graduation Year / Dates</label>
+          <input type="text" class="form-control edu-input" data-id="${item.id}" data-field="date" value="${item.date || ''}" placeholder="e.g. 2023 - 2025">
+        </div>
+        <div class="form-group">
+          <label>Grade / GPA (Optional)</label>
+          <input type="text" class="form-control edu-input" data-id="${item.id}" data-field="grade" value="${item.grade || ''}" placeholder="e.g. CGPA: 9.1/10">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Location (Optional)</label>
+        <input type="text" class="form-control edu-input" data-id="${item.id}" data-field="location" value="${item.location || ''}" placeholder="e.g. Chandigarh, India">
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Attach event listeners to edu inputs
+  container.querySelectorAll(".edu-input").forEach(input => {
+    input.addEventListener("input", (e) => {
+      const id = e.target.getAttribute("data-id");
+      const field = e.target.getAttribute("data-field");
+      const val = e.target.value;
+      const targetItem = state.resumeData.education.find(i => i.id === id);
+      if (targetItem) {
+        targetItem[field] = val;
+        saveResumeState();
+        renderResumePreview();
+      }
+    });
+  });
+
+  // Attach delete listeners
+  container.querySelectorAll(".btn-remove-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      state.resumeData.education = state.resumeData.education.filter(i => i.id !== id);
+      saveResumeState();
+      renderEducationFormList();
+      renderResumePreview();
+    });
+  });
+}
+
+function renderProjectsFormList() {
+  const container = document.getElementById("projects-list-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const items = state.resumeData.projects || [];
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "dynamic-item-card";
+    card.innerHTML = `
+      <button type="button" class="btn-remove-item" data-id="${item.id}">
+        <i class="fas fa-times"></i> Remove
+      </button>
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Project Title</label>
+          <input type="text" class="form-control proj-input" data-id="${item.id}" data-field="title" value="${item.title || ''}" placeholder="e.g. Cloud Compare Engine">
+        </div>
+        <div class="form-group">
+          <label>Tech Stack</label>
+          <input type="text" class="form-control proj-input" data-id="${item.id}" data-field="tech" value="${item.tech || ''}" placeholder="e.g. React, Node.js">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Project Link (Optional)</label>
+        <input type="text" class="form-control proj-input" data-id="${item.id}" data-field="link" value="${item.link || ''}" placeholder="e.g. cloudcompare.onlinedegrees.com">
+      </div>
+      <div class="form-group">
+        <label>Short Description</label>
+        <textarea class="form-control proj-input" data-id="${item.id}" data-field="desc" rows="2" placeholder="Brief project summary...">${item.desc || ''}</textarea>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Attach event listeners to proj inputs
+  container.querySelectorAll(".proj-input").forEach(input => {
+    input.addEventListener("input", (e) => {
+      const id = e.target.getAttribute("data-id");
+      const field = e.target.getAttribute("data-field");
+      const val = e.target.value;
+      const targetItem = state.resumeData.projects.find(i => i.id === id);
+      if (targetItem) {
+        targetItem[field] = val;
+        saveResumeState();
+        renderResumePreview();
+      }
+    });
+  });
+
+  // Attach delete listeners
+  container.querySelectorAll(".btn-remove-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      state.resumeData.projects = state.resumeData.projects.filter(i => i.id !== id);
+      saveResumeState();
+      renderProjectsFormList();
+      renderResumePreview();
+    });
+  });
+}
+
+function getContactInfoHTML(p) {
+  let html = "";
+  if (p.email) html += `<span><i class="far fa-envelope"></i> ${p.email}</span>`;
+  if (p.phone) html += `<span><i class="fas fa-phone-alt"></i> ${p.phone}</span>`;
+  if (p.location) html += `<span><i class="fas fa-map-marker-alt"></i> ${p.location}</span>`;
+  if (p.website) html += `<span><i class="fas fa-globe"></i> ${p.website}</span>`;
+  if (p.linkedin) html += `<span><i class="fab fa-linkedin"></i> ${p.linkedin}</span>`;
+  if (p.github) html += `<span><i class="fab fa-github"></i> ${p.github}</span>`;
+  return html;
+}
+
+function getSkillsHTML() {
+  const skills = state.resumeData.skills || "";
+  if (!skills.trim()) return "";
+  const list = skills.split(",").map(s => s.trim()).filter(s => s.length > 0);
+  return `
+    <div class="resume-section">
+      <h2><i class="fas fa-tools"></i> Skills</h2>
+      <div class="resume-skills-grid">
+        ${list.map(s => `<span class="resume-skill-badge">${s}</span>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function getCertificationsHTML() {
+  const certs = state.resumeData.certs || "";
+  if (!certs.trim()) return "";
+  const list = certs.split(",").map(c => c.trim()).filter(c => c.length > 0);
+  const items = list.map(c => `<li>${c}</li>`).join("");
+  return `
+    <div class="resume-section">
+      <h2><i class="fas fa-certificate"></i> Certifications</h2>
+      <ul style="padding-left:20px; font-size:0.9em; color:#334155; margin-top:5px; line-height:1.4;">
+        ${items}
+      </ul>
+    </div>
+  `;
+}
+
+function getLanguagesHTML() {
+  const langs = state.resumeData.langs || "";
+  if (!langs.trim()) return "";
+  const list = langs.split(",").map(l => l.trim()).filter(l => l.length > 0);
+  return `
+    <div class="resume-section">
+      <h2><i class="fas fa-language"></i> Languages</h2>
+      <p style="font-size:0.9em; color:#334155; margin-top:5px;">${list.join(", ")}</p>
+    </div>
+  `;
+}
+
+function renderExperiencePreview() {
+  const exp = state.resumeData.experience || [];
+  if (exp.length === 0) return "";
+  
+  const itemsHTML = exp.map(item => `
+    <div class="resume-item">
+      <div class="resume-item-header">
+        <span class="resume-item-title" style="color:#0f172a; font-weight:700;">${item.title || 'Job Title'}</span>
+        <span class="resume-item-date" style="font-size:0.85em; font-weight:600; color:#64748b; white-space:nowrap;">${item.start || ''} - ${item.end || ''}</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.85em; color:#475569; font-weight:600; margin-bottom:4px;">
+        <span class="resume-item-company" style="font-style:italic;">${item.company || 'Company'}</span>
+        <span style="font-size:0.95em; color:#64748b;">${item.location || ''}</span>
+      </div>
+      ${item.desc ? `<p class="resume-item-desc">${item.desc}</p>` : ""}
+    </div>
+  `).join("");
+  
+  return `
+    <div class="resume-section">
+      <h2><i class="fas fa-briefcase"></i> Experience</h2>
+      ${itemsHTML}
+    </div>
+  `;
+}
+
+function renderEducationPreview() {
+  const edu = state.resumeData.education || [];
+  if (edu.length === 0) return "";
+  
+  const itemsHTML = edu.map(item => `
+    <div class="resume-item">
+      <div class="resume-item-header">
+        <span class="resume-item-title" style="color:#0f172a; font-weight:700;">${item.degree || 'Degree / Qualification'}</span>
+        <span class="resume-item-date" style="font-size:0.85em; font-weight:600; color:#64748b; white-space:nowrap;">${item.date || ''}</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.85em; color:#475569; font-weight:600; margin-bottom: 2px;">
+        <span class="resume-item-company" style="font-style:italic;">${item.school || 'School/University'}</span>
+        <span style="color:#64748b;">${item.grade || ''}</span>
+      </div>
+      ${item.location ? `<p style="font-size:0.8em; color:#64748b; margin-top:2px;">Location: ${item.location}</p>` : ""}
+    </div>
+  `).join("");
+  
+  return `
+    <div class="resume-section">
+      <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+      ${itemsHTML}
+    </div>
+  `;
+}
+
+function renderProjectsPreview() {
+  const projs = state.resumeData.projects || [];
+  if (projs.length === 0) return "";
+  
+  const itemsHTML = projs.map(item => `
+    <div class="resume-item">
+      <div class="resume-item-header">
+        <span class="resume-item-title" style="color:#0f172a; font-weight:700;">${item.title || 'Project Title'}</span>
+        ${item.link ? `<span class="resume-item-date" style="font-size:0.8em; font-weight:600;"><a href="https://${item.link}" target="_blank" style="color:var(--resume-accent);"><i class="fas fa-external-link-alt" style="font-size:0.75rem; margin-right:2px;"></i>${item.link}</a></span>` : ""}
+      </div>
+      <p style="font-size:0.8em; font-weight:600; color:#475569; margin-bottom:3px;">Tech Stack: ${item.tech || ''}</p>
+      ${item.desc ? `<p class="resume-item-desc">${item.desc}</p>` : ""}
+    </div>
+  `).join("");
+  
+  return `
+    <div class="resume-section">
+      <h2><i class="fas fa-laptop-code"></i> Projects</h2>
+      ${itemsHTML}
+    </div>
+  `;
+}
+
+function renderModernTemplate(p) {
+  return `
+    <div class="resume-header">
+      <div class="resume-name">${p.name || 'Your Name'}</div>
+      <div class="resume-title">${p.title || 'Professional Title'}</div>
+      <div class="resume-contact-info">
+        ${getContactInfoHTML(p)}
+      </div>
+    </div>
+    
+    ${p.summary ? `
+      <div class="resume-section">
+        <h2><i class="far fa-user"></i> Summary</h2>
+        <p class="resume-summary-text">${p.summary}</p>
+      </div>
+    ` : ""}
+    
+    ${renderExperiencePreview()}
+    ${renderEducationPreview()}
+    ${renderProjectsPreview()}
+    ${getSkillsHTML()}
+    ${getCertificationsHTML()}
+    ${getLanguagesHTML()}
+  `;
+}
+
+function renderClassicTemplate(p) {
+  return `
+    <div class="resume-header">
+      <div class="resume-name">${p.name || 'Your Name'}</div>
+      <div class="resume-title">${p.title || 'Professional Title'}</div>
+      <div class="resume-contact-info">
+        ${getContactInfoHTML(p)}
+      </div>
+    </div>
+    
+    ${p.summary ? `
+      <div class="resume-section">
+        <h2>Summary</h2>
+        <p class="resume-summary-text">${p.summary}</p>
+      </div>
+    ` : ""}
+    
+    ${renderExperiencePreview()}
+    ${renderEducationPreview()}
+    ${renderProjectsPreview()}
+    ${getSkillsHTML()}
+    ${getCertificationsHTML()}
+    ${getLanguagesHTML()}
+  `;
+}
+
+function renderElegantSlateTemplate(p) {
+  return `
+    <div class="resume-header">
+      <div class="resume-name">${p.name || 'Your Name'}</div>
+      <div class="resume-title">${p.title || 'Professional Title'}</div>
+      <div class="resume-contact-info">
+        ${getContactInfoHTML(p)}
+      </div>
+    </div>
+    
+    ${p.summary ? `
+      <div class="resume-section">
+        <h2><i class="far fa-user"></i> Summary</h2>
+        <p class="resume-summary-text">${p.summary}</p>
+      </div>
+    ` : ""}
+    
+    ${renderExperiencePreview()}
+    ${renderEducationPreview()}
+    ${renderProjectsPreview()}
+    ${getSkillsHTML()}
+    ${getCertificationsHTML()}
+    ${getLanguagesHTML()}
+  `;
+}
+
+function renderTwoColumnTemplate(p) {
+  return `
+    <aside class="resume-sidebar">
+      <div class="resume-header">
+        <div class="resume-name">${p.name || 'Your Name'}</div>
+        <div class="resume-title" style="font-size:0.85rem; font-weight:700; color:var(--resume-accent); margin-top:2px;">${p.title || 'Title'}</div>
+      </div>
+      
+      <div class="resume-contact-info">
+        ${getContactInfoHTML(p)}
+      </div>
+      
+      ${getSkillsHTML()}
+      ${getCertificationsHTML()}
+      ${getLanguagesHTML()}
+    </aside>
+    
+    <main class="resume-main-col">
+      ${p.summary ? `
+        <div class="resume-section" style="margin-top:0;">
+          <h2><i class="far fa-user"></i> Summary</h2>
+          <p class="resume-summary-text" style="font-size:0.9em;">${p.summary}</p>
+        </div>
+      ` : ""}
+      
+      ${renderExperiencePreview()}
+      ${renderEducationPreview()}
+      ${renderProjectsPreview()}
+    </main>
+  `;
+}
+
+function renderResumePreview() {
+  const sheet = document.getElementById("resume-preview-sheet-element");
+  if (!sheet) return;
+  
+  const data = state.resumeData;
+  const p = data.personal || {};
+  
+  sheet.className = "resume-preview-sheet";
+  sheet.classList.add(`template-${data.template}`);
+  sheet.classList.add(data.font);
+  sheet.classList.add(data.spacing);
+  sheet.style.setProperty("--resume-accent", data.accentColor);
+  
+  let html = "";
+  if (data.template === "two-column") {
+    html = renderTwoColumnTemplate(p);
+  } else if (data.template === "classic") {
+    html = renderClassicTemplate(p);
+  } else if (data.template === "elegant-slate") {
+    html = renderElegantSlateTemplate(p);
+  } else {
+    html = renderModernTemplate(p);
+  }
+  
+  sheet.innerHTML = html;
+}
+
+function setupResumeBuilderEventListeners() {
+  if (window.resumeBuilderListenersAttached) return;
+  window.resumeBuilderListenersAttached = true;
+
+  const bindPersonalField = (elementId, stateField) => {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.addEventListener("input", (e) => {
+        state.resumeData.personal[stateField] = e.target.value;
+        saveResumeState();
+        renderResumePreview();
+      });
+    }
+  };
+
+  bindPersonalField("resume-name", "name");
+  bindPersonalField("resume-title", "title");
+  bindPersonalField("resume-email", "email");
+  bindPersonalField("resume-phone", "phone");
+  bindPersonalField("resume-location", "location");
+  bindPersonalField("resume-website", "website");
+  bindPersonalField("resume-linkedin", "linkedin");
+  bindPersonalField("resume-github", "github");
+  bindPersonalField("resume-summary", "summary");
+
+  const bindStateField = (elementId, stateField) => {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.addEventListener("input", (e) => {
+        state.resumeData[stateField] = e.target.value;
+        saveResumeState();
+        renderResumePreview();
+      });
+    }
+  };
+  bindStateField("resume-skills-input", "skills");
+  bindStateField("resume-certs-input", "certs");
+  bindStateField("resume-langs-input", "langs");
+
+  const tempSelect = document.getElementById("resume-template-select");
+  if (tempSelect) {
+    tempSelect.addEventListener("change", (e) => {
+      state.resumeData.template = e.target.value;
+      saveResumeState();
+      renderResumePreview();
+    });
+  }
+
+  const fontSelect = document.getElementById("resume-font-select");
+  if (fontSelect) {
+    fontSelect.addEventListener("change", (e) => {
+      state.resumeData.font = e.target.value;
+      saveResumeState();
+      renderResumePreview();
+    });
+  }
+
+  const spacingSelect = document.getElementById("resume-spacing-select");
+  if (spacingSelect) {
+    spacingSelect.addEventListener("change", (e) => {
+      state.resumeData.spacing = e.target.value;
+      saveResumeState();
+      renderResumePreview();
+    });
+  }
+
+  document.querySelectorAll(".accent-color-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const color = btn.getAttribute("data-color");
+      state.resumeData.accentColor = color;
+      
+      const customPicker = document.getElementById("custom-accent-color");
+      if (customPicker) customPicker.value = color;
+
+      document.querySelectorAll(".accent-color-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      
+      saveResumeState();
+      renderResumePreview();
+    });
+  });
+
+  const customColorPicker = document.getElementById("custom-accent-color");
+  if (customColorPicker) {
+    customColorPicker.addEventListener("input", (e) => {
+      const color = e.target.value;
+      state.resumeData.accentColor = color;
+      document.querySelectorAll(".accent-color-btn").forEach(b => b.classList.remove("active"));
+      saveResumeState();
+      renderResumePreview();
+    });
+  }
+
+  const addExpBtn = document.getElementById("btn-add-experience");
+  if (addExpBtn) {
+    addExpBtn.addEventListener("click", () => {
+      state.resumeData.experience.push({
+        id: "exp-" + Date.now(),
+        title: "",
+        company: "",
+        location: "",
+        start: "",
+        end: "",
+        desc: ""
+      });
+      saveResumeState();
+      renderExperienceFormList();
+      renderResumePreview();
+    });
+  }
+
+  const addEduBtn = document.getElementById("btn-add-education");
+  if (addEduBtn) {
+    addEduBtn.addEventListener("click", () => {
+      state.resumeData.education.push({
+        id: "edu-" + Date.now(),
+        degree: "",
+        school: "",
+        location: "",
+        date: "",
+        grade: ""
+      });
+      saveResumeState();
+      renderEducationFormList();
+      renderResumePreview();
+    });
+  }
+
+  const addProjBtn = document.getElementById("btn-add-project");
+  if (addProjBtn) {
+    addProjBtn.addEventListener("click", () => {
+      state.resumeData.projects.push({
+        id: "proj-" + Date.now(),
+        title: "",
+        tech: "",
+        link: "",
+        desc: ""
+      });
+      saveResumeState();
+      renderProjectsFormList();
+      renderResumePreview();
+    });
+  }
+
+  const clearBtn = document.getElementById("btn-clear-resume");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      if (confirm("Are you sure you want to clear all resume details? This cannot be undone.")) {
+        clearResumeState();
+      }
+    });
+  }
+
+  const loadSampleBtn = document.getElementById("btn-load-sample");
+  if (loadSampleBtn) {
+    loadSampleBtn.addEventListener("click", () => {
+      loadResumeSampleData();
+    });
+  }
+
+  const downloadPdfBtn = document.getElementById("btn-download-pdf");
+  if (downloadPdfBtn) {
+    downloadPdfBtn.addEventListener("click", () => {
+      window.print();
+    });
   }
 }
