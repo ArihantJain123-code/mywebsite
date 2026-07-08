@@ -5,10 +5,5 @@
 User-agent: *
 Allow: /
 
-# Disallow crawling of internal/non-public files
-Disallow: /app.js
-Disallow: /chatbot.js
-Disallow: /data.js
-
 # Sitemap location
 Sitemap: https://www.getonlinedegrees.online/sitemap.xml

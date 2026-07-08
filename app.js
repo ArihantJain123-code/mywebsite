@@ -97,7 +97,9 @@ const state = {
   sortBy: "rating",
   reviewsDb: {}, // Will hold user reviews in memory, supplemented by local storage
   blogQuery: "",
-  blogCategory: "all"
+  blogCategory: "all",
+  blogPage: 1,
+  blogPageSize: 9
 };
 
 // --- Initialization ---
@@ -214,6 +216,7 @@ function navigate(viewName, params = {}) {
   } else if (viewName === "compare") {
     renderCompareMatrix();
   } else if (viewName === "blog") {
+    state.blogPage = 1;
     if (params.search) {
       state.blogQuery = decodeURIComponent(params.search).toLowerCase().trim();
       // Update inputs
@@ -444,6 +447,7 @@ function setupEventListeners() {
         if (state.currentView === "blog-detail") {
           window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
         } else {
+          state.blogPage = 1;
           renderBlogsList();
         }
       }
@@ -458,6 +462,7 @@ function setupEventListeners() {
       navBlogSearchClear.style.display = "none";
       state.blogQuery = "";
       if (state.currentView === "blog") {
+        state.blogPage = 1;
         renderBlogsList();
       } else {
         window.location.hash = "#blog";
@@ -482,6 +487,7 @@ function setupEventListeners() {
         if (state.currentView === "blog-detail") {
           window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
         } else {
+          state.blogPage = 1;
           renderBlogsList();
         }
       }
@@ -496,6 +502,7 @@ function setupEventListeners() {
       if (mobBlogSearchInput) mobBlogSearchInput.value = "";
       if (navBlogSearchClear) navBlogSearchClear.style.display = "none";
       state.blogQuery = "";
+      state.blogPage = 1;
       renderBlogsList();
     });
   }
@@ -511,6 +518,7 @@ function setupEventListeners() {
       btn.classList.add("active");
 
       state.blogCategory = btn.getAttribute("data-category");
+      state.blogPage = 1;
       renderBlogsList();
     });
   }
@@ -1293,6 +1301,7 @@ function renderBlogsList() {
   const grid = document.getElementById("blog-posts-grid");
   const statusContainer = document.getElementById("blog-search-status");
   const searchTermSpan = document.getElementById("blog-search-term");
+  const paginationContainer = document.getElementById("blog-pagination");
 
   if (!grid) return;
 
@@ -1354,11 +1363,25 @@ function renderBlogsList() {
         </div>
       `;
     }
+    if (paginationContainer) paginationContainer.style.display = "none";
     return;
   }
 
+  // Calculate pagination variables
+  const totalBlogs = filteredBlogs.length;
+  const totalPages = Math.ceil(totalBlogs / state.blogPageSize);
+  
+  // Clamp current page to valid range
+  if (state.blogPage > totalPages) {
+    state.blogPage = Math.max(1, totalPages);
+  }
+  
+  const startIndex = (state.blogPage - 1) * state.blogPageSize;
+  const endIndex = startIndex + state.blogPageSize;
+  const paginatedBlogs = filteredBlogs.slice(startIndex, endIndex);
+
   // Render cards
-  filteredBlogs.forEach(blog => {
+  paginatedBlogs.forEach(blog => {
     const card = document.createElement("div");
     card.className = "blog-card";
     card.addEventListener("click", () => {
@@ -1386,6 +1409,75 @@ function renderBlogsList() {
     `;
     grid.appendChild(card);
   });
+
+  // Render pagination controls
+  renderBlogPagination(totalPages);
+}
+
+function renderBlogPagination(totalPages) {
+  const container = document.getElementById("blog-pagination");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (totalPages <= 1) {
+    container.style.display = "none";
+    return;
+  }
+  container.style.display = "flex";
+
+  // Prev Button
+  const prevBtn = document.createElement("button");
+  prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+  prevBtn.disabled = state.blogPage === 1;
+  prevBtn.addEventListener("click", () => {
+    if (state.blogPage > 1) {
+      state.blogPage--;
+      renderBlogsList();
+      const viewEl = document.getElementById("blog-view");
+      if (viewEl) viewEl.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+  container.appendChild(prevBtn);
+
+  // Page Numbers
+  const maxVisiblePages = 5;
+  let startPage = Math.max(1, state.blogPage - Math.floor(maxVisiblePages / 2));
+  let endPage = startPage + maxVisiblePages - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    const pageBtn = document.createElement("button");
+    pageBtn.textContent = i;
+    if (i === state.blogPage) {
+      pageBtn.className = "active";
+    }
+    pageBtn.addEventListener("click", () => {
+      state.blogPage = i;
+      renderBlogsList();
+      const viewEl = document.getElementById("blog-view");
+      if (viewEl) viewEl.scrollIntoView({ behavior: "smooth" });
+    });
+    container.appendChild(pageBtn);
+  }
+
+  // Next Button
+  const nextBtn = document.createElement("button");
+  nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+  nextBtn.disabled = state.blogPage === totalPages;
+  nextBtn.addEventListener("click", () => {
+    if (state.blogPage < totalPages) {
+      state.blogPage++;
+      renderBlogsList();
+      const viewEl = document.getElementById("blog-view");
+      if (viewEl) viewEl.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+  container.appendChild(nextBtn);
 }
 
 function renderBlogDetail(blogId) {
@@ -1522,18 +1614,30 @@ function updateSEO(viewName, params = {}) {
       title = `Best Online ${courseUpper} Programs | Fees & Reviews | OnlineDegrees`;
       description = `Compare top UGC-DEB and AICTE approved Online ${courseUpper} programs in India. Compare semester fees, duration, LMS platforms, and placement support.`;
       
+      const courseKey = params.course.toLowerCase();
+      const courseInfo = typeof COURSES_DATA !== 'undefined' ? COURSES_DATA[courseKey] : null;
+
       // Dynamic Course Schema
       schemaData = {
         "@context": "https://schema.org",
         "@type": "Course",
-        "name": `Online ${courseUpper}`,
-        "description": description,
+        "name": courseInfo ? courseInfo.name : `Online ${courseUpper}`,
+        "description": courseInfo ? courseInfo.description : description,
+        "educationalCredentialAwarded": courseInfo ? courseInfo.fullName : `${courseUpper} Degree`,
         "provider": {
           "@type": "Organization",
           "name": "OnlineDegrees",
           "url": "https://www.getonlinedegrees.online/"
         }
       };
+
+      if (courseInfo) {
+        schemaData.hasCourseInstance = {
+          "@type": "CourseInstance",
+          "courseMode": "online",
+          "duration": courseInfo.duration
+        };
+      }
     } else if (params.university) {
       // Find university details to personalize SEO
       const uniId = params.university;
@@ -1551,6 +1655,11 @@ function updateSEO(viewName, params = {}) {
           "url": `https://www.getonlinedegrees.online/#catalog?university=${uniId}`,
           "logo": ogImage,
           "sameAs": university.website || "",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN"
+          },
+          "award": `NAAC Grade ${university.naacGrade || "A+"}`,
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": university.rating || "4.5",
@@ -1591,6 +1700,8 @@ function updateSEO(viewName, params = {}) {
         "headline": blog.title,
         "description": description,
         "datePublished": blog.date,
+        "dateModified": blog.date,
+        "image": [ ogImage ],
         "author": {
           "@type": "Person",
           "name": blog.author || "Academic Counselors Team"

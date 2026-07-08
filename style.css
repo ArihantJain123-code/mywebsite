@@ -3,8 +3,6 @@
    Premium CSS Stylesheet
 */
 
-/* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 /* --- CSS Variables & Design System --- */
 :root {
@@ -1845,6 +1843,44 @@ footer {
 .blog-card:hover .blog-card-more-btn {
   color: var(--primary-hover);
   gap: 8px;
+}
+
+/* Blog Pagination */
+.blog-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.blog-pagination button {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.blog-pagination button:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.blog-pagination button.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.blog-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Blog Sidebar */
