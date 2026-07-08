@@ -1845,6 +1845,24 @@ footer {
   gap: 8px;
 }
 
+/* Blog Stats Bar */
+.blog-stats-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
+}
+
+.blog-stats-bar strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
 /* Blog Pagination */
 .blog-pagination {
   display: flex;

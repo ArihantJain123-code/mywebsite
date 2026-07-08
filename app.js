@@ -1346,6 +1346,11 @@ function renderBlogsList() {
 
   // Render empty state if needed
   if (filteredBlogs.length === 0) {
+    const countTextEl = document.getElementById("blog-count-text");
+    if (countTextEl) {
+      countTextEl.innerHTML = "Showing <strong>0</strong> articles";
+    }
+
     if (BLOGS_DATA.length === 0) {
       grid.innerHTML = `
         <div class="no-results" style="grid-column: 1 / -1; width: 100%;">
@@ -1379,6 +1384,14 @@ function renderBlogsList() {
   const startIndex = (state.blogPage - 1) * state.blogPageSize;
   const endIndex = startIndex + state.blogPageSize;
   const paginatedBlogs = filteredBlogs.slice(startIndex, endIndex);
+
+  // Update blog stats bar count
+  const countTextEl = document.getElementById("blog-count-text");
+  if (countTextEl) {
+    const from = startIndex + 1;
+    const to = Math.min(endIndex, totalBlogs);
+    countTextEl.innerHTML = `Showing <strong>${from}-${to}</strong> of <strong>${totalBlogs}</strong> articles`;
+  }
 
   // Render cards
   paginatedBlogs.forEach(blog => {
