@@ -2781,7 +2781,13 @@ function generate500Blogs() {
     const courseKey = courses[i % courses.length];
     const courseName = courseNames[courseKey];
     
-    // Pick two random, distinct univers    // Generate dates backwards from 2026-05-15
+    const category = categories[i % categories.length];
+    const author = authors[i % authors.length];
+    const readTime = `${4 + (i % 5)} min read`;
+    const uniA = UNIVERSITIES[i % UNIVERSITIES.length];
+    const uniB = UNIVERSITIES[(i + 1) % UNIVERSITIES.length];
+    
+    // Generate dates backwards from 2026-05-15
     const dateObj = new Date("2026-05-15");
     dateObj.setDate(dateObj.getDate() - (i - existingCount) * 2); // 2 days gap between posts
     const dateString = dateObj.toISOString().split("T")[0];
