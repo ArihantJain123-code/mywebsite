@@ -23,8 +23,33 @@
   <meta property="twitter:image" content="https://www.getonlinedegrees.online/assets/logo.png">
 
   <!-- Dynamic JSON-LD Schema Placeholder -->
-  <script type="application/ld+json" id="seo-schema-ld-json"></script>
+  <script type="application/ld+json" id="seo-schema-ld-json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "OnlineDegrees",
+      "url": "https://www.getonlinedegrees.online/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "OnlineDegrees",
+      "url": "https://www.getonlinedegrees.online/",
+      "logo": "https://www.getonlinedegrees.online/assets/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-6375079973",
+        "contactType": "customer service"
+      }
+    }
+  ]
+  </script>
   
+  <!-- Web App Manifest for Technical SEO & PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4F46E5">
+
   <!-- FontAwesome for Premium Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   

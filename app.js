@@ -1820,7 +1820,27 @@ function updateSEO(viewName, params = {}) {
   if (schemaData) {
     schemaScript.textContent = JSON.stringify(schemaData, null, 2);
   } else {
-    schemaScript.textContent = "";
+    const defaultSchema = [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "OnlineDegrees",
+        "url": "https://www.getonlinedegrees.online/"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "OnlineDegrees",
+        "url": "https://www.getonlinedegrees.online/",
+        "logo": ogImage,
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-6375079973",
+          "contactType": "customer service"
+        }
+      }
+    ];
+    schemaScript.textContent = JSON.stringify(defaultSchema, null, 2);
   }
 }
 
