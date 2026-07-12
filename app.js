@@ -222,8 +222,10 @@ function navigate(viewName, params = {}) {
       // Update inputs
       const navSearch = document.getElementById("nav-blog-search");
       const mobSearch = document.getElementById("mobile-blog-search");
+      const sidebarSearch = document.getElementById("blog-sidebar-search-input");
       if (navSearch) navSearch.value = params.search;
       if (mobSearch) mobSearch.value = params.search;
+      if (sidebarSearch) sidebarSearch.value = params.search;
       // Toggle nav search clear button
       const clearBtn = document.getElementById("nav-blog-search-clear");
       if (clearBtn) clearBtn.style.display = params.search ? "inline-flex" : "none";
@@ -231,8 +233,10 @@ function navigate(viewName, params = {}) {
       state.blogQuery = "";
       const navSearch = document.getElementById("nav-blog-search");
       const mobSearch = document.getElementById("mobile-blog-search");
+      const sidebarSearch = document.getElementById("blog-sidebar-search-input");
       if (navSearch) navSearch.value = "";
       if (mobSearch) mobSearch.value = "";
+      if (sidebarSearch) sidebarSearch.value = "";
       const clearBtn = document.getElementById("nav-blog-search-clear");
       if (clearBtn) clearBtn.style.display = "none";
     }
@@ -433,9 +437,11 @@ function setupEventListeners() {
       const value = e.target.value;
       state.blogQuery = value.toLowerCase().trim();
 
-      // Update mobile search input as well to stay in sync
+      // Update mobile and sidebar search inputs as well to stay in sync
       const mobBlogSearchInput = document.getElementById("mobile-blog-search");
+      const sidebarBlogSearchInput = document.getElementById("blog-sidebar-search-input");
       if (mobBlogSearchInput) mobBlogSearchInput.value = value;
+      if (sidebarBlogSearchInput) sidebarBlogSearchInput.value = value;
 
       if (navBlogSearchClear) {
         navBlogSearchClear.style.display = value ? "inline-flex" : "none";
@@ -458,7 +464,9 @@ function setupEventListeners() {
     navBlogSearchClear.addEventListener("click", () => {
       if (navBlogSearchInput) navBlogSearchInput.value = "";
       const mobBlogSearchInput = document.getElementById("mobile-blog-search");
+      const sidebarBlogSearchInput = document.getElementById("blog-sidebar-search-input");
       if (mobBlogSearchInput) mobBlogSearchInput.value = "";
+      if (sidebarBlogSearchInput) sidebarBlogSearchInput.value = "";
       navBlogSearchClear.style.display = "none";
       state.blogQuery = "";
       if (state.currentView === "blog") {
@@ -477,8 +485,10 @@ function setupEventListeners() {
       const value = e.target.value;
       state.blogQuery = value.toLowerCase().trim();
 
-      // Sync desktop search input
+      // Sync desktop and sidebar search inputs
       if (navBlogSearchInput) navBlogSearchInput.value = value;
+      const sidebarBlogSearchInput = document.getElementById("blog-sidebar-search-input");
+      if (sidebarBlogSearchInput) sidebarBlogSearchInput.value = value;
       if (navBlogSearchClear) navBlogSearchClear.style.display = value ? "inline-flex" : "none";
 
       if (state.currentView !== "blog" && state.currentView !== "blog-detail") {
@@ -500,6 +510,8 @@ function setupEventListeners() {
     blogStatusClearBtn.addEventListener("click", () => {
       if (navBlogSearchInput) navBlogSearchInput.value = "";
       if (mobBlogSearchInput) mobBlogSearchInput.value = "";
+      const sidebarBlogSearchInput = document.getElementById("blog-sidebar-search-input");
+      if (sidebarBlogSearchInput) sidebarBlogSearchInput.value = "";
       if (navBlogSearchClear) navBlogSearchClear.style.display = "none";
       state.blogQuery = "";
       state.blogPage = 1;
@@ -518,6 +530,23 @@ function setupEventListeners() {
       btn.classList.add("active");
 
       state.blogCategory = btn.getAttribute("data-category");
+      state.blogPage = 1;
+      renderBlogsList();
+    });
+  }
+
+  // Blog Sidebar Search input
+  const sidebarBlogSearchInput = document.getElementById("blog-sidebar-search-input");
+  if (sidebarBlogSearchInput) {
+    sidebarBlogSearchInput.addEventListener("input", (e) => {
+      const value = e.target.value;
+      state.blogQuery = value.toLowerCase().trim();
+
+      // Sync other search inputs
+      if (navBlogSearchInput) navBlogSearchInput.value = value;
+      if (mobBlogSearchInput) mobBlogSearchInput.value = value;
+      if (navBlogSearchClear) navBlogSearchClear.style.display = value ? "inline-flex" : "none";
+
       state.blogPage = 1;
       renderBlogsList();
     });
@@ -1390,7 +1419,14 @@ function renderBlogsList() {
   if (countTextEl) {
     const from = startIndex + 1;
     const to = Math.min(endIndex, totalBlogs);
-    countTextEl.innerHTML = `Showing <strong>${from}-${to}</strong> of <strong>${totalBlogs}</strong> articles`;
+    countTextEl.innerHTML = `
+      <div class="blog-total-badge">
+        <span class="blog-total-dot"></span>
+        <span class="blog-total-label">Total Published:</span>
+        <span class="blog-total-val">${totalBlogs} Articles</span>
+      </div>
+      <span class="blog-showing-range">Showing <strong>${from} - ${to}</strong> of <strong>${totalBlogs}</strong> entries</span>
+    `;
   }
 
   // Render cards
@@ -1411,13 +1447,13 @@ function renderBlogsList() {
     card.innerHTML = `
       <div class="blog-card-meta">
         <span class="blog-card-category">${blog.category}</span>
-        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${blog.readTime}</span>
+        <span class="blog-card-date"><i class="far fa-calendar-alt"></i> ${dateFormatted}</span>
       </div>
       <h3>${blog.title}</h3>
       <p>${blog.excerpt}</p>
       <div class="blog-card-footer">
         <span class="blog-card-author">By ${blog.author}</span>
-        <span class="blog-card-more-btn">Read Article <i class="fas fa-arrow-right"></i></span>
+        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${blog.readTime}</span>
       </div>
     `;
     grid.appendChild(card);
