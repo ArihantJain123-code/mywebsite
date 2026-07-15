@@ -2781,14 +2781,14 @@ function generate500Blogs() {
     "bca": "Online BCA"
   };
 
-  // We want to generate (500 - existing_blogs_length) posts to hit exactly 500 blogs.
+  // We want to generate 500 mixed blogs and then 500 extra strictly Online BCA blogs to hit 1000 blogs.
   const existingCount = BLOGS_DATA.length;
-  const targetCount = 500;
+  const targetCount = 1000;
   
   if (existingCount >= targetCount) return;
 
   for (let i = existingCount; i < targetCount; i++) {
-    const courseKey = courses[i % courses.length];
+    const courseKey = i < 500 ? courses[i % courses.length] : "bca";
     const courseName = courseNames[courseKey];
     
     const category = categories[i % categories.length];
@@ -2831,14 +2831,14 @@ function generate500Blogs() {
         <p>If you're looking for a highly credible online degree with solid placement backing, <a href="#catalog?university=${uniA.id}">${uniA.name}</a>'s <a href="#catalog?course=${courseKey}">${courseName}</a> is a top recommendation. Get in touch with our counselors for free admission guidance!</p>
       `;
     } else if (category === "University Comparisons") {
-      title = `Compare: ${uniA.name} vs ${uniB.name} for Online ${courseName}`;
-      excerpt = `Stuck between ${uniA.shortName} and ${uniB.shortName} for your Online ${courseName}? Compare tuition fees, NAAC grades, LMS platforms, and placements side-by-side.`;
+      title = `Compare: ${uniA.name} vs ${uniB.name} for ${courseName}`;
+      excerpt = `Stuck between ${uniA.shortName} and ${uniB.shortName} for your ${courseName}? Compare tuition fees, NAAC grades, LMS platforms, and placements side-by-side.`;
       
       const feeA = uniA.courses[courseKey] ? `₹${uniA.courses[courseKey].feeTotal.toLocaleString("en-IN")}` : "N/A";
       const feeB = uniB.courses[courseKey] ? `₹${uniB.courses[courseKey].feeTotal.toLocaleString("en-IN")}` : "N/A";
  
       content = `
-        <p>Deciding between <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong> and <strong><a href="#catalog?university=${uniB.id}">${uniB.name}</a></strong> for an online <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> can be challenging. Let's compare their key parameters to help you make an informed decision.</p>
+        <p>Deciding between <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong> and <strong><a href="#catalog?university=${uniB.id}">${uniB.name}</a></strong> for a <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> can be challenging. Let's compare their key parameters to help you make an informed decision.</p>
         <h3>Key Accreditations</h3>
         <ul>
           <li><strong><a href="#catalog?university=${uniA.id}">${uniA.shortName}</a>:</strong> NAAC ${uniA.naacGrade || "A+"} Grade, UGC-DEB approved.</li>
@@ -2859,12 +2859,12 @@ function generate500Blogs() {
         <p>Choose <strong><a href="#catalog?university=${uniA.id}">${uniA.shortName}</a></strong> if you prefer its unique offerings like ${uniA.features[0] || "industry aligned curriculum"}. Select <strong><a href="#catalog?university=${uniB.id}">${uniB.shortName}</a></strong> if you value ${uniB.features[0] || "flexible learning modules"}. Both are UGC-approved, legally valid degrees.</p>
       `;
     } else if (category === "Career Guidance") {
-      title = `Career Growth & Salary Outlook After completing Online ${courseName}`;
-      excerpt = `Unlock high-paying career options after completing an Online ${courseName} from a top UGC-approved university. Compare salary stats and placement prospects.`;
+      title = `Career Growth & Salary Outlook After completing ${courseName}`;
+      excerpt = `Unlock high-paying career options after completing a ${courseName} from a top UGC-approved university. Compare salary stats and placement prospects.`;
       
       content = `
-        <p>The job market in India is expanding rapidly, and an online <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> is a great way to acquire the required skills without leaving your job. Let's explore what the future holds for online graduates.</p>
-        <h3>Will Corporates Accept an Online ${courseName}?</h3>
+        <p>The job market in India is expanding rapidly, and a <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> is a great way to acquire the required skills without leaving your job. Let's explore what the future holds for online graduates.</p>
+        <h3>Will Corporates Accept a ${courseName}?</h3>
         <p>Yes. The University Grants Commission (UGC) has declared that degrees earned through online mode from recognized universities are fully equivalent to regular degrees. Leading MNCs, technology startups, and government entities actively hire online graduates.</p>
         <h3>Top Career Profiles & Salary Packages</h3>
         <p>Depending on your specialization, you can target the following roles:</p>
@@ -2875,14 +2875,14 @@ function generate500Blogs() {
         </ul>
         <p>Top universities like <a href="#catalog?university=nmims_online">NMIMS Online</a>, <a href="#catalog?university=lovely_professional_university_lpu_online">LPU Online</a>, and <a href="#catalog?university=amity_university_online">Amity Online</a> offer dedicated placement cells that connect you with companies like HCL, KPMG, Amazon, and Accenture.</p>
         <h3>Summary</h3>
-        <p>An online <a href="#catalog?course=${courseKey}">${courseName}</a> is a high-yield investment. The flexible structure enables you to immediately apply what you learn to your current work, accelerating your promotions. Compare all options on our <a href="#catalog?course=${courseKey}">catalog view</a>.</p>
+        <p>A <a href="#catalog?course=${courseKey}">${courseName}</a> is a high-yield investment. The flexible structure enables you to immediately apply what you learn to your current work, accelerating your promotions. Compare all options on our <a href="#catalog?course=${courseKey}">catalog view</a>.</p>
       `;
     } else { // Approvals & Legality
-      title = `UGC-DEB & AICTE Validity Check: Online ${courseName} Admission Guide`;
-      excerpt = `Is an online ${courseName} degree legally valid for government jobs, exams, and corporate hiring? Understand critical UGC, AICTE, and NAAC regulations.`;
+      title = `UGC-DEB & AICTE Validity Check: ${courseName} Admission Guide`;
+      excerpt = `Is a ${courseName} degree legally valid for government jobs, exams, and corporate hiring? Understand critical UGC, AICTE, and NAAC regulations.`;
       
       content = `
-        <p>As you research online <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> programs, ensuring that your degree is legally valid is vital. Here is a quick guide to understanding the regulations of the government of India.</p>
+        <p>As you research <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> programs, ensuring that your degree is legally valid is vital. Here is a quick guide to understanding the regulations of the government of India.</p>
         <h3>1. UGC-DEB Approval</h3>
         <p>The University Grants Commission's Distance Education Bureau (UGC-DEB) is the chief regulator of online education. A university must be approved by the UGC-DEB to offer online courses. Programs taken from non-approved universities are considered invalid.</p>
         <p>The University Grants Commission's Distance Education Bureau (UGC-DEB) is the chief regulator of online education.</p>
