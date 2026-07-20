@@ -1347,10 +1347,10 @@ function renderBlogsList() {
   // Filter by search query
   if (state.blogQuery) {
     filteredBlogs = filteredBlogs.filter(blog =>
-      blog.title.toLowerCase().includes(state.blogQuery) ||
-      blog.excerpt.toLowerCase().includes(state.blogQuery) ||
-      blog.category.toLowerCase().includes(state.blogQuery) ||
-      blog.content.toLowerCase().includes(state.blogQuery)
+      (blog.title && blog.title.toLowerCase().includes(state.blogQuery)) ||
+      (blog.excerpt && blog.excerpt.toLowerCase().includes(state.blogQuery)) ||
+      (blog.category && blog.category.toLowerCase().includes(state.blogQuery)) ||
+      (blog.content && blog.content.toLowerCase().includes(state.blogQuery))
     );
   }
 
