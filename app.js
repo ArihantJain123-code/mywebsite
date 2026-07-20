@@ -279,33 +279,39 @@ function setupEventListeners() {
   // Navigation links
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", (e) => {
-      const view = e.target.getAttribute("data-target");
-      window.location.hash = `#${view}`;
+      const linkEl = e.target.closest(".nav-link") || e.target.closest("[data-target]");
+      const view = linkEl ? linkEl.getAttribute("data-target") : null;
+      if (view) {
+        window.location.hash = `#${view}`;
+      }
     });
   });
 
   // Home Quick Course Cards
   document.querySelectorAll(".degree-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const course = card.getAttribute("data-course");
-      window.location.hash = `#catalog?course=${course}`;
+    card.addEventListener("click", (e) => {
+      const cardEl = e.target.closest(".degree-card");
+      const course = cardEl ? cardEl.getAttribute("data-course") : null;
+      if (course) {
+        window.location.hash = `#catalog?course=${course}`;
+      }
     });
   });
-
-
 
   // Browse Courses CTA
   const browseCta = document.getElementById("home-browse-cta");
   if (browseCta) {
-    browseCta.addEventListener("click", () => {
-      window.location.hash = `#catalog?course=mba`;
+    browseCta.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.hash = `#catalog`;
     });
   }
 
   // Logo Navigation Home
   const logo = document.getElementById("navbar-logo");
   if (logo) {
-    logo.addEventListener("click", () => {
+    logo.addEventListener("click", (e) => {
+      e.preventDefault();
       window.location.hash = "#home";
     });
   }
