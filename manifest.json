@@ -2,14 +2,19 @@
   "short_name": "OnlineDegrees",
   "name": "OnlineDegrees - Compare & Choose Top Online Degree Programs",
   "description": "Find and compare the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.",
+  "id": "https://www.getonlinedegrees.online/",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["education", "productivity", "utilities"],
   "icons": [
     {
       "src": "assets/logo.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": "/index.html",
   "background_color": "#FAFBFC",
   "theme_color": "#4F46E5",
   "display": "standalone",

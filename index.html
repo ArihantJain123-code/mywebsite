@@ -8,6 +8,15 @@
   <meta name="keywords" content="online degree, distance education, compare universities, UGC-DEB approved, online MBA, online MCA, online BCA, online BBA, online M.Com">
   <link rel="canonical" href="https://www.getonlinedegrees.online/">
 
+  <!-- Favicon & Touch Icons for Technical SEO -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- Resource Hints for Web Performance & SEO -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.getonlinedegrees.online/">
@@ -29,7 +38,12 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "OnlineDegrees",
-      "url": "https://www.getonlinedegrees.online/"
+      "url": "https://www.getonlinedegrees.online/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.getonlinedegrees.online/#catalog?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@context": "https://schema.org",
@@ -40,7 +54,9 @@
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+91-6375079973",
-        "contactType": "customer service"
+        "contactType": "customer service",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Hindi"]
       }
     }
   ]

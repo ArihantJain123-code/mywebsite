@@ -1,9 +1,13 @@
 # robots.txt for getonlinedegrees.online
-# Generated: 2026-06-19
+# Updated: 2026-07-20
 
-# Allow all well-behaved search engine crawlers
+# Allow all search engine crawlers
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Canonical Host
+Host: https://www.getonlinedegrees.online/
+
+# Sitemap Location
 Sitemap: https://www.getonlinedegrees.online/sitemap.xml
+

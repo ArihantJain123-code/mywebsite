@@ -2703,3 +2703,347 @@ function setupResumeBuilderEventListeners() {
     });
   }
 }
+
+// --- TECHNICAL SEO & METADATA MANAGER ---
+function updateSEO(viewName, params = {}) {
+  let title = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
+  let description = "Find and compare the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.";
+  let canonicalUrl = "https://www.getonlinedegrees.online/";
+  let imageUrl = "https://www.getonlinedegrees.online/assets/logo.png";
+  let jsonLdSchemas = [];
+
+  // 1. Base WebSite & Organization Schemas
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "OnlineDegrees",
+    "url": "https://www.getonlinedegrees.online/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.getonlinedegrees.online/#catalog?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OnlineDegrees",
+    "url": "https://www.getonlinedegrees.online/",
+    "logo": "https://www.getonlinedegrees.online/assets/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-6375079973",
+      "contactType": "customer service",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Hindi"]
+    }
+  };
+
+  jsonLdSchemas.push(websiteSchema, orgSchema);
+
+  // Helper mapping for course codes to titles
+  const courseTitles = {
+    mba: "Online MBA",
+    mca: "Online MCA",
+    bca: "Online BCA",
+    bba: "Online BBA",
+    mcom: "Online M.Com",
+    bcom: "Online B.Com",
+    ma: "Online MA",
+    ba: "Online BA",
+    "m-tech": "Online M.Tech",
+    "b-tech": "Online B.Tech"
+  };
+
+  // 2. View specific Metadata & Schemas
+  if (viewName === "home") {
+    title = "OnlineDegrees | Compare & Choose Top UGC-DEB Approved Online Degrees";
+    description = "Compare fees, approvals, placement records, and learning management systems of top online colleges in India. 100% UGC-DEB & AICTE approved programs.";
+    canonicalUrl = "https://www.getonlinedegrees.online/";
+    
+    // Breadcrumb schema
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.getonlinedegrees.online/"
+      }]
+    });
+
+    // Homepage FAQ Schema
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are online degrees approved by UGC-DEB valid in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, degrees awarded through online and distance learning mode by UGC-DEB recognized universities are fully valid and equivalent to conventional degrees for higher education and government jobs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I compare fees and eligibility across online universities?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can select up to 3 universities on the OnlineDegrees Compare Board to view side-by-side fee structures, NAAC ratings, semester curriculum, and placement stats."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are entrance exams required for online degree admissions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most online universities do not mandate competitive entrance exam scores (like CAT or MAT), but require candidates to meet baseline academic eligibility marks in their previous degree/higher secondary education."
+          }
+        }
+      ]
+    });
+
+  } else if (viewName === "catalog") {
+    const courseCode = params.course ? params.course.toLowerCase() : (typeof state !== "undefined" && state.selectedCourse ? state.selectedCourse : "mba");
+    const courseName = courseTitles[courseCode] || (courseCode.toUpperCase() + " Degree");
+    
+    title = `${courseName} Programs 2026 - Fees, Approvals & Top Universities | OnlineDegrees`;
+    description = `Compare top UGC-DEB approved ${courseName} degrees in India. Check eligibility, semester fees, placement assistance, and accredited university options.`;
+    canonicalUrl = `https://www.getonlinedegrees.online/#catalog${params.course ? '?course=' + params.course : ''}`;
+
+    // Course Schema
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": `${courseName} Online Degree`,
+      "description": description,
+      "provider": {
+        "@type": "Organization",
+        "name": "OnlineDegrees",
+        "url": "https://www.getonlinedegrees.online/"
+      }
+    });
+
+    // Breadcrumb Schema
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.getonlinedegrees.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Find Degrees",
+          "item": "https://www.getonlinedegrees.online/#catalog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": courseName,
+          "item": canonicalUrl
+        }
+      ]
+    });
+
+  } else if (viewName === "compare") {
+    title = "Compare Online Universities Side-by-Side | OnlineDegrees";
+    description = "Compare up to 3 online degree universities side-by-side on fees, NAAC grade, UGC approval, placement rating, and LMS features.";
+    canonicalUrl = "https://www.getonlinedegrees.online/#compare";
+
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.getonlinedegrees.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compare Board",
+          "item": canonicalUrl
+        }
+      ]
+    });
+
+  } else if (viewName === "blog") {
+    title = "Online Education Blog & University Reviews | OnlineDegrees";
+    description = "Read expert insights, detailed university reviews, career tips, and online degree admission guides.";
+    canonicalUrl = "https://www.getonlinedegrees.online/#blog";
+
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.getonlinedegrees.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blogs",
+          "item": canonicalUrl
+        }
+      ]
+    });
+
+  } else if (viewName === "blog-detail" && params.id) {
+    let post = null;
+    if (typeof BLOG_POSTS !== "undefined") {
+      post = BLOG_POSTS.find(p => p.id === params.id);
+    }
+    
+    if (post) {
+      title = `${post.title} | OnlineDegrees Blog`;
+      description = post.excerpt ? post.excerpt.substring(0, 155) : `Read our in-depth analysis: ${post.title}`;
+      if (post.image) {
+        imageUrl = post.image.startsWith("http") ? post.image : `https://www.getonlinedegrees.online/${post.image}`;
+      }
+      canonicalUrl = `https://www.getonlinedegrees.online/#blog-detail?id=${params.id}`;
+
+      jsonLdSchemas.push({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": description,
+        "image": imageUrl,
+        "datePublished": post.date || "2026-06-19",
+        "author": {
+          "@type": "Organization",
+          "name": "OnlineDegrees Editorial Team"
+        },
+        "publisher": orgSchema
+      });
+
+      jsonLdSchemas.push({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.getonlinedegrees.online/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blogs",
+            "item": "https://www.getonlinedegrees.online/#blog"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": post.title,
+            "item": canonicalUrl
+          }
+        ]
+      });
+    }
+
+  } else if (viewName === "contact") {
+    title = "Contact Us & Free Education Counseling | OnlineDegrees";
+    description = "Get in touch with expert counselors for personalized online degree guidance, fee comparisons, and admission assistance.";
+    canonicalUrl = "https://www.getonlinedegrees.online/#contact";
+
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.getonlinedegrees.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact Us",
+          "item": canonicalUrl
+        }
+      ]
+    });
+  }
+
+  if (params.university && typeof UNIVERSITIES !== "undefined") {
+    const uni = UNIVERSITIES.find(u => u.id === params.university);
+    if (uni) {
+      title = `${uni.name} Online Degrees 2026 - Fees, NAAC & Reviews | OnlineDegrees`;
+      description = `Explore ${uni.name} online degree programs. Check NAAC grade, UGC-DEB approvals, fee structure, placement support, and ratings.`;
+      
+      jsonLdSchemas.push({
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": uni.name,
+        "url": uni.website || `https://www.getonlinedegrees.online/#catalog?university=${uni.id}`,
+        "logo": uni.logo ? `https://www.getonlinedegrees.online/${uni.logo}` : orgSchema.logo,
+        "description": `${uni.name} offers accredited online degree courses.`
+      });
+    }
+  }
+
+  // 3. Update DOM Head Elements
+  document.title = title;
+
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute("content", description);
+
+  let ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute("content", title);
+
+  let ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute("content", description);
+
+  let ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute("content", canonicalUrl);
+
+  let ogImage = document.querySelector('meta[property="og:image"]');
+  if (ogImage) ogImage.setAttribute("content", imageUrl);
+
+  let twTitle = document.querySelector('meta[property="twitter:title"]');
+  if (twTitle) twTitle.setAttribute("content", title);
+
+  let twDesc = document.querySelector('meta[property="twitter:description"]');
+  if (twDesc) twDesc.setAttribute("content", description);
+
+  let twUrl = document.querySelector('meta[property="twitter:url"]');
+  if (twUrl) twUrl.setAttribute("content", canonicalUrl);
+
+  let twImage = document.querySelector('meta[property="twitter:image"]');
+  if (twImage) twImage.setAttribute("content", imageUrl);
+
+  let canonicalTag = document.querySelector('link[rel="canonical"]');
+  if (canonicalTag) {
+    canonicalTag.setAttribute("href", canonicalUrl);
+  } else {
+    canonicalTag = document.createElement("link");
+    canonicalTag.setAttribute("rel", "canonical");
+    canonicalTag.setAttribute("href", canonicalUrl);
+    document.head.appendChild(canonicalTag);
+  }
+
+  let jsonLdScript = document.getElementById("seo-schema-ld-json");
+  if (!jsonLdScript) {
+    jsonLdScript = document.createElement("script");
+    jsonLdScript.type = "application/ld+json";
+    jsonLdScript.id = "seo-schema-ld-json";
+    document.head.appendChild(jsonLdScript);
+  }
+  jsonLdScript.textContent = JSON.stringify(jsonLdSchemas, null, 2);
+}
+
