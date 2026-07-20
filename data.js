@@ -2756,102 +2756,149 @@ const BLOGS_DATA = [
   }
 ];
 
-// --- Programmatic Generator for 500 Online MCA Blog Posts ---
+// --- Programmatic Generator for 500 Blog Posts ---
 function generate500Blogs() {
-  const mcaSpecializations = [
-    "Artificial Intelligence & Machine Learning",
-    "Cyber Security & Ethical Hacking",
-    "Cloud Computing & DevOps",
-    "Full Stack Web Development",
-    "Data Science & Big Data Analytics",
-    "Software Engineering & System Design",
-    "Blockchain Technology & Security",
-    "Database Engineering & Cloud Architecture"
+  const categories = [
+    "University Reviews",
+    "University Comparisons",
+    "Career Guidance",
+    "Approvals & Legality"
   ];
-
-  const mcaUniversities = [
-    { id: "amity_university_online", name: "Amity University Online", shortName: "Amity Online", fee: "₹1,79,100", naac: "NAAC A+", emi: "₹4,975/mo", rating: "4.8" },
-    { id: "lovely_professional_university_lpu_online", name: "LPU Online", shortName: "LPU Online", fee: "₹1,00,000", naac: "NAAC A++", emi: "₹2,500/mo", rating: "4.6" },
-    { id: "chandigarh_university_online", name: "Chandigarh University Online", shortName: "CU Online", fee: "₹1,20,000", naac: "NAAC A+", emi: "₹3,000/mo", rating: "4.8" },
-    { id: "manipal_university_jaipur_online", name: "Manipal University Jaipur Online", shortName: "Manipal Jaipur Online", fee: "₹1,50,000", naac: "NAAC A+", emi: "₹3,750/mo", rating: "4.7" },
-    { id: "jain_university_online", name: "Jain University Online", shortName: "Jain Online", fee: "₹1,40,000", naac: "NAAC A++", emi: "₹3,500/mo", rating: "4.4" },
-    { id: "d_y_patil_university_online_pune", name: "DY Patil University Online Pune", shortName: "DY Patil Online", fee: "₹1,30,000", naac: "NAAC A++", emi: "₹3,250/mo", rating: "4.5" },
-    { id: "uttaranchal_university_online", name: "Uttaranchal University Online", shortName: "Uttaranchal Online", fee: "₹98,000", naac: "NAAC A+", emi: "₹2,450/mo", rating: "4.5" },
-    { id: "sikkim_manipal_university_online", name: "Sikkim Manipal University Online", shortName: "SMU Online", fee: "₹1,10,000", naac: "NAAC A+", emi: "₹2,750/mo", rating: "4.5" }
-  ];
-
+  
   const authors = [
     "Academic Counselors Team",
     "Dr. Amit Verma",
     "Meera Sen",
     "Karan Mehta",
     "Ananya Iyer",
-    "Rohan Deshmukh",
-    "Suresh Kumar"
+    "Rohan Deshmukh"
   ];
 
-  const topicTemplates = [
-    "Syllabus & Semester Curriculum Guide",
-    "Total Fees Breakdown & Affordable EMI Options",
-    "UGC-DEB Legality & Government Job Eligibility",
-    "Career Scope, Top Roles & Salary Expectations",
-    "Specialization Deep-Dive & Industry Placement Insights",
-    "Detailed Comparison & Side-by-Side Evaluation",
-    "Eligibility Criteria, Non-Maths Rules & Direct Admission",
-    "WES Accreditation & Foreign Job Acceptance in USA/Canada",
-    "Capstone Coding Projects, Practicals & Virtual Labs",
-    "Online MCA vs Regular MCA: Return on Investment (ROI) Analysis"
-  ];
+  const courses = ["mba", "bba", "bca"];
+  const courseNames = {
+    "mba": "Online MBA",
+    "bba": "Online BBA",
+    "bca": "Online BCA"
+  };
 
-  const targetMcaCount = 500;
+  // We want to generate 500 mixed blogs and then 500 extra strictly Online BCA blogs to hit 1000 blogs.
+  const existingCount = BLOGS_DATA.length;
+  const targetCount = 1000;
   
-  // Prevent duplicate runs if 500 MCA blogs already appended
-  const currentMcaCount = BLOGS_DATA.filter(b => b.category === "Online MCA").length;
-  if (currentMcaCount >= targetMcaCount) return;
+  if (existingCount >= targetCount) return;
 
-  const countToGenerate = targetMcaCount - currentMcaCount;
-
-  for (let i = 0; i < countToGenerate; i++) {
-    const idx = currentMcaCount + i;
-    const spec = mcaSpecializations[idx % mcaSpecializations.length];
-    const uniA = mcaUniversities[idx % mcaUniversities.length];
-    const uniB = mcaUniversities[(idx + 1) % mcaUniversities.length];
-    const topic = topicTemplates[idx % topicTemplates.length];
-    const author = authors[idx % authors.length];
-    const readTime = `${4 + (idx % 4)} min read`;
+  for (let i = existingCount; i < targetCount; i++) {
+    const courseKey = i < 500 ? courses[i % courses.length] : "bca";
+    const courseName = courseNames[courseKey];
     
-    // Generate dates staggered backwards from 2026-07-20
-    const dateObj = new Date("2026-07-20");
-    dateObj.setDate(dateObj.getDate() - (idx % 180));
+    const category = categories[i % categories.length];
+    const author = authors[i % authors.length];
+    const readTime = `${4 + (i % 5)} min read`;
+    const uniA = UNIVERSITIES[i % UNIVERSITIES.length];
+    const uniB = UNIVERSITIES[(i + 1) % UNIVERSITIES.length];
+    
+    // Generate dates backwards from 2026-05-15
+    const dateObj = new Date("2026-05-15");
+    dateObj.setDate(dateObj.getDate() - (i - existingCount) * 2); // 2 days gap between posts
     const dateString = dateObj.toISOString().split("T")[0];
 
-    const blogId = `online-mca-guide-${idx + 1}`;
+    let id = `generated-blog-${i}`;
     let title = "";
     let excerpt = "";
     let content = "";
 
-    if (topic === "Syllabus & Semester Curriculum Guide") {
-      title = `Online MCA in ${spec} (${uniA.shortName}): Complete 2-Year Syllabus Breakdown (#${idx + 1})`;
-      excerpt = `Explore the semester-wise curriculum of Online MCA specializing in ${spec} at ${uniA.name}. Review core subjects, practical labs, and capstone requirements.`;
-      content = `<p>Pursuing an <strong><a href="#catalog?course=mca">Online MCA</a></strong> in <strong>${spec}</strong> from <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong> equips students with cutting-edge software engineering and data management capabilities. Here is the full 4-semester academic breakdown.</p><h3>Semester-Wise Subjects & Practical Labs</h3><h4>Semester 1: Core Computer Science Foundations</h4><ul><li>Advanced Data Structures & Algorithms</li><li>Object-Oriented Programming using Java / Python</li><li>Computer Organization & OS Fundamentals</li><li>Discrete Mathematics & Logic</li></ul><h4>Semester 2: Web & Database Engineering</h4><ul><li>Relational Database Management Systems (RDBMS & SQL)</li><li>Modern Web Development (HTML5, CSS, React / Node.js)</li><li>Software Engineering & Agile SDLC</li><li>Computer Networks & Cyber Security Basics</li></ul><h4>Semester 3: Specialization Core - ${spec}</h4><ul><li>Advanced ${spec} Fundamentals</li><li>Cloud Platforms (AWS / Azure) & Containerization (Docker, Kubernetes)</li><li>Enterprise Architecture & Microservices</li><li>Elective Industry Module</li></ul><h4>Semester 4: Capstone Project & Internship</h4><ul><li>Industry Capstone Software Project</li><li>Comprehensive Viva & Technical Portfolio Presentation</li></ul><h3>Verdict & Career ROI</h3><p>With an LMS rating of <strong>${uniA.rating}/5</strong> and total program fees of <strong>${uniA.fee}</strong>, <a href="#catalog?university=${uniA.id}">${uniA.name}</a> offers an exceptional learning experience. Connect with our counselors to get the syllabus PDF!</p>`;
-    } else if (topic === "Total Fees Breakdown & Affordable EMI Options") {
-      title = `Online MCA Fees at ${uniA.name}: Total Cost, Semester Fees, & EMI Guide (#${idx + 1})`;
-      excerpt = `Looking for affordable Online MCA fees? Discover full fee structures, semester payment plans, and zero-cost EMI options at ${uniA.name} and top UGC-approved colleges.`;
-      content = `<p>Financial flexibility is one of the main drivers behind the popularity of <strong><a href="#catalog?course=mca">Online MCA degrees</a></strong>. In this fee guide, we evaluate <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong>.</p><h3>Fee Structure Overview</h3><div class="table-responsive"><table class="comparison-table" style="width:100%; border-collapse: collapse; margin: 20px 0;"><thead><tr style="background-color: var(--card-bg, #f1f3f5); border-bottom: 2px solid var(--border-color, #e9ecef);"><th style="padding:12px;">Parameter</th><th style="padding:12px;">${uniA.shortName} Details</th></tr></thead><tbody><tr><td style="padding:12px;">Total Program Fee</td><td style="padding:12px;"><strong>${uniA.fee}</strong></td></tr><tr><td style="padding:12px;">Monthly EMI Option</td><td style="padding:12px;">Starting at <strong>${uniA.emi}</strong></td></tr><tr><td style="padding:12px;">NAAC Grade</td><td style="padding:12px;">${uniA.naac}</td></tr><tr><td style="padding:12px;">Approval</td><td style="padding:12px;">UGC-DEB & AICTE Approved</td></tr></tbody></table></div><h3>Is It Worth the Investment?</h3><p>Compared to full-time physical MCA programs costing ₹3 Lakhs to ₹6 Lakhs, <a href="#catalog?university=${uniA.id}">${uniA.shortName}</a> delivers equal legal validity at a fraction of the cost. Learn more on our <a href="#catalog?course=mca">MCA catalog page</a>.</p>`;
-    } else if (topic === "Detailed Comparison & Side-by-Side Evaluation") {
-      title = `${uniA.shortName} vs ${uniB.shortName} Online MCA Comparison Guide (#${idx + 1})`;
-      excerpt = `Comparing ${uniA.shortName} and ${uniB.shortName} for your Online MCA? Compare NAAC ratings, fees, LMS experience, and placement assistance.`;
-      content = `<p>Selecting the best university for your <strong><a href="#catalog?course=mca">Online MCA</a></strong> requires evaluating key metrics. Let's compare <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong> and <strong><a href="#catalog?university=${uniB.id}">${uniB.name}</a></strong>.</p><h3>Side-by-Side Parameter Comparison</h3><div class="table-responsive"><table class="comparison-table" style="width:100%; border-collapse: collapse; margin: 20px 0;"><thead><tr style="background-color: var(--card-bg, #f1f3f5); border-bottom: 2px solid var(--border-color, #e9ecef);"><th style="padding:12px;">Feature</th><th style="padding:12px;">${uniA.shortName}</th><th style="padding:12px;">${uniB.shortName}</th></tr></thead><tbody><tr><td style="padding:12px;">NAAC Accreditation</td><td style="padding:12px;">${uniA.naac}</td><td style="padding:12px;">${uniB.naac}</td></tr><tr><td style="padding:12px;">Total Tuition Fee</td><td style="padding:12px;">${uniA.fee}</td><td style="padding:12px;">${uniB.fee}</td></tr><tr><td style="padding:12px;">Monthly EMI</td><td style="padding:12px;">${uniA.emi}</td><td style="padding:12px;">${uniB.emi}</td></tr><tr><td style="padding:12px;">LMS Rating</td><td style="padding:12px;">${uniA.rating}/5</td><td style="padding:12px;">${uniB.rating}/5</td></tr></tbody></table></div><h3>Summary Recommendation</h3><p>Both universities are UGC-DEB authorized. Choose <a href="#catalog?university=${uniA.id}">${uniA.shortName}</a> for your specialization in ${spec} or compare all universities on our <a href="#compare">comparison tool</a>.</p>`;
-    } else {
-      title = `Online MCA in ${spec} at ${uniA.shortName}: Eligibility, Career & Review (#${idx + 1})`;
-      excerpt = `Everything you need to know about pursuing an Online MCA in ${spec} at ${uniA.name}. Learn about UGC legitimacy, hiring partners, and salary packages.`;
-      content = `<p>An <strong><a href="#catalog?course=mca">Online MCA degree</a></strong> specializing in <strong>${spec}</strong> from <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong> opens doors to top IT career roles.</p><h3>Key Highlights</h3><ul><li><strong>UGC-DEB & AICTE Approved:</strong> 100% legal equality to physical campus MCA degrees.</li><li><strong>NAAC Grade:</strong> ${uniA.naac} accredited university status.</li><li><strong>Flexible Learning:</strong> Live weekend classes and recorded virtual lectures on LMS.</li></ul><h3>Career Opportunities & Roles</h3><p>Graduates are recruited into roles such as ${spec} Engineer, Software Developer, System Architect, and Data Analyst with starting packages ranging from ₹5 LPA to ₹12 LPA. Prominent recruiters include TCS, Infosys, Wipro, Accenture, and Amazon.</p><blockquote>"Pursuing my Online MCA allowed me to work full time while mastering modern cloud and AI tools. The LMS interface and support were stellar!" <br><cite>- MCA Graduate Student</cite></blockquote><p>Apply today or contact our academic guidance team for free assistance!</p>`;
+    if (category === "University Reviews") {
+      title = `${uniA.name} ${courseName} Review: Placements, Fees, & UGC Legitimacy`;
+      excerpt = `Thinking of enrolling in the ${courseName} program at ${uniA.name}? Read this expert review detailing syllabus, NAAC grade, placement rates, and fee structures.`;
+      
+      const feeText = uniA.courses[courseKey] 
+        ? `₹${uniA.courses[courseKey].feeTotal.toLocaleString("en-IN")} total tuition fee` 
+        : `highly competitive fee structures`;
+      
+      content = `
+        <p>Choosing the right online degree can be a defining milestone for your professional growth. In this review, we break down the popular <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> program offered by <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong>.</p>
+        <h3>Accreditation & Legality</h3>
+        <p><a href="#catalog?university=${uniA.id}">${uniA.name}</a> holds a <strong>NAAC ${uniA.naacGrade || "A+"} Grade</strong> and is fully recognized by the <strong>UGC-DEB</strong>. This ensures that your degree has the same legal value as a traditional campus program, making it valid for government jobs and corporate roles alike.</p>
+        <h3>Course Highlights & Fees</h3>
+        <p>Students benefit from a state-of-the-art virtual classroom. Key program highlights include:</p>
+        <ul>
+          ${uniA.features.map(f => `<li>${f}</li>`).join("")}
+        </ul>
+        <p>The total investment for this program is approximately <strong>${feeText}</strong>, with EMI options starting at <strong>${uniA.emiStarts || "affordable monthly installments"}</strong>.</p>
+        <h3>Career Prospects & Placements</h3>
+        <p>With an average placement rate of <strong>${uniA.placementRate}%</strong>, graduates have successfully secured roles at prominent companies. Key hiring partners include: ${uniA.placementPartners ? uniA.placementPartners.slice(0, 4).join(", ") : "leading software houses and MNCs"}.</p>
+        <h3>Conclusion</h3>
+        <p>If you're looking for a highly credible online degree with solid placement backing, <a href="#catalog?university=${uniA.id}">${uniA.name}</a>'s <a href="#catalog?course=${courseKey}">${courseName}</a> is a top recommendation. Get in touch with our counselors for free admission guidance!</p>
+      `;
+    } else if (category === "University Comparisons") {
+      title = `Compare: ${uniA.name} vs ${uniB.name} for ${courseName}`;
+      excerpt = `Stuck between ${uniA.shortName} and ${uniB.shortName} for your ${courseName}? Compare tuition fees, NAAC grades, LMS platforms, and placements side-by-side.`;
+      
+      const feeA = uniA.courses[courseKey] ? `₹${uniA.courses[courseKey].feeTotal.toLocaleString("en-IN")}` : "N/A";
+      const feeB = uniB.courses[courseKey] ? `₹${uniB.courses[courseKey].feeTotal.toLocaleString("en-IN")}` : "N/A";
+ 
+      content = `
+        <p>Deciding between <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong> and <strong><a href="#catalog?university=${uniB.id}">${uniB.name}</a></strong> for a <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> can be challenging. Let's compare their key parameters to help you make an informed decision.</p>
+        <h3>Key Accreditations</h3>
+        <ul>
+          <li><strong><a href="#catalog?university=${uniA.id}">${uniA.shortName}</a>:</strong> NAAC ${uniA.naacGrade || "A+"} Grade, UGC-DEB approved.</li>
+          <li><strong><a href="#catalog?university=${uniB.id}">${uniB.shortName}</a>:</strong> NAAC ${uniB.naacGrade || "A+"} Grade, UGC-DEB approved.</li>
+        </ul>
+        <h3>Fees Comparison</h3>
+        <p>Tuition fees play a major role in your decision:
+          <ul>
+            <li><strong><a href="#catalog?university=${uniA.id}">${uniA.shortName}</a>:</strong> ${feeA} total program fee.</li>
+            <li><strong><a href="#catalog?university=${uniB.id}">${uniB.shortName}</a>:</strong> ${feeB} total program fee.</li>
+          </ul>
+        </p>
+        <h3>Placement Rate & Support</h3>
+        <p>
+          ${uniA.shortName} boasts a placement rate of <strong>${uniA.placementRate}%</strong>, while ${uniB.shortName} offers <strong>${uniB.placementRate}%</strong> placements. Both universities offer dedicated placement assistance, resume prep, and mock interviews. You can run a detailed comparison on our <a href="#compare">side-by-side comparison page</a>.
+        </p>
+        <h3>The Verdict</h3>
+        <p>Choose <strong><a href="#catalog?university=${uniA.id}">${uniA.shortName}</a></strong> if you prefer its unique offerings like ${uniA.features[0] || "industry aligned curriculum"}. Select <strong><a href="#catalog?university=${uniB.id}">${uniB.shortName}</a></strong> if you value ${uniB.features[0] || "flexible learning modules"}. Both are UGC-approved, legally valid degrees.</p>
+      `;
+    } else if (category === "Career Guidance") {
+      title = `Career Growth & Salary Outlook After completing ${courseName}`;
+      excerpt = `Unlock high-paying career options after completing a ${courseName} from a top UGC-approved university. Compare salary stats and placement prospects.`;
+      
+      content = `
+        <p>The job market in India is expanding rapidly, and a <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> is a great way to acquire the required skills without leaving your job. Let's explore what the future holds for online graduates.</p>
+        <h3>Will Corporates Accept a ${courseName}?</h3>
+        <p>Yes. The University Grants Commission (UGC) has declared that degrees earned through online mode from recognized universities are fully equivalent to regular degrees. Leading MNCs, technology startups, and government entities actively hire online graduates.</p>
+        <h3>Top Career Profiles & Salary Packages</h3>
+        <p>Depending on your specialization, you can target the following roles:</p>
+        <ul>
+          <li><strong>Project Coordinator / Manager</strong> (Average Starting Salary: ₹6 LPA - ₹12 LPA)</li>
+          <li><strong>Business Consultant / Analyst</strong> (Average Starting Salary: ₹5 LPA - ₹10 LPA)</li>
+          <li><strong>Operations Lead</strong> (Average Starting Salary: ₹4.5 LPA - ₹9 LPA)</li>
+        </ul>
+        <p>Top universities like <a href="#catalog?university=nmims_online">NMIMS Online</a>, <a href="#catalog?university=lovely_professional_university_lpu_online">LPU Online</a>, and <a href="#catalog?university=amity_university_online">Amity Online</a> offer dedicated placement cells that connect you with companies like HCL, KPMG, Amazon, and Accenture.</p>
+        <h3>Summary</h3>
+        <p>A <a href="#catalog?course=${courseKey}">${courseName}</a> is a high-yield investment. The flexible structure enables you to immediately apply what you learn to your current work, accelerating your promotions. Compare all options on our <a href="#catalog?course=${courseKey}">catalog view</a>.</p>
+      `;
+    } else { // Approvals & Legality
+      title = `UGC-DEB & AICTE Validity Check: ${courseName} Admission Guide`;
+      excerpt = `Is a ${courseName} degree legally valid for government jobs, exams, and corporate hiring? Understand critical UGC, AICTE, and NAAC regulations.`;
+      
+      content = `
+        <p>As you research <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> programs, ensuring that your degree is legally valid is vital. Here is a quick guide to understanding the regulations of the government of India.</p>
+        <h3>1. UGC-DEB Approval</h3>
+        <p>The University Grants Commission's Distance Education Bureau (UGC-DEB) is the chief regulator of online education. A university must be approved by the UGC-DEB to offer online courses. Programs taken from non-approved universities are considered invalid.</p>
+        <p>The University Grants Commission's Distance Education Bureau (UGC-DEB) is the chief regulator of online education.</p>
+        <h3>2. AICTE Approval</h3>
+        <p>For technical and management programs (such as MCA and MBA), approval from the All India Council for Technical Education (AICTE) is mandatory.</p>
+        <h3>3. NAAC Grading & Legacy</h3>
+        <p>Universities with a <strong>NAAC A+, A++ or category-I autonomy</strong> are permitted to offer online degrees. Check the NAAC grade of the university to ensure high academic standards.</p>
+        <h3>Legality for Government Exams</h3>
+        <p>Online degrees from recognized colleges are fully valid for UPSC, bank exams, SSC, and state government jobs.</p>
+      `;
     }
 
     BLOGS_DATA.push({
-      id: blogId,
+      id: id,
       title: title,
-      category: "Online MCA",
+      category: category,
       date: dateString,
       author: author,
       readTime: readTime,
