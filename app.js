@@ -1653,237 +1653,6 @@ function renderTrendingBlogs() {
     container.appendChild(item);
   });
 }
-
-// --- Dynamic SEO and Meta Tag Updates ---
-function updateSEO(viewName, params = {}) {
-  let title = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
-  let description = "Find the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.";
-  let ogType = "website";
-  let ogImage = "https://www.getonlinedegrees.online/assets/logo.png";
-  let schemaData = null;
-
-  // Determine dynamic metadata based on the active viewName
-  if (viewName === "catalog") {
-    if (params.course) {
-      const courseUpper = params.course.toUpperCase();
-      title = `Best Online ${courseUpper} Programs | Fees & Reviews | OnlineDegrees`;
-      description = `Compare top UGC-DEB and AICTE approved Online ${courseUpper} programs in India. Compare semester fees, duration, LMS platforms, and placement support.`;
-      
-      const courseKey = params.course.toLowerCase();
-      const courseInfo = typeof COURSES_DATA !== 'undefined' ? COURSES_DATA[courseKey] : null;
-
-      // Dynamic Course Schema
-      schemaData = {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": courseInfo ? courseInfo.name : `Online ${courseUpper}`,
-        "description": courseInfo ? courseInfo.description : description,
-        "educationalCredentialAwarded": courseInfo ? courseInfo.fullName : `${courseUpper} Degree`,
-        "provider": {
-          "@type": "Organization",
-          "name": "OnlineDegrees",
-          "url": "https://www.getonlinedegrees.online/"
-        }
-      };
-
-      if (courseInfo) {
-        schemaData.hasCourseInstance = {
-          "@type": "CourseInstance",
-          "courseMode": "online",
-          "duration": courseInfo.duration
-        };
-      }
-    } else if (params.university) {
-      // Find university details to personalize SEO
-      const uniId = params.university;
-      const university = UNIVERSITIES.find(u => u.id === uniId);
-      if (university) {
-        title = `${university.name} Online Programs, Fees & Placements | OnlineDegrees`;
-        description = `Explore programs offered by ${university.name} Online. Read real student reviews, check total tuition fees, EMI options, NAAC rating, and hiring partners.`;
-        
-        // Dynamic Educational Organization Schema
-        schemaData = {
-          "@context": "https://schema.org",
-          "@type": "EducationalOrganization",
-          "name": university.name,
-          "description": description,
-          "url": `https://www.getonlinedegrees.online/#catalog?university=${uniId}`,
-          "logo": ogImage,
-          "sameAs": university.website || "",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "IN"
-          },
-          "award": `NAAC Grade ${university.naacGrade || "A+"}`,
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": university.rating || "4.5",
-            "reviewCount": university.reviews ? university.reviews.length : "10"
-          }
-        };
-      } else {
-        title = "Accredited Online University Programs | OnlineDegrees";
-        description = "Find and filter UGC approved online degrees (MBA, MCA, BCA, BBA, M.Com) from top-rated online colleges in India.";
-      }
-    } else {
-      title = "Find Online Degree Programs | Compare Colleges | OnlineDegrees";
-      description = "Find and filter UGC approved online degrees (MBA, MCA, BCA, BBA, M.Com) from top-rated online colleges in India.";
-    }
-  } else if (viewName === "compare") {
-    title = "Compare Online Universities Side-by-Side | OnlineDegrees";
-    description = "Use our comparison board to compare fees, approvals, placement ratings, student support, and learning systems of top online colleges.";
-  } else if (viewName === "blog") {
-    if (params.category && params.category !== "all") {
-      title = `${params.category} - Expert Guides & Insights | OnlineDegrees`;
-      description = `Browse our expert guides, comparisons, and reviews on online degree programs under the category: ${params.category}.`;
-    } else {
-      title = "Expert Blogs & Guides on Online Education | OnlineDegrees";
-      description = "Stay informed with expert insights, university reviews, career guidelines, and distance education regulations in India.";
-    }
-  } else if (viewName === "blog-detail") {
-    const blogId = params.id;
-    const blog = BLOGS_DATA.find(b => b.id === blogId);
-    if (blog) {
-      title = `${blog.title} | OnlineDegrees`;
-      description = blog.excerpt || "Read our educational insight and guide on online degree programs and top accredited universities in India.";
-      ogType = "article";
-      
-      // Dynamic Article Schema
-      schemaData = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": blog.title,
-        "description": description,
-        "datePublished": blog.date,
-        "dateModified": blog.date,
-        "image": [ ogImage ],
-        "author": {
-          "@type": "Person",
-          "name": blog.author || "Academic Counselors Team"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "OnlineDegrees",
-          "logo": {
-            "@type": "ImageObject",
-            "url": ogImage
-          }
-        },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": window.location.href
-        }
-      };
-    }
-  } else if (viewName === "contact") {
-    title = "Free Expert Counseling & Contact Support | OnlineDegrees";
-    description = "Have queries about online degrees, tuition fees, or admission deadlines? Get in touch with our counseling experts today for 100% free guidance.";
-  } else if (viewName === "resume-builder") {
-    title = "Free Interactive Resume Builder | OnlineDegrees";
-    description = "Create a premium, professional, ATS-friendly resume in real-time. Choose templates, fonts, accents, and export to PDF instantly.";
-  } else {
-    // Default / Home
-    title = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
-    description = "Find the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.";
-    
-    // Website and Organization Schema
-    schemaData = [
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "OnlineDegrees",
-        "url": "https://www.getonlinedegrees.online/"
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "OnlineDegrees",
-        "url": "https://www.getonlinedegrees.online/",
-        "logo": ogImage,
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+91-6375079973",
-          "contactType": "customer service"
-        }
-      }
-    ];
-  }
-
-  // 1. Update Title tag
-  document.title = title;
-
-  // 2. Update Meta Description
-  const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) {
-    metaDesc.setAttribute("content", description);
-  }
-
-  // 3. Update Canonical Link
-  const canonicalLink = document.querySelector('link[rel="canonical"]');
-  if (canonicalLink) {
-    canonicalLink.setAttribute("href", window.location.origin + window.location.pathname + window.location.hash);
-  }
-
-  // 4. Update Open Graph Meta Tags
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.setAttribute("content", title);
-
-  const ogDesc = document.querySelector('meta[property="og:description"]');
-  if (ogDesc) ogDesc.setAttribute("content", description);
-
-  const ogUrl = document.querySelector('meta[property="og:url"]');
-  if (ogUrl) ogUrl.setAttribute("content", window.location.href);
-
-  const ogTypeTag = document.querySelector('meta[property="og:type"]');
-  if (ogTypeTag) ogTypeTag.setAttribute("content", ogType);
-
-  const ogImageTag = document.querySelector('meta[property="og:image"]');
-  if (ogImageTag) ogImageTag.setAttribute("content", ogImage);
-
-  // 5. Update Twitter Meta Tags
-  const twTitle = document.querySelector('meta[property="twitter:title"]');
-  if (twTitle) twTitle.setAttribute("content", title);
-
-  const twDesc = document.querySelector('meta[property="twitter:description"]');
-  if (twDesc) twDesc.setAttribute("content", description);
-
-  const twUrl = document.querySelector('meta[property="twitter:url"]');
-  if (twUrl) twUrl.setAttribute("content", window.location.href);
-
-  // 6. Inject dynamic JSON-LD Schema
-  let schemaScript = document.getElementById("seo-schema-ld-json");
-  if (!schemaScript) {
-    schemaScript = document.createElement("script");
-    schemaScript.type = "application/ld+json";
-    schemaScript.id = "seo-schema-ld-json";
-    document.head.appendChild(schemaScript);
-  }
-
-  if (schemaData) {
-    schemaScript.textContent = JSON.stringify(schemaData, null, 2);
-  } else {
-    const defaultSchema = [
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "OnlineDegrees",
-        "url": "https://www.getonlinedegrees.online/"
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "OnlineDegrees",
-        "url": "https://www.getonlinedegrees.online/",
-        "logo": ogImage,
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+91-6375079973",
-          "contactType": "customer service"
-        }
-      }
-    ];
-    schemaScript.textContent = JSON.stringify(defaultSchema, null, 2);
-  }
 }
 
 // ==========================================================================
@@ -2712,7 +2481,7 @@ function setupResumeBuilderEventListeners() {
 
 // --- TECHNICAL SEO & METADATA MANAGER ---
 function updateSEO(viewName, params = {}) {
-  let title = "OnlineDegrees | Compare & Choose Top Online Degree Programs";
+  let title = "OnlineDegrees | Compare & Choose Top UGC-DEB Approved Online Degrees";
   let description = "Find and compare the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.";
   let canonicalUrl = "https://www.getonlinedegrees.online/";
   let imageUrl = "https://www.getonlinedegrees.online/assets/logo.png";
@@ -2763,7 +2532,7 @@ function updateSEO(viewName, params = {}) {
   };
 
   // 2. View specific Metadata & Schemas
-  if (viewName === "home") {
+  if (viewName === "home" || !viewName) {
     title = "OnlineDegrees | Compare & Choose Top UGC-DEB Approved Online Degrees";
     description = "Compare fees, approvals, placement records, and learning management systems of top online colleges in India. 100% UGC-DEB & AICTE approved programs.";
     canonicalUrl = "https://www.getonlinedegrees.online/";
@@ -2815,23 +2584,34 @@ function updateSEO(viewName, params = {}) {
   } else if (viewName === "catalog") {
     const courseCode = params.course ? params.course.toLowerCase() : (typeof state !== "undefined" && state.selectedCourse ? state.selectedCourse : "mba");
     const courseName = courseTitles[courseCode] || (courseCode.toUpperCase() + " Degree");
-    
+    const courseInfo = typeof COURSES_DATA !== 'undefined' ? COURSES_DATA[courseCode] : null;
+
     title = `${courseName} Programs 2026 - Fees, Approvals & Top Universities | OnlineDegrees`;
     description = `Compare top UGC-DEB approved ${courseName} degrees in India. Check eligibility, semester fees, placement assistance, and accredited university options.`;
     canonicalUrl = `https://www.getonlinedegrees.online/#catalog${params.course ? '?course=' + params.course : ''}`;
 
     // Course Schema
-    jsonLdSchemas.push({
+    const courseSchema = {
       "@context": "https://schema.org",
       "@type": "Course",
-      "name": `${courseName} Online Degree`,
-      "description": description,
+      "name": courseInfo ? courseInfo.name : `${courseName} Online Degree`,
+      "description": courseInfo ? courseInfo.description : description,
+      "educationalCredentialAwarded": courseInfo ? courseInfo.fullName : `${courseName} Degree`,
       "provider": {
         "@type": "Organization",
         "name": "OnlineDegrees",
         "url": "https://www.getonlinedegrees.online/"
       }
-    });
+    };
+
+    if (courseInfo) {
+      courseSchema.hasCourseInstance = {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "duration": courseInfo.duration
+      };
+    }
+    jsonLdSchemas.push(courseSchema);
 
     // Breadcrumb Schema
     jsonLdSchemas.push({
@@ -2909,8 +2689,8 @@ function updateSEO(viewName, params = {}) {
 
   } else if (viewName === "blog-detail" && params.id) {
     let post = null;
-    if (typeof BLOG_POSTS !== "undefined") {
-      post = BLOG_POSTS.find(p => p.id === params.id);
+    if (typeof BLOGS_DATA !== "undefined") {
+      post = BLOGS_DATA.find(p => p.id === params.id);
     }
     
     if (post) {
@@ -2930,7 +2710,7 @@ function updateSEO(viewName, params = {}) {
         "datePublished": post.date || "2026-06-19",
         "author": {
           "@type": "Organization",
-          "name": "OnlineDegrees Editorial Team"
+          "name": post.author || "OnlineDegrees Editorial Team"
         },
         "publisher": orgSchema
       });
@@ -2984,6 +2764,29 @@ function updateSEO(viewName, params = {}) {
         }
       ]
     });
+  } else if (viewName === "resume-builder") {
+    title = "Free Interactive ATS Resume Builder | OnlineDegrees";
+    description = "Create a professional, ATS-friendly resume in real-time. Custom templates, styling, and instant PDF download.";
+    canonicalUrl = "https://www.getonlinedegrees.online/#resume-builder";
+
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.getonlinedegrees.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Resume Builder",
+          "item": canonicalUrl
+        }
+      ]
+    });
   }
 
   if (params.university && typeof UNIVERSITIES !== "undefined") {
@@ -2998,7 +2801,13 @@ function updateSEO(viewName, params = {}) {
         "name": uni.name,
         "url": uni.website || `https://www.getonlinedegrees.online/#catalog?university=${uni.id}`,
         "logo": uni.logo ? `https://www.getonlinedegrees.online/${uni.logo}` : orgSchema.logo,
-        "description": `${uni.name} offers accredited online degree courses.`
+        "description": `${uni.name} offers accredited online degree courses.`,
+        "award": `NAAC Grade ${uni.naacGrade || "A+"}`,
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": uni.rating || "4.5",
+          "reviewCount": uni.reviews ? uni.reviews.length : "10"
+        }
       });
     }
   }

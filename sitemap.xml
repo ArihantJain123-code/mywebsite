@@ -9,7 +9,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.getonlinedegrees.online/</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -17,7 +17,7 @@
   <!-- Course Catalog (Find Degrees) -->
   <url>
     <loc>https://www.getonlinedegrees.online/#catalog</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -25,7 +25,7 @@
   <!-- Compare Board -->
   <url>
     <loc>https://www.getonlinedegrees.online/#compare</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- Blogs -->
   <url>
     <loc>https://www.getonlinedegrees.online/#blog</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -41,9 +41,33 @@
   <!-- Contact Us -->
   <url>
     <loc>https://www.getonlinedegrees.online/#contact</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Interactive Resume Builder -->
+  <url>
+    <loc>https://www.getonlinedegrees.online/#resume-builder</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://www.getonlinedegrees.online/privacy.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Terms & Conditions -->
+  <url>
+    <loc>https://www.getonlinedegrees.online/terms.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 
   <!-- ===================== COURSE CATALOG PAGES ===================== -->

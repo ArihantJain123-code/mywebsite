@@ -1,13 +1,28 @@
 # robots.txt for getonlinedegrees.online
-# Updated: 2026-07-20
+# Last Updated: 2026-08-04
 
-# Allow all search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Allow all other search engine crawlers
 User-agent: *
 Allow: /
 
 # Canonical Host
 Host: https://www.getonlinedegrees.online/
 
-# Sitemap Location
+# XML Sitemap Location
 Sitemap: https://www.getonlinedegrees.online/sitemap.xml
 
