@@ -89,7 +89,7 @@ const state = {
   selectedCourse: "mba", // Default course in catalog
   compareList: [],       // Array of university IDs (max 3)
   filters: {
-    feeMax: 250000,
+    feeMax: 350000,
     naacGrades: [],
     approvals: [],
     searchQuery: ""
@@ -719,17 +719,17 @@ function setupEventListeners() {
 
 // --- Filter Operations ---
 function resetFilters() {
-  state.filters.feeMax = 250000;
+  state.filters.feeMax = 350000;
   state.filters.naacGrades = [];
   state.filters.approvals = [];
   state.filters.searchQuery = "";
 
   // Reset DOM elements
   const feeSlider = document.getElementById("filter-fee");
-  if (feeSlider) feeSlider.value = 250000;
+  if (feeSlider) feeSlider.value = 350000;
 
   const feeValue = document.getElementById("filter-fee-value");
-  if (feeValue) feeValue.textContent = "₹2,50,000";
+  if (feeValue) feeValue.textContent = "₹3,50,000";
 
   document.querySelectorAll(".filter-naac, .filter-approval").forEach(chk => {
     chk.checked = false;
@@ -773,7 +773,7 @@ function renderCatalog() {
   container.innerHTML = "";
 
   // Get universities offering the selected course
-  let list = UNIVERSITIES.filter(uni => uni.courses[state.selectedCourse]);
+  let list = UNIVERSITIES.filter(uni => uni.courses && uni.courses[state.selectedCourse]);
 
   // Filter 1: Max Fee
   list = list.filter(uni => uni.courses[state.selectedCourse].feeTotal <= state.filters.feeMax);
@@ -786,7 +786,7 @@ function renderCatalog() {
   // Filter 3: Approvals
   if (state.filters.approvals.length > 0) {
     list = list.filter(uni => {
-      // Check if university has all selected approvals
+      if (!uni.approvals) return false;
       return state.filters.approvals.every(approval => {
         return uni.approvals.some(app => app.toLowerCase().includes(approval.toLowerCase()));
       });
@@ -795,21 +795,26 @@ function renderCatalog() {
 
   // Filter 4: Search query
   if (state.filters.searchQuery) {
-    list = list.filter(uni =>
-      uni.name.toLowerCase().includes(state.filters.searchQuery) ||
-      uni.shortName.toLowerCase().includes(state.filters.searchQuery)
-    );
+    const q = state.filters.searchQuery.toLowerCase();
+    list = list.filter(uni => {
+      const nameMatch = uni.name && uni.name.toLowerCase().includes(q);
+      const shortNameMatch = uni.shortName && uni.shortName.toLowerCase().includes(q);
+      const descMatch = uni.description && uni.description.toLowerCase().includes(q);
+      const approvalMatch = uni.approvals && uni.approvals.some(app => app.toLowerCase().includes(q));
+      const featureMatch = uni.features && uni.features.some(f => f.toLowerCase().includes(q));
+      return nameMatch || shortNameMatch || descMatch || approvalMatch || featureMatch;
+    });
   }
 
   // Sorting
   if (state.sortBy === "rating") {
-    list.sort((a, b) => b.rating - a.rating);
+    list.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   } else if (state.sortBy === "fee-low") {
-    list.sort((a, b) => a.courses[state.selectedCourse].feeTotal - b.courses[state.selectedCourse].feeTotal);
+    list.sort((a, b) => (a.courses[state.selectedCourse]?.feeTotal || 0) - (b.courses[state.selectedCourse]?.feeTotal || 0));
   } else if (state.sortBy === "fee-high") {
-    list.sort((a, b) => b.courses[state.selectedCourse].feeTotal - a.courses[state.selectedCourse].feeTotal);
+    list.sort((a, b) => (b.courses[state.selectedCourse]?.feeTotal || 0) - (a.courses[state.selectedCourse]?.feeTotal || 0));
   } else if (state.sortBy === "placement") {
-    list.sort((a, b) => b.placementRate - a.placementRate);
+    list.sort((a, b) => (b.placementRate || 0) - (a.placementRate || 0));
   }
 
   // Check empty state
@@ -1281,11 +1286,213 @@ window.startCounselingWithUni = function (uniId) {
 
 // --- UNIVERSITY DETAIL MODAL ACTIONS ---
 window.openModal = function (uniId) {
-  // Open inquiry modal instead of the university detail modal
-  const inquiryModal = document.getElementById("inquiry-modal");
-  if (inquiryModal) {
-    inquiryModal.style.display = "flex";
+  const uni = UNIVERSITIES.find(u => u.id === uniId);
+  if (!uni) return;
+
+  const overlay = document.getElementById("modal-overlay");
+  const headerContent = document.getElementById("modal-header-content");
+  const counselingBtn = document.getElementById("modal-counseling-btn");
+
+  if (!overlay || !headerContent) return;
+
+  // --- Populate Header ---
+  const approvalsHtml = (uni.approvals || []).map(app =>
+    `<span class="modal-badge"><i class="fas fa-check-circle"></i> ${app}</span>`
+  ).join("");
+
+  const courseKeys = uni.courses ? Object.keys(uni.courses) : [];
+  const courseCount = courseKeys.length;
+  const selectedCourse = uni.courses && uni.courses[state.selectedCourse]
+    ? state.selectedCourse
+    : (courseKeys.length > 0 ? courseKeys[0] : null);
+
+  headerContent.innerHTML = `
+    <div class="modal-header-top">
+      <div class="modal-uni-logo" style="background: ${uni.logoColor}">${uni.logoInitials}</div>
+      <div class="modal-header-info">
+        <h2>${uni.name}</h2>
+        <span class="modal-uni-short">${uni.shortName || ''}</span>
+        <div class="modal-header-badges">
+          <span class="modal-badge naac-badge"><i class="fas fa-award"></i> NAAC ${uni.naacGrade}</span>
+          <span class="modal-badge rating-badge"><i class="fas fa-star"></i> ${uni.rating} / 5.0</span>
+          ${approvalsHtml}
+        </div>
+      </div>
+    </div>
+    <div class="modal-header-stats">
+      <div class="modal-stat-item">
+        <div class="stat-value">${courseCount}</div>
+        <div class="stat-label">Courses Offered</div>
+      </div>
+      <div class="modal-stat-item">
+        <div class="stat-value">${uni.placementRate || 0}%</div>
+        <div class="stat-label">Placement Rate</div>
+      </div>
+      <div class="modal-stat-item">
+        <div class="stat-value">${uni.lmsRating || 'N/A'}</div>
+        <div class="stat-label">LMS Rating</div>
+      </div>
+      <div class="modal-stat-item">
+        <div class="stat-value">${uni.reviewsCount || (uni.reviews ? uni.reviews.length : 0)}</div>
+        <div class="stat-label">Student Reviews</div>
+      </div>
+    </div>
+  `;
+
+  // --- Tab 1: Overview ---
+  const tabOverview = document.getElementById("tab-overview");
+  if (tabOverview) {
+    const coursesListHtml = courseKeys.map(key => {
+      const courseMeta = COURSES_DATA[key];
+      const courseDetail = uni.courses[key];
+      return `
+        <div class="detail-info-card">
+          <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="info-text">
+            <div class="info-label">${courseMeta ? courseMeta.name : key.toUpperCase()}</div>
+            <div class="info-value">${courseDetail.duration} &bull; ₹${courseDetail.feeTotal.toLocaleString("en-IN")} total</div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    const featuresHtml = (uni.features || []).map(f =>
+      `<div class="detail-feature-item"><i class="fas fa-check-circle"></i> ${f}</div>`
+    ).join("");
+
+    tabOverview.innerHTML = `
+      <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 28px;">${uni.description}</p>
+      <h3 class="detail-section-heading">Courses Available</h3>
+      <div class="detail-info-grid">
+        ${coursesListHtml}
+      </div>
+      <h3 class="detail-section-heading">Key Highlights</h3>
+      <div class="detail-features-grid">
+        ${featuresHtml}
+      </div>
+    `;
   }
+
+  // --- Tab 2: Specializations ---
+  const tabSpec = document.getElementById("tab-specializations");
+  if (tabSpec) {
+    // Collect specializations from course meta data for all courses this uni offers
+    let specsHtml = "";
+    const specIcons = ["fa-briefcase", "fa-chart-pie", "fa-users", "fa-cogs", "fa-laptop-code", "fa-database", "fa-shield-alt", "fa-cloud", "fa-code", "fa-coins"];
+
+    courseKeys.forEach(key => {
+      const courseMeta = COURSES_DATA[key];
+      if (courseMeta && courseMeta.specializations) {
+        const specCards = courseMeta.specializations.map((spec, idx) =>
+          `<div class="detail-spec-card"><i class="fas ${specIcons[idx % specIcons.length]}"></i>${spec}</div>`
+        ).join("");
+        specsHtml += `
+          <h3 class="detail-section-heading" style="margin-top: 24px;">${courseMeta.name} Specializations</h3>
+          <div class="detail-spec-grid">${specCards}</div>
+        `;
+      }
+    });
+
+    if (!specsHtml) {
+      specsHtml = `<p style="color:var(--text-light); text-align:center; padding:40px 0;">Specialization details are not available for this university.</p>`;
+    }
+
+    tabSpec.innerHTML = specsHtml;
+  }
+
+  // --- Tab 3: Fees & EMI ---
+  const tabFees = document.getElementById("tab-fees");
+  if (tabFees) {
+    let feeRowsHtml = "";
+    courseKeys.forEach(key => {
+      const courseMeta = COURSES_DATA[key];
+      const courseDetail = uni.courses[key];
+      feeRowsHtml += `
+        <tr>
+          <td><strong>${courseMeta ? courseMeta.name : key.toUpperCase()}</strong></td>
+          <td>${courseDetail.duration}</td>
+          <td>₹${courseDetail.feeSemester.toLocaleString("en-IN")}</td>
+          <td><strong>₹${courseDetail.feeTotal.toLocaleString("en-IN")}</strong></td>
+        </tr>
+      `;
+    });
+
+    tabFees.innerHTML = `
+      <h3 class="detail-section-heading">Fee Structure</h3>
+      <table class="detail-fee-table">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Duration</th>
+            <th>Per Semester</th>
+            <th>Total Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${feeRowsHtml}
+        </tbody>
+      </table>
+      <div class="detail-emi-card">
+        <div class="emi-icon"><i class="fas fa-credit-card"></i></div>
+        <div class="emi-text">
+          <strong>EMI starts at ${uni.emiStarts || 'Contact for details'}</strong>
+          Easy installment plans available. No-cost EMI options for select programs. Contact our counselors for personalized payment plans.
+        </div>
+      </div>
+    `;
+  }
+
+  // --- Tab 4: Placement & LMS ---
+  const tabPlacement = document.getElementById("tab-placement");
+  if (tabPlacement) {
+    const partnersHtml = (uni.placementPartners || []).map(partner =>
+      `<div class="detail-partner-chip"><i class="fas fa-building"></i> ${partner}</div>`
+    ).join("");
+
+    tabPlacement.innerHTML = `
+      <div class="detail-placement-stats">
+        <div class="detail-placement-stat">
+          <div class="stat-number">${uni.placementRate || 0}%</div>
+          <div class="stat-desc">Placement Rate</div>
+        </div>
+        <div class="detail-placement-stat">
+          <div class="stat-number">${uni.lmsRating || 'N/A'}</div>
+          <div class="stat-desc">LMS Rating / 5.0</div>
+        </div>
+        <div class="detail-placement-stat">
+          <div class="stat-number">${(uni.placementPartners || []).length}+</div>
+          <div class="stat-desc">Hiring Partners</div>
+        </div>
+      </div>
+      <h3 class="detail-section-heading">Top Placement Partners</h3>
+      <div class="detail-partners-grid">
+        ${partnersHtml || '<p style="color:var(--text-light);">Partner details coming soon.</p>'}
+      </div>
+    `;
+  }
+
+  // --- Tab 5: Reviews ---
+  renderModalReviews(uniId);
+
+  // --- Reset tabs to Overview ---
+  document.querySelectorAll(".modal-tab-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".modal-tab-pane").forEach(p => p.classList.remove("active"));
+  const firstTab = document.querySelector('.modal-tab-btn[data-tab="overview"]');
+  const firstPane = document.getElementById("tab-overview");
+  if (firstTab) firstTab.classList.add("active");
+  if (firstPane) firstPane.classList.add("active");
+
+  // --- Wire counseling button ---
+  if (counselingBtn) {
+    counselingBtn.onclick = function () {
+      closeModal();
+      startCounselingWithUni(uniId);
+    };
+  }
+
+  // Show modal
+  overlay.style.display = "flex";
+  document.body.style.overflow = "hidden";
 };
 
 function renderModalReviews(uniId) {
