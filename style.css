@@ -2190,7 +2190,7 @@ footer {
   z-index: 1;
 }
 
-.blog-hero-banner h1 {
+.blog-hero-banner h2 {
   font-size: 2.8rem;
   font-family: var(--font-heading);
   color: var(--primary);
@@ -2964,7 +2964,7 @@ footer {
   margin-bottom: 24px;
 }
 
-.compare-hero-content h1 {
+.compare-hero-content h2 {
   font-size: 2.8rem;
   font-weight: 800;
   color: #ffffff;
@@ -3366,7 +3366,7 @@ footer {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .compare-hero-content h1 {
+  .compare-hero-content h2 {
     font-size: 2rem;
   }
   .compare-table th:first-child,
@@ -3475,12 +3475,12 @@ footer {
   margin-left: auto;
   margin-right: auto;
 }
-.contact-header h1 {
+.contact-header h2 {
   font-size: 2.8rem;
   margin-bottom: 16px;
   letter-spacing: -0.02em;
 }
-.contact-header h1 span {
+.contact-header h2 span {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3763,7 +3763,7 @@ footer {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  .contact-header h1 {
+  .contact-header h2 {
     font-size: 2.2rem;
   }
 }
@@ -4423,7 +4423,7 @@ footer {
   min-width: 300px;
 }
 
-.resume-builder-header h1 span {
+.resume-builder-header h2 span {
   color: var(--primary);
 }
 
