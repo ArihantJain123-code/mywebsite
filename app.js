@@ -1486,9 +1486,25 @@ function renderBlogPagination(totalPages) {
   }
   container.style.display = "flex";
 
+  // First Button
+  const firstBtn = document.createElement("button");
+  firstBtn.innerHTML = '<i class="fas fa-angle-double-left"></i>';
+  firstBtn.title = "First Page";
+  firstBtn.disabled = state.blogPage === 1;
+  firstBtn.addEventListener("click", () => {
+    if (state.blogPage > 1) {
+      state.blogPage = 1;
+      renderBlogsList();
+      const viewEl = document.getElementById("blog-view");
+      if (viewEl) viewEl.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+  container.appendChild(firstBtn);
+
   // Prev Button
   const prevBtn = document.createElement("button");
   prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+  prevBtn.title = "Previous Page";
   prevBtn.disabled = state.blogPage === 1;
   prevBtn.addEventListener("click", () => {
     if (state.blogPage > 1) {
@@ -1528,6 +1544,7 @@ function renderBlogPagination(totalPages) {
   // Next Button
   const nextBtn = document.createElement("button");
   nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+  nextBtn.title = "Next Page";
   nextBtn.disabled = state.blogPage === totalPages;
   nextBtn.addEventListener("click", () => {
     if (state.blogPage < totalPages) {
@@ -1538,6 +1555,21 @@ function renderBlogPagination(totalPages) {
     }
   });
   container.appendChild(nextBtn);
+
+  // Last Button
+  const lastBtn = document.createElement("button");
+  lastBtn.innerHTML = '<i class="fas fa-angle-double-right"></i>';
+  lastBtn.title = "Last Page";
+  lastBtn.disabled = state.blogPage === totalPages;
+  lastBtn.addEventListener("click", () => {
+    if (state.blogPage < totalPages) {
+      state.blogPage = totalPages;
+      renderBlogsList();
+      const viewEl = document.getElementById("blog-view");
+      if (viewEl) viewEl.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+  container.appendChild(lastBtn);
 }
 
 function renderBlogDetail(blogId) {

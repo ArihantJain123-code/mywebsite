@@ -2816,8 +2816,8 @@ const BLOGS_DATA = [
   }
 ];
 
-// --- Programmatic Generator for 500 Blog Posts ---
-function generate500Blogs() {
+// --- Programmatic Generator for Scalable Blog Posts (1000+ Blogs) ---
+function generateBlogs(targetTotalCount = 1500) {
   const categories = [
     "University Reviews",
     "University Comparisons",
@@ -2834,35 +2834,40 @@ function generate500Blogs() {
     "Rohan Deshmukh"
   ];
 
-  const courses = ["mba", "bba", "bca"];
+  const courses = ["mba", "bba", "bca", "mca", "ma", "mcom", "bcom"];
   const courseNames = {
     "mba": "Online MBA",
     "bba": "Online BBA",
-    "bca": "Online BCA"
+    "bca": "Online BCA",
+    "mca": "Online MCA",
+    "ma": "Online MA",
+    "mcom": "Online M.Com",
+    "bcom": "Online B.Com"
   };
 
-  // We want to generate 500 mixed blogs and then 500 extra strictly Online BCA blogs to hit 1000 blogs.
   const existingCount = BLOGS_DATA.length;
-  const targetCount = 1000;
-  
-  if (existingCount >= targetCount) return;
+  if (existingCount >= targetTotalCount) return;
 
-  for (let i = existingCount; i < targetCount; i++) {
-    const courseKey = i < 500 ? courses[i % courses.length] : "bca";
+  const toAddCount = targetTotalCount - existingCount;
+
+  for (let i = 0; i < toAddCount; i++) {
+    const courseKey = courses[i % courses.length];
     const courseName = courseNames[courseKey];
     
     const category = categories[i % categories.length];
     const author = authors[i % authors.length];
     const readTime = `${4 + (i % 5)} min read`;
-    const uniA = UNIVERSITIES[i % UNIVERSITIES.length];
-    const uniB = UNIVERSITIES[(i + 1) % UNIVERSITIES.length];
+    
+    const uniA = (UNIVERSITIES && UNIVERSITIES.length > 0) ? UNIVERSITIES[i % UNIVERSITIES.length] : { id: "amity_online", name: "Amity Online", naacGrade: "A+" };
+    const uniB = (UNIVERSITIES && UNIVERSITIES.length > 1) ? UNIVERSITIES[(i + 1) % UNIVERSITIES.length] : { id: "lpu_online", name: "LPU Online", naacGrade: "A++" };
     
     // Generate dates backwards from 2026-05-15
     const dateObj = new Date("2026-05-15");
-    dateObj.setDate(dateObj.getDate() - (i - existingCount) * 2); // 2 days gap between posts
+    dateObj.setDate(dateObj.getDate() - i * 2); // 2 days gap between generated posts
     const dateString = dateObj.toISOString().split("T")[0];
 
-    let id = `generated-blog-${i}`;
+    // Stable deterministic ID that doesn't conflict with static blog IDs
+    const id = `gen-post-${i + 1}`;
     let title = "";
     let excerpt = "";
     let content = "";
@@ -2936,13 +2941,8 @@ function generate500Blogs() {
         <h3>Will Corporates Accept a ${courseName}?</h3>
         <p>Yes. The University Grants Commission (UGC) has declared that degrees earned through online mode from recognized universities are fully equivalent to regular degrees. Leading MNCs, technology startups, and government entities actively hire online graduates.</p>
         <h3>Top Career Profiles & Salary Packages</h3>
-        <p>Depending on your specialization, you can target the following roles:</p>
-        <ul>
-          <li><strong>Project Coordinator / Manager</strong> (Average Starting Salary: ₹6 LPA - ₹12 LPA)</li>
-          <li><strong>Business Consultant / Analyst</strong> (Average Starting Salary: ₹5 LPA - ₹10 LPA)</li>
-          <li><strong>Operations Lead</strong> (Average Starting Salary: ₹4.5 LPA - ₹9 LPA)</li>
-        </ul>
-        <p>Top universities like <a href="#catalog?university=nmims_online">NMIMS Online</a>, <a href="#catalog?university=lovely_professional_university_lpu_online">LPU Online</a>, and <a href="#catalog?university=amity_university_online">Amity Online</a> offer dedicated placement cells that connect you with companies like HCL, KPMG, Amazon, and Accenture.</p>
+        <p>Depending on your specialization, you can target key professional roles with attractive compensation packages across IT, Finance, Marketing, and Analytics domains.</p>
+        <p>Top universities like <a href="#catalog?university=nmims_online">NMIMS Online</a>, <a href="#catalog?university=lovely_professional_university_lpu_online">LPU Online</a>, and <a href="#catalog?university=amity_university_online">Amity Online</a> offer dedicated placement cells that connect you with top corporate recruiters.</p>
         <h3>Summary</h3>
         <p>A <a href="#catalog?course=${courseKey}">${courseName}</a> is a high-yield investment. The flexible structure enables you to immediately apply what you learn to your current work, accelerating your promotions. Compare all options on our <a href="#catalog?course=${courseKey}">catalog view</a>.</p>
       `;
@@ -2954,10 +2954,9 @@ function generate500Blogs() {
         <p>As you research <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> programs, ensuring that your degree is legally valid is vital. Here is a quick guide to understanding the regulations of the government of India.</p>
         <h3>1. UGC-DEB Approval</h3>
         <p>The University Grants Commission's Distance Education Bureau (UGC-DEB) is the chief regulator of online education. A university must be approved by the UGC-DEB to offer online courses. Programs taken from non-approved universities are considered invalid.</p>
-        <p>The University Grants Commission's Distance Education Bureau (UGC-DEB) is the chief regulator of online education.</p>
         <h3>2. AICTE Approval</h3>
         <p>For technical and management programs (such as MCA and MBA), approval from the All India Council for Technical Education (AICTE) is mandatory.</p>
-        <h3>3. NAAC Grading & Legacy</h3>
+        <h3>3. NAAC Grading & Autonomy</h3>
         <p>Universities with a <strong>NAAC A+, A++ or category-I autonomy</strong> are permitted to offer online degrees. Check the NAAC grade of the university to ensure high academic standards.</p>
         <h3>Legality for Government Exams</h3>
         <p>Online degrees from recognized colleges are fully valid for UPSC, bank exams, SSC, and state government jobs.</p>
@@ -2977,5 +2976,10 @@ function generate500Blogs() {
   }
 }
 
-// Execute the generator immediately on load
-generate500Blogs();
+// Backward compatibility alias
+function generate500Blogs() {
+  generateBlogs(1500);
+}
+
+// Execute the generator immediately on load to generate 1500 blogs
+generateBlogs(1500);
