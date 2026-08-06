@@ -1,4 +1,4 @@
-﻿// Mock Database for Online Degree Education Portal
+// Mock Database for Online Degree Education Portal
 
 const COURSES_DATA = {
   "mba": {
@@ -12818,7 +12818,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-1",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (1)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2026-01-05",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -12828,7 +12828,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-2",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (2)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2026-01-04",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -12838,7 +12838,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-3",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (3)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2026-01-03",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -12848,7 +12848,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-4",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (4)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2026-01-02",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -12868,7 +12868,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-6",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (6)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-12-31",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -12878,7 +12878,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-7",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (7)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-12-30",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -12888,7 +12888,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-8",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (8)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-12-29",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -12898,7 +12898,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-9",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (9)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-12-28",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -12918,7 +12918,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-11",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (11)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-12-26",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -12928,7 +12928,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-12",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (12)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-12-25",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -12938,7 +12938,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-13",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (13)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-12-24",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -12948,7 +12948,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-14",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (14)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-12-23",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -12968,7 +12968,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-16",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (16)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-12-21",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -12978,7 +12978,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-17",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (17)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-12-20",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -12988,7 +12988,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-18",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (18)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-12-19",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -12998,7 +12998,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-19",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (19)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-12-18",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -13018,7 +13018,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-21",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (21)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-12-16",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -13028,7 +13028,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-22",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (22)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-12-15",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -13038,7 +13038,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-23",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (23)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-12-14",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -13048,7 +13048,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-24",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (24)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-12-13",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -13068,7 +13068,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-26",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (26)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-12-11",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -13078,7 +13078,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-27",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (27)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-12-10",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -13088,7 +13088,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-28",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (28)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-12-09",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -13098,7 +13098,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-29",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (29)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-12-08",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -13118,7 +13118,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-31",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (31)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-12-06",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -13128,7 +13128,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-32",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (32)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-12-05",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -13138,7 +13138,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-33",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (33)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-12-04",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -13148,7 +13148,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-34",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (34)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-12-03",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -13168,7 +13168,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-36",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (36)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-12-01",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -13178,7 +13178,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-37",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (37)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-11-30",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -13188,7 +13188,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-38",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (38)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-11-29",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -13198,7 +13198,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-39",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (39)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-11-28",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -13218,7 +13218,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-41",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (41)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-11-26",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -13228,7 +13228,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-42",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (42)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-11-25",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -13238,7 +13238,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-43",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (43)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-11-24",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -13248,7 +13248,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-44",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (44)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-11-23",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -13268,7 +13268,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-46",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (46)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-11-21",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -13278,7 +13278,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-47",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (47)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-11-20",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -13288,7 +13288,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-48",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (48)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-11-19",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -13298,7 +13298,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-49",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (49)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-11-18",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -13318,7 +13318,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-51",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (51)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-11-16",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -13328,7 +13328,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-52",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (52)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-11-15",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -13338,7 +13338,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-53",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (53)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-11-14",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -13348,7 +13348,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-54",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (54)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-11-13",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -13368,7 +13368,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-56",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (56)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-11-11",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -13378,7 +13378,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-57",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (57)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-11-10",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -13388,7 +13388,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-58",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (58)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-11-09",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -13398,7 +13398,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-59",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (59)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-11-08",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -13418,7 +13418,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-61",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (61)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-11-06",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -13428,7 +13428,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-62",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (62)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-11-05",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -13438,7 +13438,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-63",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (63)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-11-04",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -13448,7 +13448,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-64",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (64)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-11-03",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -13468,7 +13468,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-66",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (66)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-11-01",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -13478,7 +13478,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-67",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (67)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-10-31",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -13488,7 +13488,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-68",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (68)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-10-30",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -13498,7 +13498,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-69",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (69)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-10-29",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -13518,7 +13518,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-71",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (71)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-10-27",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -13528,7 +13528,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-72",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (72)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-10-26",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -13538,7 +13538,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-73",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (73)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-10-25",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -13548,7 +13548,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-74",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (74)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-10-24",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -13568,7 +13568,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-76",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (76)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-10-22",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -13578,7 +13578,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-77",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (77)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-10-21",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -13588,7 +13588,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-78",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (78)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-10-20",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -13598,7 +13598,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-79",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (79)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-10-19",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -13618,7 +13618,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-81",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (81)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-10-17",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -13628,7 +13628,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-82",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (82)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-10-16",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -13638,7 +13638,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-83",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (83)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-10-15",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -13648,7 +13648,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-84",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (84)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-10-14",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -13668,7 +13668,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-86",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (86)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-10-12",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -13678,7 +13678,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-87",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (87)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-10-11",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -13688,7 +13688,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-88",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (88)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-10-10",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -13698,7 +13698,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-89",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (89)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-10-09",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -13718,7 +13718,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-91",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (91)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-10-07",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -13728,7 +13728,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-92",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (92)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-10-06",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -13738,7 +13738,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-93",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (93)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-10-05",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -13748,7 +13748,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-94",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (94)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-10-04",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -13768,7 +13768,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-96",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (96)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-10-02",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -13778,7 +13778,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-97",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (97)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-10-01",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -13788,7 +13788,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-98",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (98)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-09-30",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -13798,7 +13798,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-99",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (99)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-09-29",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -13818,7 +13818,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-101",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (101)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-09-27",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -13828,7 +13828,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-102",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (102)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-09-26",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -13838,7 +13838,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-103",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (103)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-09-25",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -13848,7 +13848,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-104",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (104)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-09-24",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -13868,7 +13868,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-106",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (106)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-09-22",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -13878,7 +13878,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-107",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (107)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-09-21",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -13888,7 +13888,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-108",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (108)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-09-20",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -13898,7 +13898,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-109",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (109)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-09-19",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -13918,7 +13918,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-111",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (111)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-09-17",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -13928,7 +13928,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-112",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (112)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-09-16",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -13938,7 +13938,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-113",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (113)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-09-15",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -13948,7 +13948,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-114",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (114)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-09-14",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -13968,7 +13968,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-116",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (116)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-09-12",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -13978,7 +13978,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-117",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (117)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-09-11",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -13988,7 +13988,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-118",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (118)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-09-10",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -13998,7 +13998,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-119",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (119)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-09-09",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -14018,7 +14018,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-121",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (121)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-09-07",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -14028,7 +14028,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-122",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (122)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-09-06",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -14038,7 +14038,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-123",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (123)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-09-05",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -14048,7 +14048,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-124",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (124)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-09-04",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -14068,7 +14068,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-126",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (126)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-09-02",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -14078,7 +14078,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-127",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (127)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-09-01",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -14088,7 +14088,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-128",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (128)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-08-31",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -14098,7 +14098,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-129",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (129)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-08-30",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -14118,7 +14118,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-131",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (131)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-08-28",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -14128,7 +14128,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-132",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (132)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-08-27",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -14138,7 +14138,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-133",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (133)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-08-26",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -14148,7 +14148,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-134",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (134)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-08-25",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -14168,7 +14168,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-136",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (136)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-08-23",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -14178,7 +14178,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-137",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (137)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-08-22",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -14188,7 +14188,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-138",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (138)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-08-21",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -14198,7 +14198,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-139",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (139)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-08-20",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -14218,7 +14218,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-141",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (141)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-08-18",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -14228,7 +14228,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-142",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (142)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-08-17",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -14238,7 +14238,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-143",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (143)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-08-16",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -14248,7 +14248,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-144",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (144)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-08-15",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -14268,7 +14268,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-146",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (146)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-08-13",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -14278,7 +14278,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-147",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (147)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-08-12",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -14288,7 +14288,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-148",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (148)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-08-11",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -14298,7 +14298,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-149",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (149)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-08-10",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -14318,7 +14318,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-151",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (151)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-08-08",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -14328,7 +14328,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-152",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (152)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-08-07",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -14338,7 +14338,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-153",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (153)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-08-06",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -14348,7 +14348,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-154",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (154)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-08-05",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -14368,7 +14368,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-156",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (156)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-08-03",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -14378,7 +14378,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-157",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (157)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-08-02",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -14388,7 +14388,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-158",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (158)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-08-01",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -14398,7 +14398,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-159",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (159)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-07-31",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -14418,7 +14418,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-161",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (161)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-07-29",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -14428,7 +14428,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-162",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (162)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-07-28",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -14438,7 +14438,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-163",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (163)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-07-27",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -14448,7 +14448,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-164",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (164)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-07-26",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -14468,7 +14468,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-166",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (166)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-07-24",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -14478,7 +14478,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-167",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (167)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-07-23",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -14488,7 +14488,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-168",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (168)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-07-22",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -14498,7 +14498,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-169",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (169)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-07-21",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -14518,7 +14518,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-171",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (171)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-07-19",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -14528,7 +14528,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-172",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (172)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-07-18",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -14538,7 +14538,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-173",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (173)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-07-17",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -14548,7 +14548,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-174",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (174)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-07-16",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -14568,7 +14568,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-176",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (176)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-07-14",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -14578,7 +14578,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-177",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (177)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-07-13",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -14588,7 +14588,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-178",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (178)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-07-12",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -14598,7 +14598,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-179",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (179)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-07-11",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -14618,7 +14618,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-181",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (181)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-07-09",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -14628,7 +14628,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-182",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (182)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-07-08",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -14638,7 +14638,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-183",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (183)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-07-07",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -14648,7 +14648,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-184",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (184)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-07-06",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -14668,7 +14668,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-186",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (186)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-07-04",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -14678,7 +14678,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-187",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (187)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-07-03",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -14688,7 +14688,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-188",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (188)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-07-02",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -14698,7 +14698,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-189",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (189)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-07-01",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -14718,7 +14718,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-191",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (191)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-06-29",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -14728,7 +14728,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-192",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (192)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-06-28",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -14738,7 +14738,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-193",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (193)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-06-27",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -14748,7 +14748,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-194",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (194)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-06-26",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -14768,7 +14768,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-196",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (196)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-06-24",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -14778,7 +14778,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-197",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (197)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-06-23",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -14788,7 +14788,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-198",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (198)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-06-22",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -14798,7 +14798,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-199",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (199)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-06-21",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -14818,7 +14818,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-201",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (201)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-06-19",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -14828,7 +14828,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-202",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (202)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-06-18",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -14838,7 +14838,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-203",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (203)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-06-17",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -14848,7 +14848,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-204",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (204)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-06-16",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -14868,7 +14868,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-206",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (206)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-06-14",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -14878,7 +14878,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-207",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (207)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-06-13",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -14888,7 +14888,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-208",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (208)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-06-12",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -14898,7 +14898,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-209",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (209)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-06-11",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -14918,7 +14918,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-211",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (211)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-06-09",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -14928,7 +14928,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-212",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (212)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-06-08",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -14938,7 +14938,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-213",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (213)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-06-07",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -14948,7 +14948,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-214",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (214)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-06-06",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -14968,7 +14968,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-216",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (216)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-06-04",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -14978,7 +14978,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-217",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (217)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-06-03",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -14988,7 +14988,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-218",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (218)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-06-02",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -14998,7 +14998,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-219",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (219)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-06-01",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -15018,7 +15018,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-221",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (221)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-05-30",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -15028,7 +15028,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-222",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (222)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-05-29",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -15038,7 +15038,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-223",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (223)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-05-28",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -15048,7 +15048,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-224",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (224)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-05-27",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -15068,7 +15068,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-226",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (226)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-05-25",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -15078,7 +15078,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-227",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (227)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-05-24",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -15088,7 +15088,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-228",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (228)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-05-23",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -15098,7 +15098,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-229",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (229)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-05-22",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -15118,7 +15118,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-231",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (231)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-05-20",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -15128,7 +15128,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-232",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (232)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-05-19",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -15138,7 +15138,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-233",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (233)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-05-18",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -15148,7 +15148,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-234",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (234)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-05-17",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -15168,7 +15168,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-236",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (236)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-05-15",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -15178,7 +15178,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-237",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (237)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-05-14",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -15188,7 +15188,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-238",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (238)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-05-13",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -15198,7 +15198,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-239",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (239)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-05-12",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -15218,7 +15218,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-241",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (241)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-05-10",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -15228,7 +15228,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-242",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (242)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-05-09",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -15238,7 +15238,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-243",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (243)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-05-08",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -15248,7 +15248,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-244",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (244)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-05-07",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -15268,7 +15268,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-246",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (246)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-05-05",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -15278,7 +15278,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-247",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (247)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-05-04",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -15288,7 +15288,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-248",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (248)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-05-03",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -15298,7 +15298,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-249",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (249)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-05-02",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -15318,7 +15318,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-251",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (251)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-04-30",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -15328,7 +15328,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-252",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (252)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-04-29",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -15338,7 +15338,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-253",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (253)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-04-28",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -15348,7 +15348,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-254",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (254)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-04-27",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -15368,7 +15368,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-256",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (256)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-04-25",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -15378,7 +15378,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-257",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (257)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-04-24",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -15388,7 +15388,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-258",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (258)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-04-23",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -15398,7 +15398,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-259",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (259)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-04-22",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -15418,7 +15418,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-261",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (261)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-04-20",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -15428,7 +15428,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-262",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (262)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-04-19",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -15438,7 +15438,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-263",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (263)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-04-18",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -15448,7 +15448,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-264",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (264)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-04-17",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -15468,7 +15468,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-266",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (266)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-04-15",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -15478,7 +15478,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-267",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (267)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-04-14",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -15488,7 +15488,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-268",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (268)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-04-13",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -15498,7 +15498,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-269",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (269)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-04-12",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -15518,7 +15518,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-271",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (271)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-04-10",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -15528,7 +15528,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-272",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (272)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-04-09",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -15538,7 +15538,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-273",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (273)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-04-08",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -15548,7 +15548,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-274",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (274)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-04-07",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -15568,7 +15568,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-276",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (276)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-04-05",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -15578,7 +15578,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-277",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (277)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-04-04",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -15588,7 +15588,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-278",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (278)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-04-03",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -15598,7 +15598,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-279",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (279)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-04-02",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -15618,7 +15618,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-281",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (281)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-03-31",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -15628,7 +15628,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-282",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (282)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-03-30",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -15638,7 +15638,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-283",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (283)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-03-29",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -15648,7 +15648,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-284",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (284)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-03-28",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -15668,7 +15668,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-286",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (286)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-03-26",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -15678,7 +15678,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-287",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (287)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-03-25",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -15688,7 +15688,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-288",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (288)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-03-24",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -15698,7 +15698,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-289",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (289)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-03-23",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -15718,7 +15718,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-291",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (291)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-03-21",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -15728,7 +15728,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-292",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (292)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-03-20",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -15738,7 +15738,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-293",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (293)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-03-19",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -15748,7 +15748,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-294",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (294)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-03-18",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -15768,7 +15768,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-296",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (296)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-03-16",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -15778,7 +15778,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-297",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (297)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-03-15",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -15788,7 +15788,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-298",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (298)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-03-14",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -15798,7 +15798,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-299",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (299)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-03-13",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -15818,7 +15818,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-301",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (301)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-03-11",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -15828,7 +15828,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-302",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (302)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-03-10",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -15838,7 +15838,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-303",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (303)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-03-09",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -15848,7 +15848,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-304",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (304)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-03-08",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -15868,7 +15868,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-306",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (306)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-03-06",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -15878,7 +15878,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-307",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (307)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-03-05",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -15888,7 +15888,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-308",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (308)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-03-04",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -15898,7 +15898,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-309",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (309)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-03-03",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -15918,7 +15918,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-311",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (311)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-03-01",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -15928,7 +15928,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-312",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (312)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-02-28",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -15938,7 +15938,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-313",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (313)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-02-27",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -15948,7 +15948,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-314",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (314)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-02-26",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -15968,7 +15968,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-316",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (316)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-02-24",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -15978,7 +15978,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-317",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (317)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-02-23",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -15988,7 +15988,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-318",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (318)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-02-22",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -15998,7 +15998,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-319",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (319)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-02-21",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -16018,7 +16018,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-321",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (321)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-02-19",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -16028,7 +16028,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-322",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (322)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-02-18",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -16038,7 +16038,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-323",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (323)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-02-17",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -16048,7 +16048,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-324",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (324)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-02-16",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -16068,7 +16068,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-326",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (326)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-02-14",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -16078,7 +16078,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-327",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (327)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-02-13",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -16088,7 +16088,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-328",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (328)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-02-12",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -16098,7 +16098,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-329",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (329)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-02-11",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -16118,7 +16118,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-331",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (331)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-02-09",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -16128,7 +16128,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-332",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (332)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-02-08",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -16138,7 +16138,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-333",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (333)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-02-07",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -16148,7 +16148,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-334",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (334)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-02-06",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -16168,7 +16168,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-336",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (336)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-02-04",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -16178,7 +16178,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-337",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (337)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-02-03",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -16188,7 +16188,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-338",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (338)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-02-02",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -16198,7 +16198,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-339",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (339)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-02-01",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -16218,7 +16218,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-341",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (341)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-01-30",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -16228,7 +16228,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-342",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (342)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-01-29",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -16238,7 +16238,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-343",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (343)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-01-28",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -16248,7 +16248,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-344",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (344)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-01-27",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -16268,7 +16268,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-346",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (346)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-01-25",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -16278,7 +16278,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-347",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (347)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-01-24",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -16288,7 +16288,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-348",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (348)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-01-23",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -16298,7 +16298,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-349",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (349)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-01-22",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -16318,7 +16318,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-351",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (351)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-01-20",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -16328,7 +16328,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-352",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (352)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-01-19",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -16338,7 +16338,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-353",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (353)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-01-18",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -16348,7 +16348,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-354",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (354)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-01-17",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -16368,7 +16368,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-356",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (356)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-01-15",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -16378,7 +16378,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-357",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (357)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-01-14",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -16388,7 +16388,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-358",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (358)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-01-13",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -16398,7 +16398,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-359",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (359)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-01-12",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -16418,7 +16418,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-361",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (361)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-01-10",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -16428,7 +16428,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-362",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (362)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-01-09",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -16438,7 +16438,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-363",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (363)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-01-08",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -16448,7 +16448,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-364",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (364)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-01-07",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -16468,7 +16468,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-366",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (366)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2025-01-05",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -16478,7 +16478,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-367",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (367)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2025-01-04",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -16488,7 +16488,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-368",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (368)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2025-01-03",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -16498,7 +16498,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-369",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (369)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2025-01-02",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -16518,7 +16518,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-371",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (371)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-12-31",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -16528,7 +16528,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-372",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (372)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-12-30",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -16538,7 +16538,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-373",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (373)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-12-29",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -16548,7 +16548,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-374",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (374)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-12-28",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -16568,7 +16568,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-376",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (376)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-12-26",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -16578,7 +16578,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-377",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (377)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-12-25",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -16588,7 +16588,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-378",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (378)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-12-24",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -16598,7 +16598,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-379",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (379)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-12-23",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -16618,7 +16618,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-381",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (381)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-12-21",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -16628,7 +16628,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-382",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (382)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-12-20",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -16638,7 +16638,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-383",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (383)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-12-19",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -16648,7 +16648,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-384",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (384)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-12-18",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -16668,7 +16668,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-386",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (386)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-12-16",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -16678,7 +16678,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-387",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (387)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-12-15",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -16688,7 +16688,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-388",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (388)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-12-14",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -16698,7 +16698,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-389",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (389)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-12-13",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -16718,7 +16718,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-391",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (391)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-12-11",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -16728,7 +16728,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-392",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (392)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-12-10",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -16738,7 +16738,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-393",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (393)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-12-09",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -16748,7 +16748,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-394",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (394)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-12-08",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -16768,7 +16768,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-396",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (396)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-12-06",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -16778,7 +16778,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-397",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (397)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-12-05",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -16788,7 +16788,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-398",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (398)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-12-04",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -16798,7 +16798,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-399",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (399)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-12-03",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -16818,7 +16818,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-401",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (401)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-12-01",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -16828,7 +16828,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-402",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (402)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-11-30",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -16838,7 +16838,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-403",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (403)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-11-29",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -16848,7 +16848,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-404",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (404)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-11-28",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -16868,7 +16868,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-406",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (406)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-11-26",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -16878,7 +16878,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-407",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (407)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-11-25",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -16888,7 +16888,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-408",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (408)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-11-24",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -16898,7 +16898,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-409",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (409)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-11-23",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -16918,7 +16918,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-411",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (411)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-11-21",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -16928,7 +16928,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-412",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (412)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-11-20",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -16938,7 +16938,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-413",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (413)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-11-19",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -16948,7 +16948,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-414",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (414)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-11-18",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -16968,7 +16968,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-416",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (416)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-11-16",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -16978,7 +16978,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-417",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (417)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-11-15",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -16988,7 +16988,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-418",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (418)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-11-14",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -16998,7 +16998,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-419",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (419)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-11-13",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -17018,7 +17018,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-421",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (421)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-11-11",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -17028,7 +17028,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-422",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (422)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-11-10",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -17038,7 +17038,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-423",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (423)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-11-09",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -17048,7 +17048,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-424",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (424)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-11-08",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -17068,7 +17068,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-426",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (426)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-11-06",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -17078,7 +17078,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-427",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (427)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-11-05",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -17088,7 +17088,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-428",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (428)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-11-04",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -17098,7 +17098,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-429",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (429)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-11-03",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -17118,7 +17118,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-431",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (431)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-11-01",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -17128,7 +17128,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-432",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (432)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-10-31",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -17138,7 +17138,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-433",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (433)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-10-30",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -17148,7 +17148,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-434",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (434)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-10-29",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -17168,7 +17168,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-436",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (436)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-10-27",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -17178,7 +17178,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-437",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (437)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-10-26",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -17188,7 +17188,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-438",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (438)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-10-25",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -17198,7 +17198,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-439",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (439)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-10-24",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -17218,7 +17218,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-441",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (441)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-10-22",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -17228,7 +17228,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-442",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (442)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-10-21",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -17238,7 +17238,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-443",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (443)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-10-20",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -17248,7 +17248,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-444",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (444)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-10-19",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -17268,7 +17268,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-446",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (446)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-10-17",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -17278,7 +17278,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-447",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (447)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-10-16",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -17288,7 +17288,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-448",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (448)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-10-15",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -17298,7 +17298,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-449",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (449)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-10-14",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -17318,7 +17318,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-451",
     title: "Online MBA Finance - Investment Banking Career after Online MBA Finance - Salary and Roles (451)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-10-12",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -17328,7 +17328,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-452",
     title: "Online MBA Finance - Online MBA Finance for CA Professionals - Is It Worth Pursuing (452)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-10-11",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -17338,7 +17338,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-453",
     title: "Online MBA Finance - Corporate Finance vs Investment Banking - Which Stream to Choose (453)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-10-10",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -17348,7 +17348,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-454",
     title: "Online MBA Finance - Financial Risk Management Careers after Online MBA Finance (454)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-10-09",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -17368,7 +17368,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-456",
     title: "Online MBA Finance - Cheapest Online MBA Finance Programs Under Rs.1 Lakh in India (456)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-10-07",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -17378,7 +17378,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-457",
     title: "Online MBA Finance - Online MBA Finance for Working Professionals - Weekend Programs (457)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-10-06",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -17388,7 +17388,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-458",
     title: "Online MBA Finance - Stock Market and Equity Research Careers after Online MBA Finance (458)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-10-05",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -17398,7 +17398,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-459",
     title: "Online MBA Finance - Online MBA Finance vs M.Com - Differences and Career Scope (459)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-10-04",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -17418,7 +17418,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-461",
     title: "Online MBA Finance - Online MBA Finance Placement Statistics - Top Companies and Packages (461)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-10-02",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -17428,7 +17428,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-462",
     title: "Online MBA Finance - Fintech Industry Jobs after Online MBA Finance - Future Careers (462)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-10-01",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -17438,7 +17438,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-463",
     title: "Online MBA Finance - Online MBA Finance UGC Recognition - Is Your Degree Valid (463)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-09-30",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -17448,7 +17448,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-464",
     title: "Online MBA Finance - SEBI Registered Investment Advisor after Online MBA Finance (464)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-09-29",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -17468,7 +17468,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-466",
     title: "Online MBA Finance - Online MBA Finance for Commerce Graduates - Eligibility and Scope (466)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-09-27",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -17478,7 +17478,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-467",
     title: "Online MBA Finance - Project Finance Careers after Online MBA Finance in India (467)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-09-26",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -17488,7 +17488,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-468",
     title: "Online MBA Finance - Insurance Industry Opportunities after Online MBA Finance (468)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-09-25",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -17498,7 +17498,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-469",
     title: "Online MBA Finance - Online MBA Finance Alumni Success Stories - Real Career Transformations (469)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-09-24",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -17518,7 +17518,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-471",
     title: "Online MBA Finance - Financial Analytics and Data Science in MBA Finance Programs (471)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-09-22",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -17528,7 +17528,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-472",
     title: "Online MBA Finance - Online MBA Finance for Government Job Aspirants - UPSC Finance Posts (472)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-09-21",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -17538,7 +17538,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-473",
     title: "Online MBA Finance - Hedge Fund and Private Equity Careers after Online MBA Finance (473)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-09-20",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -17548,7 +17548,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-474",
     title: "Online MBA Finance - Online MBA Finance vs MBA General Management - Which is Better (474)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-09-19",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -17568,7 +17568,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-476",
     title: "Online MBA Finance - Online MBA Finance Accreditation Guide - UGC AICTE and NAAC Explained (476)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-09-17",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -17578,7 +17578,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-477",
     title: "Online MBA Finance - International Finance Careers after Indian Online MBA Finance (477)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-09-16",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -17588,7 +17588,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-478",
     title: "Online MBA Finance - Online MBA Finance for Engineers - Career Switch Guide (478)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-09-15",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -17598,7 +17598,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-479",
     title: "Online MBA Finance - Cryptocurrency and Blockchain Finance in Online MBA Programs (479)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-09-14",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -17618,7 +17618,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-481",
     title: "Online MBA Finance - Tax and Audit Careers after Online MBA Finance (481)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-09-12",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -17628,7 +17628,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-482",
     title: "Online MBA Finance - Online MBA Finance Interview Preparation - Tips and Topics (482)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-09-11",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -17638,7 +17638,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-483",
     title: "Online MBA Finance - Treasury Management Careers after Online MBA Finance (483)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-09-10",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -17648,7 +17648,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-484",
     title: "Online MBA Finance - Online MBA Finance vs MBA Banking Finance - Comparison Guide (484)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-09-09",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -17668,7 +17668,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-486",
     title: "Online MBA Finance - Online MBA Finance for Arts Graduates - Scope and Eligibility (486)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-09-07",
     author: "Neha Gupta",
     readTime: "5 min read",
@@ -17678,7 +17678,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-487",
     title: "Online MBA Finance - Financial Modeling Skills in Online MBA Finance Programs (487)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-09-06",
     author: "Pooja Hegde",
     readTime: "6 min read",
@@ -17688,7 +17688,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-488",
     title: "Online MBA Finance - Online MBA Finance vs CMA - Comparing Finance Credentials (488)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-09-05",
     author: "Prof. S. Pillai",
     readTime: "7 min read",
@@ -17698,7 +17698,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-489",
     title: "Online MBA Finance - NBFCs and Fintech Startups Jobs after Online MBA Finance (489)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-09-04",
     author: "Divya Teja",
     readTime: "8 min read",
@@ -17718,7 +17718,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-491",
     title: "Online MBA Finance - Sustainable Finance and ESG Careers after Online MBA Finance (491)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-09-02",
     author: "Academic Counselors Team",
     readTime: "5 min read",
@@ -17728,7 +17728,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-492",
     title: "Online MBA Finance - Online MBA Finance for NRI Students - Indian University Options (492)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-09-01",
     author: "MBA Finance Advisory Cell",
     readTime: "6 min read",
@@ -17738,7 +17738,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-493",
     title: "Online MBA Finance - Financial Planning and Advisory Careers after Online MBA Finance (493)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-08-31",
     author: "Dr. Priya Sharma",
     readTime: "7 min read",
@@ -17748,7 +17748,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-494",
     title: "Online MBA Finance - Online MBA Finance Dissertation and Capstone Project Guide (494)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-08-30",
     author: "Finance Education Expert",
     readTime: "8 min read",
@@ -17768,7 +17768,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-496",
     title: "Online MBA Finance - Online MBA Finance Group Discussion Topics and Tips (496)",
-    category: "University Reviews",
+    category: "Online MBA Finance",
     date: "2024-08-28",
     author: "Dr. Amit Verma",
     readTime: "5 min read",
@@ -17778,7 +17778,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-497",
     title: "Online MBA Finance - Credit Analysis and Loan Management Jobs after Online MBA Finance (497)",
-    category: "University Comparisons",
+    category: "Online MBA Finance",
     date: "2024-08-27",
     author: "Meera Sen",
     readTime: "6 min read",
@@ -17788,7 +17788,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-498",
     title: "Online MBA Finance - Online MBA Finance for Science Graduates - Career Transition (498)",
-    category: "Career Guidance",
+    category: "Online MBA Finance",
     date: "2024-08-26",
     author: "Karan Mehta",
     readTime: "7 min read",
@@ -17798,7 +17798,7 @@ const BLOGS_DATA = [
   {
     id: "online-mba-finance-499",
     title: "Online MBA Finance - Derivative Markets and Options Trading Careers after Online MBA Finance (499)",
-    category: "Approvals & Legality",
+    category: "Online MBA Finance",
     date: "2024-08-25",
     author: "Ananya Iyer",
     readTime: "8 min read",
@@ -17914,37 +17914,12 @@ function generateBlogs(targetTotalCount = 1500) {
 
       content = `
         <p>Deciding between <strong><a href="#catalog?university=${uniA.id}">${uniA.name}</a></strong> and <strong><a href="#catalog?university=${uniB.id}">${uniB.name}</a></strong> for a <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> can be challenging. Let's compare their key parameters to help you make an informed decision.</p>
-        <h3>Key Accreditations</h3>
-        <ul>
-          <li><strong><a href="#catalog?university=${uniA.id}">${shortNameA}</a>:</strong> NAAC ${uniA.naacGrade || "A+"} Grade, UGC-DEB approved.</li>
-          <li><strong><a href="#catalog?university=${uniB.id}">${shortNameB}</a>:</strong> NAAC ${uniB.naacGrade || "A+"} Grade, UGC-DEB approved.</li>
-        </ul>
-        <h3>Fees Comparison</h3>
-        <p>Tuition fees play a major role in your decision:
-          <ul>
-            <li><strong><a href="#catalog?university=${uniA.id}">${shortNameA}</a>:</strong> ${feeA} total program fee.</li>
-            <li><strong><a href="#catalog?university=${uniB.id}">${shortNameB}</a>:</strong> ${feeB} total program fee.</li>
-          </ul>
-        </p>
-        <h3>Placement Rate & Support</h3>
         <p>
           ${shortNameA} boasts a placement rate of <strong>${uniA.placementRate || 85}%</strong>, while ${shortNameB} offers <strong>${uniB.placementRate || 84}%</strong> placements. Both universities offer dedicated placement assistance, resume prep, and mock interviews. You can run a detailed comparison on our <a href="#compare">side-by-side comparison page</a>.
         </p>
         <h3>The Verdict</h3>
         <p>Choose <strong><a href="#catalog?university=${uniA.id}">${shortNameA}</a></strong> if you prefer its unique offerings like ${featA}. Select <strong><a href="#catalog?university=${uniB.id}">${shortNameB}</a></strong> if you value ${featB}. Both are UGC-approved, legally valid degrees.</p>
       `;
-    } else if (category === "Career Guidance") {
-      title = `Career Growth & Salary Outlook After completing ${courseName}`;
-      excerpt = `Unlock high-paying career options after completing a ${courseName} from a top UGC-approved university. Compare salary stats and placement prospects.`;
-      
-      content = `
-        <p>The job market in India is expanding rapidly, and a <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> is a great way to acquire the required skills without leaving your job. Let's explore what the future holds for online graduates.</p>
-        <h3>Will Corporates Accept a ${courseName}?</h3>
-        <p>Yes. The University Grants Commission (UGC) has declared that degrees earned through online mode from recognized universities are fully equivalent to regular degrees. Leading MNCs, technology startups, and government entities actively hire online graduates.</p>
-        <h3>Top Career Profiles & Salary Packages</h3>
-        <p>Depending on your specialization, you can target key professional roles with attractive compensation packages across IT, Finance, Marketing, and Analytics domains.</p>
-        <p>Top universities like <a href="#catalog?university=nmims_online">NMIMS Online</a>, <a href="#catalog?university=lovely_professional_university_lpu_online">LPU Online</a>, and <a href="#catalog?university=amity_university_online">Amity Online</a> offer dedicated placement cells that connect you with top corporate recruiters.</p>
-        <h3>Summary</h3>
         <p>A <a href="#catalog?course=${courseKey}">${courseName}</a> is a high-yield investment. The flexible structure enables you to immediately apply what you learn to your current work, accelerating your promotions. Compare all options on our <a href="#catalog?course=${courseKey}">catalog view</a>.</p>
       `;
     } else { // Approvals & Legality
@@ -17983,4 +17958,4 @@ function generate500Blogs() {
 }
 
 // Execute the generator immediately on load to generate 1500 blogs
-generateBlogs(2000);
+generateBlogs(3000);
