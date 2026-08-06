@@ -2736,6 +2736,7 @@ function updateSEO(viewName, params = {}) {
     "@type": "WebSite",
     "name": "OnlineDegrees",
     "url": "https://www.getonlinedegrees.online/",
+    "inLanguage": "en",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://www.getonlinedegrees.online/#catalog?search={search_term_string}",
@@ -2749,6 +2750,7 @@ function updateSEO(viewName, params = {}) {
     "name": "OnlineDegrees",
     "url": "https://www.getonlinedegrees.online/",
     "logo": "https://www.getonlinedegrees.online/assets/logo.png",
+    "inLanguage": "en",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+91-6375079973",
@@ -2951,6 +2953,7 @@ function updateSEO(viewName, params = {}) {
         "description": description,
         "image": imageUrl,
         "datePublished": post.date || "2026-06-19",
+        "inLanguage": "en",
         "author": {
           "@type": "Organization",
           "name": post.author || "OnlineDegrees Editorial Team"
@@ -3046,6 +3049,7 @@ function updateSEO(viewName, params = {}) {
         "logo": uni.logo ? `https://www.getonlinedegrees.online/${uni.logo}` : orgSchema.logo,
         "description": `${uni.name} offers accredited online degree courses.`,
         "award": `NAAC Grade ${uni.naacGrade || "A+"}`,
+        "inLanguage": "en",
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": uni.rating || "4.5",
@@ -3093,6 +3097,28 @@ function updateSEO(viewName, params = {}) {
     canonicalTag.setAttribute("rel", "canonical");
     canonicalTag.setAttribute("href", canonicalUrl);
     document.head.appendChild(canonicalTag);
+  }
+
+  let hreflangEn = document.querySelector('link[rel="alternate"][hreflang="en"]');
+  if (hreflangEn) {
+    hreflangEn.setAttribute("href", canonicalUrl);
+  } else {
+    hreflangEn = document.createElement("link");
+    hreflangEn.setAttribute("rel", "alternate");
+    hreflangEn.setAttribute("hreflang", "en");
+    hreflangEn.setAttribute("href", canonicalUrl);
+    document.head.appendChild(hreflangEn);
+  }
+
+  let hreflangDefault = document.querySelector('link[rel="alternate"][hreflang="x-default"]');
+  if (hreflangDefault) {
+    hreflangDefault.setAttribute("href", canonicalUrl);
+  } else {
+    hreflangDefault = document.createElement("link");
+    hreflangDefault.setAttribute("rel", "alternate");
+    hreflangDefault.setAttribute("hreflang", "x-default");
+    hreflangDefault.setAttribute("href", canonicalUrl);
+    document.head.appendChild(hreflangDefault);
   }
 
   let jsonLdScript = document.getElementById("seo-schema-ld-json");
