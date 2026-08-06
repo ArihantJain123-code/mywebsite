@@ -183,7 +183,12 @@ function navigate(viewName, params = {}) {
 
   // Handle specific view parameters
   if (viewName === "catalog") {
-    if (params.course) {
+    if (params.search) {
+      const queryStr = decodeURIComponent(params.search);
+      state.filters.searchQuery = queryStr.toLowerCase().trim();
+      const searchInput = document.getElementById("catalog-search");
+      if (searchInput) searchInput.value = queryStr;
+    } else if (params.course) {
       state.selectedCourse = params.course.toLowerCase();
       state.filters.searchQuery = "";
       const searchInput = document.getElementById("catalog-search");
@@ -1652,7 +1657,6 @@ function renderTrendingBlogs() {
     `;
     container.appendChild(item);
   });
-}
 }
 
 // ==========================================================================

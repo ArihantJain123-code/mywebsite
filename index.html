@@ -161,9 +161,9 @@
           <div class="search-container">
             <div class="search-input-wrapper">
               <i class="fas fa-search"></i>
-              <input type="text" id="home-search-input" placeholder="Search for courses or universities..." onkeyup="if(event.key === 'Enter') { window.location.hash = '#catalog'; document.getElementById('catalog-search').value = this.value; state.filters.searchQuery = this.value.toLowerCase(); renderCatalog(); }">
+              <input type="text" id="home-search-input" placeholder="Search for courses or universities..." onkeyup="if(event.key === 'Enter') { const q = this.value.trim(); window.location.hash = q ? '#catalog?search=' + encodeURIComponent(q) : '#catalog'; }">
             </div>
-            <button class="btn btn-primary" onclick="const q = document.getElementById('home-search-input').value; window.location.hash = '#catalog'; document.getElementById('catalog-search').value = q; state.filters.searchQuery = q.toLowerCase(); renderCatalog();">Search</button>
+            <button class="btn btn-primary" onclick="const q = document.getElementById('home-search-input').value.trim(); window.location.hash = q ? '#catalog?search=' + encodeURIComponent(q) : '#catalog';">Search</button>
           </div>
           
           <div class="hero-cta-group">
