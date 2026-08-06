@@ -1,4 +1,4 @@
-// Mock Database for Online Degree Education Portal
+﻿// Mock Database for Online Degree Education Portal
 
 const COURSES_DATA = {
   "mba": {
@@ -17818,6 +17818,10 @@ const BLOGS_DATA = [
 ];
 
 // --- Programmatic Generator for Scalable Blog Posts (1000+ Blogs) ---
+
+
+// --- Programmatic Generator for Scalable Blog Posts (1000+ Blogs) ---
+
 function generateBlogs(targetTotalCount = 1500) {
   const categories = [
     "University Reviews",
@@ -17859,8 +17863,8 @@ function generateBlogs(targetTotalCount = 1500) {
     const author = authors[i % authors.length];
     const readTime = `${4 + (i % 5)} min read`;
     
-    const uniA = (UNIVERSITIES && UNIVERSITIES.length > 0) ? UNIVERSITIES[i % UNIVERSITIES.length] : { id: "amity_online", name: "Amity Online", naacGrade: "A+" };
-    const uniB = (UNIVERSITIES && UNIVERSITIES.length > 1) ? UNIVERSITIES[(i + 1) % UNIVERSITIES.length] : { id: "lpu_online", name: "LPU Online", naacGrade: "A++" };
+    const uniA = (typeof UNIVERSITIES !== "undefined" && UNIVERSITIES && UNIVERSITIES.length > 0) ? UNIVERSITIES[i % UNIVERSITIES.length] : { id: "amity_online", name: "Amity Online", naacGrade: "A+" };
+    const uniB = (typeof UNIVERSITIES !== "undefined" && UNIVERSITIES && UNIVERSITIES.length > 1) ? UNIVERSITIES[(i + 1) % UNIVERSITIES.length] : { id: "lpu_online", name: "LPU Online", naacGrade: "A++" };
     
     // Generate dates backwards from 2026-05-15
     const dateObj = new Date("2026-05-15");
@@ -17879,7 +17883,7 @@ function generateBlogs(targetTotalCount = 1500) {
       excerpt = `Thinking of enrolling in the ${courseName} program at ${uniA.name}? Read this expert review detailing syllabus, NAAC grade, placement rates, and fee structures.`;
       
       const feeText = (uniA.courses && uniA.courses[courseKey]) 
-        ? `â‚¹${uniA.courses[courseKey].feeTotal.toLocaleString("en-IN")} total tuition fee` 
+        ? `₹${uniA.courses[courseKey].feeTotal.toLocaleString("en-IN")} total tuition fee` 
         : `highly competitive fee structures`;
       
       const featuresList = (uniA.features && Array.isArray(uniA.features))
@@ -17907,8 +17911,6 @@ function generateBlogs(targetTotalCount = 1500) {
       title = `Compare: ${uniA.name} vs ${uniB.name} for ${courseName}`;
       excerpt = `Stuck between ${shortNameA} and ${shortNameB} for your ${courseName}? Compare tuition fees, NAAC grades, LMS platforms, and placements side-by-side.`;
       
-      const feeA = (uniA.courses && uniA.courses[courseKey]) ? `â‚¹${uniA.courses[courseKey].feeTotal.toLocaleString("en-IN")}` : "N/A";
-      const feeB = (uniB.courses && uniB.courses[courseKey]) ? `â‚¹${uniB.courses[courseKey].feeTotal.toLocaleString("en-IN")}` : "N/A";
       const featA = (uniA.features && uniA.features[0]) ? uniA.features[0] : "industry aligned curriculum";
       const featB = (uniB.features && uniB.features[0]) ? uniB.features[0] : "flexible learning modules";
 
@@ -17919,8 +17921,23 @@ function generateBlogs(targetTotalCount = 1500) {
         </p>
         <h3>The Verdict</h3>
         <p>Choose <strong><a href="#catalog?university=${uniA.id}">${shortNameA}</a></strong> if you prefer its unique offerings like ${featA}. Select <strong><a href="#catalog?university=${uniB.id}">${shortNameB}</a></strong> if you value ${featB}. Both are UGC-approved, legally valid degrees.</p>
-      `;
         <p>A <a href="#catalog?course=${courseKey}">${courseName}</a> is a high-yield investment. The flexible structure enables you to immediately apply what you learn to your current work, accelerating your promotions. Compare all options on our <a href="#catalog?course=${courseKey}">catalog view</a>.</p>
+      `;
+    } else if (category === "Career Guidance") {
+      title = `Career Growth & Salary Scope with an ${courseName} Degree in 2026`;
+      excerpt = `Discover the high-demand career pathways, salary trends, and promotion opportunities unlocked by an accredited ${courseName}.`;
+      
+      content = `
+        <p>In today's fast-moving economy, an accredited <strong><a href="#catalog?course=${courseKey}">${courseName}</a></strong> equips working professionals and graduates with high-impact skills required by leading companies.</p>
+        <h3>Salary Growth & High-Demand Domains</h3>
+        <p>Graduates with a ${courseName} typically report starting salary packages between ₹4.5 LPA and ₹15 LPA, depending on prior experience and specialization.</p>
+        <h3>Key Benefits of Online Learning</h3>
+        <ul>
+          <li>Study while continuing your current employment</li>
+          <li>Interactive LMS with live and archived lectures</li>
+          <li>Global peer networking and industry expert mentorship</li>
+        </ul>
+        <p>Explore accredited universities offering this degree on our <a href="#catalog?course=${courseKey}">course search engine</a>.</p>
       `;
     } else { // Approvals & Legality
       title = `UGC-DEB & AICTE Validity Check: ${courseName} Admission Guide`;
