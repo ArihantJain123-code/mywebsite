@@ -17989,7 +17989,7 @@ function generateMCABlogs(count = 500) {
     BLOGS_DATA.push({
       id: `mca-vs-regular-post-${i + 1}`,
       title: "Online MCA vs Regular MCA: Which Is Better?",
-      category: "Career Guidance",
+      category: "Online MCA vs Regular MCA",
       date: dateString,
       author: author,
       readTime: "6 min read",
