@@ -1,4 +1,4 @@
-// Mock Database for Online Degree Education Portal
+﻿// Mock Database for Online Degree Education Portal
 
 const COURSES_DATA = {
   "mba": {
@@ -18902,4 +18902,228 @@ function generateOperationsMBABlogs(count = 500) {
 // Generate 500 blogs on Online MBA Colleges in Operations
 generateOperationsMBABlogs(500);
 
-
+
+// Generate 500 blogs on Online MBA Colleges in International Business
+function generateInternationalBusinessMBABlogs(count = 500) {
+  const unis = [
+    { name: "Amity University Online", shortName: "Amity Online", naac: "A+", fee: "â‚¹1,99,000", emi: "â‚¹8,291/mo", avgPackage: "â‚¹9.5 LPA", topPartners: "HSBC, Deloitte, DHL, Ernst & Young", lms: "Amity Amigo AI portal & global trade simulations" },
+    { name: "Manipal University Jaipur Online", shortName: "Manipal Online", naac: "A+", fee: "â‚¹1,75,000", emi: "â‚¹7,291/mo", avgPackage: "â‚¹8.9 LPA", topPartners: "KPMG, Accenture, Amazon Global, FedEx", lms: "Coursera integrated LMS & export-import management labs" },
+    { name: "Jain University Online", shortName: "Jain Online", naac: "A++", fee: "â‚¹1,60,000", emi: "â‚¹6,666/mo", avgPackage: "â‚¹8.4 LPA", topPartners: "PwC, Morgan Stanley, Schneider Electric, Trade Finance Corp", lms: "Interactive digital campus & international trade policy case studies" },
+    { name: "Chandigarh University Online", shortName: "CU Online", naac: "A+", fee: "â‚¹1,40,000", emi: "â‚¹5,833/mo", avgPackage: "â‚¹7.8 LPA", topPartners: "Maersk, HDFC Bank International, Wipro, Tech Mahindra", lms: "CU LMS with global business strategy simulations" },
+    { name: "DY Patil University Online", shortName: "DY Patil Online", naac: "A++", fee: "â‚¹1,70,000", emi: "â‚¹7,083/mo", avgPackage: "â‚¹8.5 LPA", topPartners: "Barclays, Tata International, Unilever, Samsung", lms: "Flexible digital portal & weekend international trade masterclasses" },
+    { name: "UPES Online", shortName: "UPES Online", naac: "A", fee: "â‚¹1,80,000", emi: "â‚¹7,500/mo", avgPackage: "â‚¹8.8 LPA", topPartners: "Shell International, Adani Global, Schlumberger, DP World", lms: "Industry-aligned LMS with energy & commodities trade labs" },
+    { name: "LPU Online (Lovely Professional)", shortName: "LPU Online", naac: "A++", fee: "â‚¹1,36,000", emi: "â‚¹5,666/mo", avgPackage: "â‚¹7.4 LPA", topPartners: "Cognizant, Infosys Global, DHL Express, Reliance Global", lms: "LPU e-Connect app & virtual global interactive lectures" },
+    { name: "Chitkara University Online", shortName: "Chitkara Online", naac: "A+", fee: "â‚¹1,50,000", emi: "â‚¹6,250/mo", avgPackage: "â‚¹8.0 LPA", topPartners: "Volvo, Siemens Global, Nestle International, Expeditors", lms: "EdTech platform with cross-border trade sandbox" }
+  ];
+
+  const subtopics = [
+    {
+      titleTag: "Global Trade Strategy & Foreign Direct Investment (FDI)",
+      focus: "Cross-Border Market Entry, Foreign Investments & MNE Strategy",
+      summary: "Mastering multinational corporate expansion, foreign direct investment (FDI) appraisal, greenfield vs acquisition strategies, and international market entry dynamics.",
+      curriculum: ["Global Market Entry Strategies & Joint Ventures", "Foreign Direct Investment (FDI) & Capital Flow Appraisal", "Transnational Strategic Management & MNE Governance", "Regional Trade Agreements (EU, ASEAN, USMCA)", "Multinational Political Risk & Country Evaluation"],
+      careerRole: "International Business Development Manager / Global Strategy Lead",
+      avgSalary: "â‚¹11 LPA - â‚¹25 LPA"
+    },
+    {
+      titleTag: "International Financial Management & Foreign Exchange",
+      focus: "Forex Hedging, Trade Credit & Cross-Border Capital Allocation",
+      summary: "Understanding foreign currency risk management, hedging techniques, Letters of Credit (LC), Eurodollar money markets, and global corporate finance.",
+      curriculum: ["Foreign Exchange Risk & Currency Hedging", "International Trade Finance & Letters of Credit (LC)", "International Transfer Pricing & Offshore Taxation", "Global Capital Markets, Eurobonds & ADR/GDRs", "Cross-Border Project Valuation & Working Capital"],
+      careerRole: "International Finance Manager / Forex Risk Strategist",
+      avgSalary: "â‚¹12 LPA - â‚¹26 LPA"
+    },
+    {
+      titleTag: "Export-Import (EXIM) Operations & Global Logistics",
+      focus: "Customs Compliance, Incoterms 2020 & International Freight",
+      summary: "Hands-on execution of Incoterms 2020, DGFT export policies, customs clearance documentation, maritime shipping, and international supply chain routing.",
+      curriculum: ["Export-Import Laws & Customs Documentation", "Incoterms 2020 & International Shipping Contracts", "DGFT Policies & Export Promotion Schemes", "Global Supply Chain & Maritime Freight Operations", "Port Logistics & International Distribution Networks"],
+      careerRole: "Export-Import (EXIM) Manager / Global Supply Chain Manager",
+      avgSalary: "â‚¹9.5 LPA - â‚¹21 LPA"
+    },
+    {
+      titleTag: "Cross-Cultural Management & Global Leadership",
+      focus: "Multinational Team Governance, Diversity & Expatriate Relations",
+      summary: "Leading diverse multicultural teams, managing expatriate assignments, international labor law compliance, and mastering cross-border negotiations.",
+      curriculum: ["Cross-Cultural Communication & Executive Negotiation", "International Human Resource Management (IHRM)", "Expatriate Management & Global Mobility Frameworks", "Global Diversity & Inclusion (D&I) Leadership", "Comparative International Labor Laws"],
+      careerRole: "Global HR Director / International Mobility Specialist",
+      avgSalary: "â‚¹10 LPA - â‚¹23 LPA"
+    },
+    {
+      titleTag: "Global Marketing, E-Commerce & Brand Localization",
+      focus: "Multi-Country Branding, Digital Market Entry & Localization",
+      summary: "Designing global marketing mix strategies, cross-border e-commerce expansion, brand localization tactics, and global consumer market research.",
+      curriculum: ["Global Brand Strategy & Product Adaptation", "Cross-Border E-Commerce & Global Marketplace Logistics", "International Market Research & Consumer Behavior", "Localization vs Standardization Marketing Frameworks", "Global Digital Advertising & Multi-Currency Sales Funnels"],
+      careerRole: "Global Brand Manager / International E-Commerce Lead",
+      avgSalary: "â‚¹10.5 LPA - â‚¹24 LPA"
+    },
+    {
+      titleTag: "UGC-DEB Recognition, WES & Global Credential Parity 2026",
+      focus: "Degree Legality, AICTE Approval & International Equivalency",
+      summary: "Comprehensive guide to UGC-DEB 2026 guidelines confirming 100% legal parity of Online International Business MBAs for corporate hiring, UPSC, and WES credentialing.",
+      curriculum: ["UGC-DEB Regulations & University Autonomy Status", "AICTE Equivalence Directives for Online MBAs", "WES Credential Evaluation for Immigrations & Overseas Employment", "Eligibility for Public Sector Jobs & Foreign Doctoral Programs", "Corporate Recognition in Global Fortune 500 MNCs"],
+      careerRole: "Global Operations Lead / Country Business Head",
+      avgSalary: "â‚¹8.5 LPA - â‚¹20 LPA"
+    },
+    {
+      titleTag: "Tuition Fee Breakdown, EMI Plans & Global ROI 2026",
+      focus: "Course Fees, Flexible EMIs & High-Yield Salary Packages",
+      summary: "In-depth fee comparison of top Indian online universities offering International Business MBA, no-cost monthly EMI options, tax benefits, and long-term career ROI.",
+      curriculum: ["Financial Management & Tuition Cost Evaluation", "Executive Salary Negotiation & Global Pay Structures", "Tax Savings & Corporate Education Sponsorships", "Skill-to-Compensation Mapping for Multinational Roles", "Return on Investment (ROI) & Payback Analysis"],
+      careerRole: "International Business Consultant / Trade Advisor",
+      avgSalary: "â‚¹9 LPA - â‚¹22 LPA"
+    },
+    {
+      titleTag: "Placement Assistance, Global MNC Drives & Alumni Support",
+      focus: "Virtual Career Fairs, Resume Prep & Corporate Hiring Partners",
+      summary: "Exploring dedicated virtual placement cells, global executive mentorship, mock interview prep, and corporate recruitment networks at top MNCs.",
+      curriculum: ["MNC Resume & LinkedIn Profile Optimization", "Mock Behavioral Interviews for Global Roles", "Capstone Projects on Overseas Business Expansion", "Virtual Job Fairs & Corporate Placement Drives", "Executive Alumni Network & Mentorship Sessions"],
+      careerRole: "Director of International Business / Senior Trade Consultant",
+      avgSalary: "â‚¹10 LPA - â‚¹25 LPA"
+    }
+  ];
+
+  const authors = [
+    "Dr. Rajesh Malhotra",
+    "Priya Nair",
+    "Vikramaditya Sen",
+    "Siddharth Kapoor",
+    "Global Education Research Cell",
+    "Prof. Sunita Deshmukh",
+    "Arjun Banerjee",
+    "International Trade Advisory Board"
+  ];
+
+  for (let i = 0; i < count; i++) {
+    const uniA = unis[i % unis.length];
+    const uniB = unis[(i + 4) % unis.length];
+    const subtopic = subtopics[i % subtopics.length];
+    const author = authors[i % authors.length];
+    const variantIndex = Math.floor(i / unis.length) + 1;
+
+    const dateObj = new Date("2026-08-08");
+    dateObj.setDate(dateObj.getDate() - (i % 90));
+    const dateString = dateObj.toISOString().split("T")[0];
+
+    const readTime = `${5 + (i % 4)} min read`;
+    const id = `ib-mba-post-${i + 1}`;
+
+    let title = "";
+    let excerpt = "";
+
+    if (i % 6 === 0) {
+      title = `${uniA.name} Online MBA in International Business Review 2026: Fees, Syllabus & Placements (Guide #${variantIndex})`;
+      excerpt = `Is ${uniA.name}'s Online MBA in International Business worth it? Read our full 2026 review covering fees (${uniA.fee}), NAAC grade (${uniA.naac}), LMS features, and average salary packages (${uniA.avgPackage}).`;
+    } else if (i % 6 === 1) {
+      title = `Top Online MBA Colleges in International Business in India 2026: Admission & Fees Guide (#${i + 1})`;
+      excerpt = `Discover top UGC-approved online MBA colleges offering International Business specializations. Compare ${uniA.shortName}, ${uniB.shortName}, EXIM curriculum, and global placement opportunities.`;
+    } else if (i % 6 === 2) {
+      title = `Compare: ${uniA.name} vs ${uniB.name} for Online MBA in International Business (#${variantIndex})`;
+      excerpt = `Detailed side-by-side comparison of ${uniA.shortName} and ${uniB.shortName} for Online MBA in International Business. Compare NAAC grades, fee structures (${uniA.fee} vs ${uniB.fee}), trade labs, and placements.`;
+    } else if (i % 6 === 3) {
+      title = `${subtopic.titleTag}: Online MBA International Business Syllabus (#${i + 1})`;
+      excerpt = `Explore how top Online MBA in International Business programs teach ${subtopic.focus}. Detailed syllabus, practical toolkits, and average salary packages for ${subtopic.careerRole}.`;
+    } else if (i % 6 === 4) {
+      title = `UGC-DEB Validity & Global Recognition: Online MBA in International Business Guide (#${i + 1})`;
+      excerpt = `Are Online MBAs in International Business recognized for WES evaluation, foreign jobs, UPSC, and corporate hiring? Learn about UGC-DEB 2026 norms, AICTE rules, and global degree parity.`;
+    } else {
+      title = `Career Scope & Salary ROI: Online MBA in International Business at ${uniA.shortName} (#${i + 1})`;
+      excerpt = `Elevate your global trade and corporate management career with an Online MBA in International Business. Average packages of ${uniA.avgPackage}, top hiring partners (${uniA.topPartners}), and monthly EMIs starting at ${uniA.emi}.`;
+    }
+
+    const curriculumListHtml = subtopic.curriculum.map(item => `<li><strong>${item}:</strong> Hands-on application through real-world international case studies and trade simulations.</li>`).join("");
+
+    const content = `
+      <p>In an increasingly interconnected global economy, businesses are continuously expanding across borders. Pursuing an <strong>Online MBA in International Business</strong> has emerged as a premier executive credential in 2026, equipping management professionals with the expertise to navigate foreign trade, global financial markets, and multinational operations.</p>
+
+      <h3>1. Program Overview & Key Highlights</h3>
+      <p>An accredited <strong>Online MBA in International Business</strong> integrates foundational management principles with advanced global strategy, trade finance, export-import operations, and cross-cultural leadership. Top programs offered by institutions like <strong><a href="#catalog">${uniA.name}</a></strong> feature:</p>
+      <ul>
+        <li><strong>UGC-DEB & NAAC Accreditation:</strong> Recognized with a <strong>NAAC ${uniA.naac} Grade</strong> and approved by UGC-DEB for 100% legal degree equivalence.</li>
+        <li><strong>Interactive Digital Learning:</strong> ${uniA.lms}. Enjoy 24/7 access to recorded lectures, live weekend masterclasses, and global business case studies.</li>
+        <li><strong>Affordable Fees & Easy EMIs:</strong> Total program tuition of approximately <strong>${uniA.fee}</strong>, backed by no-cost monthly installments from <strong>${uniA.emi}</strong>.</li>
+        <li><strong>High Placement Returns:</strong> Average placement package of <strong>${uniA.avgPackage}</strong> with top recruiting partners including ${uniA.topPartners}.</li>
+      </ul>
+
+      <h3>2. Specialization Focus: ${subtopic.focus}</h3>
+      <p>${subtopic.summary}</p>
+
+      <h3>3. Detailed Syllabus & Core Curriculum</h3>
+      <p>The 2-year Online MBA in International Business is divided into 4 comprehensive semesters. Alongside core business administration subjects, learners complete specialized global trade modules:</p>
+      <ul>
+        ${curriculumListHtml}
+      </ul>
+
+      <h3>4. Comparative University Analysis: ${uniA.shortName} vs ${uniB.shortName}</h3>
+      <p>Choosing the ideal university for your Online MBA in International Business requires a side-by-side assessment of key academic and financial metrics:</p>
+
+      <div class="table-responsive">
+        <table class="comparison-table" style="width:100%; border-collapse: collapse; margin: 20px 0;">
+          <thead>
+            <tr style="background-color: var(--card-bg, #f1f3f5); border-bottom: 2px solid var(--border-color, #e9ecef);">
+              <th style="padding: 12px; text-align: left; font-weight: 600;">Parameter</th>
+              <th style="padding: 12px; text-align: left; font-weight: 600;">${uniA.shortName}</th>
+              <th style="padding: 12px; text-align: left; font-weight: 600;">${uniB.shortName}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">NAAC Accreditation</td>
+              <td style="padding: 12px;">NAAC ${uniA.naac}</td>
+              <td style="padding: 12px;">NAAC ${uniB.naac}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Total Course Fee</td>
+              <td style="padding: 12px;">${uniA.fee} (EMI Available)</td>
+              <td style="padding: 12px;">${uniB.fee} (EMI Available)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Average Placement Salary</td>
+              <td style="padding: 12px;">${uniA.avgPackage}</td>
+              <td style="padding: 12px;">${uniB.avgPackage}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Key Recruiting Partners</td>
+              <td style="padding: 12px;">${uniA.topPartners}</td>
+              <td style="padding: 12px;">${uniB.topPartners}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Examination Mode</td>
+              <td style="padding: 12px;">100% Online AI-Proctored Exams</td>
+              <td style="padding: 12px;">100% Online AI-Proctored Exams</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5. Career Pathways & Salary Scope</h3>
+      <p>Graduates with an Online MBA in International Business enter high-growth roles across trade consultancies, multinational corporations, logistics conglomerates, and financial institutions:</p>
+      <ul>
+        <li><strong>${subtopic.careerRole}:</strong> Average salary packages ranging from <strong>${subtopic.avgSalary}</strong>.</li>
+        <li><strong>Global Business Development Manager:</strong> Spearheading cross-border market expansion and international client acquisitions.</li>
+        <li><strong>Export-Import (EXIM) Manager:</strong> Managing cross-border compliance, trade documentation, and shipping logistics.</li>
+        <li><strong>International Financial Strategist:</strong> Handling forex hedging, multi-currency trade financing, and offshore investments.</li>
+      </ul>
+
+      <h3>6. UGC Recognition & Global Degree Parity</h3>
+      <p>Under official UGC (Open and Distance Learning Programs and Online Programs) Regulations, an Online MBA granted by a UGC-approved university holds <strong>100% legal equivalence</strong> with a traditional full-time MBA. It is fully recognized for government sector competitive exams (UPSC, SSC, PSUs), higher research degrees (PhD), and foreign credential evaluations via WES.</p>
+
+      <h3>Conclusion</h3>
+      <p>An <strong>Online MBA in International Business</strong> from top institutions like <strong><a href="#catalog">${uniA.name}</a></strong> or <strong><a href="#catalog">${uniB.name}</a></strong> builds the strategic leadership necessary to succeed in today's global marketplace. Leverage flexible digital learning, expert faculty mentorship, and placement assistance. Compare top colleges on our platform and request free student advisory today!</p>
+    `;
+
+    BLOGS_DATA.push({
+      id: id,
+      title: title,
+      category: "Online MBA International Business",
+      date: dateString,
+      author: author,
+      readTime: readTime,
+      excerpt: excerpt,
+      content: content
+    });
+  }
+}
+
+// Generate 500 blogs on Online MBA Colleges in International Business
+generateInternationalBusinessMBABlogs(500);
