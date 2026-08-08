@@ -2604,13 +2604,12 @@ footer {
   transition: transform 0.2s ease;
 }
 
-.blog-category-pill .blog-pill-count {
-  background: rgba(0, 0, 0, 0.05);
+.blog-category-pill .blog-pill-arrow {
+  font-size: 0.72rem;
   color: var(--text-muted);
-  padding: 2px 7px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  opacity: 0.6;
+  margin-left: 4px;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .blog-category-pill:hover {
@@ -2618,6 +2617,12 @@ footer {
   color: var(--primary);
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(79, 70, 229, 0.1);
+}
+
+.blog-category-pill:hover .blog-pill-arrow {
+  opacity: 1;
+  color: var(--primary);
+  transform: translateX(2px);
 }
 
 .blog-category-pill.active {
@@ -2633,9 +2638,9 @@ footer {
   opacity: 1;
 }
 
-.blog-category-pill.active .blog-pill-count {
-  background: rgba(255, 255, 255, 0.25);
+.blog-category-pill.active .blog-pill-arrow {
   color: #ffffff;
+  opacity: 0.95;
 }
 
 /* --- Sidebar Category List --- */
@@ -2693,14 +2698,11 @@ footer {
   opacity: 0.7;
 }
 
-.blog-cat-badge {
-  background: rgba(0, 0, 0, 0.05);
+.blog-cat-arrow {
+  font-size: 0.78rem;
   color: var(--text-muted);
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  transition: all var(--transition-fast);
+  opacity: 0.5;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .blog-category-btn:hover {
@@ -2708,9 +2710,10 @@ footer {
   color: var(--primary);
 }
 
-.blog-category-btn:hover .blog-cat-badge {
-  background: rgba(79, 70, 229, 0.15);
+.blog-category-btn:hover .blog-cat-arrow {
   color: var(--primary);
+  opacity: 1;
+  transform: translateX(3px);
 }
 
 .blog-category-btn.active {
@@ -2724,9 +2727,10 @@ footer {
   color: var(--primary);
 }
 
-.blog-category-btn.active .blog-cat-badge {
-  background: var(--primary);
-  color: #ffffff;
+.blog-category-btn.active .blog-cat-arrow {
+  color: var(--primary);
+  opacity: 1;
+  transform: translateX(3px);
 }
 
 .blog-card-category {

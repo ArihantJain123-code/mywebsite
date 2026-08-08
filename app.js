@@ -1605,7 +1605,7 @@ function renderBlogCategories() {
         <button class="blog-category-pill ${isActive}" data-category="${escapeHtml(cat.name)}" title="Filter by ${escapeHtml(cat.label)}">
           <i class="${iconClass}"></i>
           <span>${escapeHtml(cat.label)}</span>
-          <span class="blog-pill-count">${cat.count}</span>
+          <i class="fas fa-chevron-right blog-pill-arrow"></i>
         </button>
       `;
     }).join("");
@@ -1623,7 +1623,7 @@ function renderBlogCategories() {
             <i class="${iconClass}"></i>
             <span>${escapeHtml(cat.label)}</span>
           </div>
-          <span class="blog-cat-badge">${cat.count}</span>
+          <i class="fas fa-chevron-right blog-cat-arrow"></i>
         </button>
       `;
     }).join("");
