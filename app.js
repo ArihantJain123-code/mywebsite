@@ -252,16 +252,8 @@ function navigate(viewName, params = {}) {
       state.blogCategory = "all";
     }
 
-    // Sync category sidebar buttons visually
-    const catBtns = document.querySelectorAll(".blog-category-btn");
-    catBtns.forEach(btn => {
-      if (btn.getAttribute("data-category") === state.blogCategory) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
-    });
-
+    renderBlogCategories();
+    syncBlogCategoryUI();
     renderBlogsList();
     renderTrendingBlogs();
   } else if (viewName === "blog-detail") {
@@ -525,24 +517,32 @@ function setupEventListeners() {
       if (sidebarBlogSearchInput) sidebarBlogSearchInput.value = "";
       if (navBlogSearchClear) navBlogSearchClear.style.display = "none";
       state.blogQuery = "";
+      state.blogCategory = "all";
       state.blogPage = 1;
+      syncBlogCategoryUI();
       renderBlogsList();
     });
   }
 
-  // Blog Categories buttons
-  const categoryContainer = document.getElementById("blog-categories-list");
-  if (categoryContainer) {
-    categoryContainer.addEventListener("click", (e) => {
+  // Top Blog Categories Pills Bar Event Listener
+  const categoryPillsContainer = document.getElementById("blog-categories-pills");
+  if (categoryPillsContainer) {
+    categoryPillsContainer.addEventListener("click", (e) => {
+      const pill = e.target.closest(".blog-category-pill");
+      if (!pill) return;
+      const catName = pill.getAttribute("data-category");
+      if (catName) selectBlogCategory(catName);
+    });
+  }
+
+  // Sidebar Blog Categories List Event Listener
+  const categorySidebarContainer = document.getElementById("blog-categories-list");
+  if (categorySidebarContainer) {
+    categorySidebarContainer.addEventListener("click", (e) => {
       const btn = e.target.closest(".blog-category-btn");
       if (!btn) return;
-
-      categoryContainer.querySelectorAll(".blog-category-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      state.blogCategory = btn.getAttribute("data-category");
-      state.blogPage = 1;
-      renderBlogsList();
+      const catName = btn.getAttribute("data-category");
+      if (catName) selectBlogCategory(catName);
     });
   }
 
@@ -1544,6 +1544,133 @@ window.startCounselingWithUni = startCounselingWithUni;
 window.resetFilters = resetFilters;
 
 // --- BLOG PAGE RENDERING FUNCTIONS ---
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function getBlogCategoryIcon(category) {
+  switch (category) {
+    case "all": return "fas fa-th-large";
+    case "Online MBA Finance": return "fas fa-chart-line";
+    case "Online MBA Marketing": return "fas fa-bullhorn";
+    case "Online MBA FinTech": return "fas fa-coins";
+    case "Online MBA Business Analytics": return "fas fa-chart-bar";
+    case "Online MBA International Business": return "fas fa-globe";
+    case "Online MBA Operations": return "fas fa-cogs";
+    case "Online BBA": return "fas fa-user-graduate";
+    case "University Reviews": return "fas fa-star";
+    case "University Comparisons": return "fas fa-balance-scale";
+    case "Career Guidance": return "fas fa-compass";
+    case "Approvals & Legality": return "fas fa-shield-alt";
+    case "Online Degree vs Distance Degree": return "fas fa-exchange-alt";
+    case "Online MCA vs Regular MCA": return "fas fa-laptop-code";
+    default: return "fas fa-folder";
+  }
+}
+
+let categoriesRendered = false;
+
+function renderBlogCategories() {
+  if (typeof BLOGS_DATA === "undefined" || !Array.isArray(BLOGS_DATA)) return;
+
+  // Compute count per category
+  const categoryCounts = {};
+  BLOGS_DATA.forEach(blog => {
+    if (blog.category) {
+      categoryCounts[blog.category] = (categoryCounts[blog.category] || 0) + 1;
+    }
+  });
+
+  const totalCount = BLOGS_DATA.length;
+  const sortedCategories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a]);
+
+  const categoryList = [{ name: "all", label: "All Articles", count: totalCount }];
+  sortedCategories.forEach(cat => {
+    categoryList.push({ name: cat, label: cat, count: categoryCounts[cat] });
+  });
+
+  // 1. Render Top Pills Bar
+  const pillsContainer = document.getElementById("blog-categories-pills");
+  if (pillsContainer) {
+    pillsContainer.innerHTML = categoryList.map(cat => {
+      const isActive = state.blogCategory === cat.name ? "active" : "";
+      const iconClass = getBlogCategoryIcon(cat.name);
+      return `
+        <button class="blog-category-pill ${isActive}" data-category="${escapeHtml(cat.name)}" title="Filter by ${escapeHtml(cat.label)}">
+          <i class="${iconClass}"></i>
+          <span>${escapeHtml(cat.label)}</span>
+          <span class="blog-pill-count">${cat.count}</span>
+        </button>
+      `;
+    }).join("");
+  }
+
+  // 2. Render Sidebar Category Buttons
+  const sidebarContainer = document.getElementById("blog-categories-list");
+  if (sidebarContainer) {
+    sidebarContainer.innerHTML = categoryList.map(cat => {
+      const isActive = state.blogCategory === cat.name ? "active" : "";
+      const iconClass = getBlogCategoryIcon(cat.name);
+      return `
+        <button class="blog-category-btn ${isActive}" data-category="${escapeHtml(cat.name)}" title="Filter by ${escapeHtml(cat.label)}">
+          <div class="blog-cat-left">
+            <i class="${iconClass}"></i>
+            <span>${escapeHtml(cat.label)}</span>
+          </div>
+          <span class="blog-cat-badge">${cat.count}</span>
+        </button>
+      `;
+    }).join("");
+  }
+
+  categoriesRendered = true;
+}
+
+function syncBlogCategoryUI() {
+  const currentCat = state.blogCategory || "all";
+
+  // Sync top pills
+  const pills = document.querySelectorAll("#blog-categories-pills .blog-category-pill");
+  pills.forEach(pill => {
+    if (pill.getAttribute("data-category") === currentCat) {
+      pill.classList.add("active");
+      try {
+        pill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      } catch (err) {}
+    } else {
+      pill.classList.remove("active");
+    }
+  });
+
+  // Sync sidebar buttons
+  const catBtns = document.querySelectorAll("#blog-categories-list .blog-category-btn");
+  catBtns.forEach(btn => {
+    if (btn.getAttribute("data-category") === currentCat) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+}
+
+function selectBlogCategory(catName) {
+  state.blogCategory = catName;
+  state.blogPage = 1;
+  syncBlogCategoryUI();
+  renderBlogsList();
+
+  const statsBar = document.getElementById("blog-stats-bar");
+  if (statsBar && window.scrollY > statsBar.offsetTop + 100) {
+    statsBar.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
 function renderBlogsList() {
   const grid = document.getElementById("blog-posts-grid");
   const statusContainer = document.getElementById("blog-search-status");
@@ -1551,6 +1678,10 @@ function renderBlogsList() {
   const paginationContainer = document.getElementById("blog-pagination");
 
   if (!grid) return;
+
+  if (!categoriesRendered) {
+    renderBlogCategories();
+  }
 
   grid.innerHTML = "";
 
@@ -1572,10 +1703,21 @@ function renderBlogsList() {
     );
   }
 
-  // Show / Hide search status
+  // Show / Hide search & category status
   if (statusContainer && searchTermSpan) {
-    if (state.blogQuery) {
-      searchTermSpan.textContent = state.blogQuery;
+    const hasQuery = Boolean(state.blogQuery);
+    const hasCat = state.blogCategory !== "all";
+
+    if (hasQuery || hasCat) {
+      let statusHTML = "";
+      if (hasQuery && hasCat) {
+        statusHTML = `Showing <strong>${filteredBlogs.length}</strong> results for "<strong>${escapeHtml(state.blogQuery)}</strong>" in <strong>${escapeHtml(state.blogCategory)}</strong>`;
+      } else if (hasQuery) {
+        statusHTML = `Showing <strong>${filteredBlogs.length}</strong> results for "<strong>${escapeHtml(state.blogQuery)}</strong>"`;
+      } else {
+        statusHTML = `Filtered by category: <strong>${escapeHtml(state.blogCategory)}</strong> (${filteredBlogs.length} articles)`;
+      }
+      searchTermSpan.innerHTML = statusHTML;
       statusContainer.style.display = "flex";
     } else {
       statusContainer.style.display = "none";
@@ -1664,16 +1806,25 @@ function renderBlogsList() {
 
     card.innerHTML = `
       <div class="blog-card-meta">
-        <span class="blog-card-category">${blog.category}</span>
+        <span class="blog-card-category" data-category="${escapeHtml(blog.category)}" title="Click to filter by ${escapeHtml(blog.category)}">${escapeHtml(blog.category)}</span>
         <span class="blog-card-date"><i class="far fa-calendar-alt"></i> ${dateFormatted}</span>
       </div>
-      <h3>${blog.title}</h3>
-      <p>${blog.excerpt}</p>
+      <h3>${escapeHtml(blog.title)}</h3>
+      <p>${escapeHtml(blog.excerpt)}</p>
       <div class="blog-card-footer">
-        <span class="blog-card-author">By ${blog.author}</span>
-        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${blog.readTime}</span>
+        <span class="blog-card-author">By ${escapeHtml(blog.author)}</span>
+        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${escapeHtml(blog.readTime)}</span>
       </div>
     `;
+
+    const catBadge = card.querySelector(".blog-card-category");
+    if (catBadge) {
+      catBadge.addEventListener("click", (e) => {
+        e.stopPropagation();
+        selectBlogCategory(blog.category);
+      });
+    }
+
     grid.appendChild(card);
   });
 
