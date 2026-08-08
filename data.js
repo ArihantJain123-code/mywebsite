@@ -1,4 +1,4 @@
-﻿// Mock Database for Online Degree Education Portal
+// Mock Database for Online Degree Education Portal
 
 const COURSES_DATA = {
   "mba": {
@@ -18229,3 +18229,227 @@ function generateOnlineVsDistanceBlogs(count = 500) {
 
 // Generate the requested 500 blogs about Online Degree vs Distance Degree
 generateOnlineVsDistanceBlogs(500);
+
+function generateFintechMBABlogs(count = 500) {
+  const unis = [
+    { name: "Manipal University Jaipur Online", shortName: "Manipal Online", naac: "A+", fee: "₹1,75,000", emi: "₹7,291/mo", avgPackage: "₹8.5 LPA", topPartners: "Razorpay, Paytm, Deloitte, ICICI Bank", lms: "Coursera integrated LMS & Virtual Labs" },
+    { name: "Amity University Online", shortName: "Amity Online", naac: "A+", fee: "₹1,99,000", emi: "₹8,291/mo", avgPackage: "₹9.2 LPA", topPartners: "PhonePe, CRED, KPMG, HDFC Bank", lms: "Amity Amigo AI-powered portal" },
+    { name: "Jain University Online", shortName: "Jain Online", naac: "A++", fee: "₹1,60,000", emi: "₹6,666/mo", avgPackage: "₹8.0 LPA", topPartners: "Zerodha, Paytm Money, EY, Axis Bank", lms: "Interactive digital campus & live projects" },
+    { name: "Chandigarh University Online", shortName: "CU Online", naac: "A+", fee: "₹1,40,000", emi: "₹5,833/mo", avgPackage: "₹7.5 LPA", topPartners: "Groww, Pine Labs, PwC, SBI Card", lms: "CU LMS with global case study repository" },
+    { name: "UPES Online", shortName: "UPES Online", naac: "A", fee: "₹1,80,000", emi: "₹7,500/mo", avgPackage: "₹8.8 LPA", topPartners: "BharatPe, PolicyBazaar, Deloitte, HSBC", lms: "Industry-aligned LMS with live trading simulators" },
+    { name: "DY Patil University Online", shortName: "DY Patil Online", naac: "A++", fee: "₹1,70,000", emi: "₹7,083/mo", avgPackage: "₹8.2 LPA", topPartners: "Mobikwik, Lendingkart, KPMG, Kotak Mahindra", lms: "Flexible digital portal & weekend masterclasses" },
+    { name: "LPU Online (Lovely Professional)", shortName: "LPU Online", naac: "A++", fee: "₹1,36,000", emi: "₹5,666/mo", avgPackage: "₹7.2 LPA", topPartners: "Financial Software Systems, PwC, YES Bank", lms: "LPU e-Connect app & virtual interactive lectures" },
+    { name: "Chitkara University Online", shortName: "Chitkara Online", naac: "A+", fee: "₹1,50,000", emi: "₹6,250/mo", avgPackage: "₹7.8 LPA", topPartners: "Capital Float, Navi, Accenture, Barclays", lms: "EdTech platform with hands-on coding labs" }
+  ];
+
+  const subtopics = [
+    {
+      titleTag: "AI, Machine Learning & Algorithmic Trading",
+      focus: "Artificial Intelligence in Modern Financial Engineering",
+      summary: "How machine learning models, automated algorithmic trading bots, and predictive analytics are reshaping modern banking and investment portfolios.",
+      curriculum: ["Predictive Financial Modeling", "Algorithmic Trading Strategies", "AI-Powered Credit Scoring", "Robo-Advisory Algorithms", "Natural Language Processing for Market Sentiment Analysis"],
+      careerRole: "FinTech Data Scientist / Quantitative Analyst",
+      avgSalary: "₹10 LPA - ₹22 LPA"
+    },
+    {
+      titleTag: "Blockchain Technologies, Smart Contracts & DeFi",
+      focus: "Decentralized Finance (DeFi) & Enterprise Blockchain Systems",
+      summary: "Understanding distributed ledger technology, smart contract architecture, tokenomics, and cross-border digital payment protocols in corporate finance.",
+      curriculum: ["Blockchain Architecture & Ethereum Fundamentals", "Smart Contracts & Distributed Ledger Technology", "Decentralized Finance (DeFi) Ecosystems", "Central Bank Digital Currencies (CBDC)", "Cryptocurrency Regulation & Risk Management"],
+      careerRole: "Blockchain Financial Consultant / DeFi Solutions Architect",
+      avgSalary: "₹12 LPA - ₹24 LPA"
+    },
+    {
+      titleTag: "Open Banking APIs, Neobanking & Payments",
+      focus: "Digital Payment Gateway Architectures & Open Financial Data",
+      summary: "Exploring unified payment interfaces (UPI), open banking API integration, digital wallets, and the rise of branchless neobanks across global markets.",
+      curriculum: ["Open Banking Infrastructure & API Ecosystems", "UPI & Cross-Border Payment Architecture", "Neobank Business Models & Unit Economics", "Digital Wallet Security & Tokenization", "Customer Acquisition in Digital Banking"],
+      careerRole: "FinTech Product Manager / Digital Payments Strategist",
+      avgSalary: "₹9 LPA - ₹18 LPA"
+    },
+    {
+      titleTag: "RegTech, Financial Compliance & Cybersecurity",
+      focus: "Regulatory Technology, AML & Fraud Analytics",
+      summary: "Navigating international financial compliance, Anti-Money Laundering (AML) algorithms, Know-Your-Customer (KYC) automation, and financial cybersecurity.",
+      curriculum: ["Financial Regulation & Compliance Frameworks", "AML & Anti-Fraud Machine Learning Analytics", "Automated e-KYC Systems", "Financial Cyber Risk & Data Privacy Regulations (DPDP)", "Audit Trail Automation"],
+      careerRole: "RegTech Specialist / Financial Risk Manager (FRM)",
+      avgSalary: "₹8 LPA - ₹16 LPA"
+    },
+    {
+      titleTag: "WealthTech, Robo-Advisors & InsurTech",
+      focus: "Digital Wealth Management & Automated Insurance Analytics",
+      summary: "How digital investment platforms, micro-investing apps, robo-advisors, and telematics-driven InsurTech startups are democratizing financial services.",
+      curriculum: ["Robo-Advisory & Automated Wealth Management", "Micro-Investing Platforms & Retail Trading Tech", "InsurTech & Telematics Pricing Models", "Behavioral Finance in Digital Products", "Portfolio Risk Optimization"],
+      careerRole: "WealthTech Product Lead / InsurTech Analyst",
+      avgSalary: "₹8.5 LPA - ₹17.5 LPA"
+    },
+    {
+      titleTag: "UGC-DEB Approval & Degree Validity 2026",
+      focus: "Legal Validity, NAAC Accreditation & Government Job Eligibility",
+      summary: "Detailed analysis of UGC-DEB 2026 regulations ensuring that Online MBA degrees in FinTech hold 100% legal parity with traditional on-campus MBAs.",
+      curriculum: ["UGC-DEB Category-I Autonomy Standards", "AICTE Compliance for Management Degrees", "WES Credential Evaluation for Global Mobility", "Equivalence for UPSC, SSC & Public Sector Undertakings (PSUs)", "Corporate Recognition across Big 4 & MNCs"],
+      careerRole: "Corporate Finance Manager / Treasury Specialist",
+      avgSalary: "₹7.5 LPA - ₹15 LPA"
+    },
+    {
+      titleTag: "Fee Structure, EMI Options & ROI Breakdown",
+      focus: "Tuition Cost Analysis, No-Cost EMIs & Salary Growth Potential",
+      summary: "Comprehensive evaluation of tuition fees, semester pay structures, tax benefits, no-cost monthly EMI options, and expected salary return on investment.",
+      curriculum: ["Financial Management & Capital Budgeting", "Cost-Benefit Analysis of Online Education", "Executive Salary Negotiation Strategies", "Skill-to-Compensation Mapping", "Corporate Tuition Reimbursement Models"],
+      careerRole: "Financial Planning & Analysis (FP&A) Manager",
+      avgSalary: "₹8 LPA - ₹18 LPA"
+    },
+    {
+      titleTag: "Placement Support, MNC Drives & Career Outcomes",
+      focus: "Campus Placement Networks, Hiring Partners & Portfolio Prep",
+      summary: "Exploring dedicated online career centers, virtual job fairs, resume building workshops, and placement track records with top FinTech unicorns and MNCs.",
+      curriculum: ["Corporate Networking & Mentorship", "Capstones & FinTech Live Project Portfolio", "Technical Interview Prep for Financial Tech Roles", "Executive LinkedIn Personal Branding", "Case Study Competitions"],
+      careerRole: "Strategy Lead / Business Development Manager in FinTech",
+      avgSalary: "₹9 LPA - ₹20 LPA"
+    }
+  ];
+
+  const authors = [
+    "Dr. Amit Verma",
+    "Meera Sen",
+    "Karan Mehta",
+    "Ananya Iyer",
+    "Academic Counselors Team",
+    "Prof. Rajesh Kumar",
+    "Priya Sharma",
+    "FinTech Research Cell"
+  ];
+
+  for (let i = 0; i < count; i++) {
+    const uniA = unis[i % unis.length];
+    const uniB = unis[(i + 3) % unis.length];
+    const subtopic = subtopics[i % subtopics.length];
+    const author = authors[i % authors.length];
+    const variantIndex = Math.floor(i / unis.length) + 1;
+
+    const dateObj = new Date("2026-08-08");
+    dateObj.setDate(dateObj.getDate() - (i % 90));
+    const dateString = dateObj.toISOString().split("T")[0];
+
+    const readTime = `${5 + (i % 4)} min read`;
+    const id = `fintech-mba-post-${i + 1}`;
+
+    let title = "";
+    let excerpt = "";
+
+    if (i % 6 === 0) {
+      title = `${uniA.name} Online MBA in FinTech Review 2026: Fees, Syllabus & Placements (Guide #${variantIndex})`;
+      excerpt = `Is ${uniA.name}'s Online MBA in Financial Technology worth it? Read our detailed review covering fees (${uniA.fee}), NAAC grade (${uniA.naac}), LMS features, and average salary packages (${uniA.avgPackage}).`;
+    } else if (i % 6 === 1) {
+      title = `Top Online MBA Colleges in FinTech in India 2026: Admission & Fees Guide (#${i + 1})`;
+      excerpt = `Discover the best UGC-approved online MBA colleges offering Financial Technology specializations. Compare ${uniA.shortName}, ${uniB.shortName}, curriculum highlights, and career growth pathways.`;
+    } else if (i % 6 === 2) {
+      title = `Compare: ${uniA.name} vs ${uniB.name} for Online MBA in FinTech (#${variantIndex})`;
+      excerpt = `Side-by-side comparison of ${uniA.shortName} and ${uniB.shortName} for Online MBA in FinTech. Compare NAAC accreditation, fee structures (${uniA.fee} vs ${uniB.fee}), live projects, and placement assistance.`;
+    } else if (i % 6 === 3) {
+      title = `${subtopic.titleTag}: Online MBA in FinTech Curriculum Breakdown (#${i + 1})`;
+      excerpt = `Explore how modern Online MBA in FinTech programs teach ${subtopic.focus}. Discover syllabus topics, hands-on tools, and salary trends for ${subtopic.careerRole}.`;
+    } else if (i % 6 === 4) {
+      title = `UGC-DEB Validity & Government Job Recognition: Online MBA in FinTech Guide (#${i + 1})`;
+      excerpt = `Are Online MBA degrees in Financial Technology recognized for UPSC, SSC, Banking, and Corporate hiring? Learn about UGC-DEB guidelines, AICTE norms, and WES global evaluations.`;
+    } else {
+      title = `Career Scope & Salary ROI: Online MBA in FinTech at ${uniA.shortName} (#${i + 1})`;
+      excerpt = `Boost your financial career with an Online MBA in FinTech. Learn about starting packages of ${uniA.avgPackage}, top hiring partners (${uniA.topPartners}), and monthly EMI options starting at ${uniA.emi}.`;
+    }
+
+    const curriculumListHtml = subtopic.curriculum.map(item => `<li><strong>${item}:</strong> Practical industry application with real-world case studies and cloud lab tools.</li>`).join("");
+
+    const content = `
+      <p>The global financial landscape is undergoing a massive digital transformation. Driven by artificial intelligence, blockchain, open banking APIs, and real-time payment rails, traditional banking and asset management are being reinvented. Pursuing an <strong>Online MBA in FinTech (Financial Technology)</strong> has emerged as one of the highest-yield career investments for working professionals and ambitious graduates in 2026.</p>
+
+      <h3>1. Program Overview & Key Highlights</h3>
+      <p>An accredited <strong>Online MBA in FinTech</strong> combines core management disciplines (Financial Accounting, Corporate Strategy, Leadership, and Marketing) with advanced technology modules. Programs offered by top institutions like <strong><a href="#catalog">${uniA.name}</a></strong> feature:</p>
+      <ul>
+        <li><strong>UGC-DEB & NAAC Accreditation:</strong> Accredited with a <strong>NAAC ${uniA.naac} Grade</strong> and approved by the Distance Education Bureau (UGC-DEB).</li>
+        <li><strong>Flexible Digital LMS:</strong> ${uniA.lms}. Access live weekend lectures, archived HD recordings, and interactive e-libraries 24/7.</li>
+        <li><strong>Affordable Tuition & EMIs:</strong> Total tuition of approximately <strong>${uniA.fee}</strong>, with easy monthly installments starting at <strong>${uniA.emi}</strong>.</li>
+        <li><strong>High Placement Returns:</strong> Average placement package of <strong>${uniA.avgPackage}</strong> across leading hiring partners such as ${uniA.topPartners}.</li>
+      </ul>
+
+      <h3>2. Specialization Focus: ${subtopic.focus}</h3>
+      <p>${subtopic.summary}</p>
+
+      <h3>3. Detailed Syllabus & Core Curriculum</h3>
+      <p>The 2-year Online MBA curriculum is divided into 4 semesters. In addition to fundamental business administration subjects, students undergo specialized FinTech training in:</p>
+      <ul>
+        ${curriculumListHtml}
+      </ul>
+
+      <h3>4. Comparative University Analysis: ${uniA.shortName} vs ${uniB.shortName}</h3>
+      <p>When selecting the best online college for your FinTech MBA, evaluating key institutional metrics is essential:</p>
+
+      <div class="table-responsive">
+        <table class="comparison-table" style="width:100%; border-collapse: collapse; margin: 20px 0;">
+          <thead>
+            <tr style="background-color: var(--card-bg, #f1f3f5); border-bottom: 2px solid var(--border-color, #e9ecef);">
+              <th style="padding: 12px; text-align: left; font-weight: 600;">Parameter</th>
+              <th style="padding: 12px; text-align: left; font-weight: 600;">${uniA.shortName}</th>
+              <th style="padding: 12px; text-align: left; font-weight: 600;">${uniB.shortName}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">NAAC Accreditation</td>
+              <td style="padding: 12px;">NAAC ${uniA.naac}</td>
+              <td style="padding: 12px;">NAAC ${uniB.naac}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Total Course Fee</td>
+              <td style="padding: 12px;">${uniA.fee} (EMI Available)</td>
+              <td style="padding: 12px;">${uniB.fee} (EMI Available)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Average Placement Salary</td>
+              <td style="padding: 12px;">${uniA.avgPackage}</td>
+              <td style="padding: 12px;">${uniB.avgPackage}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Key Recruiting Partners</td>
+              <td style="padding: 12px;">${uniA.topPartners}</td>
+              <td style="padding: 12px;">${uniB.topPartners}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color, #e9ecef);">
+              <td style="padding: 12px; font-weight: 500;">Examination Mode</td>
+              <td style="padding: 12px;">100% Online AI-Proctored Exams</td>
+              <td style="padding: 12px;">100% Online AI-Proctored Exams</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5. Career Pathways & Salary Scope</h3>
+      <p>Graduates holding an Online MBA in FinTech enter a booming market. Top career opportunities include:</p>
+      <ul>
+        <li><strong>${subtopic.careerRole}:</strong> Average remuneration ranging from <strong>${subtopic.avgSalary}</strong>.</li>
+        <li><strong>FinTech Product Lead:</strong> Overseeing product strategy for digital banking apps, wallet integrations, and payment gateways.</li>
+        <li><strong>Risk & RegTech Analyst:</strong> Ensuring compliance with RBI digital lending guidelines and international data privacy norms.</li>
+        <li><strong>Financial Analyst & Portfolio Strategy Manager:</strong> Managing digital wealth portfolios using robo-advisors and quantitative data models.</li>
+      </ul>
+
+      <h3>6. UGC Recognition & Legal Parity</h3>
+      <p>Under the latest UGC (Open and Distance Learning Programs and Online Programs) Regulations, an Online MBA granted by a recognized university holds <strong>complete legal equality</strong> with a full-time regular MBA degree. It is fully valid for government competitive exams (UPSC, Banking, SSC), higher studies (PhD), and global corporate job placements.</p>
+
+      <h3>Conclusion</h3>
+      <p>An <strong>Online MBA in FinTech</strong> from reputed colleges like <strong><a href="#catalog">${uniA.name}</a></strong> or <strong><a href="#catalog">${uniB.name}</a></strong> bridges the gap between traditional finance and modern technology. With flexible online classes, AI-proctored home exams, and robust career support, it is the ideal degree to fast-track your career. Compare top universities on our portal and get free expert counseling today!</p>
+    `;
+
+    BLOGS_DATA.push({
+      id: id,
+      title: title,
+      category: "Online MBA FinTech",
+      date: dateString,
+      author: author,
+      readTime: readTime,
+      excerpt: excerpt,
+      content: content
+    });
+  }
+}
+
+// Generate 500 blogs on Online MBA Colleges in FinTech
+generateFintechMBABlogs(500);
