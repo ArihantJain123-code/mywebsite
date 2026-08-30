@@ -139,13 +139,11 @@
         </li>
         <li><a class="nav-link" data-target="blog" href="#blog">Blogs</a></li>
         <li><a class="nav-link" data-target="contact" href="#contact">Contact Us</a></li>
-        <li><a class="nav-link" id="open-inquiry-modal" href="#contact" data-target="contact">Inquiry</a></li>
-        
-<li class="nav-phone-item">
-          <a href="tel:6375079973" class="nav-phone-link">
+        <li><a class="nav-inquiry-btn" id="open-inquiry-modal" href="javascript:void(0);" role="button"><i class="fas fa-paper-plane"></i><span>Inquiry</span></a></li>
+        <li class="nav-phone-item">
+          <a href="tel:6375079973" class="nav-phone-link" aria-label="Call admissions hotline">
             <i class="fas fa-phone-alt"></i>
           </a>
-        </li>
         </li>
       </ul>
     </div>
@@ -544,6 +542,7 @@
             </table>
           </div>
         </div>
+      </div>
     </section>
 
     <!-- --- VIEW 4: BLOGS PAGE --- -->
@@ -1005,7 +1004,7 @@
           </aside>
 
           <!-- Live Preview Panel -->
-          <main class="resume-preview-panel">
+          <div class="resume-preview-panel">
             <div class="preview-actions">
               <span><i class="far fa-eye"></i> Live A4 Sheet Preview</span>
               <span id="preview-sheet-page-count" style="font-size:0.8rem; color:var(--text-light);">A4 Standard Grid</span>
@@ -1017,7 +1016,7 @@
                 <!-- Reactively Injected Structure -->
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </section>
@@ -1094,71 +1093,81 @@
 
   <!-- --- SCRIPTS INJECTION --- -->
   <!-- Inquiry Modal -->
-<div class="modal-overlay" id="inquiry-modal" style="display:none;">
-  <div class="modal-content">
-    <button class="modal-close" id="inquiry-modal-close">&times;</button>
-    <h2 class="modal-title">Inquiry</h2>
+<div class="modal-overlay" id="inquiry-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="inquiry-modal-title">
+  <div class="modal-content inquiry-modal-card">
+    <button class="modal-close" id="inquiry-modal-close" aria-label="Close Inquiry Modal">&times;</button>
+    <div class="inquiry-modal-header">
+      <div class="inquiry-modal-badge"><i class="fas fa-paper-plane"></i></div>
+      <h2 class="modal-title" id="inquiry-modal-title">Admission &amp; Degree Inquiry</h2>
+      <p class="modal-subtitle" id="inquiry-modal-subtitle">Connect with certified academic counselors for 100% free guidance on university accreditations, fees &amp; scholarship options.</p>
+    </div>
     <form id="inquiry-form" class="premium-form">
       <div class="form-group-row">
         <div class="form-group">
           <label for="inquiry-name">Full Name *</label>
-          <div class="input-wrapper"><i class="far fa-user"></i><input type="text" id="inquiry-name" placeholder="John Doe" required></div>
+          <div class="input-wrapper"><i class="far fa-user"></i><input type="text" id="inquiry-name" placeholder="John Doe" required autocomplete="name"></div>
         </div>
         <div class="form-group">
-          <label for="inquiry-phone">Phone *</label>
-          <div class="input-wrapper"><i class="fas fa-phone-alt"></i><input type="tel" id="inquiry-phone" placeholder="9876543210" pattern="[0-9]{10}" title="Ten digit mobile number" required></div>
+          <label for="inquiry-phone">Phone Number *</label>
+          <div class="input-wrapper"><i class="fas fa-phone-alt"></i><input type="tel" id="inquiry-phone" placeholder="9876543210" pattern="[0-9]{10}" title="Ten digit mobile number" required autocomplete="tel"></div>
         </div>
       </div>
       <div class="form-group-row">
         <div class="form-group">
-          <label for="inquiry-email">Email *</label>
-          <div class="input-wrapper"><i class="far fa-envelope"></i><input type="email" id="inquiry-email" placeholder="john@example.com" required></div>
+          <label for="inquiry-email">Email Address *</label>
+          <div class="input-wrapper"><i class="far fa-envelope"></i><input type="email" id="inquiry-email" placeholder="john@example.com" required autocomplete="email"></div>
         </div>
         <div class="form-group">
-          <label for="inquiry-location">Location *</label>
-          <div class="input-wrapper"><i class="fas fa-map-marker-alt"></i><input type="text" id="inquiry-location" placeholder="City, State" required></div>
+          <label for="inquiry-location">City / Location *</label>
+          <div class="input-wrapper"><i class="fas fa-map-marker-alt"></i><input type="text" id="inquiry-location" placeholder="e.g. Mumbai, Delhi" required></div>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <div class="form-group">
+          <label for="inquiry-course">Preferred Degree / Course *</label>
+          <div class="input-wrapper select-wrapper"><i class="fas fa-graduation-cap"></i>
+            <select id="inquiry-course" required>
+              <option value="" disabled selected>Select a degree</option>
+              <option value="online-mba">Online MBA</option>
+              <option value="online-mca">Online MCA</option>
+              <option value="online-bca">Online BCA</option>
+              <option value="online-bba">Online BBA</option>
+              <option value="online-mcom">Online M.Com</option>
+              <option value="online-bcom">Online B.Com</option>
+              <option value="online-ma">Online MA</option>
+              <option value="online-ba">Online BA</option>
+              <option value="online-mtech">Online M.Tech</option>
+              <option value="online-btech">Online B.Tech</option>
+              <option value="executive-mba">Executive MBA</option>
+              <option value="online-pgdm">Online PGDM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inquiry-budget">Budget Range *</label>
+          <div class="input-wrapper select-wrapper"><i class="fas fa-rupee-sign"></i>
+            <select id="inquiry-budget" required>
+              <option value="" disabled selected>Select budget range</option>
+              <option value="Under ₹50,000">Under ₹50,000</option>
+              <option value="₹50,000 - ₹1,00,000">₹50,000 to ₹1,00,000</option>
+              <option value="₹1,00,000 - ₹1,50,000">₹1,00,000 to ₹1,50,000</option>
+              <option value="₹1,50,000 - ₹2,00,000">₹1,50,000 to ₹2,00,000</option>
+              <option value="₹2,00,000+">₹2,00,000 and above</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="inquiry-budget">Budget *</label>
-        <div class="input-wrapper select-wrapper"><i class="fas fa-rupee-sign"></i>
-          <select id="inquiry-budget" required>
-            <option value="" disabled selected>Select budget range</option>
-            <option value="0-50000">0 to 50000</option>
-            <option value="50000-100000">50000 to 100000</option>
-            <option value="100000-150000">100000 to 150000</option>
-            <option value="150000-200000">150000 to 200000</option>
-            <option value="200000+">200000 and above</option>
-          </select>
-        </div>
+        <label for="inquiry-message">Your Questions or Requirements *</label>
+        <textarea id="inquiry-message" rows="3" placeholder="Briefly tell us your preferred university, background, or any specific questions..." required></textarea>
       </div>
-      <div class="form-group">
-        <label for="inquiry-course">Preferred Course *</label>
-        <div class="input-wrapper select-wrapper"><i class="fas fa-graduation-cap"></i>
-          <select id="inquiry-course" required>
-            <option value="" disabled selected>Select a course</option>
-            <option value="online-mba">Online MBA</option>
-            <option value="online-pgdm">Online PGDM</option>
-            <option value="executive-mba">Executive MBA</option>
-            <option value="online-bba">Online BBA</option>
-            <option value="online-bca">Online BCA</option>
-            <option value="online-mca">Online MCA</option>
-            <option value="online-btech">Online BTech</option>
-            <option value="online-ba">Online BA</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inquiry-message">Message *</label>
-        <textarea id="inquiry-message" rows="4" placeholder="Briefly describe your goals, budget, or any questions..." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Send Inquiry</button>
+      <button type="submit" class="btn btn-primary btn-block" id="inquiry-submit-btn"><i class="fas fa-paper-plane"></i> <span>Send Free Inquiry</span></button>
     </form>
     <div id="inquiry-success" class="contact-success-card" style="display:none;">
       <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-      <h3>Thank You!</h3>
-      <p>Your inquiry has been submitted. An advisor will contact you shortly.</p>
-      <button type="button" class="btn btn-secondary" id="inquiry-reset-btn" style="margin-top:16px;">Submit Another Inquiry</button>
+      <h3>Inquiry Submitted!</h3>
+      <p>Thank you for reaching out. A dedicated academic advisor will contact you within 24 hours to assist you.</p>
+      <button type="button" class="btn btn-secondary" id="inquiry-reset-btn" style="margin-top:16px;"><i class="fas fa-redo"></i> Submit Another Inquiry</button>
     </div>
   </div>
 </div>

@@ -281,6 +281,8 @@ function setupEventListeners() {
       if (view) {
         window.location.hash = `#${view}`;
       }
+      const navMenu = document.getElementById("nav-menu");
+      if (navMenu) navMenu.classList.remove("show");
     });
   });
 
@@ -411,13 +413,19 @@ function setupEventListeners() {
   // Modal Tab Switchers
   document.querySelectorAll(".modal-tab-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
-      const targetTab = e.target.getAttribute("data-tab");
+      const btnEl = e.target.closest(".modal-tab-btn");
+      if (!btnEl) return;
+      const targetTab = btnEl.getAttribute("data-tab");
+      if (!targetTab) return;
 
-      document.querySelectorAll(".modal-tab-btn").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".modal-tab-pane").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".modal-nav-tabs .modal-tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".modal-body-content .modal-tab-pane").forEach(p => p.classList.remove("active"));
 
-      e.target.classList.add("active");
-      document.getElementById(`tab-${targetTab}`).classList.add("active");
+      btnEl.classList.add("active");
+      const targetPane = document.getElementById(`tab-${targetTab}`);
+      if (targetPane) {
+        targetPane.classList.add("active");
+      }
     });
   });
 
@@ -639,27 +647,68 @@ function setupEventListeners() {
   const inquirySuccess = document.getElementById("inquiry-success");
   const inquiryResetBtn = document.getElementById("inquiry-reset-btn");
 
-  if (inquiryOpenBtn) {
-    inquiryOpenBtn.addEventListener("click", (e) => {
+  function openInquiryModal(e) {
+    if (e) {
       e.preventDefault();
-      if (inquiryModal) inquiryModal.style.display = "flex";
-    });
+      e.stopPropagation();
+    }
+    if (inquiryModal) {
+      inquiryModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+    const navMenu = document.getElementById("nav-menu");
+    if (navMenu) navMenu.classList.remove("show");
   }
+
+  function closeInquiryModal() {
+    if (inquiryModal) {
+      inquiryModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  }
+
+  if (inquiryOpenBtn) {
+    inquiryOpenBtn.addEventListener("click", openInquiryModal);
+  }
+
   if (inquiryCloseBtn) {
-    inquiryCloseBtn.addEventListener("click", () => {
-      if (inquiryModal) inquiryModal.style.display = "none";
+    inquiryCloseBtn.addEventListener("click", closeInquiryModal);
+  }
+
+  if (inquiryModal) {
+    inquiryModal.addEventListener("click", (e) => {
+      if (e.target === inquiryModal) {
+        closeInquiryModal();
+      }
     });
   }
+
+  // Global keydown for Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeInquiryModal();
+      closeModal();
+    }
+  });
+
   if (inquiryForm) {
     inquiryForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const name = document.getElementById("inquiry-name").value.trim();
-      const email = document.getElementById("inquiry-email").value.trim();
-      const phone = document.getElementById("inquiry-phone").value.trim();
-      const location = document.getElementById("inquiry-location").value.trim();
-      const budget = document.getElementById("inquiry-budget").value;
-      const course = document.getElementById("inquiry-course").value;
-      const message = document.getElementById("inquiry-message").value.trim();
+      const nameEl = document.getElementById("inquiry-name");
+      const emailEl = document.getElementById("inquiry-email");
+      const phoneEl = document.getElementById("inquiry-phone");
+      const locationEl = document.getElementById("inquiry-location");
+      const budgetEl = document.getElementById("inquiry-budget");
+      const courseEl = document.getElementById("inquiry-course");
+      const messageEl = document.getElementById("inquiry-message");
+
+      const name = nameEl ? nameEl.value.trim() : "";
+      const email = emailEl ? emailEl.value.trim() : "";
+      const phone = phoneEl ? phoneEl.value.trim() : "";
+      const location = locationEl ? locationEl.value.trim() : "";
+      const budget = budgetEl ? budgetEl.value : "";
+      const course = courseEl ? (courseEl.options[courseEl.selectedIndex]?.text || courseEl.value) : "";
+      const message = messageEl ? messageEl.value.trim() : "";
 
       const inquiry = {
         formType: "Inquiry Form",
@@ -674,18 +723,25 @@ function setupEventListeners() {
       };
 
       let inquiries = [];
-      const stored = localStorage.getItem("portal_inquiry_submissions");
-      if (stored) inquiries = JSON.parse(stored);
+      try {
+        const stored = localStorage.getItem("portal_inquiry_submissions");
+        if (stored) inquiries = JSON.parse(stored);
+      } catch (err) {}
       inquiries.push(inquiry);
-      localStorage.setItem("portal_inquiry_submissions", JSON.stringify(inquiries));
+      try {
+        localStorage.setItem("portal_inquiry_submissions", JSON.stringify(inquiries));
+      } catch (err) {}
 
-      // Send to integrations (Google Sheets + Activepieces)
-      window.submitLeadToIntegrations(inquiry);
+      // Send to integrations (Google Sheets + Activepieces + WhatsApp)
+      if (typeof window.submitLeadToIntegrations === "function") {
+        window.submitLeadToIntegrations(inquiry);
+      }
 
       inquiryForm.style.display = "none";
       if (inquirySuccess) inquirySuccess.style.display = "block";
     });
   }
+
   if (inquiryResetBtn) {
     inquiryResetBtn.addEventListener("click", () => {
       if (inquiryForm) {
@@ -693,7 +749,7 @@ function setupEventListeners() {
         inquiryForm.style.display = "flex";
       }
       if (inquirySuccess) inquirySuccess.style.display = "none";
-      if (inquiryModal) inquiryModal.style.display = "none";
+      closeInquiryModal();
     });
   }
 
@@ -1205,11 +1261,17 @@ function renderCompareData() {
     },
     {
       label: "Total Fee Program",
-      render: (uni) => `<span class="compare-detail-fee">₹${(uni.courses[course]?.feeTotal || 0).toLocaleString("en-IN")}</span>`
+      render: (uni) => {
+        const cd = uni.courses ? uni.courses[course] : null;
+        return cd ? `<span class="compare-detail-fee">₹${cd.feeTotal.toLocaleString("en-IN")}</span>` : `<span style="color:var(--text-muted); font-size:0.9rem;">Not Offered</span>`;
+      }
     },
     {
       label: "Semester Fee",
-      render: (uni) => `<span class="compare-sem-fee">₹${(uni.courses[course]?.feeSemester || 0).toLocaleString("en-IN")} / Sem</span>`
+      render: (uni) => {
+        const cd = uni.courses ? uni.courses[course] : null;
+        return cd ? `<span class="compare-sem-fee">₹${cd.feeSemester.toLocaleString("en-IN")} / Sem</span>` : `<span style="color:var(--text-muted); font-size:0.9rem;">—</span>`;
+      }
     },
     {
       label: "Average Package",
@@ -1277,11 +1339,40 @@ function renderCompareData() {
 }
 
 window.startCounselingWithUni = function (uniId) {
-  // Open inquiry modal directly
   const inquiryModal = document.getElementById("inquiry-modal");
-  if (inquiryModal) {
-    inquiryModal.style.display = "flex";
+  if (!inquiryModal) return;
+
+  const inquiryTitle = document.getElementById("inquiry-modal-title");
+  const inquirySubtitle = document.getElementById("inquiry-modal-subtitle");
+  const courseSelect = document.getElementById("inquiry-course");
+  const messageInput = document.getElementById("inquiry-message");
+
+  if (uniId && typeof UNIVERSITIES !== "undefined") {
+    const uni = UNIVERSITIES.find(u => u.id === uniId);
+    if (uni) {
+      if (inquiryTitle) inquiryTitle.textContent = `Counseling Inquiry: ${uni.name}`;
+      if (inquirySubtitle) inquirySubtitle.textContent = `Get instant guidance on admission requirements, fees, EMI plans, and scholarships for ${uni.name}.`;
+      if (messageInput) {
+        messageInput.value = `I am interested in enrolling at ${uni.name}. Please guide me on eligibility, fees, semester schedules, and scholarship assistance.`;
+      }
+    }
+  } else {
+    if (inquiryTitle) inquiryTitle.textContent = "Admission & Degree Inquiry";
+    if (inquirySubtitle) inquirySubtitle.textContent = "Connect with certified academic counselors for 100% free guidance on university accreditations, fees & scholarship options.";
   }
+
+  if (courseSelect && typeof state !== "undefined" && state.selectedCourse) {
+    const currentCourse = state.selectedCourse.toLowerCase();
+    for (let opt of courseSelect.options) {
+      if (opt.value.toLowerCase().includes(currentCourse)) {
+        opt.selected = true;
+        break;
+      }
+    }
+  }
+
+  inquiryModal.style.display = "flex";
+  document.body.style.overflow = "hidden";
 };
 
 // --- UNIVERSITY DETAIL MODAL ACTIONS ---
