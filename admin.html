@@ -23,7 +23,30 @@
 </head>
 <body>
 
-  <div class="admin-layout">
+  <!-- Login Overlay -->
+  <div id="admin-login-overlay" style="position: fixed; inset: 0; background: var(--bg-primary); z-index: 99999; display: flex; align-items: center; justify-content: center;">
+    <div class="login-card" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); width: 100%; max-width: 400px; backdrop-filter: blur(12px);">
+      <div class="brand-icon" style="margin: 0 auto 20px; width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold;">O</div>
+      <h2 style="text-align: center; margin-bottom: 8px; font-family: 'Outfit', sans-serif;">Admin Portal</h2>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px; font-size: 14px;">Enter credentials to access dashboard</p>
+      
+      <div class="input-group" style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-secondary); font-weight: 500;">Username</label>
+        <input type="text" id="login-username" placeholder="Username" style="width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); outline: none; transition: var(--transition-fast);">
+      </div>
+      
+      <div class="input-group" style="margin-bottom: 30px;">
+        <label style="display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-secondary); font-weight: 500;">Password</label>
+        <input type="password" id="login-password" placeholder="Password" style="width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); outline: none; transition: var(--transition-fast);">
+      </div>
+      
+      <button id="login-submit-btn" style="width: 100%; padding: 14px; background: var(--accent-primary); color: white; border: none; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-glow);">Sign In</button>
+      
+      <p id="login-error-msg" style="color: var(--danger); text-align: center; margin-top: 15px; font-size: 14px; display: none; font-weight: 500;">Invalid username or password</p>
+    </div>
+  </div>
+
+  <div class="admin-layout" id="main-admin-layout" style="display: none;">
     <!-- --- SIDEBAR NAVIGATION --- -->
     <aside class="admin-sidebar" id="admin-sidebar">
       <div class="sidebar-brand">

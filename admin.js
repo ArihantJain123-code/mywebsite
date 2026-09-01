@@ -809,3 +809,54 @@ window.updateLeadStatus = updateLeadStatus;
 window.exportLeadsCSV = exportLeadsCSV;
 window.exportSEOReport = exportSEOReport;
 window.pingSitemaps = pingSitemaps;
+
+// --- Login System ---
+document.addEventListener('DOMContentLoaded', () => {
+  const loginBtn = document.getElementById('login-submit-btn');
+  const userIn = document.getElementById('login-username');
+  const passIn = document.getElementById('login-password');
+  const errorMsg = document.getElementById('login-error-msg');
+  const overlay = document.getElementById('admin-login-overlay');
+  const mainLayout = document.getElementById('main-admin-layout');
+  
+  if (loginBtn && overlay && mainLayout) {
+    const handleLogin = () => {
+      const u = userIn.value.trim();
+      const p = passIn.value.trim();
+      if (u === 'online2027' && p === 'mba2027') {
+        overlay.style.display = 'none';
+        mainLayout.style.display = 'flex';
+        // Trigger resize so charts render correctly after becoming visible
+        window.dispatchEvent(new Event('resize'));
+        showToast('Login successful. Welcome to Admin Portal.');
+      } else {
+        errorMsg.style.display = 'block';
+        userIn.style.borderColor = 'var(--danger)';
+        passIn.style.borderColor = 'var(--danger)';
+      }
+    };
+
+    loginBtn.addEventListener('click', handleLogin);
+
+    passIn.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleLogin();
+      }
+    });
+    
+    userIn.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        passIn.focus();
+      }
+    });
+
+    // Reset error state on input
+    const resetError = () => {
+      errorMsg.style.display = 'none';
+      userIn.style.borderColor = 'var(--border-color)';
+      passIn.style.borderColor = 'var(--border-color)';
+    };
+    userIn.addEventListener('input', resetError);
+    passIn.addEventListener('input', resetError);
+  }
+});
