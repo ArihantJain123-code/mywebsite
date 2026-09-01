@@ -859,4 +859,79 @@ document.addEventListener('DOMContentLoaded', () => {
     userIn.addEventListener('input', resetError);
     passIn.addEventListener('input', resetError);
   }
+
+  // ==========================================
+  // BLOG SUGGESTIONS LOGIC
+  // ==========================================
+  function renderBlogSuggestions() {
+    const container = document.getElementById('blog-suggestions-container');
+    if (!container) return;
+
+    const topics = [
+      { title: "Top 5 Online MBA Specializations in 2026", prompt: "Act as an expert career counselor and SEO content writer. Write a comprehensive 1000-word blog post about the top 5 most in-demand Online MBA specializations for 2026. Focus on FinTech, Business Analytics, Healthcare Management, Digital Marketing, and Supply Chain. Include salary expectations and why professionals are choosing these fields. Use headings, bullet points, and an engaging tone." },
+      { title: "Online MCA vs Regular MCA: Which is Right for You?", prompt: "Write an SEO-optimized blog post comparing Online MCA to Regular MCA. Structure it with a catchy introduction, a comparison table (Cost, Flexibility, Recognition, Placements), and a definitive conclusion. The target audience is working professionals in the IT sector looking to upgrade their qualifications without quitting their jobs." },
+      { title: "How to Balance a Full-Time Job and an Online Degree", prompt: "Draft a highly engaging, motivational 800-word article offering 7 practical time-management tips for working professionals enrolled in an online degree program. Include advice on leveraging weekends, setting boundaries at work, and using productivity tools like Notion or Trello." },
+      { title: "Is an Online BBA Worth It? Career Outcomes & Salary", prompt: "Create a detailed guide addressing the ROI of an Online BBA degree. Discuss the typical entry-level roles available after graduation, average salary bands, and how it serves as a stepping stone for an MBA. Keep the tone professional, objective, and encouraging." },
+      { title: "The Future of EdTech: How AI is Changing Online Degrees", prompt: "Write a thought-leadership article on how Artificial Intelligence and Machine Learning are transforming the landscape of online education. Discuss personalized learning paths, AI-driven proctoring, and automated student support. Aim for a futuristic yet grounded perspective." },
+      { title: "Top 10 High-Paying Jobs You Can Get with an Online M.Com", prompt: "Act as an SEO blog writer. Generate a listicle-style post detailing the top 10 highest-paying career options for M.Com graduates. Include roles like Investment Banker, Financial Analyst, and Chief Financial Officer. Provide average salaries and key skills required for each." },
+      { title: "Debunking Myths About Distance Education in 2026", prompt: "Write an engaging blog post that debunks the top 5 most common myths about distance and online education (e.g., 'It's not recognized by employers', 'It lacks networking opportunities'). Provide facts, stats, and real-world examples to counter each myth." },
+      { title: "Why Data Science is the Most Requested Online Course", prompt: "Draft an informative article explaining the explosion in demand for Data Science and Analytics online courses. Discuss the industry skill gap, the democratizing effect of online learning platforms, and the career trajectory of a Data Scientist." },
+      { title: "How to Choose the Right University for Your Online Degree", prompt: "Create a step-by-step guide on how prospective students should evaluate and select an online university. Cover accreditation, faculty credentials, learning management systems (LMS), and placement support. Format with clear H2 and H3 tags." },
+      { title: "The Impact of UGC Guidelines on Online Degrees in India", prompt: "Write a well-researched, authoritative blog post explaining the latest University Grants Commission (UGC) guidelines regarding online degrees in India. Clarify the 'equal value' mandate and what it means for job seekers in both public and private sectors." }
+    ];
+
+    // Seeded random based on current date so it changes daily but stays consistent during the day
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    
+    // Simple pseudo-random generator
+    function seededRandom(max, min) {
+        max = max || 1;
+        min = min || 0;
+        const x = Math.sin(seed++) * 10000;
+        return Math.floor((x - Math.floor(x)) * (max - min) + min);
+    }
+
+    // Shuffle and pick 5
+    let shuffled = [...topics];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = seededRandom(i + 1, 0);
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const dailySuggestions = shuffled.slice(0, 5);
+
+    let html = '';
+    dailySuggestions.forEach(suggestion => {
+      html += `
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; position: relative;">
+          <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 1.1rem; color: var(--text-primary); font-family: 'Outfit', sans-serif;">${suggestion.title}</h3>
+          <div style="position: relative;">
+            <textarea readonly style="width: 100%; height: 100px; padding: 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-secondary); font-family: monospace; font-size: 0.85rem; resize: none; outline: none;">${suggestion.prompt}</textarea>
+            <button class="copy-prompt-btn" style="position: absolute; top: 10px; right: 10px; background: var(--accent-primary); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;"><i class="fas fa-copy"></i> Copy</button>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+
+    // Attach copy events
+    container.querySelectorAll('.copy-prompt-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const textToCopy = this.previousElementSibling.value;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = this.innerHTML;
+          this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+          this.style.background = 'var(--success)';
+          setTimeout(() => {
+            this.innerHTML = originalText;
+            this.style.background = 'var(--accent-primary)';
+          }, 2000);
+        });
+      });
+    });
+  }
+
+  // Initialize Blog Suggestions on load and on tab switch
+  renderBlogSuggestions();
 });
