@@ -33,7 +33,12 @@ const SEO_KEYWORD_DATABASE = [
   { keyword: "manipal university jaipur online bca syllabus", rank: 4, prevRank: 5, volume: 6200, clicks: 880, impressions: 11900, ctr: 7.39, intent: "Informational", url: "/#catalog?university=manipal_university_jaipur_online" },
   { keyword: "scdl pune pgdba fees 2026", rank: 2, prevRank: 2, volume: 8900, clicks: 1850, impressions: 17200, ctr: 10.75, intent: "Commercial", url: "/#catalog?university=symbiosis_centre_for_distance_learning_scdl_pune" },
   { keyword: "top 30 web development interview questions", rank: 8, prevRank: 14, volume: 15600, clicks: 1640, impressions: 29000, ctr: 5.65, intent: "Informational", url: "/#blog-detail?id=frontend-developer-interview-questions-for-freshers" },
-  { keyword: "online degrees recognized by wscuc and wes", rank: 9, prevRank: 12, volume: 4900, clicks: 520, impressions: 9800, ctr: 5.30, intent: "Informational", url: "/#blog" }
+  { keyword: "online degrees recognized by wscuc and wes", rank: 9, prevRank: 12, volume: 4900, clicks: 520, impressions: 9800, ctr: 5.30, intent: "Informational", url: "/#blog" },
+  { keyword: "ignou mba equivalent online degree", rank: 3, prevRank: 6, volume: 22500, clicks: 4120, impressions: 45000, ctr: 9.15, intent: "Informational", url: "/#blog-detail?id=ignou-alternative-online-mba" },
+  { keyword: "is online mca valid for tcs infosys", rank: 1, prevRank: 3, volume: 34000, clicks: 8200, impressions: 61000, ctr: 13.44, intent: "Informational", url: "/#blog-detail?id=online-mca-validity-for-mnc-jobs" },
+  { keyword: "upes online mba energy management fees", rank: 4, prevRank: 4, volume: 5600, clicks: 750, impressions: 11200, ctr: 6.69, intent: "Commercial", url: "/#catalog?university=upes_online" },
+  { keyword: "cuet pg not required for online mba", rank: 2, prevRank: 5, volume: 14200, clicks: 3100, impressions: 24000, ctr: 12.91, intent: "Transactional", url: "/#blog-detail?id=direct-admission-online-mba-without-entrance" },
+  { keyword: "symbiosis online bca eligibility criteria", rank: 5, prevRank: 7, volume: 8900, clicks: 1120, impressions: 15800, ctr: 7.08, intent: "Informational", url: "/#catalog?university=symbiosis_online" }
 ];
 
 const INITIAL_LEADS = [
@@ -41,7 +46,12 @@ const INITIAL_LEADS = [
   { id: "lead_02", name: "Priya Sundaram", phone: "9823456789", email: "priya.s@outlook.com", course: "Online MCA", city: "Bengaluru", budget: "₹1,50,000 - ₹2,00,000", source: "AI Chatbot", message: "Looking for AI/Data Science specialization with placement help.", timestamp: Date.now() - 38 * 60000, status: "Contacted" },
   { id: "lead_03", name: "Rohan Varma", phone: "9712345678", email: "rohan.v@yahoo.com", course: "Online BBA", city: "Mumbai", budget: "Under ₹1,00,000", source: "Counseling Modal", message: "Working professional wanting distance degree with weekend lectures.", timestamp: Date.now() - 95 * 60000, status: "In Progress" },
   { id: "lead_04", name: "Neha Deshmukh", phone: "9988776655", email: "neha.desh@gmail.com", course: "Online MBA", city: "Pune", budget: "₹1,50,000 - ₹2,00,000", source: "Blog CTA", message: "Want to compare Manipal Jaipur vs Amity Online MBA.", timestamp: Date.now() - 180 * 60000, status: "Enrolled" },
-  { id: "lead_05", name: "Ankit Gupta", phone: "9654321987", email: "ankit.g@gmail.com", course: "Online BCA", city: "Hyderabad", budget: "₹1,00,000 - ₹1,50,000", source: "Catalog Inquiry", message: "Non-IT to IT career switch program details needed.", timestamp: Date.now() - 320 * 60000, status: "New" }
+  { id: "lead_05", name: "Ankit Gupta", phone: "9654321987", email: "ankit.g@gmail.com", course: "Online BCA", city: "Hyderabad", budget: "₹1,00,000 - ₹1,50,000", source: "Catalog Inquiry", message: "Non-IT to IT career switch program details needed.", timestamp: Date.now() - 320 * 60000, status: "New" },
+  { id: "lead_06", name: "Kavya Menon", phone: "9445566778", email: "kavya.menon@yahoo.in", course: "Online M.Com", city: "Chennai", budget: "Under ₹1,00,000", source: "Organic Search", message: "Need details on Jain University M.Com syllabus.", timestamp: Date.now() - 410 * 60000, status: "Contacted" },
+  { id: "lead_07", name: "Vikram Singh", phone: "9811223344", email: "vikram.s99@gmail.com", course: "Online MBA", city: "Chandigarh", budget: "₹1,50,000 - ₹2,00,000", source: "Facebook Ads", message: "Looking for best ROI MBA programs with easy EMI options.", timestamp: Date.now() - 550 * 60000, status: "New" },
+  { id: "lead_08", name: "Sneha Patil", phone: "9001122334", email: "sneha.p@outlook.com", course: "Online BCA", city: "Ahmedabad", budget: "₹1,00,000 - ₹1,50,000", source: "Google Ads", message: "Are live classes mandatory for BCA in Amity?", timestamp: Date.now() - 840 * 60000, status: "In Progress" },
+  { id: "lead_09", name: "Manish Kumar", phone: "9776655443", email: "manish.k.dev@gmail.com", course: "Online MCA", city: "Noida", budget: "₹2,00,000+", source: "Blog CTA", message: "Looking for NMIMS MCA Cloud Computing specialization.", timestamp: Date.now() - 1100 * 60000, status: "Contacted" },
+  { id: "lead_10", name: "Aditi Rao", phone: "9988112233", email: "aditi.rao.designs@gmail.com", course: "Online BBA", city: "Kochi", budget: "₹1,00,000 - ₹1,50,000", source: "Counseling Modal", message: "I want to start a business, need a BBA with good entrepreneurship focus.", timestamp: Date.now() - 1440 * 60000, status: "New" }
 ];
 
 const INITIAL_TOP_PAGES = [
@@ -52,7 +62,11 @@ const INITIAL_TOP_PAGES = [
   { path: "/#compare", pageviews24h: 1490, unique24h: 1180, avgTime: "4m 50s", bounceRate: "19.2%", convRate: "8.4%" },
   { path: "/#blog-detail?id=top-online-bba-colleges-in-india", pageviews24h: 1320, unique24h: 1040, avgTime: "3m 40s", bounceRate: "25.0%", convRate: "5.9%" },
   { path: "/#catalog?university=lovely_professional_university_lpu_online", pageviews24h: 1180, unique24h: 910, avgTime: "2m 55s", bounceRate: "27.8%", convRate: "6.0%" },
-  { path: "/#blog", pageviews24h: 1050, unique24h: 820, avgTime: "2m 10s", bounceRate: "33.5%", convRate: "3.2%" }
+  { path: "/#blog", pageviews24h: 1050, unique24h: 820, avgTime: "2m 10s", bounceRate: "33.5%", convRate: "3.2%" },
+  { path: "/#catalog?university=nmims_online", pageviews24h: 980, unique24h: 750, avgTime: "3m 50s", bounceRate: "22.4%", convRate: "7.8%" },
+  { path: "/#catalog?course=bca", pageviews24h: 910, unique24h: 710, avgTime: "2m 30s", bounceRate: "29.1%", convRate: "4.9%" },
+  { path: "/#blog-detail?id=online-mca-validity-for-mnc-jobs", pageviews24h: 850, unique24h: 680, avgTime: "4m 25s", bounceRate: "18.5%", convRate: "9.1%" },
+  { path: "/#catalog?university=amity_university_online", pageviews24h: 790, unique24h: 620, avgTime: "3m 15s", bounceRate: "24.6%", convRate: "6.5%" }
 ];
 
 // --- Initialization ---
