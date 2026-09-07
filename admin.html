@@ -18,6 +18,10 @@
   <!-- Chart.js for High Performance Data Visualizations -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
+  <!-- Firebase App & Realtime Database for Cloud Real-Time Streaming -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
   <!-- Admin Stylesheet -->
   <link rel="stylesheet" href="admin.css">
 </head>
@@ -115,6 +119,12 @@
         </div>
 
         <div class="header-right">
+          <!-- Real-Time Sync Status Pill -->
+          <div class="realtime-status-pill" id="realtime-status-pill" onclick="switchTab('settings')" title="Real-Time Data Engine Status: Click to configure Cloud/Sync">
+            <span class="pulse-dot status-green" id="rt-status-dot"></span>
+            <span id="rt-status-text">Live Sync: Active</span>
+          </div>
+
           <!-- Real-Time User Pulse Counter -->
           <div class="live-pulse-badge" title="Active concurrent users on site right now">
             <span class="pulse-dot"></span>
@@ -553,6 +563,9 @@
                   <option value="BCA">BCA</option>
                   <option value="M.Com">M.Com</option>
                 </select>
+                <button class="btn-secondary-sm" id="btn-sync-sheets" onclick="syncGoogleSheetsLeads()" title="Pull fresh leads from Google Sheets Web App">
+                  <i class="fas fa-sync-alt" id="sync-sheets-icon"></i> <span>Sync Google Sheets</span>
+                </button>
                 <button class="btn-primary-sm" onclick="exportLeadsCSV()">
                   <i class="fas fa-download"></i> <span>Export CSV</span>
                 </button>
@@ -697,38 +710,86 @@
 
         <!-- ================= VIEW 7: SETTINGS & LOGS ================= -->
         <section class="view-section" id="view-settings">
-          <div class="data-card">
-            <div class="chart-card-title"><i class="fas fa-sliders"></i> Analytics Tracking & Integrations Configuration</div>
-            <div class="chart-card-subtitle" style="margin-bottom: 20px;">Manage webhooks, Google Sheets endpoints, and live stream telemetry preferences.</div>
+          <div class="data-card" style="margin-bottom: 24px;">
+            <div class="chart-card-title"><i class="fas fa-tower-broadcast" style="color: #6366f1;"></i> Real-Time Data Streaming & Cloud Sync</div>
+            <div class="chart-card-subtitle" style="margin-bottom: 20px;">Configure cross-device real-time event streaming via Firebase Realtime Database or Local Broadcast.</div>
 
-            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 600px;">
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Google Sheets Apps Script Webhook URL</label>
-                <input type="text" class="table-search-input" value="https://script.google.com/macros/s/AKfycbwlWgDbbFjwQoHyTlrFA61VG-bupBF9arcwcGoDj2tp5AATzjEN4-LYvbCeBVI8cjAU/exec" readonly style="font-family: monospace; font-size: 0.8rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+              <!-- Real-Time Mode & Audio Settings -->
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div>
+                  <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Real-Time Data Mode</label>
+                  <select class="filter-select" id="rt-data-mode" style="width: 100%;" onchange="updateRealtimeMode(this.value)">
+                    <option value="live-real">Real Telemetry Only (Real user browsing & leads)</option>
+                    <option value="hybrid" selected>Hybrid Mode (Real telemetry + gentle baseline activity)</option>
+                    <option value="simulation">Full Simulation (Simulated high-velocity traffic)</option>
+                  </select>
+                  <small style="display: block; margin-top: 5px; color: var(--text-muted); font-size: 0.75rem;">In Real Telemetry mode, stream items reflect actual visitor actions.</small>
+                </div>
+
+                <div>
+                  <label style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+                    <input type="checkbox" id="rt-lead-audio-toggle" checked style="width: 16px; height: 16px; accent-color: var(--accent-primary);">
+                    <span>Play Audio Chime on New Real-Time Lead</span>
+                  </label>
+                  <small style="display: block; margin-top: 4px; margin-left: 26px; color: var(--text-muted); font-size: 0.75rem;">Subtle synthesizer chime when a new lead lands.</small>
+                </div>
+
+                <div>
+                  <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Google Sheets Apps Script Webhook URL</label>
+                  <input type="text" id="setting-sheets-url" class="table-search-input" value="https://script.google.com/macros/s/AKfycbwlWgDbbFjwQoHyTlrFA61VG-bupBF9arcwcGoDj2tp5AATzjEN4-LYvbCeBVI8cjAU/exec" style="font-family: monospace; font-size: 0.8rem;">
+                </div>
+
+                <div>
+                  <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Admin Phone for WhatsApp Leads</label>
+                  <input type="text" id="setting-admin-phone" class="table-search-input" value="+91-6375079973">
+                </div>
               </div>
 
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Admin Phone for WhatsApp Leads</label>
-                <input type="text" class="table-search-input" value="+91-6375079973" readonly>
-              </div>
+              <!-- Firebase Cloud Realtime Database Configuration -->
+              <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary);"><i class="fab fa-google" style="color: #ea4335;"></i> Firebase Cloud Realtime (Optional)</span>
+                  <span class="badge" id="firebase-status-badge" style="background: rgba(100,116,139,0.2); color: var(--text-muted);">Not Connected</span>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">Connect your Firebase project to sync leads & visitor stream across multiple devices, mobile phones, and external networks in real time.</p>
 
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Real-Time Simulation Speed</label>
-                <select class="filter-select" style="width: 100%;">
-                  <option value="normal" selected>Normal Traffic Velocity (3.5s update)</option>
-                  <option value="fast">High Traffic / Surge Mode (1.5s update)</option>
-                  <option value="paused">Pause Simulation (Real Storage Only)</option>
-                </select>
-              </div>
+                <div>
+                  <label style="display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 4px;">Firebase Database URL</label>
+                  <input type="text" id="firebase-db-url" class="table-search-input" placeholder="https://your-project-default-rtdb.firebaseio.com" style="font-family: monospace; font-size: 0.75rem;">
+                </div>
 
-              <div style="padding-top: 10px; display: flex; gap: 12px;">
-                <button class="btn-primary-sm" onclick="showToast('Settings saved successfully!')">
-                  <i class="fas fa-save"></i> <span>Save Preferences</span>
-                </button>
-                <button class="btn-icon" style="width: auto; padding: 0 14px;" onclick="localStorage.removeItem('portal_analytics_events'); showToast('Local event logs cleared');">
-                  <i class="fas fa-trash-alt" style="margin-right: 6px;"></i> Clear Local Cache
-                </button>
+                <div>
+                  <label style="display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 4px;">Firebase API Key</label>
+                  <input type="text" id="firebase-api-key" class="table-search-input" placeholder="AIzaSy..." style="font-family: monospace; font-size: 0.75rem;">
+                </div>
+
+                <div>
+                  <label style="display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 4px;">Project ID</label>
+                  <input type="text" id="firebase-project-id" class="table-search-input" placeholder="my-online-degrees" style="font-family: monospace; font-size: 0.75rem;">
+                </div>
+
+                <div style="display: flex; gap: 8px; margin-top: 4px;">
+                  <button class="btn-primary-sm" onclick="saveAndConnectFirebase()" style="flex: 1; justify-content: center;">
+                    <i class="fas fa-plug"></i> <span>Connect Cloud Sync</span>
+                  </button>
+                  <button class="btn-secondary-sm" onclick="disconnectFirebase()" title="Disconnect & use local broadcast only">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
               </div>
+            </div>
+
+            <div style="padding-top: 20px; display: flex; gap: 12px; border-top: 1px solid var(--border-light); margin-top: 20px;">
+              <button class="btn-primary-sm" onclick="saveAdminGeneralSettings()">
+                <i class="fas fa-save"></i> <span>Save Preferences</span>
+              </button>
+              <button class="btn-icon" style="width: auto; padding: 0 14px;" onclick="testRealtimeDispatch()">
+                <i class="fas fa-paper-plane" style="margin-right: 6px;"></i> Send Test Live Event
+              </button>
+              <button class="btn-icon" style="width: auto; padding: 0 14px;" onclick="localStorage.removeItem('portal_analytics_events'); showToast('Local event logs cleared');">
+                <i class="fas fa-trash-alt" style="margin-right: 6px;"></i> Clear Local Cache
+              </button>
             </div>
           </div>
         </section>

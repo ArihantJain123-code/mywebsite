@@ -78,6 +78,26 @@
     return cities[Math.floor(Math.random() * cities.length)];
   }
 
+  // Real-Time BroadcastChannel for instant cross-tab communication
+  let telemetryChannel = null;
+  try {
+    if (typeof BroadcastChannel !== "undefined") {
+      telemetryChannel = new BroadcastChannel("od_live_telemetry");
+    }
+  } catch (e) {
+    console.warn("BroadcastChannel not supported", e);
+  }
+
+  // Optional Firebase Realtime Database sync dispatcher
+  function getFirebaseDB() {
+    try {
+      if (typeof firebase !== "undefined" && firebase.apps && firebase.apps.length > 0) {
+        return firebase.database();
+      }
+    } catch (e) { }
+    return null;
+  }
+
   // Record an event
   function trackEvent(eventType, eventData = {}) {
     const session = getSession();
@@ -104,6 +124,24 @@
       console.warn("Analytics storage error", e);
     }
 
+    // Broadcast across browser windows/tabs in sub-second real-time
+    if (telemetryChannel) {
+      try {
+        telemetryChannel.postMessage({ type: "TELEMETRY_EVENT", event: event });
+      } catch (e) { }
+    }
+
+    // Sync with Firebase Realtime Database if connected
+    const db = getFirebaseDB();
+    if (db) {
+      try {
+        db.ref("telemetry_stream").push({
+          ...event,
+          _serverTime: { ".sv": "timestamp" }
+        });
+      } catch (e) { }
+    }
+
     // Update real-time heartbeat
     updateRealtimeHeartbeat(session, event);
   }
@@ -111,7 +149,7 @@
   function updateRealtimeHeartbeat(session, lastEvent) {
     try {
       const realtimeData = JSON.parse(localStorage.getItem(STORAGE_KEY_REALTIME) || "{}");
-      realtimeData[session.id] = {
+      const currentActive = {
         sessionId: session.id,
         lastActive: Date.now(),
         currentPath: window.location.pathname + window.location.hash,
@@ -120,6 +158,7 @@
         city: session.city,
         referrer: session.referrer
       };
+      realtimeData[session.id] = currentActive;
 
       // Clean up inactive sessions (> 3 minutes)
       const now = Date.now();
@@ -129,6 +168,27 @@
         }
       }
       localStorage.setItem(STORAGE_KEY_REALTIME, JSON.stringify(realtimeData));
+
+      // Broadcast heartbeat
+      if (telemetryChannel) {
+        try {
+          telemetryChannel.postMessage({
+            type: "HEARTBEAT",
+            session: currentActive,
+            activeCount: Object.keys(realtimeData).length
+          });
+        } catch (e) { }
+      }
+
+      // Sync active presence to Firebase if connected
+      const db = getFirebaseDB();
+      if (db) {
+        try {
+          const presenceRef = db.ref("active_sessions/" + session.id);
+          presenceRef.set(currentActive);
+          presenceRef.onDisconnect().remove();
+        } catch (e) { }
+      }
     } catch (e) { }
   }
 
@@ -158,6 +218,21 @@
       localStorage.setItem(STORAGE_KEY_LEADS, JSON.stringify(leads));
     } catch (e) { }
 
+    // Broadcast lead immediately across all open tabs (Admin Panel instantly catches this)
+    if (telemetryChannel) {
+      try {
+        telemetryChannel.postMessage({ type: "NEW_LEAD", lead: lead });
+      } catch (e) { }
+    }
+
+    // Sync lead to Firebase Realtime Database
+    const db = getFirebaseDB();
+    if (db) {
+      try {
+        db.ref("leads/" + lead.id).set(lead);
+      } catch (e) { }
+    }
+
     trackEvent("lead_submit", { leadId: lead.id, course: lead.course, source: lead.source });
   }
 
@@ -165,6 +240,7 @@
   window.OnlineDegreesAnalytics = {
     trackEvent: trackEvent,
     trackLead: trackLead,
+    channel: telemetryChannel,
     getEvents: function () {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY_EVENTS) || "[]"); } catch (e) { return []; }
     },
