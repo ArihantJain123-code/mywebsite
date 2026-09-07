@@ -219,8 +219,8 @@
             <div class="chart-card">
               <div class="chart-card-header">
                 <div>
-                  <div class="chart-card-title"><i class="fas fa-wave-square"></i> 24-Hour Hourly Traffic & Search Clicks</div>
-                  <div class="chart-card-subtitle">Real-time visitor flow with peak times around 2 PM - 8 PM</div>
+                  <div class="chart-card-title" id="traffic-chart-title"><i class="fas fa-wave-square"></i> 24-Hour Hourly Traffic & Search Clicks</div>
+                  <div class="chart-card-subtitle" id="traffic-chart-subtitle">Real-time visitor flow with peak times around 2 PM - 8 PM</div>
                 </div>
               </div>
               <div class="chart-container">
@@ -262,31 +262,12 @@
             <div class="chart-card">
               <div class="chart-card-header">
                 <div>
-                  <div class="chart-card-title"><i class="fas fa-map-location-dot"></i> Top Student Locations (24h)</div>
+                  <div class="chart-card-title"><i class="fas fa-map-location-dot"></i> Top Student Locations (<span class="time-range-text">24h</span>)</div>
                   <div class="chart-card-subtitle">Geographic concentration of degree aspirants</div>
                 </div>
               </div>
-              <div class="geo-list">
-                <div class="geo-item">
-                  <div class="geo-header"><span class="geo-city"><i class="fas fa-location-pin" style="color: #6366f1;"></i> Delhi NCR</span><span class="geo-visitors">4,280 (28.8%)</span></div>
-                  <div class="geo-bar"><div class="geo-bar-fill" style="width: 28.8%;"></div></div>
-                </div>
-                <div class="geo-item">
-                  <div class="geo-header"><span class="geo-city"><i class="fas fa-location-pin" style="color: #06b6d4;"></i> Mumbai MMR</span><span class="geo-visitors">3,410 (22.9%)</span></div>
-                  <div class="geo-bar"><div class="geo-bar-fill" style="width: 22.9%;"></div></div>
-                </div>
-                <div class="geo-item">
-                  <div class="geo-header"><span class="geo-city"><i class="fas fa-location-pin" style="color: #10b981;"></i> Bengaluru</span><span class="geo-visitors">2,650 (17.8%)</span></div>
-                  <div class="geo-bar"><div class="geo-bar-fill" style="width: 17.8%;"></div></div>
-                </div>
-                <div class="geo-item">
-                  <div class="geo-header"><span class="geo-city"><i class="fas fa-location-pin" style="color: #f59e0b;"></i> Hyderabad</span><span class="geo-visitors">1,820 (12.2%)</span></div>
-                  <div class="geo-bar"><div class="geo-bar-fill" style="width: 12.2%;"></div></div>
-                </div>
-                <div class="geo-item">
-                  <div class="geo-header"><span class="geo-city"><i class="fas fa-location-pin" style="color: #8b5cf6;"></i> Pune & Others</span><span class="geo-visitors">2,690 (18.3%)</span></div>
-                  <div class="geo-bar"><div class="geo-bar-fill" style="width: 18.3%;"></div></div>
-                </div>
+              <div class="geo-list" id="geo-distribution-container">
+                <!-- Injected dynamically via admin.js -->
               </div>
             </div>
           </div>
@@ -295,7 +276,7 @@
           <div class="data-card">
             <div class="chart-card-header">
               <div>
-                <div class="chart-card-title"><i class="fas fa-file-lines"></i> Most Visited URLs & Pages (Last 24 Hours)</div>
+                <div class="chart-card-title" id="top-pages-title"><i class="fas fa-file-lines"></i> Most Visited URLs & Pages (Last 24 Hours)</div>
                 <div class="chart-card-subtitle">Highest traffic landing pages, blog guides, and degree catalogs</div>
               </div>
             </div>
@@ -304,7 +285,7 @@
                 <thead>
                   <tr>
                     <th>Page / URL Path</th>
-                    <th>24h Pageviews</th>
+                    <th>Pageviews (<span class="time-range-text">24h</span>)</th>
                     <th>Unique Visitors</th>
                     <th>Avg. Time</th>
                     <th>Bounce Rate</th>
@@ -436,12 +417,12 @@
           <div class="kpi-grid">
             <div class="kpi-card">
               <div class="kpi-header">
-                <span class="kpi-title">Organic Impressions (24h)</span>
+                <span class="kpi-title">Organic Impressions (<span class="time-range-text">24h</span>)</span>
                 <div class="kpi-icon-box kpi-icon-indigo"><i class="fas fa-eye"></i></div>
               </div>
               <div class="kpi-value-row">
-                <div class="kpi-value">86,500</div>
-                <span class="kpi-trend trend-up">+14.2%</span>
+                <div class="kpi-value" id="seo-kpi-impressions">98,400</div>
+                <span class="kpi-trend trend-up" id="seo-kpi-imp-trend">+15.8%</span>
               </div>
               <div class="kpi-subtext">Google Search Console Telemetry</div>
             </div>
@@ -452,10 +433,10 @@
                 <div class="kpi-icon-box kpi-icon-emerald"><i class="fas fa-mouse-pointer"></i></div>
               </div>
               <div class="kpi-value-row">
-                <div class="kpi-value">9,240</div>
-                <span class="kpi-trend trend-up">+12.8%</span>
+                <div class="kpi-value" id="seo-kpi-clicks">10,850</div>
+                <span class="kpi-trend trend-up" id="seo-kpi-clicks-trend">+16.2%</span>
               </div>
-              <div class="kpi-subtext">Average CTR: <strong>10.68%</strong></div>
+              <div class="kpi-subtext" id="seo-kpi-ctr-text">Average CTR: <strong>11.03%</strong></div>
             </div>
 
             <div class="kpi-card">
@@ -464,10 +445,10 @@
                 <div class="kpi-icon-box kpi-icon-amber"><i class="fas fa-list-ol"></i></div>
               </div>
               <div class="kpi-value-row">
-                <div class="kpi-value">4.2</div>
-                <span class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +0.6 pos</span>
+                <div class="kpi-value" id="seo-kpi-position">3.8</div>
+                <span class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +0.8 pos</span>
               </div>
-              <div class="kpi-subtext">Top 5 average ranking across target terms</div>
+              <div class="kpi-subtext">Top 4 average ranking across target terms</div>
             </div>
 
             <div class="kpi-card">
@@ -476,10 +457,10 @@
                 <div class="kpi-icon-box kpi-icon-purple"><i class="fas fa-crown"></i></div>
               </div>
               <div class="kpi-value-row">
-                <div class="kpi-value">28</div>
-                <span class="kpi-trend trend-up">+4 keywords</span>
+                <div class="kpi-value" id="seo-kpi-top3">34</div>
+                <span class="kpi-trend trend-up">+6 keywords</span>
               </div>
-              <div class="kpi-subtext">84 keywords in Top 10 Google India</div>
+              <div class="kpi-subtext">112 keywords in Top 10 Google India</div>
             </div>
           </div>
 
@@ -487,8 +468,8 @@
           <div class="chart-card">
             <div class="chart-card-header">
               <div>
-                <div class="chart-card-title"><i class="fab fa-google"></i> Google Search Console Performance (Last 7 Days vs Last 24h)</div>
-                <div class="chart-card-subtitle">Correlation of search impressions and organic clicks</div>
+                <div class="chart-card-title" id="gsc-chart-title"><i class="fab fa-google"></i> Google Search Console Performance (Daily Trend & Telemetry)</div>
+                <div class="chart-card-subtitle" id="gsc-chart-subtitle">Correlation of search impressions and organic clicks</div>
               </div>
             </div>
             <div class="chart-container" style="min-height: 280px;">
@@ -647,11 +628,11 @@
               <div style="display: flex; flex-direction: column; gap: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 10px;">
                   <span><strong>Total Discovered URLs:</strong></span>
-                  <span class="badge badge-info">742 URLs</span>
+                  <span class="badge badge-info">3,075 URLs</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 10px;">
                   <span><strong>Indexed in Google Search:</strong></span>
-                  <span class="badge badge-success">738 Indexed (99.5%)</span>
+                  <span class="badge badge-success">3,028 Indexed (98.5%)</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 10px;">
                   <span><strong>Robots.txt Validation:</strong></span>
