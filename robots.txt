@@ -1,28 +1,35 @@
-# robots.txt for getonlinedegrees.online
-# Last Updated: 2026-08-04
+# robots.txt for https://www.getonlinedegrees.online/
+# Technical SEO & Crawl Directive Configuration
 
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-# Allow all other search engine crawlers
+# Default rules for all web crawlers
 User-agent: *
 Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
 
-# Canonical Host
-Host: https://www.getonlinedegrees.online/
+# Googlebot specific directives
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Bingbot specific directives
+User-agent: Bingbot
+Allow: /
+Allow: /assets/
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Respectful crawl delay for aggressive non-major crawlers
+User-agent: YandexBot
+Crawl-delay: 2
 
 # XML Sitemap Location
 Sitemap: https://www.getonlinedegrees.online/sitemap.xml
 
+# Canonical Host
+Host: www.getonlinedegrees.online

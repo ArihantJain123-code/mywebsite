@@ -24,5 +24,35 @@
   "background_color": "#FAFBFC",
   "theme_color": "#4F46E5",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "shortcuts": [
+    {
+      "name": "Compare Universities",
+      "short_name": "Compare",
+      "description": "Compare online universities side-by-side",
+      "url": "/?view=compare",
+      "icons": [{ "src": "assets/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Online MBA Programs",
+      "short_name": "Online MBA",
+      "description": "Explore UGC-DEB approved Online MBA degrees",
+      "url": "/?view=catalog&course=mba",
+      "icons": [{ "src": "assets/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Online MCA Programs",
+      "short_name": "Online MCA",
+      "description": "Explore top Online MCA degrees",
+      "url": "/?view=catalog&course=mca",
+      "icons": [{ "src": "assets/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Education Blog & Guides",
+      "short_name": "Blogs",
+      "description": "Read career transition roadmaps and university reviews",
+      "url": "/?view=blog",
+      "icons": [{ "src": "assets/logo.png", "sizes": "192x192" }]
+    }
+  ]
 }

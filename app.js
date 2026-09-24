@@ -127,19 +127,30 @@ function initReviews() {
 }
 
 // --- Router ---
+// --- Router (SEO-friendly Query Param & Hash Support) ---
 function initRouter() {
   const handleRouteChange = () => {
-    const hash = window.location.hash || "#home";
-
-    // Parse query params if any, e.g. #catalog?course=bca
-    const parts = hash.split("?");
-    const viewName = parts[0].substring(1);
-
+    let viewName = "home";
     let params = {};
-    if (parts[1]) {
-      const searchParams = new URLSearchParams(parts[1]);
-      for (const [key, value] of searchParams.entries()) {
-        params[key] = value;
+
+    // 1. Check Query Parameters first (Crawlable URLs like /?view=catalog&course=mba or /?view=blog-detail&id=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("view") || urlParams.has("course") || urlParams.has("id") || urlParams.has("university")) {
+      viewName = urlParams.get("view") || (urlParams.has("course") || urlParams.has("university") ? "catalog" : (urlParams.has("id") ? "blog-detail" : "home"));
+      for (const [key, value] of urlParams.entries()) {
+        if (key !== "view") params[key] = value;
+      }
+    } else {
+      // 2. Fall back to hash routing (SPA Navigation #catalog, #blog-detail?id=...)
+      const hash = window.location.hash || "#home";
+      const parts = hash.split("?");
+      viewName = parts[0].substring(1) || "home";
+
+      if (parts[1]) {
+        const searchParams = new URLSearchParams(parts[1]);
+        for (const [key, value] of searchParams.entries()) {
+          params[key] = value;
+        }
       }
     }
 
@@ -147,6 +158,7 @@ function initRouter() {
   };
 
   window.addEventListener("hashchange", handleRouteChange);
+  window.addEventListener("popstate", handleRouteChange);
 
   // Trigger on initial load
   handleRouteChange();
@@ -218,6 +230,13 @@ function navigate(viewName, params = {}) {
     }
     updateCatalogCourseInfo();
     renderCatalog();
+    if (params.university) {
+      setTimeout(() => {
+        if (typeof openModal === "function") {
+          openModal(params.university);
+        }
+      }, 150);
+    }
   } else if (viewName === "compare") {
     renderCompareMatrix();
   } else if (viewName === "blog") {
@@ -273,13 +292,32 @@ function navigate(viewName, params = {}) {
 
 // --- Event Listeners Helper ---
 function setupEventListeners() {
-  // Navigation links
+  // Global Interceptor for Clean SEO Query URLs (Seamless SPA Navigation)
+  document.addEventListener("click", (e) => {
+    const anchor = e.target.closest('a[href*="?view="]');
+    if (!anchor || e.ctrlKey || e.metaKey || e.shiftKey || anchor.getAttribute("target") === "_blank") {
+      return;
+    }
+    const href = anchor.getAttribute("href");
+    if (href && (href.startsWith("/?view=") || href.startsWith("?view="))) {
+      e.preventDefault();
+      const targetUrl = href.startsWith("/") ? href : ("/" + href);
+      window.history.pushState({}, "", targetUrl);
+      window.dispatchEvent(new Event("popstate"));
+      const navMenu = document.getElementById("nav-menu");
+      if (navMenu) navMenu.classList.remove("show");
+    }
+  });
+
+  // Navigation links fallback
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", (e) => {
       const linkEl = e.target.closest(".nav-link") || e.target.closest("[data-target]");
       const view = linkEl ? linkEl.getAttribute("data-target") : null;
       if (view) {
-        window.location.hash = `#${view}`;
+        e.preventDefault();
+        window.history.pushState({}, "", `/?view=${view}`);
+        window.dispatchEvent(new Event("popstate"));
       }
       const navMenu = document.getElementById("nav-menu");
       if (navMenu) navMenu.classList.remove("show");
@@ -292,7 +330,8 @@ function setupEventListeners() {
       const cardEl = e.target.closest(".degree-card");
       const course = cardEl ? cardEl.getAttribute("data-course") : null;
       if (course) {
-        window.location.hash = `#catalog?course=${course}`;
+        window.history.pushState({}, "", `/?view=catalog&course=${encodeURIComponent(course)}`);
+        window.dispatchEvent(new Event("popstate"));
       }
     });
   });
@@ -302,7 +341,8 @@ function setupEventListeners() {
   if (browseCta) {
     browseCta.addEventListener("click", (e) => {
       e.preventDefault();
-      window.location.hash = `#catalog`;
+      window.history.pushState({}, "", `/?view=catalog`);
+      window.dispatchEvent(new Event("popstate"));
     });
   }
 
@@ -311,7 +351,8 @@ function setupEventListeners() {
   if (logo) {
     logo.addEventListener("click", (e) => {
       e.preventDefault();
-      window.location.hash = "#home";
+      window.history.pushState({}, "", `/?view=home`);
+      window.dispatchEvent(new Event("popstate"));
     });
   }
 
@@ -320,7 +361,9 @@ function setupEventListeners() {
   if (courseSelect) {
     courseSelect.addEventListener("change", (e) => {
       state.selectedCourse = e.target.value;
+      window.history.pushState({}, "", `/?view=catalog&course=${encodeURIComponent(state.selectedCourse)}`);
       updateCatalogCourseInfo();
+      updateSEO("catalog", { course: state.selectedCourse });
       renderCatalog();
     });
   }
@@ -390,7 +433,8 @@ function setupEventListeners() {
   const compareTrayBtn = document.getElementById("compare-tray-action-btn");
   if (compareTrayBtn) {
     compareTrayBtn.addEventListener("click", () => {
-      window.location.hash = "#compare";
+      window.history.pushState({}, "", "/?view=compare");
+      window.dispatchEvent(new Event("popstate"));
     });
   }
 
@@ -459,10 +503,12 @@ function setupEventListeners() {
       }
 
       if (state.currentView !== "blog" && state.currentView !== "blog-detail") {
-        window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+        window.history.pushState({}, "", `/?view=blog&search=${encodeURIComponent(value)}`);
+        window.dispatchEvent(new Event("popstate"));
       } else {
         if (state.currentView === "blog-detail") {
-          window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+          window.history.pushState({}, "", `/?view=blog&search=${encodeURIComponent(value)}`);
+          window.dispatchEvent(new Event("popstate"));
         } else {
           state.blogPage = 1;
           renderBlogsList();
@@ -484,7 +530,8 @@ function setupEventListeners() {
         state.blogPage = 1;
         renderBlogsList();
       } else {
-        window.location.hash = "#blog";
+        window.history.pushState({}, "", "/?view=blog");
+        window.dispatchEvent(new Event("popstate"));
       }
     });
   }
@@ -503,10 +550,12 @@ function setupEventListeners() {
       if (navBlogSearchClear) navBlogSearchClear.style.display = value ? "inline-flex" : "none";
 
       if (state.currentView !== "blog" && state.currentView !== "blog-detail") {
-        window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+        window.history.pushState({}, "", `/?view=blog&search=${encodeURIComponent(value)}`);
+        window.dispatchEvent(new Event("popstate"));
       } else {
         if (state.currentView === "blog-detail") {
-          window.location.hash = `#blog?search=${encodeURIComponent(value)}`;
+          window.history.pushState({}, "", `/?view=blog&search=${encodeURIComponent(value)}`);
+          window.dispatchEvent(new Event("popstate"));
         } else {
           state.blogPage = 1;
           renderBlogsList();
@@ -577,10 +626,11 @@ function setupEventListeners() {
     blogDetailBackBtn.addEventListener("click", (e) => {
       e.preventDefault();
       if (state.blogQuery) {
-        window.location.hash = `#blog?search=${encodeURIComponent(state.blogQuery)}`;
+        window.history.pushState({}, "", `/?view=blog&search=${encodeURIComponent(state.blogQuery)}`);
       } else {
-        window.location.hash = "#blog";
+        window.history.pushState({}, "", "/?view=blog");
       }
+      window.dispatchEvent(new Event("popstate"));
     });
   }
 
@@ -643,22 +693,36 @@ function setupEventListeners() {
   const inquiryModal = document.getElementById("inquiry-modal");
   const inquiryOpenBtn = document.getElementById("open-inquiry-modal");
   const inquiryCloseBtn = document.getElementById("inquiry-modal-close");
-  const inquiryForm = document.getElementById("inquiry-form");
+  const inquiryForm = document.getElementById("inquiry-modal-form") || document.getElementById("inquiry-form");
   const inquirySuccess = document.getElementById("inquiry-success");
   const inquiryResetBtn = document.getElementById("inquiry-reset-btn");
 
-  function openInquiryModal(e) {
-    if (e) {
+  function openInquiryModal(e, uniId = null) {
+    if (e && e.preventDefault) {
       e.preventDefault();
       e.stopPropagation();
     }
-    if (inquiryModal) {
+    // Ensure form is displayed and success message is reset when re-opened
+    const formEl = document.getElementById("inquiry-modal-form") || document.getElementById("inquiry-form");
+    const successEl = document.getElementById("inquiry-success");
+    if (formEl) {
+      formEl.style.display = "";
+    }
+    if (successEl) {
+      successEl.style.display = "none";
+    }
+
+    if (typeof window.startCounselingWithUni === "function") {
+      window.startCounselingWithUni(uniId);
+    } else if (inquiryModal) {
       inquiryModal.style.display = "flex";
       document.body.style.overflow = "hidden";
     }
     const navMenu = document.getElementById("nav-menu");
     if (navMenu) navMenu.classList.remove("show");
   }
+
+  window.openInquiryModal = openInquiryModal;
 
   function closeInquiryModal() {
     if (inquiryModal) {
@@ -691,8 +755,9 @@ function setupEventListeners() {
     }
   });
 
-  if (inquiryForm) {
-    inquiryForm.addEventListener("submit", (e) => {
+  const activeInquiryForm = document.getElementById("inquiry-modal-form") || document.getElementById("inquiry-form");
+  if (activeInquiryForm) {
+    activeInquiryForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const nameEl = document.getElementById("inquiry-name");
       const emailEl = document.getElementById("inquiry-email");
@@ -737,34 +802,40 @@ function setupEventListeners() {
         window.submitLeadToIntegrations(inquiry);
       }
 
-      inquiryForm.style.display = "none";
-      if (inquirySuccess) inquirySuccess.style.display = "block";
+      activeInquiryForm.style.display = "none";
+      const successCard = document.getElementById("inquiry-success");
+      if (successCard) successCard.style.display = "block";
     });
   }
 
   if (inquiryResetBtn) {
     inquiryResetBtn.addEventListener("click", () => {
-      if (inquiryForm) {
-        inquiryForm.reset();
-        inquiryForm.style.display = "flex";
+      const formEl = document.getElementById("inquiry-modal-form") || document.getElementById("inquiry-form");
+      if (formEl) {
+        formEl.reset();
+        formEl.style.display = "";
       }
-      if (inquirySuccess) inquirySuccess.style.display = "none";
+      const successEl = document.getElementById("inquiry-success");
+      if (successEl) successEl.style.display = "none";
       closeInquiryModal();
     });
   }
 
   // (Integration helpers moved to global scope at the top of app.js)
 
-  // --- Accordion FAQs toggle logic
-  const accordionTitles = document.querySelectorAll(".contact-accordion .accordion-title");
+  // --- Accordion FAQs toggle logic (Contact & Home FAQs)
+  const accordionTitles = document.querySelectorAll(".accordion-title");
   accordionTitles.forEach(title => {
     title.addEventListener("click", () => {
       const item = title.parentElement;
       const isOpen = item.classList.contains("open");
+      const parentContainer = item.closest(".contact-accordion, .home-accordion, .accordion-wrapper, .info-card") || item.parentElement;
 
-      document.querySelectorAll(".contact-accordion .accordion-item").forEach(el => {
-        el.classList.remove("open");
-      });
+      if (parentContainer) {
+        parentContainer.querySelectorAll(".accordion-item").forEach(el => {
+          el.classList.remove("open");
+        });
+      }
 
       if (!isOpen) {
         item.classList.add("open");
@@ -819,6 +890,27 @@ function updateCatalogCourseInfo() {
   if (duration) duration.textContent = courseMeta.duration;
   if (salary) salary.textContent = courseMeta.avgSalary;
   if (eligibility) eligibility.textContent = courseMeta.eligibility;
+
+  // Dynamic Specializations Badges
+  const specsContainer = document.getElementById("catalog-specializations-container");
+  if (specsContainer && courseMeta.specializations) {
+    specsContainer.innerHTML = courseMeta.specializations.map(spec => `
+      <span class="catalog-spec-badge">
+        <i class="fa-solid fa-certificate" style="color:var(--primary); font-size:0.75rem;"></i>
+        ${spec}
+      </span>
+    `).join("");
+  }
+
+  // Dynamic Buyer's Guide Section
+  const guideTitle = document.getElementById("catalog-guide-title");
+  if (guideTitle) {
+    guideTitle.textContent = `${courseMeta.name} Admissions & Comprehensive Degree Guide`;
+  }
+  const guideSubtitle = document.getElementById("catalog-guide-subtitle");
+  if (guideSubtitle) {
+    guideSubtitle.textContent = `Everything you need to know about eligibility, UGC-DEB recognition, curriculum highlights, and career ROI for ${courseMeta.name}.`;
+  }
 }
 
 // --- Render Course Catalog ---
@@ -925,7 +1017,7 @@ function renderCatalog() {
       <!-- Middle Column: Name, Approvals, Features -->
       <div class="uni-card-middle">
         <div class="uni-name-row">
-          <h3>${uni.name}</h3>
+          <h3><a href="?view=catalog&amp;university=${uni.id}" onclick="event.preventDefault(); openModal('${uni.id}')" style="color:inherit; text-decoration:none;">${uni.name}</a></h3>
         </div>
         <div class="uni-approvals-tags">
           ${approvalsHtml}
@@ -952,7 +1044,7 @@ function renderCatalog() {
           </div>
         </div>
         <div class="uni-actions-col">
-          <button class="btn btn-primary" onclick="openModal('${uni.id}')">View Details</button>
+          <a href="?view=catalog&amp;university=${uni.id}" class="btn btn-primary" onclick="event.preventDefault(); openModal('${uni.id}')" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">View Details</a>
           <button class="btn btn-accent" onclick="startCounselingWithUni('${uni.id}')">Apply for Counseling</button>
         </div>
       </div>
@@ -1342,6 +1434,11 @@ window.startCounselingWithUni = function (uniId) {
   const inquiryModal = document.getElementById("inquiry-modal");
   if (!inquiryModal) return;
 
+  const formEl = document.getElementById("inquiry-modal-form") || document.getElementById("inquiry-form");
+  const successEl = document.getElementById("inquiry-success");
+  if (formEl) formEl.style.display = "";
+  if (successEl) successEl.style.display = "none";
+
   const inquiryTitle = document.getElementById("inquiry-modal-title");
   const inquirySubtitle = document.getElementById("inquiry-modal-subtitle");
   const courseSelect = document.getElementById("inquiry-course");
@@ -1357,8 +1454,11 @@ window.startCounselingWithUni = function (uniId) {
       }
     }
   } else {
-    if (inquiryTitle) inquiryTitle.textContent = "Admission & Degree Inquiry";
-    if (inquirySubtitle) inquirySubtitle.textContent = "Connect with certified academic counselors for 100% free guidance on university accreditations, fees & scholarship options.";
+    if (inquiryTitle) inquiryTitle.textContent = "Free University Admission Counseling";
+    if (inquirySubtitle) inquirySubtitle.textContent = "Get personalized advice from certified education experts. 100% free guidance on degrees, fees & scholarship options.";
+    if (messageInput && messageInput.value.startsWith("I am interested in enrolling at")) {
+      messageInput.value = "";
+    }
   }
 
   if (courseSelect && typeof state !== "undefined" && state.selectedCourse) {
@@ -1885,7 +1985,8 @@ function renderBlogsList() {
     const card = document.createElement("div");
     card.className = "blog-card";
     card.addEventListener("click", () => {
-      window.location.hash = `#blog-detail?id=${blog.id}`;
+      window.history.pushState({}, "", `/?view=blog-detail&id=${encodeURIComponent(blog.id)}`);
+      window.dispatchEvent(new Event("popstate"));
     });
 
     // Format date nicely
@@ -1900,11 +2001,11 @@ function renderBlogsList() {
         <span class="blog-card-category" data-category="${escapeHtml(blog.category)}" title="Click to filter by ${escapeHtml(blog.category)}">${escapeHtml(blog.category)}</span>
         <span class="blog-card-date"><i class="far fa-calendar-alt"></i> ${dateFormatted}</span>
       </div>
-      <h3>${escapeHtml(blog.title)}</h3>
+      <h3><a href="?view=blog-detail&amp;id=${encodeURIComponent(blog.id)}" style="color:inherit; text-decoration:none;">${escapeHtml(blog.title)}</a></h3>
       <p>${escapeHtml(blog.excerpt)}</p>
       <div class="blog-card-footer">
         <span class="blog-card-author">By ${escapeHtml(blog.author)}</span>
-        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${escapeHtml(blog.readTime)}</span>
+        <a href="?view=blog-detail&amp;id=${encodeURIComponent(blog.id)}" class="blog-card-more-btn" style="text-decoration:none; font-size:0.8rem;">Read Article <i class="fas fa-arrow-right"></i></a>
       </div>
     `;
 
@@ -2024,7 +2125,8 @@ function renderBlogPagination(totalPages) {
 function renderBlogDetail(blogId) {
   const blog = BLOGS_DATA.find(b => b.id === blogId);
   if (!blog) {
-    window.location.hash = "#blog";
+    window.history.pushState({}, "", "/?view=blog");
+    window.dispatchEvent(new Event("popstate"));
     return;
   }
 
@@ -2042,7 +2144,8 @@ function renderBlogDetail(blogId) {
     catEl.textContent = blog.category;
     catEl.style.cursor = "pointer";
     catEl.onclick = () => {
-      window.location.hash = `#blog?category=${encodeURIComponent(blog.category)}`;
+      window.history.pushState({}, "", `/?view=blog&category=${encodeURIComponent(blog.category)}`);
+      window.dispatchEvent(new Event("popstate"));
     };
   }
   if (readEl) readEl.innerHTML = `<i class="far fa-clock"></i> ${blog.readTime}`;
@@ -2057,6 +2160,39 @@ function renderBlogDetail(blogId) {
   }
   if (avatarEl) avatarEl.textContent = blog.author.charAt(0);
   if (bodyEl) bodyEl.innerHTML = blog.content;
+
+  // Update Breadcrumb active text
+  const breadcrumbActive = document.getElementById("blog-breadcrumb-active");
+  if (breadcrumbActive) {
+    breadcrumbActive.textContent = blog.title.length > 45 ? blog.title.substring(0, 42) + "..." : blog.title;
+  }
+
+  // Setup Social Sharing Buttons
+  const currentUrl = `https://www.getonlinedegrees.online/?view=blog-detail&id=${encodeURIComponent(blog.id)}`;
+  const shareTitle = encodeURIComponent(`${blog.title} - OnlineDegrees`);
+  
+  const waBtn = document.getElementById("btn-share-whatsapp");
+  if (waBtn) {
+    waBtn.onclick = () => window.open(`https://api.whatsapp.com/send?text=${shareTitle}%20${encodeURIComponent(currentUrl)}`, "_blank");
+  }
+  const liBtn = document.getElementById("btn-share-linkedin");
+  if (liBtn) {
+    liBtn.onclick = () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`, "_blank");
+  }
+  const twBtn = document.getElementById("btn-share-twitter");
+  if (twBtn) {
+    twBtn.onclick = () => window.open(`https://twitter.com/intent/tweet?text=${shareTitle}&url=${encodeURIComponent(currentUrl)}`, "_blank");
+  }
+  const copyBtn = document.getElementById("btn-share-copy");
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(currentUrl).then(() => {
+        const textSpan = document.getElementById("share-copy-text");
+        if (textSpan) textSpan.textContent = "Copied!";
+        setTimeout(() => { if (textSpan) textSpan.textContent = "Copy"; }, 2000);
+      });
+    };
+  }
 
   // Render Related Posts
   renderRelatedBlogs(blog);
@@ -2083,19 +2219,20 @@ function renderRelatedBlogs(currentBlog) {
     const card = document.createElement("div");
     card.className = "blog-card";
     card.addEventListener("click", () => {
-      window.location.hash = `#blog-detail?id=${blog.id}`;
+      window.history.pushState({}, "", `/?view=blog-detail&id=${encodeURIComponent(blog.id)}`);
+      window.dispatchEvent(new Event("popstate"));
     });
 
     card.innerHTML = `
       <div class="blog-card-meta">
-        <span class="blog-card-category" style="font-size:0.75rem; padding: 2px 8px;">${blog.category}</span>
-        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${blog.readTime}</span>
+        <span class="blog-card-category" style="font-size:0.75rem; padding: 2px 8px;">${escapeHtml(blog.category)}</span>
+        <span class="blog-card-readtime"><i class="far fa-clock"></i> ${escapeHtml(blog.readTime)}</span>
       </div>
-      <h3 style="font-size: 1.1rem; line-height: 1.3;">${blog.title}</h3>
-      <p style="font-size: 0.85rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${blog.excerpt}</p>
+      <h3 style="font-size: 1.1rem; line-height: 1.3;"><a href="?view=blog-detail&amp;id=${encodeURIComponent(blog.id)}" style="color:inherit; text-decoration:none;">${escapeHtml(blog.title)}</a></h3>
+      <p style="font-size: 0.85rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${escapeHtml(blog.excerpt)}</p>
       <div class="blog-card-footer">
-        <span class="blog-card-author">By ${blog.author}</span>
-        <span class="blog-card-more-btn" style="font-size:0.75rem;">Read <i class="fas fa-arrow-right"></i></span>
+        <span class="blog-card-author">By ${escapeHtml(blog.author)}</span>
+        <a href="?view=blog-detail&amp;id=${encodeURIComponent(blog.id)}" class="blog-card-more-btn" style="font-size:0.75rem; text-decoration:none;">Read <i class="fas fa-arrow-right"></i></a>
       </div>
     `;
     grid.appendChild(card);
@@ -2120,10 +2257,15 @@ function renderTrendingBlogs() {
   const trending = BLOGS_DATA.slice(0, 3);
 
   trending.forEach(blog => {
-    const item = document.createElement("div");
+    const item = document.createElement("a");
     item.className = "blog-popular-item";
-    item.addEventListener("click", () => {
-      window.location.hash = `#blog-detail?id=${blog.id}`;
+    item.href = `/?view=blog-detail&id=${encodeURIComponent(blog.id)}`;
+    item.style.textDecoration = "none";
+    item.style.display = "block";
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.history.pushState({}, "", `/?view=blog-detail&id=${encodeURIComponent(blog.id)}`);
+      window.dispatchEvent(new Event("popstate"));
     });
 
     const formattedDate = new Date(blog.date).toLocaleDateString("en-IN", {
@@ -2133,8 +2275,8 @@ function renderTrendingBlogs() {
     });
 
     item.innerHTML = `
-      <h4>${blog.title}</h4>
-      <span>${formattedDate} &bull; ${blog.readTime}</span>
+      <h4>${escapeHtml(blog.title)}</h4>
+      <span>${formattedDate} &bull; ${escapeHtml(blog.readTime)}</span>
     `;
     container.appendChild(item);
   });
@@ -2969,7 +3111,7 @@ function updateSEO(viewName, params = {}) {
   let title = "OnlineDegrees | Compare & Choose Top UGC-DEB Approved Online Degrees";
   let description = "Find and compare the best online degree programs from top UGC-DEB approved universities. Compare fees, LMS, placements, and ratings in one place.";
   let canonicalUrl = "https://www.getonlinedegrees.online/";
-  let imageUrl = "https://www.getonlinedegrees.online/assets/logo.png";
+  let imageUrl = "https://www.getonlinedegrees.online/assets/og-banner.jpg";
   let jsonLdSchemas = [];
 
   // 1. Base WebSite & Organization Schemas
@@ -2981,7 +3123,7 @@ function updateSEO(viewName, params = {}) {
     "inLanguage": "en",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://www.getonlinedegrees.online/#catalog?search={search_term_string}",
+      "target": "https://www.getonlinedegrees.online/?view=catalog&search={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -3036,7 +3178,7 @@ function updateSEO(viewName, params = {}) {
       }]
     });
 
-    // Homepage FAQ Schema
+    // Homepage FAQ Schema (Matches on-page questions for rich Google SERP features)
     jsonLdSchemas.push({
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -3046,7 +3188,7 @@ function updateSEO(viewName, params = {}) {
           "name": "Are online degrees approved by UGC-DEB valid in India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, degrees awarded through online and distance learning mode by UGC-DEB recognized universities are fully valid and equivalent to conventional degrees for higher education and government jobs."
+            "text": "Yes, degrees awarded through online and distance learning mode by UGC-DEB recognized universities are fully valid and equivalent to conventional regular degrees for higher education, private corporate employment, and central/state government jobs."
           }
         },
         {
@@ -3064,6 +3206,80 @@ function updateSEO(viewName, params = {}) {
             "@type": "Answer",
             "text": "Most online universities do not mandate competitive entrance exam scores (like CAT or MAT), but require candidates to meet baseline academic eligibility marks in their previous degree/higher secondary education."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I switch from a non-tech background to IT with an Online MCA or BCA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Online BCA and Online MCA programs in India offer bridge courses and foundational modules in programming, web development, and cloud computing, allowing graduates from commerce and arts streams to transition successfully into tech careers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are online degrees recognized internationally and approved by WES?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Top NAAC A+ accredited online universities in India like Amity Online and Chandigarh University have WES (World Education Services) recognition, making their online degrees valid for global higher education and immigration."
+          }
+        }
+      ]
+    });
+
+    // ItemList Schema for featured courses carousel
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Top UGC-DEB Approved Online Degree Programs in India",
+      "description": "Featured online undergraduate and postgraduate degree courses available from top accredited Indian universities.",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Online MBA (Master of Business Administration)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=mba"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Online MCA (Master of Computer Applications)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=mca"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Online BCA (Bachelor of Computer Applications)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=bca"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Online BBA (Bachelor of Business Administration)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=bba"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Online M.Com (Master of Commerce)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=mcom"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Online B.Com (Bachelor of Commerce)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=bcom"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Online MA (Master of Arts)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=ma"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Online BA (Bachelor of Arts)",
+          "url": "https://www.getonlinedegrees.online/?view=catalog&course=ba"
         }
       ]
     });
@@ -3075,7 +3291,14 @@ function updateSEO(viewName, params = {}) {
 
     title = `${courseName} Programs 2026 - Fees, Approvals & Top Universities | OnlineDegrees`;
     description = `Compare top UGC-DEB approved ${courseName} degrees in India. Check eligibility, semester fees, placement assistance, and accredited university options.`;
-    canonicalUrl = `https://www.getonlinedegrees.online/#catalog${params.course ? '?course=' + params.course : ''}`;
+    
+    if (params.university) {
+      canonicalUrl = `https://www.getonlinedegrees.online/?view=catalog&university=${encodeURIComponent(params.university)}`;
+    } else if (params.course) {
+      canonicalUrl = `https://www.getonlinedegrees.online/?view=catalog&course=${encodeURIComponent(params.course.toLowerCase())}`;
+    } else {
+      canonicalUrl = `https://www.getonlinedegrees.online/?view=catalog`;
+    }
 
     // Course Schema
     const courseSchema = {
@@ -3115,7 +3338,7 @@ function updateSEO(viewName, params = {}) {
           "@type": "ListItem",
           "position": 2,
           "name": "Find Degrees",
-          "item": "https://www.getonlinedegrees.online/#catalog"
+          "item": "https://www.getonlinedegrees.online/?view=catalog"
         },
         {
           "@type": "ListItem",
@@ -3129,7 +3352,7 @@ function updateSEO(viewName, params = {}) {
   } else if (viewName === "compare") {
     title = "Compare Online Universities Side-by-Side | OnlineDegrees";
     description = "Compare up to 3 online degree universities side-by-side on fees, NAAC grade, UGC approval, placement rating, and LMS features.";
-    canonicalUrl = "https://www.getonlinedegrees.online/#compare";
+    canonicalUrl = "https://www.getonlinedegrees.online/?view=compare";
 
     jsonLdSchemas.push({
       "@context": "https://schema.org",
@@ -3151,9 +3374,9 @@ function updateSEO(viewName, params = {}) {
     });
 
   } else if (viewName === "blog") {
-    title = "Online Education Blog & University Reviews | OnlineDegrees";
-    description = "Read expert insights, detailed university reviews, career tips, and online degree admission guides.";
-    canonicalUrl = "https://www.getonlinedegrees.online/#blog";
+    title = "Online Education Blog, Career Roadmaps & University Reviews | OnlineDegrees";
+    description = "Read expert insights, detailed UGC university reviews, tech career transition guides, and online degree admission tips.";
+    canonicalUrl = "https://www.getonlinedegrees.online/?view=blog";
 
     jsonLdSchemas.push({
       "@context": "https://schema.org",
@@ -3186,7 +3409,7 @@ function updateSEO(viewName, params = {}) {
       if (post.image) {
         imageUrl = post.image.startsWith("http") ? post.image : `https://www.getonlinedegrees.online/${post.image}`;
       }
-      canonicalUrl = `https://www.getonlinedegrees.online/#blog-detail?id=${params.id}`;
+      canonicalUrl = `https://www.getonlinedegrees.online/?view=blog-detail&id=${encodeURIComponent(params.id)}`;
 
       jsonLdSchemas.push({
         "@context": "https://schema.org",
@@ -3195,6 +3418,11 @@ function updateSEO(viewName, params = {}) {
         "description": description,
         "image": imageUrl,
         "datePublished": post.date || "2026-06-19",
+        "dateModified": post.date || "2026-06-19",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": canonicalUrl
+        },
         "inLanguage": "en",
         "author": {
           "@type": "Organization",
@@ -3217,7 +3445,7 @@ function updateSEO(viewName, params = {}) {
             "@type": "ListItem",
             "position": 2,
             "name": "Blogs",
-            "item": "https://www.getonlinedegrees.online/#blog"
+            "item": "https://www.getonlinedegrees.online/?view=blog"
           },
           {
             "@type": "ListItem",
@@ -3232,7 +3460,7 @@ function updateSEO(viewName, params = {}) {
   } else if (viewName === "contact") {
     title = "Contact Us & Free Education Counseling | OnlineDegrees";
     description = "Get in touch with expert counselors for personalized online degree guidance, fee comparisons, and admission assistance.";
-    canonicalUrl = "https://www.getonlinedegrees.online/#contact";
+    canonicalUrl = "https://www.getonlinedegrees.online/?view=contact";
 
     jsonLdSchemas.push({
       "@context": "https://schema.org",
@@ -3255,7 +3483,7 @@ function updateSEO(viewName, params = {}) {
   } else if (viewName === "resume-builder") {
     title = "Free Interactive ATS Resume Builder | OnlineDegrees";
     description = "Create a professional, ATS-friendly resume in real-time. Custom templates, styling, and instant PDF download.";
-    canonicalUrl = "https://www.getonlinedegrees.online/#resume-builder";
+    canonicalUrl = "https://www.getonlinedegrees.online/?view=resume-builder";
 
     jsonLdSchemas.push({
       "@context": "https://schema.org",
@@ -3287,7 +3515,7 @@ function updateSEO(viewName, params = {}) {
         "@context": "https://schema.org",
         "@type": "EducationalOrganization",
         "name": uni.name,
-        "url": uni.website || `https://www.getonlinedegrees.online/#catalog?university=${uni.id}`,
+        "url": uni.website || `https://www.getonlinedegrees.online/?view=catalog&university=${encodeURIComponent(uni.id)}`,
         "logo": uni.logo ? `https://www.getonlinedegrees.online/${uni.logo}` : orgSchema.logo,
         "description": `${uni.name} offers accredited online degree courses.`,
         "award": `NAAC Grade ${uni.naacGrade || "A+"}`,

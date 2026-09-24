@@ -14,6 +14,10 @@
     return prefix + "_" + Math.random().toString(36).substring(2, 9) + Date.now().toString(36);
   }
 
+  function getCurrentTrackPath() {
+    return window.location.pathname + (window.location.search || window.location.hash || "");
+  }
+
   // Get or initialize session
   function getSession() {
     let session = null;
@@ -32,7 +36,7 @@
         device: getDeviceType(),
         browser: getBrowserInfo(),
         os: getOSInfo(),
-        landingPage: window.location.pathname + window.location.hash,
+        landingPage: getCurrentTrackPath(),
         city: getRandomCity()
       };
       try {
@@ -106,7 +110,7 @@
       type: eventType,
       timestamp: Date.now(),
       sessionId: session.id,
-      path: window.location.pathname + window.location.hash,
+      path: getCurrentTrackPath(),
       title: document.title,
       referrer: document.referrer || "Direct",
       device: session.device,
@@ -152,7 +156,7 @@
       const currentActive = {
         sessionId: session.id,
         lastActive: Date.now(),
-        currentPath: window.location.pathname + window.location.hash,
+        currentPath: getCurrentTrackPath(),
         pageTitle: document.title,
         device: session.device,
         city: session.city,
@@ -266,15 +270,17 @@
   document.addEventListener("DOMContentLoaded", () => {
     trackEvent("pageview", {
       url: window.location.href,
-      path: window.location.pathname + window.location.hash
+      path: getCurrentTrackPath()
     });
 
-    // Track hash changes (SPA navigation)
-    window.addEventListener("hashchange", () => {
+    // Track hash and query navigation changes (SPA dual routing)
+    const handleNavChange = () => {
       trackEvent("navigation", {
-        path: window.location.pathname + window.location.hash
+        path: getCurrentTrackPath()
       });
-    });
+    };
+    window.addEventListener("hashchange", handleNavChange);
+    window.addEventListener("popstate", handleNavChange);
 
     // Heartbeat every 20 seconds
     setInterval(() => {

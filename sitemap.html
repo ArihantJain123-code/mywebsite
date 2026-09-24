@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Sitemap & Directory | OnlineDegrees</title>
+  <meta name="description" content="Explore the comprehensive directory of UGC-DEB approved online degrees, university comparison boards, career roadmaps, and admission counseling resources on OnlineDegrees.">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Language" content="en">
+  <link rel="canonical" href="https://www.getonlinedegrees.online/sitemap.html">
+  <link rel="alternate" hreflang="en" href="https://www.getonlinedegrees.online/sitemap.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.getonlinedegrees.online/sitemap.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OnlineDegrees">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://www.getonlinedegrees.online/sitemap.html">
+  <meta property="og:title" content="HTML Sitemap & Directory | OnlineDegrees">
+  <meta property="og:description" content="Comprehensive index of UGC-DEB approved online degree courses, accredited universities, and educational blogs.">
+  <meta property="og:image" content="https://www.getonlinedegrees.online/assets/og-banner.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:site" content="@OnlineDegrees">
+  <meta property="twitter:url" content="https://www.getonlinedegrees.online/sitemap.html">
+  <meta property="twitter:title" content="HTML Sitemap & Directory | OnlineDegrees">
+  <meta property="twitter:description" content="Comprehensive index of UGC-DEB approved online degree courses, accredited universities, and educational blogs.">
+  <meta property="twitter:image" content="https://www.getonlinedegrees.online/assets/og-banner.jpg">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "inLanguage": "en",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.getonlinedegrees.online/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Sitemap Directory",
+        "item": "https://www.getonlinedegrees.online/sitemap.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styling -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .sitemap-header {
+      padding: 60px 0 30px 0;
+      text-align: center;
+    }
+    .sitemap-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .sitemap-header h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .sitemap-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .sitemap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin: 40px 0 80px 0;
+    }
+    .sitemap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+    }
+    .sitemap-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(79, 70, 229, 0.3);
+      transform: translateY(-3px);
+    }
+    .sitemap-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .sitemap-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+    .sitemap-card-header h2 {
+      font-size: 1.3rem;
+      color: var(--text-main);
+      margin: 0;
+    }
+    .sitemap-links-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sitemap-links-list li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 6px 0;
+      transition: color var(--transition-fast);
+    }
+    .sitemap-links-list li a:hover {
+      color: var(--primary);
+    }
+    .sitemap-links-list li a i {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      transition: transform var(--transition-fast);
+    }
+    .sitemap-links-list li a:hover i {
+      transform: translateX(4px);
+      color: var(--primary);
+    }
+    .badge-tag {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--secondary);
+      font-weight: 700;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- --- HEADER & NAVIGATION --- -->
+  <header>
+    <div class="container navbar">
+      <a href="/" class="logo-container" id="navbar-logo" style="text-decoration:none;">
+        <div class="logo-icon">O</div>
+        <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/?view=catalog">Find Degrees</a></li>
+        <li><a class="nav-link" href="/?view=compare">Compare Board</a></li>
+        <li><a class="nav-link" href="/?view=blog">Blogs</a></li>
+        <li><a class="nav-link" href="/?view=contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- --- MAIN CONTENT --- -->
+  <main class="container">
+    <div class="sitemap-header">
+      <div class="sitemap-badge"><i class="fas fa-sitemap"></i> Site Index &amp; Directory</div>
+      <h1>Complete Website Sitemap</h1>
+      <p>Quickly locate accredited online degree programs, university comparison sheets, career transition roadmaps, and student tools.</p>
+    </div>
+
+    <div class="sitemap-grid">
+      
+      <!-- Card 1: Core Navigation Pages -->
+      <div class="sitemap-card">
+        <div class="sitemap-card-header">
+          <div class="sitemap-card-icon"><i class="fas fa-compass"></i></div>
+          <h2>Core Portal Pages</h2>
+        </div>
+        <ul class="sitemap-links-list">
+          <li><a href="/"><span>Home &amp; University Search</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=catalog"><span>Degree Course Catalog</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=compare"><span>Side-by-Side Compare Board</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=blog"><span>Insights &amp; Reviews Blog</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=contact"><span>Contact Admissions</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=resume-builder"><span>Interactive ATS Resume Builder</span> <span class="badge-tag">Free Tool</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Card 2: Accredited Degree Courses -->
+      <div class="sitemap-card">
+        <div class="sitemap-card-header">
+          <div class="sitemap-card-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h2>Accredited Degrees</h2>
+        </div>
+        <ul class="sitemap-links-list">
+          <li><a href="/?view=catalog&amp;course=mba"><span>Online MBA (2 Years)</span> <span class="badge-tag">Top Choice</span></a></li>
+          <li><a href="/?view=catalog&amp;course=mca"><span>Online MCA (2 Years)</span> <span class="badge-tag">High Demand</span></a></li>
+          <li><a href="/?view=catalog&amp;course=bca"><span>Online BCA (3 Years)</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=catalog&amp;course=bba"><span>Online BBA (3 Years)</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=catalog&amp;course=mcom"><span>Online M.Com (2 Years)</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=catalog&amp;course=bcom"><span>Online B.Com (3 Years)</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=catalog&amp;course=ma"><span>Online MA Programs</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=catalog&amp;course=ba"><span>Online BA Programs</span> <i class="fas fa-chevron-right"></i></a></li>
+        </ul>
+      </div>
+
+      <!-- Card 3: Top Accredited Universities -->
+      <div class="sitemap-card">
+        <div class="sitemap-card-header">
+          <div class="sitemap-card-icon"><i class="fas fa-university"></i></div>
+          <h2>Featured Universities</h2>
+        </div>
+        <ul class="sitemap-links-list">
+          <li><a href="/?view=catalog&amp;university=amity_university_online"><span>Amity University Online</span> <span class="badge-tag">NAAC A+</span></a></li>
+          <li><a href="/?view=catalog&amp;university=chandigarh_university_online"><span>Chandigarh University Online</span> <span class="badge-tag">NAAC A+</span></a></li>
+          <li><a href="/?view=catalog&amp;university=manipal_university_jaipur_online"><span>Manipal Online University</span> <span class="badge-tag">NAAC A+</span></a></li>
+          <li><a href="/?view=catalog&amp;university=lovely_professional_university_online"><span>Lovely Professional University</span> <span class="badge-tag">NAAC A++</span></a></li>
+          <li><a href="/?view=catalog&amp;university=d_y_patil_university_online"><span>Dr. D.Y. Patil Online</span> <span class="badge-tag">NAAC A++</span></a></li>
+          <li><a href="/?view=catalog&amp;university=jain_university_online"><span>Jain University Online</span> <span class="badge-tag">NAAC A++</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Card 4: Key Guides & Resources -->
+      <div class="sitemap-card">
+        <div class="sitemap-card-header">
+          <div class="sitemap-card-icon"><i class="fas fa-book-open"></i></div>
+          <h2>Editorial &amp; Legal Guides</h2>
+        </div>
+        <ul class="sitemap-links-list">
+          <li><a href="/?view=blog&amp;category=Approvals"><span>UGC-DEB Regulatory Approval Guides</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=blog&amp;category=Career"><span>Tech Career Transition Roadmaps</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=blog&amp;category=Comparison"><span>University Comparison Reports</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/?view=blog&amp;category=Placements"><span>Placement Statistics &amp; Hiring Reports</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/privacy.html"><span>Privacy Policy &amp; Data Rights</span> <i class="fas fa-chevron-right"></i></a></li>
+          <li><a href="/terms.html"><span>Terms &amp; Conditions</span> <i class="fas fa-chevron-right"></i></a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- --- FOOTER --- -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <div class="logo-container">
+          <div class="logo-icon" style="background:var(--secondary)">O</div>
+          <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+        </div>
+        <p class="footer-desc">India's premium online degree comparison portal. Empowering working professionals and students to match academic goals with fully accredited UGC-DEB universities.</p>
+      </div>
+      <div class="footer-links-col">
+        <h4>Degree Courses</h4>
+        <ul>
+          <li><a href="/?view=catalog&amp;course=mba">Online MBA</a></li>
+          <li><a href="/?view=catalog&amp;course=mca">Online MCA</a></li>
+          <li><a href="/?view=catalog&amp;course=bca">Online BCA</a></li>
+          <li><a href="/?view=catalog&amp;course=bba">Online BBA</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/sitemap.html">Sitemap Directory</a></li>
+          <li><a href="/terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>&copy; 2026 OnlineDegrees. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

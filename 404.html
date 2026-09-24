@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | OnlineDegrees</title>
+  <meta name="description" content="The page you are looking for cannot be found. Browse top UGC-DEB approved online degrees, university fee comparisons, and education blogs on OnlineDegrees.">
+  <meta name="robots" content="noindex, follow">
+  <meta http-equiv="Content-Language" content="en">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .error-wrapper {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .error-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .error-code {
+      font-family: var(--font-heading);
+      font-size: clamp(5rem, 12vw, 8.5rem);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+    .error-title {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: var(--text-main);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .error-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto 32px auto;
+      line-height: 1.6;
+    }
+    .error-search-box {
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto 36px auto;
+      display: flex;
+      gap: 8px;
+      background: white;
+      padding: 6px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+    .error-search-box input {
+      flex: 1;
+      border: none;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .quick-links-title {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .quick-links-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .quick-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      background: white;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+    .quick-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .quick-chip i {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- --- HEADER & NAVIGATION --- -->
+  <header>
+    <div class="container navbar">
+      <a href="/" class="logo-container" id="navbar-logo" style="text-decoration:none;">
+        <div class="logo-icon">O</div>
+        <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+      </a>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/#catalog">Find Degrees</a></li>
+        <li><a class="nav-link" href="/#compare">Compare Board</a></li>
+        <li><a class="nav-link" href="/#blog">Blogs</a></li>
+        <li><a class="nav-link" href="/#contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- --- MAIN 404 CONTENT --- -->
+  <main class="container">
+    <div class="error-wrapper">
+      <div class="error-badge"><i class="fas fa-exclamation-triangle"></i> HTTP 404 Error</div>
+      <div class="error-code">404</div>
+      <h1 class="error-title">Looking For an Online Degree Program?</h1>
+      <p class="error-desc">We couldn't find the page you were looking for. The link may have changed, or the program details were updated. Use the search bar below or pick from our popular degree comparisons.</p>
+      
+      <!-- Quick Search -->
+      <form class="error-search-box" onsubmit="event.preventDefault(); const q = this.querySelector('input').value.trim(); window.location.href = q ? '/#catalog?search=' + encodeURIComponent(q) : '/#catalog';">
+        <input type="text" placeholder="Search degrees, courses, or universities..." required>
+        <button type="submit" class="btn btn-primary" style="padding: 10px 20px;"><i class="fas fa-search"></i> Search</button>
+      </form>
+
+      <!-- Popular Quick Links -->
+      <div class="quick-links-title">Explore Popular Accredited Programs</div>
+      <div class="quick-links-grid">
+        <a href="/#catalog?course=mba" class="quick-chip"><i class="fas fa-briefcase"></i> Online MBA</a>
+        <a href="/#catalog?course=mca" class="quick-chip"><i class="fas fa-laptop-code"></i> Online MCA</a>
+        <a href="/#catalog?course=bca" class="quick-chip"><i class="fas fa-code"></i> Online BCA</a>
+        <a href="/#catalog?course=bba" class="quick-chip"><i class="fas fa-chart-line"></i> Online BBA</a>
+        <a href="/#catalog?course=mcom" class="quick-chip"><i class="fas fa-calculator"></i> Online M.Com</a>
+        <a href="/#compare" class="quick-chip"><i class="fas fa-balance-scale"></i> Compare Universities</a>
+        <a href="/#blog" class="quick-chip"><i class="fas fa-book-open"></i> Career Blogs</a>
+        <a href="/" class="quick-chip" style="background:var(--primary); color:white;"><i class="fas fa-home" style="color:white;"></i> Back to Homepage</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- --- FOOTER --- -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <div class="logo-container">
+          <div class="logo-icon" style="background:var(--secondary)">O</div>
+          <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+        </div>
+        <p class="footer-desc">India's premium online degree comparison portal. Empowering working professionals and students to match academic goals with fully accredited UGC-DEB universities.</p>
+      </div>
+      <div class="footer-links-col">
+        <h4>Popular Programs</h4>
+        <ul>
+          <li><a href="/#catalog?course=mba">Online MBA</a></li>
+          <li><a href="/#catalog?course=mca">Online MCA</a></li>
+          <li><a href="/#catalog?course=bca">Online BCA</a></li>
+          <li><a href="/#catalog?course=bba">Online BBA</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Legal &amp; Policy</h4>
+        <ul>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>&copy; 2026 OnlineDegrees. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
