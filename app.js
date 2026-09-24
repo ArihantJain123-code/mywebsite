@@ -327,6 +327,7 @@ function setupEventListeners() {
   // Home Quick Course Cards
   document.querySelectorAll(".degree-card").forEach(card => {
     card.addEventListener("click", (e) => {
+      e.preventDefault();
       const cardEl = e.target.closest(".degree-card");
       const course = cardEl ? cardEl.getAttribute("data-course") : null;
       if (course) {

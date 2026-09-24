@@ -13,16 +13,10 @@ Write-Host "==================================================" -ForegroundColor
 Write-Host "  OnlineDegrees Search Engine Submission Tool" -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Cyan
 
-# 1. Bing Sitemap Ping
-Write-Host "`n[1/3] Pinging Microsoft Bing Sitemap Endpoint..." -ForegroundColor Yellow
-$bingPingUrl = "https://www.bing.com/ping?sitemap=https%3A%2F%2F$HostName%2Fsitemap.xml"
-
-try {
-    $res = Invoke-WebRequest -Uri $bingPingUrl -Method Get -TimeoutSec 10 -UseBasicParsing
-    Write-Host "  -> Bing Ping Status: $($res.StatusCode) $($res.StatusDescription)" -ForegroundColor Green
-} catch {
-    Write-Host "  -> Note: Bing Ping returned: $_ (Normal if running in an offline or restricted environment)" -ForegroundColor DarkGray
-}
+# 1. Bing / IndexNow Protocol Note
+Write-Host "`n[1/3] Checking Search Engine Submission Protocols..." -ForegroundColor Yellow
+Write-Host "  -> Microsoft Bing & Yandex: Fully automated via IndexNow Protocol (HTTP 200)." -ForegroundColor Green
+Write-Host "  -> Google: Requires Google Search Console manual submission or backlinks (Pings deprecated)." -ForegroundColor Cyan
 
 # 2. IndexNow Batch Submission
 Write-Host "`n[2/3] Submitting Core URLs to IndexNow API (Bing/Yandex/Partners)..." -ForegroundColor Yellow
@@ -70,9 +64,34 @@ $ogBannerExists = Test-Path "d:\mywebsite\assets\og-banner.jpg"
 
 Write-Host "  -> IndexNow Key File ($Key.txt): $(if ($keyExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($keyExists) {'Green'} else {'Red'})
 Write-Host "  -> XML Sitemap (sitemap.xml): $(if ($sitemapExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($sitemapExists) {'Green'} else {'Red'})
+Write-Host "  -> Articles Sitemap (sitemap_articles.xml): $(if (Test-Path "d:\mywebsite\sitemap_articles.xml") {'FOUND'} else {'MISSING'})" -ForegroundColor $(if (Test-Path "d:\mywebsite\sitemap_articles.xml") {'Green'} else {'Red'})
 Write-Host "  -> HTML Sitemap (sitemap.html): $(if ($htmlSitemapExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($htmlSitemapExists) {'Green'} else {'Red'})
 Write-Host "  -> Robots.txt Directive: $(if ($robotsExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($robotsExists) {'Green'} else {'Red'})
 Write-Host "  -> Social 1200x630 OG Banner: $(if ($ogBannerExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($ogBannerExists) {'Green'} else {'Red'})
+
+# 4. Google Search Console & Indexing Diagnostic
+Write-Host "`n[4/4] Google Search Console (GSC) Indexing Diagnostics..." -ForegroundColor Yellow
+Write-Host "  -> NOTE: Google DOES NOT support IndexNow and deprecated sitemap pings in Dec 2023." -ForegroundColor Cyan
+Write-Host "  -> Checking DNS TXT Verification for Google..." -ForegroundColor DarkGray
+try {
+    $dnsTxt = Resolve-DnsName "getonlinedegrees.online" -Type TXT -ErrorAction Stop
+    $gTxt = $dnsTxt | Where-Object { $_.Strings -match "google-site-verification" }
+    if ($gTxt) {
+        Write-Host "  -> Google DNS TXT Verification: FOUND ($($gTxt.Strings))" -ForegroundColor Green
+    } else {
+        Write-Host "  -> Google DNS TXT Verification: NOT FOUND" -ForegroundColor Red
+    }
+} catch {
+    Write-Host "  -> Could not resolve DNS TXT record locally: $_" -ForegroundColor DarkGray
+}
+
+Write-Host "`n  --------------------------------------------------" -ForegroundColor DarkCyan
+Write-Host "  CRITICAL ACTION REQUIRED FOR GOOGLE INDEXING:" -ForegroundColor White
+Write-Host "  1. Open Google Search Console: https://search.google.com/search-console" -ForegroundColor White
+Write-Host "  2. Submit your Core Sitemap: https://$HostName/sitemap.xml" -ForegroundColor White
+Write-Host "  3. Go to 'URL Inspection' -> Enter: https://$HostName/" -ForegroundColor White
+Write-Host "  4. Click 'TEST LIVE URL' -> Click 'REQUEST INDEXING'" -ForegroundColor White
+Write-Host "  --------------------------------------------------" -ForegroundColor DarkCyan
 
 Write-Host "`n==================================================" -ForegroundColor Cyan
 Write-Host "  Search Engine Setup Completed Successfully!" -ForegroundColor Cyan

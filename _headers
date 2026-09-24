@@ -32,6 +32,10 @@
   Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=86400, stale-while-revalidate=43200
 
+/sitemap_articles.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=86400, stale-while-revalidate=43200
+
 /robots.txt
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=86400

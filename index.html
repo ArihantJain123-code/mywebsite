@@ -16,9 +16,36 @@
   <meta name="distribution" content="Global">
   <meta name="rating" content="General">
   <meta name="revisit-after" content="7 days">
-  <link rel="canonical" href="https://www.getonlinedegrees.online/">
-  <link rel="alternate" hreflang="en" href="https://www.getonlinedegrees.online/">
-  <link rel="alternate" hreflang="x-default" href="https://www.getonlinedegrees.online/">
+  <link rel="canonical" href="https://www.getonlinedegrees.online/" id="canonical-url">
+  <link rel="alternate" hreflang="en" href="https://www.getonlinedegrees.online/" id="hreflang-en">
+  <link rel="alternate" hreflang="x-default" href="https://www.getonlinedegrees.online/" id="hreflang-default">
+  <script>
+    (function(){
+      try {
+        var sp = new URLSearchParams(window.location.search);
+        var canonical = 'https://www.getonlinedegrees.online/';
+        if (sp.has('view')) {
+          var v = sp.get('view');
+          if (v === 'home') canonical = 'https://www.getonlinedegrees.online/';
+          else if (v === 'catalog') {
+            if (sp.has('course')) canonical = 'https://www.getonlinedegrees.online/?view=catalog&course=' + encodeURIComponent(sp.get('course').toLowerCase());
+            else if (sp.has('university')) canonical = 'https://www.getonlinedegrees.online/?view=catalog&university=' + encodeURIComponent(sp.get('university'));
+            else canonical = 'https://www.getonlinedegrees.online/?view=catalog';
+          } else if (v === 'blog-detail' && sp.has('id')) {
+            canonical = 'https://www.getonlinedegrees.online/?view=blog-detail&id=' + encodeURIComponent(sp.get('id'));
+          } else {
+            canonical = 'https://www.getonlinedegrees.online/?view=' + encodeURIComponent(v);
+          }
+        }
+        var cEl = document.getElementById('canonical-url');
+        if (cEl) cEl.setAttribute('href', canonical);
+        var enEl = document.getElementById('hreflang-en');
+        if (enEl) enEl.setAttribute('href', canonical);
+        var defEl = document.getElementById('hreflang-default');
+        if (defEl) defEl.setAttribute('href', canonical);
+      } catch(e){}
+    })();
+  </script>
 
   <!-- Favicon & Touch Icons for Technical SEO -->
   <link rel="icon" type="image/png" href="assets/logo.png">
@@ -54,8 +81,8 @@
   <meta property="twitter:image" content="https://www.getonlinedegrees.online/assets/og-banner.jpg">
   <meta property="twitter:image:alt" content="OnlineDegrees - Compare UGC-DEB Approved Online Degrees in India">
 
-  <!-- Search Engine Webmaster Verification (Replace with your actual tokens) -->
-  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <!-- Search Engine Webmaster Verification -->
+  <meta name="google-site-verification" content="ryeZfQtwAz0BvQG0KNqVp_kHCm7YwmL143gKgnmej7o">
   <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
 
   <!-- Critical Asset Preload for Core Web Vitals -->
@@ -334,9 +361,9 @@
           <div class="search-container">
             <div class="search-input-wrapper">
               <i class="fas fa-search"></i>
-              <input type="text" id="home-search-input" placeholder="Search for courses or universities..." onkeyup="if(event.key === 'Enter') { const q = this.value.trim(); window.location.hash = q ? '#catalog?search=' + encodeURIComponent(q) : '#catalog'; }">
+              <input type="text" id="home-search-input" placeholder="Search for courses or universities..." onkeyup="if(event.key === 'Enter') { const q = this.value.trim(); window.location.href = q ? '/?view=catalog&search=' + encodeURIComponent(q) : '/?view=catalog'; }">
             </div>
-            <button class="btn btn-primary" onclick="const q = document.getElementById('home-search-input').value.trim(); window.location.hash = q ? '#catalog?search=' + encodeURIComponent(q) : '#catalog';">Search</button>
+            <button class="btn btn-primary" onclick="const q = document.getElementById('home-search-input').value.trim(); window.location.href = q ? '/?view=catalog&search=' + encodeURIComponent(q) : '/?view=catalog';">Search</button>
           </div>
           
           <div class="hero-cta-group">
@@ -378,7 +405,7 @@
         </div>
         
         <div class="degree-grid">
-          <div class="degree-card" data-course="mba">
+          <a href="/?view=catalog&course=mba" class="degree-card" data-course="mba" style="text-decoration:none; color:inherit; display:block;">
             <div class="degree-icon"><i class="fas fa-briefcase"></i></div>
             <h3>Online MBA</h3>
             <p>Boost your management skills. Leading specializations include Finance, Marketing, HR, and Analytics.</p>
@@ -386,9 +413,9 @@
               <span><i class="far fa-clock"></i> 2 Years</span>
               <span>Avg Salary: 6-15 LPA</span>
             </div>
-          </div>
+          </a>
           
-          <div class="degree-card" data-course="bca">
+          <a href="/?view=catalog&course=bca" class="degree-card" data-course="bca" style="text-decoration:none; color:inherit; display:block;">
             <div class="degree-icon"><i class="fas fa-code"></i></div>
             <h3>Online BCA</h3>
             <p>Start your IT journey. Learn web design, database management, and programming languages.</p>
@@ -396,9 +423,9 @@
               <span><i class="far fa-clock"></i> 3 Years</span>
               <span>Avg Salary: 3-7 LPA</span>
             </div>
-          </div>
+          </a>
           
-          <div class="degree-card" data-course="bba">
+          <a href="/?view=catalog&course=bba" class="degree-card" data-course="bba" style="text-decoration:none; color:inherit; display:block;">
             <div class="degree-icon"><i class="fas fa-chart-line"></i></div>
             <h3>Online BBA</h3>
             <p>Build a core foundation in business administration, administration strategies, and commerce values.</p>
@@ -406,9 +433,9 @@
               <span><i class="far fa-clock"></i> 3 Years</span>
               <span>Avg Salary: 3-8 LPA</span>
             </div>
-          </div>
+          </a>
           
-          <div class="degree-card" data-course="mca">
+          <a href="/?view=catalog&course=mca" class="degree-card" data-course="mca" style="text-decoration:none; color:inherit; display:block;">
             <div class="degree-icon"><i class="fas fa-laptop-code"></i></div>
             <h3>Online MCA</h3>
             <p>Master advanced software engineering, cloud architecture, and artificial intelligence tracks.</p>
@@ -416,9 +443,9 @@
               <span><i class="far fa-clock"></i> 2 Years</span>
               <span>Avg Salary: 5-12 LPA</span>
             </div>
-          </div>
+          </a>
           
-          <div class="degree-card" data-course="mcom">
+          <a href="/?view=catalog&course=mcom" class="degree-card" data-course="mcom" style="text-decoration:none; color:inherit; display:block;">
             <div class="degree-icon"><i class="fas fa-calculator"></i></div>
             <h3>Online M.Com</h3>
             <p>Deepen your academic expertise in financial accounting, statistics, banking, and commercial law.</p>
@@ -426,7 +453,7 @@
               <span><i class="far fa-clock"></i> 2 Years</span>
               <span>Avg Salary: 4-9 LPA</span>
             </div>
-          </div>
+          </a>
         </div>
 
         <!-- Trust Stats strip -->
@@ -1490,7 +1517,7 @@
           <li><a href="sitemap.html" style="color:var(--secondary);"><i class="fas fa-sitemap" style="font-size:0.75rem;margin-right:4px;"></i> Sitemap Directory</a></li>
           <li><a href="terms.html" style="color:var(--secondary);">Terms &amp; Conditions</a></li>
           <li><a href="privacy.html" style="color:var(--secondary);">Privacy Policy</a></li>
-          <li><a href="admin.html" style="color:var(--secondary);"><i class="fas fa-lock" style="font-size:0.75rem;margin-right:4px;"></i> Admin Panel</a></li>
+          <li><a href="admin.html" rel="nofollow" style="color:var(--secondary);"><i class="fas fa-lock" style="font-size:0.75rem;margin-right:4px;"></i> Admin Panel</a></li>
         </ul>
       </div>
       
@@ -1510,7 +1537,7 @@
         <a href="sitemap.html" style="color:var(--secondary);">Sitemap Directory</a>
         <a href="terms.html" style="color:var(--secondary);">Terms &amp; Conditions</a>
         <a href="privacy.html" style="color:var(--secondary);">Privacy Policy</a>
-        <a href="admin.html" style="color:var(--secondary);"><i class="fas fa-shield-alt" style="font-size:0.75rem;"></i> Admin Analytics</a>
+        <a href="admin.html" rel="nofollow" style="color:var(--secondary);"><i class="fas fa-shield-alt" style="font-size:0.75rem;"></i> Admin Analytics</a>
       </div>
     </div>
   </footer>
