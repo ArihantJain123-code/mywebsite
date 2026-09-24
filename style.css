@@ -193,26 +193,33 @@ header {
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
-  background: var(--gradient-primary);
-  color: white !important;
+  background: #000000;
+  color: #ffffff !important;
   font-weight: 600;
   font-size: 0.9rem;
   border-radius: var(--radius-full);
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   transition: var(--transition-normal);
   border: 1px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
 }
 
 .nav-inquiry-btn:hover {
+  background: #1f2937;
+  color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
-  filter: brightness(1.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.nav-inquiry-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav-inquiry-btn i {
   font-size: 0.85rem;
+  color: #ffffff;
 }
 
 .nav-actions {
