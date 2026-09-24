@@ -86,7 +86,6 @@ Crawl-delay: 2
 
 # XML Sitemap Location
 Sitemap: https://www.getonlinedegrees.online/sitemap.xml
-Sitemap: https://www.getonlinedegrees.online/sitemap_articles.xml
 
 # Canonical Host
 Host: www.getonlinedegrees.online

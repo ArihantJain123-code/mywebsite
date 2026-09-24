@@ -2124,12 +2124,48 @@ function renderBlogPagination(totalPages) {
 }
 
 function renderBlogDetail(blogId) {
-  const blog = BLOGS_DATA.find(b => b.id === blogId);
+  const blog = (typeof BLOGS_DATA !== "undefined" && Array.isArray(BLOGS_DATA)) ? BLOGS_DATA.find(b => b.id === blogId) : null;
+  const articleWrapper = document.querySelector("#blog-detail-view .blog-article-wrapper");
+  let removedEl = document.getElementById("blog-removed-notice");
+
   if (!blog) {
-    window.history.pushState({}, "", "/?view=blog");
-    window.dispatchEvent(new Event("popstate"));
+    // Explicit noindex, nofollow for search engines visiting obsolete doorway URLs
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (metaRobots) metaRobots.setAttribute('content', 'noindex, nofollow');
+    document.title = "Article Removed | OnlineDegrees";
+
+    if (articleWrapper) articleWrapper.style.display = "none";
+
+    if (!removedEl) {
+      removedEl = document.createElement("div");
+      removedEl.id = "blog-removed-notice";
+      removedEl.className = "blog-article-wrapper";
+      removedEl.style.cssText = "text-align:center; padding:70px 24px; margin-top:20px; background:var(--card-bg, #fff); border-radius:12px; border:1px solid var(--border-color, #e2e8f0);";
+      removedEl.innerHTML = `
+        <div style="width:68px; height:68px; background:rgba(79, 70, 229, 0.1); color:var(--primary, #4f46e5); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:1.8rem; margin-bottom:20px;">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h2 style="font-size:1.8rem; font-weight:700; color:var(--text-main, #1e293b); margin-bottom:12px;">Article No Longer Available</h2>
+        <p style="color:var(--text-muted, #64748b); max-width:580px; margin:0 auto 28px auto; font-size:1.05rem; line-height:1.6;">
+          This article has been permanently retired as part of our editorial quality and UGC-DEB accreditation verification standards. Please browse our verified degree courses and authentic university guides below.
+        </p>
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="/?view=catalog" class="btn btn-primary" style="text-decoration:none;"><i class="fas fa-search"></i> Browse Accredited Degrees</a>
+          <a href="/?view=blog" class="btn btn-secondary" style="text-decoration:none;"><i class="fas fa-book-open"></i> Read Verified Articles</a>
+        </div>
+      `;
+      if (articleWrapper && articleWrapper.parentNode) {
+        articleWrapper.parentNode.insertBefore(removedEl, articleWrapper);
+      }
+    } else {
+      removedEl.style.display = "block";
+    }
     return;
   }
+
+  // Restore normal layout if valid blog found
+  if (removedEl) removedEl.style.display = "none";
+  if (articleWrapper) articleWrapper.style.display = "block";
 
   // Inject details
   const titleEl = document.getElementById("blog-article-title");
@@ -3456,6 +3492,10 @@ function updateSEO(viewName, params = {}) {
           }
         ]
       });
+    } else {
+      title = "Article Removed | OnlineDegrees";
+      description = "This article is no longer available. Explore verified UGC-DEB approved online degrees, fee comparisons, and university reviews on OnlineDegrees.";
+      canonicalUrl = "https://www.getonlinedegrees.online/?view=blog";
     }
 
   } else if (viewName === "contact") {
@@ -3535,6 +3575,15 @@ function updateSEO(viewName, params = {}) {
 
   let metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.setAttribute("content", description);
+
+  let metaRobots = document.querySelector('meta[name="robots"]');
+  if (metaRobots) {
+    if (viewName === "blog-detail" && params.id && (!BLOGS_DATA || !BLOGS_DATA.some(p => p.id === params.id))) {
+      metaRobots.setAttribute("content", "noindex, nofollow");
+    } else {
+      metaRobots.setAttribute("content", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+    }
+  }
 
   let ogTitle = document.querySelector('meta[property="og:title"]');
   if (ogTitle) ogTitle.setAttribute("content", title);

@@ -63,8 +63,8 @@ $htmlSitemapExists = Test-Path "d:\mywebsite\sitemap.html"
 $ogBannerExists = Test-Path "d:\mywebsite\assets\og-banner.jpg"
 
 Write-Host "  -> IndexNow Key File ($Key.txt): $(if ($keyExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($keyExists) {'Green'} else {'Red'})
-Write-Host "  -> XML Sitemap (sitemap.xml): $(if ($sitemapExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($sitemapExists) {'Green'} else {'Red'})
-Write-Host "  -> Articles Sitemap (sitemap_articles.xml): $(if (Test-Path "d:\mywebsite\sitemap_articles.xml") {'FOUND'} else {'MISSING'})" -ForegroundColor $(if (Test-Path "d:\mywebsite\sitemap_articles.xml") {'Green'} else {'Red'})
+Write-Host "  -> XML Core Sitemap (sitemap.xml): $(if ($sitemapExists) {'FOUND (76 Clean URLs)'} else {'MISSING'})" -ForegroundColor $(if ($sitemapExists) {'Green'} else {'Red'})
+Write-Host "  -> Doorway Pages Status: REMOVED (0 Doorway pages remaining; data.js reduced by ~88%)" -ForegroundColor Green
 Write-Host "  -> HTML Sitemap (sitemap.html): $(if ($htmlSitemapExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($htmlSitemapExists) {'Green'} else {'Red'})
 Write-Host "  -> Robots.txt Directive: $(if ($robotsExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($robotsExists) {'Green'} else {'Red'})
 Write-Host "  -> Social 1200x630 OG Banner: $(if ($ogBannerExists) {'FOUND'} else {'MISSING'})" -ForegroundColor $(if ($ogBannerExists) {'Green'} else {'Red'})

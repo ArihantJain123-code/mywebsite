@@ -24,6 +24,27 @@
       try {
         var sp = new URLSearchParams(window.location.search);
         var canonical = 'https://www.getonlinedegrees.online/';
+        var isRemovedOrInvalid = false;
+        var validBlogIds = [
+          "online-mba-colleges-haryana-guide", "kuk-online-mba-haryana-review", "op-jindal-online-mba-haryana-review",
+          "manav-rachna-online-mba-haryana-review", "govt-vs-private-online-mba-haryana",
+          "online-mba-gurgaon-faridabad-working-professionals", "ultimate-guide-online-bba-programs-india",
+          "online-mba-colleges-under-1-lakh-india", "top-online-mba-colleges-india",
+          "review-amity_university_online", "review-chandigarh_university_online", "review-d_y_patil_university_online_pune",
+          "review-jain_university_online", "review-lovely_professional_university_lpu_online",
+          "review-manipal_university_jaipur_online", "review-jaipuria_institute_of_management_online_pgdm",
+          "review-sikkim_manipal_university_online", "review-nmims_online", "review-uttaranchal_university_online",
+          "review-vivekananda_global_university_online", "review-parul_university_online", "review-andhra_university_online",
+          "review-shoolini_university_online", "review-srm_university_online", "review-galgotias_university_online",
+          "review-vignan_university_online", "review-kalinga_university_online", "review-chitkara_university_online",
+          "review-op_jindal_global_university_online", "review-jamia_hamdard_university_online",
+          "review-manav_rachna_university_online", "review-mody_university_online", "review-guru_kashi_university_online",
+          "review-sastra_university_online", "review-kurukshetra_university_online", "review-upes_online",
+          "review-symbiosis_centre_for_distance_learning_scdl", "review-amrita_vishwa_vidyapeetham_online",
+          "review-kl_university_online", "review-dy_patil_vidyapeeth_online_navi_mumbai",
+          "review-golden_gate_university_usa", "review-liverpool_john_moores_university_uk",
+          "review-birchwood_university_usa"
+        ];
         if (sp.has('view')) {
           var v = sp.get('view');
           if (v === 'home') canonical = 'https://www.getonlinedegrees.online/';
@@ -32,10 +53,20 @@
             else if (sp.has('university')) canonical = 'https://www.getonlinedegrees.online/?view=catalog&university=' + encodeURIComponent(sp.get('university'));
             else canonical = 'https://www.getonlinedegrees.online/?view=catalog';
           } else if (v === 'blog-detail' && sp.has('id')) {
-            canonical = 'https://www.getonlinedegrees.online/?view=blog-detail&id=' + encodeURIComponent(sp.get('id'));
+            var bId = sp.get('id');
+            if (validBlogIds.indexOf(bId) !== -1) {
+              canonical = 'https://www.getonlinedegrees.online/?view=blog-detail&id=' + encodeURIComponent(bId);
+            } else {
+              isRemovedOrInvalid = true;
+              canonical = 'https://www.getonlinedegrees.online/?view=blog';
+            }
           } else {
             canonical = 'https://www.getonlinedegrees.online/?view=' + encodeURIComponent(v);
           }
+        }
+        if (isRemovedOrInvalid) {
+          var robotsEl = document.querySelector('meta[name="robots"]');
+          if (robotsEl) robotsEl.setAttribute('content', 'noindex, nofollow');
         }
         var cEl = document.getElementById('canonical-url');
         if (cEl) cEl.setAttribute('href', canonical);
