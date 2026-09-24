@@ -473,7 +473,7 @@
       () => {
         setTimeout(() => {
           botMessage(
-            `Our expert counselor will call you within <strong>24 hours</strong> on <strong>${sessionData.lead.phone}</strong> to discuss the best universities for you! 📞<br><br>Meanwhile, feel free to:<br>• 🔍 <a href="#catalog" onclick="window.location.hash='#catalog'">Browse Courses</a><br>• ⚖️ <a href="#compare" onclick="window.location.hash='#compare'">Compare Universities</a><br>• 📞 Call us directly: <a href="tel:6375079973">6375079973</a>`,
+            `Our expert counselor will call you within <strong>24 hours</strong> on <strong>${sessionData.lead.phone}</strong> to discuss the best universities for you! 📞<br><br>Meanwhile, feel free to:<br>• 🔍 <a href="/?view=catalog">Browse Courses</a><br>• ⚖️ <a href="/?view=compare">Compare Universities</a><br>• 📞 Call us directly: <a href="tel:6375079973">6375079973</a>`,
             () => {
               setTimeout(() => {
                 botMessage(
