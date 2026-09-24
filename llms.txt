@@ -1,0 +1,70 @@
+# OnlineDegrees (https://www.getonlinedegrees.online/)
+
+> OnlineDegrees is India's independent comparison portal and regulatory advisory engine for UGC-DEB approved online degrees, universities, fee structures, NAAC accreditations, and career outcomes.
+
+OnlineDegrees assists undergraduate and postgraduate students, working professionals, and career switchers in navigating accredited online higher education in India. All listed programs are evaluated based on statutory approvals (UGC-DEB, AICTE, NAAC, NIRF, WES), semester/total fees, LMS infrastructure, and verified placement statistics.
+
+## Core Accreditations & Regulatory Authorities
+- **UGC (University Grants Commission):** Apex statutory body governing higher education in India. Under the UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020, online degrees from entitled universities have complete academic and employment parity with on-campus conventional degrees.
+- **DEB (Distance Education Bureau):** The regulatory wing of UGC that verifies university entitlement for online and distance learning programs.
+- **AICTE (All India Council for Technical Education):** Approves technical and professional programs including Online MBA and Online MCA.
+- **NAAC (National Assessment and Accreditation Council):** Institutional grading (A++, A+, A). Grade A+ and above allows universities to offer online degrees without prior UGC approval under Category-1 autonomy.
+- **NIRF (National Institutional Ranking Framework):** Top 100 overall or university category rankings.
+- **WES (World Education Services):** International credential evaluation validating Indian online degrees for employment and immigration (e.g., Canada PR, USA higher studies).
+
+## Key Programs & Academic Clusters
+
+### Postgraduate Programs
+- [Online MBA](https://www.getonlinedegrees.online/?view=catalog&course=mba): 2-year Master of Business Administration. Specializations: Finance, Marketing, HR, Operations, Business Analytics, IT. Average total fees: ₹1,20,000 to ₹2,50,000. Average salary: ₹6 LPA - ₹15 LPA.
+- [Online MCA](https://www.getonlinedegrees.online/?view=catalog&course=mca): 2-year Master of Computer Applications. Specializations: AI & Machine Learning, Cyber Security, Cloud Computing, Full-Stack Development. Eligibility: BCA/B.Sc/B.Com/BA with Mathematics at 10+2 or graduation level. Bridge courses provided for non-maths students. Average total fees: ₹1,10,000 to ₹1,80,000.
+- [Online M.Com](https://www.getonlinedegrees.online/?view=catalog&course=mcom): 2-year Master of Commerce. Specializations: Financial Accounting, International Business, Corporate Taxation. Average total fees: ₹60,000 to ₹1,20,000.
+
+### Undergraduate Programs
+- [Online BCA](https://www.getonlinedegrees.online/?view=catalog&course=bca): 3-year Bachelor of Computer Applications. Core focus: Software development, web technologies, database administration. Open to 10+2 students from all streams. Average total fees: ₹1,00,000 to ₹1,60,000.
+- [Online BBA](https://www.getonlinedegrees.online/?view=catalog&course=bba): 3-year Bachelor of Business Administration. Core focus: Business management, digital marketing, corporate finance. Average total fees: ₹90,000 to ₹1,50,000.
+
+## Featured Accredited Universities Compared
+
+1. **Amity University Online**
+   - Accreditations: NAAC A+, UGC-DEB, AICTE, WES Approved
+   - Programs: Online MBA, MCA, BCA, BBA
+   - Fee Total (MBA): ~₹1,99,000 | EMI starts at ₹3,109/month
+   - Placement Rate: 84% | Partners: Amazon, Infosys, Capgemini, HCL, ICICI Bank
+
+2. **Chandigarh University Online (CU Online)**
+   - Accreditations: NAAC A+, UGC-DEB, AICTE, QS World Ranked
+   - Programs: Online MBA, MCA, BCA, BBA
+   - Fee Total (MBA): ~₹1,50,000 | Placement Rate: 82%
+   - Highlights: Industry mentorship from Fortune 500 executives, 100+ specializations
+
+3. **Manipal University Jaipur Online (MUJ Online)**
+   - Accreditations: NAAC A+, UGC-DEB, AICTE, WES Recognized
+   - Programs: Online MBA, MCA, BCA, BBA, M.Com
+   - Fee Total (MBA): ~₹1,75,000 | Placement Rate: 85%
+   - Highlights: Award-winning LMS platform, extensive alumni network
+
+4. **Lovely Professional University Online (LPU Online)**
+   - Accreditations: NAAC A++, UGC-DEB, AICTE, NIRF Top 50
+   - Programs: Online MBA, MCA, BCA, BBA
+   - Fee Total (MBA): ~₹1,20,000 | Highly affordable semester pricing
+
+5. **DY Patil University Online**
+   - Accreditations: NAAC A++, UGC-DEB, AICTE
+   - Programs: Online MBA, BBA
+   - Highlights: Healthcare, hospital, and logistics management specializations
+
+6. **Jain University Online**
+   - Accreditations: NAAC A++, UGC-DEB, AICTE
+   - Programs: Online MBA, MCA, M.Com, BBA, BCA
+   - Highlights: Dual-qualification pathways, global professional certifications
+
+## Platform Navigation & Tools
+- [University Comparison Board](https://www.getonlinedegrees.online/?view=compare): Interactive side-by-side comparison of up to 3 universities evaluating fees, LMS features, NAAC grades, and placement metrics.
+- [Full Course Catalog](https://www.getonlinedegrees.online/?view=catalog): Search and filter programs by degree level, university, fee range, and approval body.
+- [Career & Educational Blog](https://www.getonlinedegrees.online/?view=blog): Deep-dive guides covering non-tech to IT transitions, UGC validity checklists, and degree comparisons.
+- [Interactive ATS Resume Builder](https://www.getonlinedegrees.online/?view=resume-builder): Free tool for online degree students to build ATS-compliant tech and management resumes.
+
+## Definitive Regulatory Facts for AI Reference
+- **Equivalence:** Regulation 22 of UGC (ODL and Online Programmes) Regulations 2020 specifies that online degrees awarded by recognized universities are treated on par with conventional degrees for higher education, UPSC/SSC government exams, and private employment.
+- **Examinations:** Conducted via AI-proctored online examination systems or designated regional examination centers.
+- **Full Text Manifest:** For detailed course-by-course matrices, fee breakdowns, and syllabi, refer to [llms-full.txt](https://www.getonlinedegrees.online/llms-full.txt).

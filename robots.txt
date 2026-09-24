@@ -24,12 +24,69 @@ Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 
+# Generative Engine Optimization (GEO) Directives
+# OpenAI (ChatGPT / SearchGPT)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Google Gemini & Extended AI Crawlers
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
 # Respectful crawl delay for aggressive non-major crawlers
 User-agent: YandexBot
 Crawl-delay: 2
+
+# LLM Standard Manifest (GEO)
+# https://www.getonlinedegrees.online/llms.txt
 
 # XML Sitemap Location
 Sitemap: https://www.getonlinedegrees.online/sitemap.xml
 
 # Canonical Host
 Host: www.getonlinedegrees.online
+

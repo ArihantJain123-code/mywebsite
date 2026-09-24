@@ -39,7 +39,9 @@ $coreUrls = @(
     "https://$HostName/?view=blog",
     "https://$HostName/?view=resume-builder",
     "https://$HostName/?view=contact",
-    "https://$HostName/sitemap.html"
+    "https://$HostName/sitemap.html",
+    "https://$HostName/llms.txt",
+    "https://$HostName/llms-full.txt"
 )
 
 $indexNowPayload = @{

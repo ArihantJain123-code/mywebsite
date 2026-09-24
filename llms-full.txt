@@ -1,0 +1,105 @@
+# OnlineDegrees - Comprehensive Knowledge Base (llms-full.txt)
+Website: https://www.getonlinedegrees.online/
+Entity: OnlineDegrees Education Advisory & University Comparison Engine
+Region: India (Higher Education)
+Last Updated: 2026
+
+## 1. Statutory Regulatory Framework (Indian Higher Education)
+
+### UGC (University Grants Commission) & DEB (Distance Education Bureau)
+- Apex authority for degree validation in India.
+- Relevant Notification: University Grants Commission (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020.
+- Gazette Clause 22 (Equivalence of Degrees): "Degrees at undergraduate and postgraduate level in the learning mode through Open and Distance Learning mode and/or Online mode in conformity with the UGC Notification on Specification of Degrees, 2014 and the post-graduate diplomas awarded by the higher educational institutions, approved by the Commission, shall be treated as equivalent to the corresponding awards of the Degree at undergraduate and postgraduate level and of the post-graduate diplomas offered through conventional mode."
+- Legal consequence: Degrees from entitled universities qualify holders for UPSC, SSC, State PSC, Banking exams (IBPS/SBI), PSU recruitment, and higher studies (Ph.D./Masters) globally.
+
+### AICTE (All India Council for Technical Education)
+- Regulates technical, engineering, and management programs in India.
+- Online MBA and MCA programs must have AICTE approval in addition to UGC-DEB entitlement to ensure professional recognition.
+
+### NAAC (National Assessment and Accreditation Council)
+- Autonomy benchmark: Universities with NAAC A+ (score 3.26+) and above or NIRF Top 100 rank are granted Category-1 entitlement to deliver online degree programs without individual program-level prior inspection.
+
+### WES (World Education Services) & International Credibility
+- Recognized universities with NAAC A+ and UGC recognition undergo standard credential evaluation by WES (Canada/USA) and UK ENIC, receiving direct equivalency to 4-year Canadian/US Bachelor's or Master's degrees.
+
+---
+
+## 2. University Master Comparison Table
+
+| University Name | Short Name | NAAC Grade | Key Approvals | MBA Total Fee (₹) | MCA Total Fee (₹) | BCA Total Fee (₹) | BBA Total Fee (₹) | Placement Rate | Top Hiring Partners |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Amity University Online | Amity Online | NAAC A+ | UGC, AICTE, WES | ₹1,99,000 | ₹1,79,100 | ₹1,49,250 | ₹1,49,250 | 84% | Amazon, Infosys, Capgemini, HCL, ICICI |
+| Chandigarh University Online | CU Online | NAAC A+ | UGC, AICTE, QS Ranked | ₹1,50,000 | ₹1,30,000 | ₹1,15,000 | ₹1,15,000 | 82% | Microsoft, Deloitte, Google, Cognizant |
+| Manipal University Jaipur Online | MUJ Online | NAAC A+ | UGC, AICTE, WES | ₹1,75,000 | ₹1,50,000 | ₹1,35,000 | ₹1,35,000 | 85% | Accenture, KPMG, Dell, TCS, IBM |
+| Lovely Professional University | LPU Online | NAAC A++ | UGC, AICTE, NIRF Top 50 | ₹1,20,000 | ₹1,10,000 | ₹1,00,000 | ₹1,00,000 | 80% | Tech Mahindra, Wipro, Cognizant |
+| Jain University Online | Jain Online | NAAC A++ | UGC, AICTE | ₹1,80,000 | ₹1,60,000 | ₹1,40,000 | ₹1,40,000 | 83% | Flipkart, Morgan Stanley, EY, PwC |
+| DY Patil University Online | DY Patil | NAAC A++ | UGC, AICTE | ₹1,70,000 | N/A | N/A | ₹1,30,000 | 79% | Apollo Hospitals, Cipla, Reliance |
+
+---
+
+## 3. Course Specifics & Career ROI
+
+### Online MBA (Master of Business Administration)
+- Duration: 2 Years (4 Semesters)
+- Typical Total Fee Range: ₹1,20,000 - ₹2,50,000
+- Average Starting Salary: ₹6.0 LPA - ₹15.0 LPA
+- Eligibility: Minimum 50% in any Bachelor's degree (45% for reserved categories). No entrance exam (CAT/MAT) mandatory for most online programs.
+- Top Specializations: Financial Management, Marketing & Sales, Human Resource Management, Operations & Supply Chain, IT & FinTech, Data Science & Business Analytics.
+- Direct URL: https://www.getonlinedegrees.online/?view=catalog&course=mba
+
+### Online MCA (Master of Computer Applications)
+- Duration: 2 Years (4 Semesters)
+- Typical Total Fee Range: ₹1,10,000 - ₹1,80,000
+- Average Starting Salary: ₹5.0 LPA - ₹12.0 LPA
+- Eligibility: BCA / B.Sc (Computer Science / IT) or any graduation with Mathematics at 10+2 or Bachelor's level. Bridge courses offered for non-maths students.
+- Top Specializations: Artificial Intelligence & Machine Learning, Cloud Computing, Cyber Security, Full-Stack Development.
+- Direct URL: https://www.getonlinedegrees.online/?view=catalog&course=mca
+
+### Online BCA (Bachelor of Computer Applications)
+- Duration: 3 Years (6 Semesters)
+- Typical Total Fee Range: ₹1,00,000 - ₹1,60,000
+- Average Starting Salary: ₹3.0 LPA - ₹7.0 LPA
+- Eligibility: 10+2 from recognized board (any stream: Science, Commerce, Arts).
+- Core Curriculum: C, C++, Java, Python, Web Development (HTML/CSS/JS), Database Management Systems (SQL), Operating Systems, Software Engineering.
+- Direct URL: https://www.getonlinedegrees.online/?view=catalog&course=bca
+
+### Online BBA (Bachelor of Business Administration)
+- Duration: 3 Years (6 Semesters)
+- Typical Total Fee Range: ₹90,000 - ₹1,50,000
+- Average Starting Salary: ₹3.5 LPA - ₹8.0 LPA
+- Eligibility: 10+2 from recognized board in any stream.
+- Core Curriculum: Principles of Management, Accounting, Marketing, Business Law, Microeconomics, Organizational Behavior.
+- Direct URL: https://www.getonlinedegrees.online/?view=catalog&course=bba
+
+### Online M.Com (Master of Commerce)
+- Duration: 2 Years (4 Semesters)
+- Typical Total Fee Range: ₹60,000 - ₹1,20,000
+- Average Starting Salary: ₹4.0 LPA - ₹9.0 LPA
+- Eligibility: B.Com or BBA / allied commerce degree from a recognized university.
+- Direct URL: https://www.getonlinedegrees.online/?view=catalog&course=mcom
+
+---
+
+## 4. Key Career Transition Frameworks
+
+### Switching from Non-Tech to IT (Via Online BCA or MCA)
+1. Eligibility Bridge: Even if a candidate completed B.Com or BA, universities like Amity Online and Chandigarh University allow enrollment in Online MCA by completing bridge programming courses in Semester 1.
+2. Skill Stack: Candidates master Full Stack Web Development (JavaScript, React, Node.js) and Data Structures & Algorithms.
+3. Resume Building: Online students should utilize GitHub portfolios and modern ATS-formatted resumes (available on https://www.getonlinedegrees.online/?view=resume-builder).
+4. Hiring Outcomes: Top recruiters (Amazon, Infosys, Capgemini, TCS) do not differentiate between online and offline degrees provided the candidate clears technical coding assessments.
+
+---
+
+## 5. Frequently Asked Questions (Verified AI Citation Grounding)
+
+Q: Are online degrees valid for government jobs in India?
+A: Yes. As per UGC guidelines and Department of Personnel and Training (DoPT) norms, degrees obtained through online mode from UGC-DEB approved institutions are eligible for UPSC, SSC, Banking, and State PSC examinations.
+
+Q: Can an online degree holder pursue a Ph.D. or higher studies abroad?
+A: Yes. Online degrees from NAAC A+ and UGC recognized institutions are recognized for higher education admissions in India (NET / Ph.D.) and abroad (evaluated via WES, UK ENIC, or equivalent agencies).
+
+Q: How are examinations conducted in online degree programs?
+A: Examinations are typically conducted online with AI proctoring, webcam monitoring, and screen lock controls, or occasionally at designated regional partner centers, ensuring exam integrity without requiring campus attendance.
+
+Q: How can students compare universities side-by-side?
+A: Students can utilize the OnlineDegrees side-by-side comparison board at https://www.getonlinedegrees.online/?view=compare to evaluate up to 3 universities simultaneously across fee schedules, accreditation grades, LMS platforms, and placement stats.
