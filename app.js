@@ -713,6 +713,11 @@ function setupEventListeners() {
       successEl.style.display = "none";
     }
 
+    const aiModal = document.getElementById("ai-quiz-modal");
+    if (aiModal) aiModal.style.display = "none";
+    const guideModal = document.getElementById("download-guide-modal");
+    if (guideModal) guideModal.style.display = "none";
+
     if (typeof window.startCounselingWithUni === "function") {
       window.startCounselingWithUni(uniId);
     } else if (inquiryModal) {
@@ -731,6 +736,7 @@ function setupEventListeners() {
       document.body.style.overflow = "";
     }
   }
+  window.closeInquiryModal = closeInquiryModal;
 
   if (inquiryOpenBtn) {
     inquiryOpenBtn.addEventListener("click", openInquiryModal);
@@ -3650,4 +3656,292 @@ function updateSEO(viewName, params = {}) {
   }
   jsonLdScript.textContent = JSON.stringify(jsonLdSchemas, null, 2);
 }
+
+// ========================================================
+// GEN Z COLLEGE SEARCH PORTAL & LEAD GENERATION HANDLERS
+// ========================================================
+
+// 1. Hero Search Handler
+window.handleHeroSearch = function() {
+  const degEl = document.getElementById("hero-degree-select");
+  const searchEl = document.getElementById("home-search-input");
+  const deg = degEl ? degEl.value : "";
+  const query = searchEl ? searchEl.value.trim() : "";
+  
+  let url = "/?view=catalog";
+  if (deg) url += "&course=" + encodeURIComponent(deg);
+  if (query) url += "&search=" + encodeURIComponent(query);
+  window.location.href = url;
+};
+
+// 2. Home AI Matcher Wizard Logic
+window.homeWizardState = {
+  degree: "Online MBA",
+  priority: "Highest Placements"
+};
+
+window.advanceHomeWizard = function(stepNum) {
+  const steps = document.querySelectorAll("#home-ai-wizard .wizard-step");
+  steps.forEach(step => {
+    if (parseInt(step.getAttribute("data-step")) === stepNum) {
+      step.style.display = "block";
+      step.classList.add("active");
+    } else {
+      step.style.display = "none";
+      step.classList.remove("active");
+    }
+  });
+};
+
+window.resetHomeWizard = function() {
+  const form = document.getElementById("home-wizard-lead-form");
+  const success = document.getElementById("home-wizard-success");
+  if (form) {
+    form.reset();
+    form.style.display = "";
+  }
+  if (success) {
+    success.style.display = "none";
+  }
+  window.advanceHomeWizard(1);
+};
+
+window.submitHomeWizardLead = function(e) {
+  if (e) e.preventDefault();
+  const name = document.getElementById("wizard-name")?.value.trim() || "";
+  const phone = document.getElementById("wizard-phone")?.value.trim() || "";
+  const email = document.getElementById("wizard-email")?.value.trim() || "";
+  const budget = document.getElementById("wizard-budget")?.value || "";
+
+  const leadData = {
+    formType: "AI Degree Matcher (Home Wizard)",
+    name,
+    phone,
+    email,
+    budget,
+    course: window.homeWizardState.degree,
+    priority: window.homeWizardState.priority,
+    message: `AI Match Request: Degree=${window.homeWizardState.degree}, Priority=${window.homeWizardState.priority}, Budget=${budget}`,
+    date: new Date().toISOString()
+  };
+
+  if (typeof window.submitLeadToIntegrations === "function") {
+    window.submitLeadToIntegrations(leadData);
+  }
+
+  const form = document.getElementById("home-wizard-lead-form");
+  const success = document.getElementById("home-wizard-success");
+  if (form) form.style.display = "none";
+  if (success) success.style.display = "block";
+};
+
+// 3. Standalone AI Quiz Modal
+window.modalWizardState = {
+  degree: "Online MBA",
+  priority: "Highest Placements"
+};
+
+window.openAiQuizModal = function() {
+  const inq = document.getElementById("inquiry-modal");
+  if (inq) inq.style.display = "none";
+  const guideM = document.getElementById("download-guide-modal");
+  if (guideM) guideM.style.display = "none";
+  const modal = document.getElementById("ai-quiz-modal");
+  if (modal) {
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+};
+
+window.closeAiQuizModal = function() {
+  const modal = document.getElementById("ai-quiz-modal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+};
+
+window.advanceModalWizard = function(stepNum) {
+  for (let i = 1; i <= 3; i++) {
+    const s = document.getElementById(`m-step-${i}`);
+    if (s) s.style.display = (i === stepNum) ? "block" : "none";
+  }
+};
+
+window.submitModalWizard = function(e) {
+  if (e) e.preventDefault();
+  const name = document.getElementById("m-wizard-name")?.value.trim() || "";
+  const phone = document.getElementById("m-wizard-phone")?.value.trim() || "";
+  const email = document.getElementById("m-wizard-email")?.value.trim() || "";
+  const budget = document.getElementById("m-wizard-budget")?.value || "";
+
+  const leadData = {
+    formType: "60-Second AI University Matcher Modal",
+    name,
+    phone,
+    email,
+    budget,
+    course: window.modalWizardState.degree,
+    priority: window.modalWizardState.priority,
+    message: `Selected Degree: ${window.modalWizardState.degree} | Decision Factor: ${window.modalWizardState.priority} | Budget: ${budget}`,
+    date: new Date().toISOString()
+  };
+
+  if (typeof window.submitLeadToIntegrations === "function") {
+    window.submitLeadToIntegrations(leadData);
+  }
+
+  const form = document.getElementById("modal-wizard-form");
+  const success = document.getElementById("m-wizard-success");
+  if (form) form.style.display = "none";
+  if (success) success.style.display = "block";
+};
+
+// 4. Download Free 2026 Guide Modal
+window.openDownloadGuideModal = function() {
+  const inq = document.getElementById("inquiry-modal");
+  if (inq) inq.style.display = "none";
+  const aiM = document.getElementById("ai-quiz-modal");
+  if (aiM) aiM.style.display = "none";
+  const modal = document.getElementById("download-guide-modal");
+  if (modal) {
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+};
+
+window.closeDownloadGuideModal = function() {
+  const modal = document.getElementById("download-guide-modal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+};
+
+window.submitGuideDownload = function(e) {
+  if (e) e.preventDefault();
+  const name = document.getElementById("guide-lead-name")?.value.trim() || "";
+  const phone = document.getElementById("guide-lead-phone")?.value.trim() || "";
+  const email = document.getElementById("guide-lead-email")?.value.trim() || "";
+  const course = document.getElementById("guide-lead-course")?.value || "";
+
+  const leadData = {
+    formType: "2026 Free Guide Download",
+    name,
+    phone,
+    email,
+    course,
+    message: `Requested Free 2026 University & Fee Matrix PDF for ${course}`,
+    date: new Date().toISOString()
+  };
+
+  if (typeof window.submitLeadToIntegrations === "function") {
+    window.submitLeadToIntegrations(leadData);
+  }
+
+  const form = document.getElementById("download-guide-form");
+  const success = document.getElementById("guide-download-success");
+  if (form) form.style.display = "none";
+  if (success) success.style.display = "block";
+};
+
+// 5. Live Social Proof Toast Simulation
+const SOCIAL_NOTIFICATIONS = [
+  { name: "Rahul S.", city: "Mumbai", uni: "Amity Online MBA", time: "1 min ago" },
+  { name: "Priya K.", city: "Bengaluru", uni: "Manipal Online MCA", time: "3 mins ago" },
+  { name: "Aditya V.", city: "Delhi NCR", uni: "Chandigarh University BCA", time: "4 mins ago" },
+  { name: "Sneha M.", city: "Pune", uni: "NMIMS Online MBA", time: "6 mins ago" },
+  { name: "Rohan D.", city: "Hyderabad", uni: "LPU Online BBA", time: "8 mins ago" }
+];
+
+let currentToastIdx = 0;
+
+function initSocialProofToast() {
+  const toastEl = document.getElementById("live-social-toast");
+  if (!toastEl) return;
+
+  function showNextToast() {
+    const item = SOCIAL_NOTIFICATIONS[currentToastIdx];
+    currentToastIdx = (currentToastIdx + 1) % SOCIAL_NOTIFICATIONS.length;
+
+    const avatar = document.getElementById("toast-avatar");
+    const text = document.getElementById("toast-text");
+    const time = document.getElementById("toast-time");
+
+    if (avatar) avatar.textContent = item.name.charAt(0);
+    if (text) text.innerHTML = `<strong>${item.name} from ${item.city}</strong> just applied for ${item.uni}.`;
+    if (time) time.textContent = item.time;
+
+    toastEl.style.display = "flex";
+
+    setTimeout(() => {
+      toastEl.style.display = "none";
+    }, 6000);
+  }
+
+  setTimeout(() => {
+    showNextToast();
+    setInterval(showNextToast, 18000);
+  }, 4000);
+}
+
+window.dismissToast = function() {
+  const toastEl = document.getElementById("live-social-toast");
+  if (toastEl) toastEl.style.display = "none";
+};
+
+// Initialize interactive listeners
+document.addEventListener("DOMContentLoaded", () => {
+  // Option pills click handling for Home Wizard
+  document.querySelectorAll("#home-ai-wizard .wizard-step[data-step='1'] .wizard-option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#home-ai-wizard .wizard-step[data-step='1'] .wizard-option-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      window.homeWizardState.degree = btn.getAttribute("data-val") || btn.innerText;
+    });
+  });
+
+  document.querySelectorAll("#home-ai-wizard .wizard-step[data-step='2'] .wizard-option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#home-ai-wizard .wizard-step[data-step='2'] .wizard-option-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      window.homeWizardState.priority = btn.getAttribute("data-val") || btn.innerText;
+    });
+  });
+
+  // Option pills click handling for Modal Wizard
+  document.querySelectorAll("#m-step-1 .m-option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#m-step-1 .m-option-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      window.modalWizardState.degree = btn.getAttribute("data-val") || btn.innerText;
+    });
+  });
+
+  document.querySelectorAll("#m-step-2 .m-option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#m-step-2 .m-option-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      window.modalWizardState.priority = btn.getAttribute("data-val") || btn.innerText;
+    });
+  });
+
+  // Mobile menu toggle
+  const mobileToggle = document.getElementById("mobile-menu-toggle");
+  const navMenu = document.getElementById("nav-menu");
+  if (mobileToggle && navMenu) {
+    mobileToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("show");
+    });
+    navMenu.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("show");
+      });
+    });
+  }
+
+  // Start Social Proof toast
+  initSocialProofToast();
+});
+
 

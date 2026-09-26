@@ -332,47 +332,54 @@
 <body>
 
   <!-- --- HEADER & NAVIGATION --- -->
-  <header>
-    <div class="container navbar">
-      <div class="logo-container" id="navbar-logo">
-        <div class="logo-icon">O</div>
-        <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+  <header class="site-header">
+    <div class="header-top-banner">
+      <div class="container header-top-inner">
+        <span class="top-announcement"><span class="pulse-live"></span> Admissions Open 2026: Get Up to 30% Early Bird Scholarship &amp; Zero-Cost EMI</span>
+        <div class="header-top-links">
+          <a href="tel:6375079973" class="header-helpline-link"><i class="fas fa-phone-alt"></i> Counselor Helpline: <strong>+91 63750 79973</strong></a>
+          <span class="divider">|</span>
+          <a href="https://wa.me/916375079973?text=Hi%2C%20I%20want%20to%20know%20about%20online%20degrees" target="_blank" rel="noopener" class="header-whatsapp-link"><i class="fab fa-whatsapp"></i> WhatsApp Counselor</a>
+        </div>
       </div>
-      
-      <!-- Sleek Blog Search Bar (Desktop) -->
-      <div class="nav-search-wrapper" id="nav-search-wrapper">
-        <i class="fas fa-search nav-search-icon"></i>
-        <input type="text" id="nav-blog-search" placeholder="Search blog insights..." autocomplete="off">
-        <button class="nav-search-clear-btn" id="nav-blog-search-clear" style="display: none;"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="container navbar">
+      <div class="logo-container" id="navbar-logo" onclick="window.location.href='/?view=home';">
+        <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="logo-text-group">
+          <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>
+          <span class="logo-badge"><i class="fas fa-check-circle"></i> UGC-DEB Portal</span>
+        </div>
       </div>
 
-      <div class="menu-toggle" id="mobile-menu-toggle">
+      <div class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
         <i class="fas fa-bars"></i>
       </div>
       
       <ul class="nav-menu" id="nav-menu">
-        <!-- Mobile Blog Search Bar (only visible on mobile screens) -->
-        <li class="mobile-search-item">
-          <div class="mobile-search-wrapper">
-            <i class="fas fa-search mobile-search-icon"></i>
-            <input type="text" id="mobile-blog-search" placeholder="Search blog insights..." autocomplete="off">
-          </div>
-        </li>
         <li><a class="nav-link active" data-target="home" href="/?view=home">Home</a></li>
-        <li><a class="nav-link" data-target="catalog" href="/?view=catalog">Find Degrees</a></li>
+        <li>
+          <a class="nav-link" data-target="catalog" href="/?view=catalog">
+            Find Degrees <span class="nav-pill-tag hot">Popular</span>
+          </a>
+        </li>
         <li>
           <a class="nav-link compare-badge-container" data-target="compare" href="/?view=compare">
             Compare Board
             <span class="compare-badge" id="nav-compare-badge" style="display: none;">0</span>
           </a>
         </li>
+        <li>
+          <a class="nav-link ai-nav-link" href="javascript:void(0);" onclick="if(window.openAiQuizModal) window.openAiQuizModal();">
+            <i class="fas fa-magic"></i> AI Matcher <span class="nav-pill-tag ai">60s Quiz</span>
+          </a>
+        </li>
         <li><a class="nav-link" data-target="blog" href="/?view=blog">Blogs</a></li>
         <li><a class="nav-link" data-target="contact" href="/?view=contact">Contact Us</a></li>
-        <li><a class="nav-inquiry-btn" id="open-inquiry-modal" href="javascript:void(0);" role="button"><i class="fas fa-paper-plane"></i><span>Inquire Now</span></a></li>
-        <li class="nav-phone-item">
-          <a href="tel:6375079973" class="nav-phone-link" aria-label="Call admissions hotline">
-            <i class="fas fa-phone-alt"></i>
-          </a>
+        <li class="nav-cta-item">
+          <button class="nav-inquiry-btn" id="open-inquiry-modal" type="button">
+            <i class="fas fa-headset"></i><span>Free Counseling</span>
+          </button>
         </li>
       </ul>
     </div>
@@ -382,25 +389,199 @@
   <main>
     <section id="home-view" class="view-section active">
       <div class="container">
-        <!-- Hero Section -->
-        <div class="hero">
-          <div class="hero-tag">UGC-DEB & AICTE Approved Degrees</div>
-          <h1>Find & Compare the Best <span>Online Universities</span></h1>
-          <p class="hero-subtitle">Find & compare the best online universities to make an informed decision. Compare fees, approvals, placement records, and learning management systems of top online colleges in India.</p>
-          
-          <!-- Quick Search Bar -->
-          <div class="search-container">
-            <div class="search-input-wrapper">
-              <i class="fas fa-search"></i>
-              <input type="text" id="home-search-input" placeholder="Search for courses or universities..." onkeyup="if(event.key === 'Enter') { const q = this.value.trim(); window.location.href = q ? '/?view=catalog&search=' + encodeURIComponent(q) : '/?view=catalog'; }">
+        <!-- Gen Z Portal Hero Section -->
+        <div class="genz-hero-wrapper">
+          <div class="genz-hero-content">
+            <div class="hero-live-pill">
+              <span class="pulse-dot"></span> 100% UGC-DEB &amp; AICTE Approved Online Degrees
             </div>
-            <button class="btn btn-primary" onclick="const q = document.getElementById('home-search-input').value.trim(); window.location.href = q ? '/?view=catalog&search=' + encodeURIComponent(q) : '/?view=catalog';">Search</button>
+            <h1 class="genz-hero-title">
+              Find &amp; Compare Top <span class="gradient-text">Online Degrees</span> In India
+            </h1>
+            <p class="genz-hero-subtitle">
+              Don't gamble on your future. Compare 50+ accredited universities, authentic fee matrices, semester EMI from ₹2,999/mo, and placement records (6–18 LPA) with 100% unbiased expert guidance.
+            </p>
+
+            <!-- Quick Degree Switcher Pills -->
+            <div class="hero-course-pills">
+              <span class="pills-label">Trending:</span>
+              <a href="/?view=catalog&course=mba" class="hero-pill active"><i class="fas fa-briefcase"></i> Online MBA</a>
+              <a href="/?view=catalog&course=mca" class="hero-pill"><i class="fas fa-laptop-code"></i> Online MCA</a>
+              <a href="/?view=catalog&course=bca" class="hero-pill"><i class="fas fa-code"></i> Online BCA</a>
+              <a href="/?view=catalog&course=bba" class="hero-pill"><i class="fas fa-chart-line"></i> Online BBA</a>
+              <a href="/?view=catalog&course=mcom" class="hero-pill"><i class="fas fa-calculator"></i> Online M.Com</a>
+            </div>
+
+            <!-- Integrated Portal Search Box -->
+            <div class="portal-search-box">
+              <div class="portal-search-select-wrapper">
+                <i class="fas fa-graduation-cap"></i>
+                <select id="hero-degree-select">
+                  <option value="">All Degrees</option>
+                  <option value="mba">Online MBA</option>
+                  <option value="mca">Online MCA</option>
+                  <option value="bca">Online BCA</option>
+                  <option value="bba">Online BBA</option>
+                  <option value="mcom">Online M.Com</option>
+                </select>
+              </div>
+              <div class="portal-search-divider"></div>
+              <div class="portal-search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="home-search-input" placeholder="Search university (e.g. Amity, Manipal, Chandigarh)..." onkeyup="if(event.key === 'Enter') { const deg = document.getElementById('hero-degree-select').value; const q = this.value.trim(); let url = '/?view=catalog'; if (deg) url += '&course=' + encodeURIComponent(deg); if (q) url += '&search=' + encodeURIComponent(q); window.location.href = url; }">
+              </div>
+              <button class="portal-search-btn" type="button" onclick="const deg = document.getElementById('hero-degree-select').value; const q = document.getElementById('home-search-input').value.trim(); let url = '/?view=catalog'; if (deg) url += '&course=' + encodeURIComponent(deg); if (q) url += '&search=' + encodeURIComponent(q); window.location.href = url;">
+                <i class="fas fa-arrow-right"></i> <span>Search Degrees</span>
+              </button>
+            </div>
+
+            <div class="hero-trust-badges">
+              <span><i class="fas fa-check-circle"></i> 100% Free Counseling</span>
+              <span><i class="fas fa-check-circle"></i> No-Cost EMI Available</span>
+              <span><i class="fas fa-check-circle"></i> UGC-DEB Valid for Govt Jobs</span>
+            </div>
+
+            <div class="hero-action-buttons">
+              <button id="home-browse-cta" class="btn btn-primary btn-glow" type="button">
+                <i class="fas fa-compass"></i> Explore All Degrees
+              </button>
+              <button class="btn btn-quiz-trigger" type="button" onclick="if(window.openAiQuizModal) window.openAiQuizModal();">
+                <i class="fas fa-magic"></i> 60-Sec AI Degree Matcher
+              </button>
+            </div>
           </div>
-          
-          <div class="hero-cta-group">
-            <button id="home-browse-cta" class="btn btn-primary">
-              Browse Courses
-            </button>
+
+          <div class="genz-hero-graphic">
+            <div class="hero-graphic-card">
+              <div class="hero-graphic-glow"></div>
+              <img src="assets/genz_degree_hero.jpg" alt="Online Degree College Search Portal Students" class="hero-main-img" width="600" height="338">
+              
+              <!-- Floating Micro-Stats Badges -->
+              <div class="floating-badge badge-top-right">
+                <div class="badge-icon green"><i class="fas fa-award"></i></div>
+                <div>
+                  <strong>NAAC A++ &amp; WES</strong>
+                  <span>Global Validity</span>
+                </div>
+              </div>
+
+              <div class="floating-badge badge-bottom-left">
+                <div class="badge-icon blue"><i class="fas fa-chart-line"></i></div>
+                <div>
+                  <strong>6 - 18 LPA</strong>
+                  <span>Top Placement CTC</span>
+                </div>
+              </div>
+
+              <div class="floating-badge badge-bottom-right">
+                <div class="badge-icon purple"><i class="fas fa-users"></i></div>
+                <div>
+                  <strong>25,000+</strong>
+                  <span>Students Guided</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hiring Partners Marquee -->
+        <div class="hiring-partners-strip">
+          <div class="partners-label">Top Hiring Companies For Online Degree Grads:</div>
+          <div class="marquee-track">
+            <div class="marquee-item"><i class="fab fa-google"></i> Google</div>
+            <div class="marquee-item"><i class="fab fa-microsoft"></i> Microsoft</div>
+            <div class="marquee-item"><i class="fab fa-amazon"></i> Amazon</div>
+            <div class="marquee-item"><i class="fas fa-building"></i> Deloitte</div>
+            <div class="marquee-item"><i class="fas fa-briefcase"></i> Infosys</div>
+            <div class="marquee-item"><i class="fas fa-city"></i> TCS</div>
+            <div class="marquee-item"><i class="fas fa-laptop-code"></i> Accenture</div>
+            <div class="marquee-item"><i class="fas fa-chart-pie"></i> EY</div>
+            <div class="marquee-item"><i class="fas fa-university"></i> ICICI Bank</div>
+            <div class="marquee-item"><i class="fas fa-shopping-bag"></i> Flipkart</div>
+            <!-- Duplicate for infinite seamless marquee loop -->
+            <div class="marquee-item"><i class="fab fa-google"></i> Google</div>
+            <div class="marquee-item"><i class="fab fa-microsoft"></i> Microsoft</div>
+            <div class="marquee-item"><i class="fab fa-amazon"></i> Amazon</div>
+            <div class="marquee-item"><i class="fas fa-building"></i> Deloitte</div>
+            <div class="marquee-item"><i class="fas fa-briefcase"></i> Infosys</div>
+            <div class="marquee-item"><i class="fas fa-city"></i> TCS</div>
+          </div>
+        </div>
+
+        <!-- LEAD GENERATION POWERHOUSE: 60-Sec Interactive AI Degree Matcher Card -->
+        <div class="ai-matcher-card-section" id="ai-degree-finder-section">
+          <div class="ai-matcher-box">
+            <div class="ai-matcher-header">
+              <span class="ai-chip"><i class="fas fa-robot"></i> AI RECOMMENDATION ENGINE</span>
+              <h2>Confused About Which University is Best For You?</h2>
+              <p>Answer 3 quick questions. Our AI algorithm evaluates 50+ UGC-approved universities to give you tailored recommendations with exact fee breakdowns &amp; placement stats.</p>
+            </div>
+            
+            <div class="ai-matcher-wizard" id="home-ai-wizard">
+              <div class="wizard-step active" data-step="1">
+                <span class="step-num">Step 1 of 3</span>
+                <h4>Select Your Target Degree:</h4>
+                <div class="wizard-pill-grid">
+                  <button type="button" class="wizard-option-btn active" data-val="Online MBA">🎓 Online MBA</button>
+                  <button type="button" class="wizard-option-btn" data-val="Online MCA">💻 Online MCA</button>
+                  <button type="button" class="wizard-option-btn" data-val="Online BCA">⚡ Online BCA</button>
+                  <button type="button" class="wizard-option-btn" data-val="Online BBA">📊 Online BBA</button>
+                  <button type="button" class="wizard-option-btn" data-val="Online M.Com">📈 Online M.Com</button>
+                  <button type="button" class="wizard-option-btn" data-val="Other Degree">🌟 Other Degree</button>
+                </div>
+                <div class="wizard-nav-actions">
+                  <button type="button" class="btn btn-primary" onclick="window.advanceHomeWizard && window.advanceHomeWizard(2)">Next Step <i class="fas fa-arrow-right"></i></button>
+                </div>
+              </div>
+
+              <div class="wizard-step" data-step="2" style="display:none;">
+                <span class="step-num">Step 2 of 3</span>
+                <h4>What Is Your #1 Priority?</h4>
+                <div class="wizard-pill-grid">
+                  <button type="button" class="wizard-option-btn active" data-val="Highest Placements">🚀 Highest Placements &amp; Salary</button>
+                  <button type="button" class="wizard-option-btn" data-val="Affordable Fees &amp; EMI">💸 Affordable Fees / Easy EMI</button>
+                  <button type="button" class="wizard-option-btn" data-val="NAAC A++ / Prestige">🏆 Top NAAC A++ Brand Name</button>
+                  <button type="button" class="wizard-option-btn" data-val="Weekend / Flexible Live Classes">⏰ Flexible Classes for Job</button>
+                </div>
+                <div class="wizard-nav-actions">
+                  <button type="button" class="btn btn-secondary" onclick="window.advanceHomeWizard && window.advanceHomeWizard(1)"><i class="fas fa-arrow-left"></i> Back</button>
+                  <button type="button" class="btn btn-primary" onclick="window.advanceHomeWizard && window.advanceHomeWizard(3)">Next Step <i class="fas fa-arrow-right"></i></button>
+                </div>
+              </div>
+
+              <div class="wizard-step" data-step="3" style="display:none;">
+                <span class="step-num">Step 3 of 3 (Final)</span>
+                <h4>Where Should We Send Your University Match Report?</h4>
+                <form id="home-wizard-lead-form" class="wizard-lead-form" onsubmit="window.submitHomeWizardLead && window.submitHomeWizardLead(event)">
+                  <div class="wizard-form-row">
+                    <input type="text" id="wizard-name" placeholder="Your Name *" required>
+                    <input type="tel" id="wizard-phone" placeholder="WhatsApp / Mobile Number *" pattern="[0-9]{10}" required>
+                  </div>
+                  <div class="wizard-form-row">
+                    <input type="email" id="wizard-email" placeholder="Your Email Address *" required>
+                    <select id="wizard-budget" required>
+                      <option value="" disabled selected>Total Budget Range</option>
+                      <option value="Under ₹1 Lakh">Under ₹1 Lakh</option>
+                      <option value="₹1 Lakh - ₹1.5 Lakh">₹1 Lakh - ₹1.5 Lakh</option>
+                      <option value="₹1.5 Lakh - ₹2.5 Lakh">₹1.5 Lakh - ₹2.5 Lakh</option>
+                      <option value="Flexible / Need EMI">Flexible / Need EMI</option>
+                    </select>
+                  </div>
+                  <div class="wizard-submit-bar">
+                    <button type="submit" class="btn btn-accent btn-glow" id="wizard-submit-btn">
+                      <i class="fas fa-paper-plane"></i> Get Free Match Report &amp; Fee Sheet
+                    </button>
+                    <span class="privacy-note"><i class="fas fa-lock"></i> 100% Free • Verified Counselors Only • No Spam</span>
+                  </div>
+                </form>
+                <div id="home-wizard-success" class="wizard-success-state" style="display:none;">
+                  <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                  <h3>Matching Universities Found!</h3>
+                  <p>We've analyzed your preferences. An academic counselor is preparing your customized university comparison and fee scholarship breakdown. We'll message you on WhatsApp shortly!</p>
+                  <button type="button" class="btn btn-secondary" onclick="window.resetHomeWizard && window.resetHomeWizard()"><i class="fas fa-redo"></i> Retake Matcher</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -411,7 +592,7 @@
               <i class="fas fa-university"></i>
             </div>
             <h3>100% Approved Degrees</h3>
-            <p>All featured courses are UGC-DEB and AICTE approved, ensuring equivalent validity to regular degrees.</p>
+            <p>All featured courses are UGC-DEB and AICTE approved, ensuring equivalent validity to regular degrees for MNC jobs and UPSC exams.</p>
           </div>
           <div class="feature-item">
             <div class="feature-badge-icon">
@@ -431,6 +612,7 @@
 
         <!-- Popular Online Degrees Section -->
         <div class="section-header">
+          <div class="section-tag-pill">TRENDING ONLINE COURSES</div>
           <h2>Popular Online Degree Programs</h2>
           <p>Select a course below to explore and compare top accredited universities offering that curriculum.</p>
         </div>
@@ -555,6 +737,29 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Lead Magnet: 2026 Free University Guide Download Banner -->
+        <div class="guide-lead-banner">
+          <div class="guide-banner-inner">
+            <div class="guide-banner-text">
+              <span class="guide-tag"><i class="fas fa-file-pdf"></i> FREE 2026 COMPREHENSIVE GUIDE</span>
+              <h3>Download 2026 Online Degree &amp; Fee Matrix (PDF)</h3>
+              <p>Get complete semester-wise fees, syllabus comparisons, NAAC accreditation reports, and placement CTCs of top 25 online universities in India.</p>
+              <div class="guide-perks">
+                <span><i class="fas fa-check"></i> Complete Fee Comparison</span>
+                <span><i class="fas fa-check"></i> EMI Schedules</span>
+                <span><i class="fas fa-check"></i> Placement Statistics</span>
+              </div>
+            </div>
+            <div class="guide-banner-cta">
+              <button class="btn btn-white-glow" type="button" onclick="if(window.openDownloadGuideModal) window.openDownloadGuideModal();">
+                <i class="fas fa-download"></i> Download Free PDF Guide
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- Accreditation & Legitimacy Trust Pillars for SEO -->
         <div class="section-header" style="margin-top: 60px;">
           <h2>100% Recognized &amp; Approved Online Degrees</h2>
@@ -1654,6 +1859,149 @@
         <button type="button" class="btn btn-secondary" id="inquiry-reset-btn" style="margin-top:16px;"><i class="fas fa-redo"></i> Submit Another Inquiry</button>
       </div>
     </div>
+  <!-- AI Quiz Matcher Modal (Lead Generation) -->
+  <div class="modal-overlay" id="ai-quiz-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="ai-quiz-modal-title">
+    <div class="modal-content ai-quiz-modal-card">
+      <button class="modal-close" onclick="closeAiQuizModal();" aria-label="Close AI Matcher">&times;</button>
+      <div class="ai-quiz-modal-header">
+        <div class="ai-quiz-badge"><i class="fas fa-magic"></i></div>
+        <div>
+          <h3 id="ai-quiz-modal-title" class="modal-title">60-Second AI University Matcher</h3>
+          <p class="modal-subtitle">Find your best-fit online degree &amp; university in 3 simple clicks.</p>
+        </div>
+      </div>
+      
+      <div id="modal-ai-wizard">
+        <div class="modal-wizard-step" id="m-step-1">
+          <div class="step-indicator-bar"><div class="fill" style="width: 33%;"></div></div>
+          <h4>1. Select Your Target Degree:</h4>
+          <div class="wizard-options-grid">
+            <button type="button" class="m-option-btn active" data-val="Online MBA"><i class="fas fa-briefcase"></i> Online MBA</button>
+            <button type="button" class="m-option-btn" data-val="Online MCA"><i class="fas fa-laptop-code"></i> Online MCA</button>
+            <button type="button" class="m-option-btn" data-val="Online BCA"><i class="fas fa-code"></i> Online BCA</button>
+            <button type="button" class="m-option-btn" data-val="Online BBA"><i class="fas fa-chart-line"></i> Online BBA</button>
+            <button type="button" class="m-option-btn" data-val="Online M.Com"><i class="fas fa-calculator"></i> Online M.Com</button>
+            <button type="button" class="m-option-btn" data-val="Other Degree"><i class="fas fa-graduation-cap"></i> Other Programs</button>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" onclick="advanceModalWizard(2)" style="margin-top:20px;">Continue <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="modal-wizard-step" id="m-step-2" style="display:none;">
+          <div class="step-indicator-bar"><div class="fill" style="width: 66%;"></div></div>
+          <h4>2. What is Your Key Decision Factor?</h4>
+          <div class="wizard-options-grid">
+            <button type="button" class="m-option-btn active" data-val="Highest Placements"><i class="fas fa-rocket"></i> Highest Placements (6-18 LPA)</button>
+            <button type="button" class="m-option-btn" data-val="Affordable Fees &amp; EMI"><i class="fas fa-wallet"></i> Budget / Low Monthly EMI</button>
+            <button type="button" class="m-option-btn" data-val="Top NAAC A++ Rank"><i class="fas fa-trophy"></i> Elite Brand Reputation</button>
+            <button type="button" class="m-option-btn" data-val="Flexible Timings"><i class="fas fa-clock"></i> Evening &amp; Weekend Classes</button>
+          </div>
+          <div style="display:flex; gap:12px; margin-top:20px;">
+            <button type="button" class="btn btn-secondary" onclick="advanceModalWizard(1)"><i class="fas fa-arrow-left"></i> Back</button>
+            <button type="button" class="btn btn-primary" onclick="advanceModalWizard(3)" style="flex:1;">Continue <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="modal-wizard-step" id="m-step-3" style="display:none;">
+          <div class="step-indicator-bar"><div class="fill" style="width: 100%;"></div></div>
+          <h4>3. Enter Your Details To Unlock Custom Matches:</h4>
+          <form id="modal-wizard-form" onsubmit="submitModalWizard(event)">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <div class="input-wrapper"><i class="fas fa-user"></i><input type="text" id="m-wizard-name" placeholder="e.g. Priyanshu Sharma" required></div>
+            </div>
+            <div class="form-group-row">
+              <div class="form-group">
+                <label>WhatsApp / Mobile *</label>
+                <div class="input-wrapper"><i class="fas fa-phone-alt"></i><input type="tel" id="m-wizard-phone" placeholder="10-digit number" pattern="[0-9]{10}" required></div>
+              </div>
+              <div class="form-group">
+                <label>Email Address *</label>
+                <div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" id="m-wizard-email" placeholder="name@email.com" required></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Target Budget *</label>
+              <div class="input-wrapper select-wrapper"><i class="fas fa-rupee-sign"></i>
+                <select id="m-wizard-budget" required>
+                  <option value="" disabled selected>Select Budget Preference</option>
+                  <option value="Under ₹1 Lakh">Under ₹1 Lakh</option>
+                  <option value="₹1 Lakh - ₹1.5 Lakh">₹1 Lakh - ₹1.5 Lakh</option>
+                  <option value="₹1.5 Lakh - ₹2.5 Lakh">₹1.5 Lakh - ₹2.5 Lakh</option>
+                  <option value="Flexible / EMI Scheme">Flexible / EMI Scheme</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-accent btn-block btn-glow" style="margin-top:14px;"><i class="fas fa-bolt"></i> View Top University Matches Now</button>
+          </form>
+          <div id="m-wizard-success" class="contact-success-card" style="display:none;">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h3>Your Matches Are Ready!</h3>
+            <p>Our academic counselor is reviewing your profile and will send a personalized comparison chart and scholarship eligibility report to your WhatsApp within 15 minutes.</p>
+            <button type="button" class="btn btn-secondary" onclick="closeAiQuizModal()" style="margin-top:14px;">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Free 2026 Guide Download Modal (Lead Magnet) -->
+  <div class="modal-overlay" id="download-guide-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="guide-modal-title">
+    <div class="modal-content inquiry-modal-card">
+      <button class="modal-close" onclick="closeDownloadGuideModal();" aria-label="Close Guide Modal">&times;</button>
+      <div class="inquiry-modal-header">
+        <div class="inquiry-modal-badge" style="background:var(--accent);"><i class="fas fa-file-pdf"></i></div>
+        <div>
+          <h3 id="guide-modal-title" class="modal-title">Download Free 2026 University Matrix</h3>
+          <p class="modal-subtitle">Instant PDF guide covering fees, UGC approvals &amp; placement stats.</p>
+        </div>
+      </div>
+      <form id="download-guide-form" onsubmit="submitGuideDownload(event)">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <div class="input-wrapper"><i class="fas fa-user"></i><input type="text" id="guide-lead-name" placeholder="e.g. Rahul Sharma" required></div>
+        </div>
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>WhatsApp Number *</label>
+            <div class="input-wrapper"><i class="fab fa-whatsapp"></i><input type="tel" id="guide-lead-phone" placeholder="10-digit mobile" pattern="[0-9]{10}" required></div>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" id="guide-lead-email" placeholder="name@gmail.com" required></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Degree Interested In *</label>
+          <div class="input-wrapper select-wrapper"><i class="fas fa-graduation-cap"></i>
+            <select id="guide-lead-course" required>
+              <option value="Online MBA" selected>Online MBA</option>
+              <option value="Online MCA">Online MCA</option>
+              <option value="Online BCA">Online BCA</option>
+              <option value="Online BBA">Online BBA</option>
+              <option value="Online M.Com">Online M.Com</option>
+              <option value="All Programs">All Programs</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-download"></i> Send PDF Guide on WhatsApp</button>
+      </form>
+      <div id="guide-download-success" class="contact-success-card" style="display:none;">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h3>Guide Dispatched!</h3>
+        <p>The 2026 Online Degree &amp; Fee Comparison PDF has been sent to your WhatsApp and email. Feel free to connect with our counselors for scholarship guidance.</p>
+        <button type="button" class="btn btn-secondary" onclick="closeDownloadGuideModal()" style="margin-top:14px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Social Proof Toast Notification -->
+  <div class="live-social-proof-toast" id="live-social-toast" style="display:none;">
+    <div class="toast-avatar" id="toast-avatar">A</div>
+    <div class="toast-content">
+      <p class="toast-text" id="toast-text"><strong>Amit from Delhi</strong> just applied for Manipal Online MBA.</p>
+      <span class="toast-time" id="toast-time">2 mins ago</span>
+    </div>
+    <button class="toast-close" onclick="dismissToast()">&times;</button>
   </div>
 
   <!-- University Detail Modal -->
