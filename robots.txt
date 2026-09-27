@@ -1,30 +1,90 @@
 # robots.txt for https://www.getonlinedegrees.online/
 # Technical SEO & Crawl Directive Configuration
+# Last updated: 2026-09-28
 
-# Default rules for all web crawlers
+# =============================================
+# DEFAULT RULES FOR ALL WEB CRAWLERS
+# =============================================
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /sitemap.html
+Allow: /404.html
+
+# Allow all public views (query-string pages)
+Allow: /?view=catalog
+Allow: /?view=compare
+Allow: /?view=blog
+Allow: /?view=blog-detail
+Allow: /?view=contact
+Allow: /?view=resume-builder
+
+# Block admin & internal files from all crawlers
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
+Disallow: /local_server.ps1
+Disallow: /ping_search_engines.ps1
+Disallow: /*.ps1$
+Disallow: /*.md$
 
-# Googlebot specific directives
+# =============================================
+# GOOGLEBOT — Full Access
+# =============================================
 User-agent: Googlebot
 Allow: /
 Allow: /assets/
+Allow: /index.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /sitemap.html
+
+# All catalog views
+Allow: /?view=catalog
+Allow: /?view=catalog&course=
+Allow: /?view=catalog&university=
+Allow: /?view=compare
+Allow: /?view=blog
+Allow: /?view=blog-detail&id=
+Allow: /?view=contact
+Allow: /?view=resume-builder
+
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
+Disallow: /*.ps1$
+Disallow: /*.md$
 
-# Bingbot specific directives
+# =============================================
+# BINGBOT — Full Access
+# =============================================
 User-agent: Bingbot
 Allow: /
 Allow: /assets/
+Allow: /index.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /sitemap.html
+Allow: /?view=catalog
+Allow: /?view=compare
+Allow: /?view=blog
+Allow: /?view=blog-detail&id=
+Allow: /?view=contact
+Allow: /?view=resume-builder
+
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
+Disallow: /*.ps1$
+Disallow: /*.md$
 
-# Generative Engine Optimization (GEO) Directives
+# =============================================
+# GENERATIVE ENGINE OPTIMIZATION (GEO)
+# Allow AI crawlers to index all public content
+# =============================================
+
 # OpenAI (ChatGPT / SearchGPT)
 User-agent: GPTBot
 Allow: /
@@ -77,16 +137,35 @@ Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 
-# Respectful crawl delay for aggressive non-major crawlers
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# =============================================
+# CRAWL DELAYS — Respectful pacing
+# =============================================
 User-agent: YandexBot
 Crawl-delay: 2
 
-# LLM Standard Manifest (GEO)
+User-agent: Baiduspider
+Crawl-delay: 3
+
+# =============================================
+# LLM MANIFEST (GEO)
+# =============================================
 # https://www.getonlinedegrees.online/llms.txt
+# https://www.getonlinedegrees.online/llms-full.txt
 
-# XML Sitemap Location
+# =============================================
+# XML SITEMAPS
+# =============================================
 Sitemap: https://www.getonlinedegrees.online/sitemap.xml
+Sitemap: https://www.getonlinedegrees.online/sitemap_articles.xml
 
-# Canonical Host
+# =============================================
+# CANONICAL HOST
+# =============================================
 Host: www.getonlinedegrees.online
-
