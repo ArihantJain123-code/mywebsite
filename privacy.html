@@ -756,10 +756,11 @@
         <li><a class="nav-link" href="/?view=contact">Contact Us</a></li>
       </ul>
 
-      <div class="menu-toggle" id="mobile-menu-toggle">
+      <div class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" role="button" tabindex="0">
         <i class="fas fa-bars"></i>
       </div>
     </div>
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
   </header>
 
   <!-- ─── HERO ─── -->
@@ -1241,9 +1242,39 @@
     sections.forEach(s => observer.observe(s));
 
     // Mobile nav toggle
-    document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
-      document.getElementById('nav-menu')?.classList.toggle('show');
-    });
+    const mobToggle = document.getElementById('mobile-menu-toggle');
+    const mobMenu = document.getElementById('nav-menu');
+    const mobBackdrop = document.getElementById('mobile-nav-backdrop');
+
+    function closePrivacyMobileMenu() {
+      if (mobMenu) mobMenu.classList.remove('show');
+      if (mobToggle) {
+        mobToggle.classList.remove('active');
+        mobToggle.setAttribute('aria-expanded', 'false');
+        const icon = mobToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
+      }
+      if (mobBackdrop) mobBackdrop.classList.remove('show');
+    }
+
+    if (mobToggle && mobMenu) {
+      mobToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = mobMenu.classList.toggle('show');
+        mobToggle.classList.toggle('active', isOpen);
+        mobToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        const icon = mobToggle.querySelector('i');
+        if (icon) icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+        if (mobBackdrop) mobBackdrop.classList.toggle('show', isOpen);
+      });
+      if (mobBackdrop) mobBackdrop.addEventListener('click', closePrivacyMobileMenu);
+      document.addEventListener('click', (e) => {
+        if (mobMenu.classList.contains('show') && !mobMenu.contains(e.target) && !mobToggle.contains(e.target)) {
+          closePrivacyMobileMenu();
+        }
+      });
+      mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closePrivacyMobileMenu));
+    }
   </script>
 </body>
 </html>

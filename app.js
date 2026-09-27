@@ -474,12 +474,83 @@ function setupEventListeners() {
     });
   });
 
-  // Mobile menu toggle
+  // Mobile menu toggle & backdrop handler
   const menuToggle = document.getElementById("mobile-menu-toggle");
   const navMenu = document.getElementById("nav-menu");
+  const navBackdrop = document.getElementById("mobile-nav-backdrop");
+
+  function closeMobileNav() {
+    if (navMenu) navMenu.classList.remove("show");
+    if (menuToggle) {
+      menuToggle.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+      const icon = menuToggle.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
+      }
+    }
+    if (navBackdrop) navBackdrop.classList.remove("show");
+  }
+
+  function openMobileNav() {
+    if (navMenu) navMenu.classList.add("show");
+    if (menuToggle) {
+      menuToggle.classList.add("active");
+      menuToggle.setAttribute("aria-expanded", "true");
+      const icon = menuToggle.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+      }
+    }
+    if (navBackdrop) navBackdrop.classList.add("show");
+  }
+
+  window.closeMobileNavMenu = closeMobileNav;
+
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("show");
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (navMenu.classList.contains("show")) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+
+    // Close when tapping anywhere on the backdrop
+    if (navBackdrop) {
+      navBackdrop.addEventListener("click", closeMobileNav);
+    }
+
+    // Close when clicking outside
+    document.addEventListener("click", (e) => {
+      if (navMenu.classList.contains("show") && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        closeMobileNav();
+      }
+    });
+
+    // Close when pressing Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && navMenu.classList.contains("show")) {
+        closeMobileNav();
+      }
+    });
+
+    // Close when clicking any nav link or CTA button inside the mobile menu
+    navMenu.addEventListener("click", (e) => {
+      const interactive = e.target.closest("a, button, .nav-link, .nav-inquiry-btn");
+      if (interactive) {
+        closeMobileNav();
+      }
+    });
+
+    // Auto-close on resize to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768 && navMenu.classList.contains("show")) {
+        closeMobileNav();
+      }
     });
   }
 
@@ -3926,19 +3997,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Mobile menu toggle
-  const mobileToggle = document.getElementById("mobile-menu-toggle");
-  const navMenu = document.getElementById("nav-menu");
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("show");
-    });
-    navMenu.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("show");
-      });
-    });
-  }
+
 
   // Start Social Proof toast
   initSocialProofToast();
