@@ -72,8 +72,17 @@ function redirectLeadToWhatsApp(inquiryData) {
   if (inquiryData.course) message += `*Course:* ${inquiryData.course}\n`;
   if (inquiryData.message) message += `*Message:* ${inquiryData.message}\n`;
   
-  const waUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
-  window.open(waUrl, "_blank");
+  // Open WhatsApp in background with a delay so it never blocks/freezes the UI.
+  // Browsers may still block the popup if no user gesture is active; fail silently.
+  setTimeout(() => {
+    try {
+      const waUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+      const win = window.open(waUrl, "_blank");
+      // If browser blocked the popup, win will be null — that's fine, ignore it.
+    } catch (e) {
+      // Silently ignore popup errors — form already submitted successfully.
+    }
+  }, 500);
 }
 
 // Unified dispatcher accessible from chatbot.js
@@ -404,12 +413,16 @@ function setupEventListeners() {
     });
   });
 
-  // Search input
+  // Search input (debounced 200ms to avoid re-rendering catalog on every keystroke)
   const searchInput = document.getElementById("catalog-search");
   if (searchInput) {
+    let _catalogSearchTimer = null;
     searchInput.addEventListener("input", (e) => {
       state.filters.searchQuery = e.target.value.toLowerCase().trim();
-      renderCatalog();
+      clearTimeout(_catalogSearchTimer);
+      _catalogSearchTimer = setTimeout(() => {
+        renderCatalog();
+      }, 200);
     });
   }
 
@@ -546,11 +559,15 @@ function setupEventListeners() {
       }
     });
 
-    // Auto-close on resize to desktop
+    // Auto-close on resize to desktop (debounced to avoid lag on every pixel)
+    let _resizeTimer = null;
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 768 && navMenu.classList.contains("show")) {
-        closeMobileNav();
-      }
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(() => {
+        if (window.innerWidth > 768 && navMenu.classList.contains("show")) {
+          closeMobileNav();
+        }
+      }, 150);
     });
   }
 
@@ -1962,13 +1979,12 @@ function renderBlogsList() {
     filteredBlogs = filteredBlogs.filter(blog => blog.category === state.blogCategory);
   }
 
-  // Filter by search query
+  // Filter by search query (skip content field — it is huge and causes lag on every keystroke)
   if (state.blogQuery) {
     filteredBlogs = filteredBlogs.filter(blog =>
       (blog.title && blog.title.toLowerCase().includes(state.blogQuery)) ||
       (blog.excerpt && blog.excerpt.toLowerCase().includes(state.blogQuery)) ||
-      (blog.category && blog.category.toLowerCase().includes(state.blogQuery)) ||
-      (blog.content && blog.content.toLowerCase().includes(state.blogQuery))
+      (blog.category && blog.category.toLowerCase().includes(state.blogQuery))
     );
   }
 
@@ -3961,8 +3977,10 @@ window.dismissToast = function() {
   if (toastEl) toastEl.style.display = "none";
 };
 
-// Initialize interactive listeners
+// Initialize interactive listeners (wizard pill buttons only — guarded to run once)
 document.addEventListener("DOMContentLoaded", () => {
+  if (window._wizardListenersAttached) return;
+  window._wizardListenersAttached = true;
   // Option pills click handling for Home Wizard
   document.querySelectorAll("#home-ai-wizard .wizard-step[data-step='1'] .wizard-option-btn").forEach(btn => {
     btn.addEventListener("click", () => {
