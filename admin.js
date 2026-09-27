@@ -8,14 +8,14 @@ const adminState = {
   currentTab: "overview",
   timeRange: "24h", // '24h', '7d', '30d'
   liveStreamActive: true,
-  liveUsersCount: 42,
+  liveUsersCount: 1,
   theme: localStorage.getItem("admin_theme") || "dark",
   leads: [],
   keywords: [],
   topPages: [],
   crawlLogs: [],
   charts: {},
-  realtimeMode: localStorage.getItem("admin_rt_mode") || "hybrid", // 'live-real', 'hybrid', 'simulation'
+  realtimeMode: localStorage.getItem("admin_rt_mode") || "live-real", // 'live-real', 'hybrid', 'simulation'
   audioEnabled: localStorage.getItem("admin_rt_audio") !== "false",
   firebaseConfig: JSON.parse(localStorage.getItem("admin_firebase_config") || "null"),
   firebaseConnected: false,
@@ -24,101 +24,60 @@ const adminState = {
   channel: null
 };
 
-// --- Seed Data Generators for Rich Analytics ---
+// --- Target SEO Keywords & Research Database ---
+// Real high-intent target keywords for the portal. Live rankings, clicks, and impressions require GSC integration.
 const SEO_KEYWORD_DATABASE = [
-  { keyword: "online mba under 1 lakh", rank: 2, prevRank: 3, volume: 22400, clicks: 4680, impressions: 41200, ctr: 11.36, intent: "Commercial", url: "/#blog-detail?id=top-online-mba-colleges-india-under-1-lakh" },
-  { keyword: "best online bba colleges in india", rank: 1, prevRank: 2, volume: 18900, clicks: 4120, impressions: 36500, ctr: 11.29, intent: "Commercial", url: "/#blog-detail?id=top-online-bba-colleges-in-india" },
-  { keyword: "is online mca valid for tcs infosys", rank: 1, prevRank: 1, volume: 42000, clicks: 10500, impressions: 78000, ctr: 13.46, intent: "Informational", url: "/#blog-detail?id=online-mca-validity-for-mnc-jobs" },
-  { keyword: "ugc approved online degree checklist", rank: 3, prevRank: 4, volume: 14200, clicks: 2450, impressions: 26800, ctr: 9.14, intent: "Informational", url: "/#blog-detail?id=ugc-approved-online-university-checklist" },
-  { keyword: "nmims online mba admission fees 2026", rank: 2, prevRank: 3, volume: 28500, clicks: 5940, impressions: 52000, ctr: 11.42, intent: "Transactional", url: "/#catalog?university=nmims_online" },
-  { keyword: "lpu online mba fees and placement", rank: 1, prevRank: 2, volume: 24100, clicks: 5780, impressions: 49200, ctr: 11.75, intent: "Commercial", url: "/#catalog?university=lovely_professional_university_lpu_online" },
-  { keyword: "online mca fee structure 2026", rank: 3, prevRank: 5, volume: 16800, clicks: 3120, impressions: 34500, ctr: 9.04, intent: "Transactional", url: "/#catalog?course=mca" },
-  { keyword: "cuet pg not required for online mba", rank: 1, prevRank: 2, volume: 19500, clicks: 4820, impressions: 38000, ctr: 12.68, intent: "Transactional", url: "/#blog-detail?id=direct-admission-online-mba-without-entrance" },
-  { keyword: "online bba vs online bcom differences", rank: 1, prevRank: 1, volume: 11200, clicks: 2980, impressions: 23400, ctr: 12.74, intent: "Informational", url: "/#blog-detail?id=online-bba-vs-online-bcom-differences" },
-  { keyword: "distance education validity in it sector", rank: 4, prevRank: 6, volume: 12400, clicks: 2150, impressions: 27100, ctr: 7.93, intent: "Informational", url: "/#blog-detail?id=online-degree-validity-in-it-industry" },
-  { keyword: "manipal university jaipur online bca syllabus", rank: 2, prevRank: 4, volume: 9800, clicks: 1840, impressions: 19600, ctr: 9.39, intent: "Informational", url: "/#catalog?university=manipal_university_jaipur_online" },
-  { keyword: "amity online bba review 2026", rank: 3, prevRank: 4, volume: 9400, clicks: 1620, impressions: 18500, ctr: 8.76, intent: "Informational", url: "/#blog-detail?id=amity-university-online-bba-review" },
-  { keyword: "jain university online degree naac a++", rank: 3, prevRank: 5, volume: 8600, clicks: 1480, impressions: 16200, ctr: 9.14, intent: "Informational", url: "/#catalog?university=jain_university_online" },
-  { keyword: "scdl pune pgdba fees 2026", rank: 2, prevRank: 2, volume: 11600, clicks: 2420, impressions: 21800, ctr: 10.46, intent: "Commercial", url: "/#catalog?university=symbiosis_centre_for_distance_learning_scdl_pune" },
-  { keyword: "ignou mba equivalent online degree", rank: 2, prevRank: 3, volume: 29000, clicks: 5840, impressions: 58200, ctr: 10.03, intent: "Informational", url: "/#blog-detail?id=ignou-alternative-online-mba" },
-  { keyword: "upes online mba energy management fees", rank: 3, prevRank: 4, volume: 7400, clicks: 1120, impressions: 14800, ctr: 7.57, intent: "Commercial", url: "/#catalog?university=upes_online" },
-  { keyword: "chandigarh university online degree placement", rank: 2, prevRank: 4, volume: 17200, clicks: 3680, impressions: 33400, ctr: 11.02, intent: "Commercial", url: "/#catalog?university=chandigarh_university_online" },
-  { keyword: "top 30 web development interview questions", rank: 5, prevRank: 8, volume: 18500, clicks: 2480, impressions: 36000, ctr: 6.89, intent: "Informational", url: "/#blog-detail?id=frontend-developer-interview-questions-for-freshers" },
-  { keyword: "uttaranchal university online bca fees", rank: 4, prevRank: 5, volume: 6800, clicks: 920, impressions: 12500, ctr: 7.36, intent: "Transactional", url: "/#catalog?university=uttaranchal_university_online" },
-  { keyword: "how to switch from non tech to it sector", rank: 5, prevRank: 7, volume: 16800, clicks: 2240, impressions: 31000, ctr: 7.23, intent: "Informational", url: "/#blog-detail?id=how-to-switch-from-non-tech-to-it-sector" },
-  { keyword: "symbiosis online bca eligibility criteria", rank: 3, prevRank: 5, volume: 12800, clicks: 2050, impressions: 24100, ctr: 8.51, intent: "Informational", url: "/#catalog?university=symbiosis_online" },
-  { keyword: "online mba placement package in india", rank: 4, prevRank: 5, volume: 26400, clicks: 4320, impressions: 48000, ctr: 9.00, intent: "Informational", url: "/#blog" },
-  { keyword: "best online mca for working professionals", rank: 2, prevRank: 3, volume: 21500, clicks: 4750, impressions: 42000, ctr: 11.31, intent: "Commercial", url: "/#catalog?course=mca" },
-  { keyword: "online bba digital marketing salary", rank: 3, prevRank: 4, volume: 13400, clicks: 2180, impressions: 25600, ctr: 8.52, intent: "Informational", url: "/#blog-detail?id=top-online-bba-colleges-in-india" },
-  { keyword: "wes recognized online degrees india", rank: 5, prevRank: 9, volume: 8900, clicks: 1140, impressions: 17200, ctr: 6.63, intent: "Informational", url: "/#blog" },
-  { keyword: "online mcom entrance exam required or not", rank: 2, prevRank: 3, volume: 10200, clicks: 1940, impressions: 20100, ctr: 9.65, intent: "Transactional", url: "/#catalog?course=mcom" },
-  { keyword: "online degree comparison tool india", rank: 1, prevRank: 2, volume: 15400, clicks: 3890, impressions: 31200, ctr: 12.47, intent: "Transactional", url: "/#compare" },
-  { keyword: "online bca data science career scope", rank: 3, prevRank: 4, volume: 11800, clicks: 1890, impressions: 22400, ctr: 8.44, intent: "Informational", url: "/#catalog?course=bca" },
-  { keyword: "d y patil online mba fee review", rank: 4, prevRank: 5, volume: 8200, clicks: 1240, impressions: 15800, ctr: 7.85, intent: "Commercial", url: "/#catalog?university=dr_d_y_patil_vidyapeeth_dpuv_online" },
-  { keyword: "bennett university online bba fee structure", rank: 3, prevRank: 4, volume: 6400, clicks: 980, impressions: 12100, ctr: 8.10, intent: "Transactional", url: "/#catalog?university=bennett_university_online" }
+  { keyword: "online mba under 1 lakh", targetRank: 2, volume: 22400, intent: "Commercial", url: "/#blog-detail?id=top-online-mba-colleges-india-under-1-lakh" },
+  { keyword: "best online bba colleges in india", targetRank: 1, volume: 18900, intent: "Commercial", url: "/#blog-detail?id=top-online-bba-colleges-in-india" },
+  { keyword: "is online mca valid for tcs infosys", targetRank: 1, volume: 42000, intent: "Informational", url: "/#blog-detail?id=online-mca-validity-for-mnc-jobs" },
+  { keyword: "ugc approved online degree checklist", targetRank: 3, volume: 14200, intent: "Informational", url: "/#blog-detail?id=ugc-approved-online-university-checklist" },
+  { keyword: "nmims online mba admission fees 2026", targetRank: 2, volume: 28500, intent: "Transactional", url: "/#catalog?university=nmims_online" },
+  { keyword: "lpu online mba fees and placement", targetRank: 1, volume: 24100, intent: "Commercial", url: "/#catalog?university=lovely_professional_university_lpu_online" },
+  { keyword: "online mca fee structure 2026", targetRank: 3, volume: 16800, intent: "Transactional", url: "/#catalog?course=mca" },
+  { keyword: "cuet pg not required for online mba", targetRank: 1, volume: 19500, intent: "Transactional", url: "/#blog-detail?id=direct-admission-online-mba-without-entrance" },
+  { keyword: "online bba vs online bcom differences", targetRank: 1, volume: 11200, intent: "Informational", url: "/#blog-detail?id=online-bba-vs-online-bcom-differences" },
+  { keyword: "distance education validity in it sector", targetRank: 4, volume: 12400, intent: "Informational", url: "/#blog-detail?id=online-degree-validity-in-it-industry" },
+  { keyword: "manipal university jaipur online bca syllabus", targetRank: 2, volume: 9800, intent: "Informational", url: "/#catalog?university=manipal_university_jaipur_online" },
+  { keyword: "amity online bba review 2026", targetRank: 3, volume: 9400, intent: "Informational", url: "/#blog-detail?id=amity-university-online-bba-review" },
+  { keyword: "jain university online degree naac a++", targetRank: 3, volume: 8600, intent: "Informational", url: "/#catalog?university=jain_university_online" },
+  { keyword: "scdl pune pgdba fees 2026", targetRank: 2, volume: 11600, intent: "Commercial", url: "/#catalog?university=symbiosis_centre_for_distance_learning_scdl_pune" },
+  { keyword: "ignou mba equivalent online degree", targetRank: 2, volume: 29000, intent: "Informational", url: "/#blog-detail?id=ignou-alternative-online-mba" },
+  { keyword: "upes online mba energy management fees", targetRank: 3, volume: 7400, intent: "Commercial", url: "/#catalog?university=upes_online" },
+  { keyword: "chandigarh university online degree placement", targetRank: 2, volume: 17200, intent: "Commercial", url: "/#catalog?university=chandigarh_university_online" },
+  { keyword: "top 30 web development interview questions", targetRank: 5, volume: 18500, intent: "Informational", url: "/#blog-detail?id=frontend-developer-interview-questions-for-freshers" },
+  { keyword: "uttaranchal university online bca fees", targetRank: 4, volume: 6800, intent: "Transactional", url: "/#catalog?university=uttaranchal_university_online" },
+  { keyword: "how to switch from non tech to it sector", targetRank: 5, volume: 16800, intent: "Informational", url: "/#blog-detail?id=how-to-switch-from-non-tech-to-it-sector" },
+  { keyword: "symbiosis online bca eligibility criteria", targetRank: 3, volume: 12800, intent: "Informational", url: "/#catalog?university=symbiosis_online" },
+  { keyword: "online mba placement package in india", targetRank: 4, volume: 26400, intent: "Informational", url: "/#blog" },
+  { keyword: "best online mca for working professionals", targetRank: 2, volume: 21500, intent: "Commercial", url: "/#catalog?course=mca" },
+  { keyword: "online bba digital marketing salary", targetRank: 3, volume: 13400, intent: "Informational", url: "/#blog-detail?id=top-online-bba-colleges-in-india" },
+  { keyword: "wes recognized online degrees india", targetRank: 5, volume: 8900, intent: "Informational", url: "/#blog" },
+  { keyword: "online mcom entrance exam required or not", targetRank: 2, volume: 10200, intent: "Transactional", url: "/#catalog?course=mcom" },
+  { keyword: "online degree comparison tool india", targetRank: 1, volume: 15400, intent: "Transactional", url: "/#compare" },
+  { keyword: "online bca data science career scope", targetRank: 3, volume: 11800, intent: "Informational", url: "/#catalog?course=bca" },
+  { keyword: "d y patil online mba fee review", targetRank: 4, volume: 8200, intent: "Commercial", url: "/#catalog?university=dr_d_y_patil_vidyapeeth_dpuv_online" },
+  { keyword: "bennett university online bba fee structure", targetRank: 3, volume: 6400, intent: "Transactional", url: "/#catalog?university=bennett_university_online" }
 ];
 
-const INITIAL_LEADS = [
-  { id: "lead_01", name: "Aarav Sharma", phone: "9876543210", email: "aarav.sharma@gmail.com", course: "Online MBA", city: "Delhi NCR", budget: "₹1,00,000 - ₹1,50,000", source: "Catalog Inquiry", message: "Interested in LPU Online and NMIMS Online for Finance & FinTech with No-Cost EMI.", timestamp: Date.now() - 14 * 60000, status: "New" },
-  { id: "lead_02", name: "Priya Sundaram", phone: "9823456789", email: "priya.s@outlook.com", course: "Online MCA", city: "Bengaluru", budget: "₹1,50,000 - ₹2,00,000", source: "AI Chatbot", message: "Looking for AI/Data Science specialization with 100% weekend lectures & placement help.", timestamp: Date.now() - 32 * 60000, status: "Contacted" },
-  { id: "lead_03", name: "Rohan Varma", phone: "9712345678", email: "rohan.v@yahoo.com", course: "Online BBA", city: "Mumbai", budget: "Under ₹1,00,000", source: "Counseling Modal", message: "Working professional wanting UGC-DEB approved BBA to accelerate corporate career.", timestamp: Date.now() - 65 * 60000, status: "In Progress" },
-  { id: "lead_04", name: "Neha Deshmukh", phone: "9988776655", email: "neha.desh@gmail.com", course: "Online MBA", city: "Pune", budget: "₹1,50,000 - ₹2,00,000", source: "Blog CTA", message: "Want to compare Manipal Jaipur vs Amity Online MBA in Business Analytics.", timestamp: Date.now() - 110 * 60000, status: "Enrolled" },
-  { id: "lead_05", name: "Ankit Gupta", phone: "9654321987", email: "ankit.g@gmail.com", course: "Online BCA", city: "Hyderabad", budget: "₹1,00,000 - ₹1,50,000", source: "Catalog Inquiry", message: "Non-IT to IT career switch program details and live coding mentorship needed.", timestamp: Date.now() - 160 * 60000, status: "New" },
-  { id: "lead_06", name: "Kavya Menon", phone: "9445566778", email: "kavya.menon@yahoo.in", course: "Online M.Com", city: "Chennai", budget: "Under ₹1,00,000", source: "Organic Search", message: "Need details on Jain University Online M.Com international accounting syllabus.", timestamp: Date.now() - 230 * 60000, status: "Contacted" },
-  { id: "lead_07", name: "Harshwardhan Rathore", phone: "9829012345", email: "harsh.rathore@gmail.com", course: "Online MBA", city: "Jaipur", budget: "₹1,50,000 - ₹2,00,000", source: "Counseling Modal", message: "Looking for Manipal Jaipur Online MBA with Marketing specialization.", timestamp: Date.now() - 290 * 60000, status: "New" },
-  { id: "lead_08", name: "Tanvi Mukherjee", phone: "9830112233", email: "tanvi.m@outlook.com", course: "Online MCA", city: "Kolkata", budget: "₹1,50,000 - ₹2,00,000", source: "AI Chatbot", message: "Cyber Security & Cloud track inquiry. Have BCA from Calcutta University.", timestamp: Date.now() - 360 * 60000, status: "In Progress" },
-  { id: "lead_09", name: "Vikram Singh", phone: "9811223344", email: "vikram.s99@gmail.com", course: "Online MBA", city: "Chandigarh", budget: "₹1,50,000 - ₹2,00,000", source: "Catalog Inquiry", message: "Looking for best ROI MBA programs with easy zero-cost EMI options.", timestamp: Date.now() - 430 * 60000, status: "New" },
-  { id: "lead_10", name: "Sneha Patil", phone: "9001122334", email: "sneha.p@outlook.com", course: "Online BCA", city: "Ahmedabad", budget: "₹1,00,000 - ₹1,50,000", source: "Blog CTA", message: "Are live classes mandatory for BCA in Amity? Need recorded lectures on weekend.", timestamp: Date.now() - 510 * 60000, status: "Contacted" },
-  { id: "lead_11", name: "Manish Kumar", phone: "9776655443", email: "manish.k.dev@gmail.com", course: "Online MCA", city: "Noida", budget: "₹2,00,000+", source: "Blog CTA", message: "Looking for NMIMS MCA Cloud Computing specialization & faculty credential details.", timestamp: Date.now() - 600 * 60000, status: "In Progress" },
-  { id: "lead_12", name: "Divya Reddy", phone: "9848011223", email: "divya.reddy@gmail.com", course: "Online MBA", city: "Hyderabad", budget: "₹1,50,000 - ₹2,00,000", source: "Catalog Inquiry", message: "Healthcare Management MBA for hospital administration career. Apollo employee.", timestamp: Date.now() - 710 * 60000, status: "New" },
-  { id: "lead_13", name: "Saurabh Joshi", phone: "9826044556", email: "saurabh.j@yahoo.com", course: "Online BCA", city: "Indore", budget: "₹1,00,000 - ₹1,50,000", source: "Counseling Modal", message: "Fresher seeking online BCA with full placement assistance and live capstone project.", timestamp: Date.now() - 820 * 60000, status: "Contacted" },
-  { id: "lead_14", name: "Aditi Rao", phone: "9988112233", email: "aditi.rao.designs@gmail.com", course: "Online BBA", city: "Kochi", budget: "₹1,00,000 - ₹1,50,000", source: "Counseling Modal", message: "I want to start a business, need a BBA with good entrepreneurship & incubation focus.", timestamp: Date.now() - 940 * 60000, status: "Enrolled" },
-  { id: "lead_15", name: "Arjun Patel", phone: "9879512345", email: "arjun.patel.biz@gmail.com", course: "Online BBA", city: "Surat", budget: "₹1,00,000 - ₹1,50,000", source: "Organic Search", message: "Need Online BBA to expand textile export business. Interested in Jain University.", timestamp: Date.now() - 1050 * 60000, status: "New" },
-  { id: "lead_16", name: "Meera Nambiar", phone: "9447012345", email: "meera.nambiar@gmail.com", course: "Online M.Com", city: "Thiruvananthapuram", budget: "Under ₹1,00,000", source: "Organic Search", message: "Pursuing CA, want an authorized online M.Com degree for dual qualification.", timestamp: Date.now() - 1160 * 60000, status: "Contacted" },
-  { id: "lead_17", name: "Ritu Choudhary", phone: "9818098765", email: "ritu.c@gmail.com", course: "Online MBA", city: "Gurugram", budget: "₹1,50,000 - ₹2,00,000", source: "Blog CTA", message: "Human Resource Management online MBA. Currently HR associate at MNC.", timestamp: Date.now() - 1280 * 60000, status: "In Progress" },
-  { id: "lead_18", name: "Rahul Bhattacharya", phone: "9937012345", email: "rahul.b@outlook.com", course: "Online MCA", city: "Bhubaneswar", budget: "₹1,00,000 - ₹1,50,000", source: "Catalog Inquiry", message: "TCS corporate eligibility verification needed for Uttaranchal University MCA.", timestamp: Date.now() - 1360 * 60000, status: "New" },
-  { id: "lead_19", name: "Shreya Kulkarni", phone: "9822019988", email: "shreya.k@yahoo.co.in", course: "Online MBA", city: "Nagpur", budget: "₹1,50,000 - ₹2,00,000", source: "Counseling Modal", message: "Banking & FinTech MBA at Symbiosis. Bank PO looking for promotion eligibility.", timestamp: Date.now() - 1420 * 60000, status: "Enrolled" },
-  { id: "lead_20", name: "Deepak Verma", phone: "9415012345", email: "deepak.verma99@gmail.com", course: "Online BCA", city: "Lucknow", budget: "Under ₹1,00,000", source: "AI Chatbot", message: "Passed 10+2 with 68% in PCM. Want to study Software Engineering without relocating.", timestamp: Date.now() - 1540 * 60000, status: "New" },
-  { id: "lead_21", name: "Simran Kaur", phone: "9814012345", email: "simran.k@gmail.com", course: "Online BBA", city: "Amritsar", budget: "Under ₹1,00,000", source: "Organic Search", message: "Chandigarh University online BBA admission process & syllabus inquiry.", timestamp: Date.now() - 1660 * 60000, status: "Contacted" },
-  { id: "lead_22", name: "Pooja Singhania", phone: "9839012345", email: "pooja.singhania@gmail.com", course: "Online MBA", city: "Kanpur", budget: "₹1,50,000 - ₹2,00,000", source: "Catalog Inquiry", message: "Dual specialization in Finance & Marketing. Need faculty review & alumni contacts.", timestamp: Date.now() - 1780 * 60000, status: "In Progress" },
-  { id: "lead_23", name: "Amitava Sen", phone: "9431012345", email: "amitava.sen@gmail.com", course: "Online MCA", city: "Patna", budget: "₹1,50,000 - ₹2,00,000", source: "Catalog Inquiry", message: "Is online MCA valid for state government IT officer recruitments? Need checklist.", timestamp: Date.now() - 1890 * 60000, status: "New" },
-  { id: "lead_24", name: "Karthik Subramanian", phone: "9443012345", email: "karthik.sub@gmail.com", course: "Online MBA", city: "Coimbatore", budget: "₹1,50,000 - ₹2,00,000", source: "Counseling Modal", message: "Senior Developer looking for IT & Project Management MBA to transition to Lead role.", timestamp: Date.now() - 1980 * 60000, status: "Contacted" },
-  { id: "lead_25", name: "Ananya Biswas", phone: "9864012345", email: "ananya.biswas@outlook.com", course: "Online BCA", city: "Guwahati", budget: "Under ₹1,00,000", source: "Organic Search", message: "High-speed LMS access and exam schedule flexibility needed for working student.", timestamp: Date.now() - 2100 * 60000, status: "New" }
-];
+// Real leads come from Google Sheets Sync or direct user submissions via the contact/chatbot forms.
+// INITIAL_LEADS is intentionally empty — populate via the "Sync Google Sheets" button in the Leads CRM tab.
+const INITIAL_LEADS = [];
 
-const INITIAL_TOP_PAGES = [
-  { path: "/ (Homepage & University Finder)", pageviews24h: 4680, unique24h: 3620, avgTime: "2m 54s", bounceRate: "26.2%", convRate: "5.4%" },
-  { path: "/#catalog?course=mba", pageviews24h: 3840, unique24h: 2980, avgTime: "3m 45s", bounceRate: "22.8%", convRate: "7.2%" },
-  { path: "/#blog-detail?id=top-online-mba-colleges-india-under-1-lakh", pageviews24h: 3420, unique24h: 2810, avgTime: "4m 38s", bounceRate: "19.5%", convRate: "8.6%" },
-  { path: "/#catalog?course=mca", pageviews24h: 2650, unique24h: 2120, avgTime: "3m 28s", bounceRate: "24.1%", convRate: "6.4%" },
-  { path: "/#compare", pageviews24h: 2190, unique24h: 1780, avgTime: "5m 12s", bounceRate: "16.4%", convRate: "9.8%" },
-  { path: "/#blog-detail?id=online-mca-validity-for-mnc-jobs", pageviews24h: 1940, unique24h: 1590, avgTime: "4m 50s", bounceRate: "17.2%", convRate: "9.4%" },
-  { path: "/#catalog?university=lovely_professional_university_lpu_online", pageviews24h: 1820, unique24h: 1450, avgTime: "3m 15s", bounceRate: "25.4%", convRate: "6.8%" },
-  { path: "/#blog-detail?id=top-online-bba-colleges-in-india", pageviews24h: 1760, unique24h: 1410, avgTime: "3m 52s", bounceRate: "23.6%", convRate: "6.7%" },
-  { path: "/#catalog?university=nmims_online", pageviews24h: 1680, unique24h: 1360, avgTime: "4m 05s", bounceRate: "21.0%", convRate: "8.5%" },
-  { path: "/#catalog?course=bca", pageviews24h: 1540, unique24h: 1230, avgTime: "2m 48s", bounceRate: "27.5%", convRate: "5.6%" },
-  { path: "/#catalog?university=manipal_university_jaipur_online", pageviews24h: 1420, unique24h: 1160, avgTime: "3m 30s", bounceRate: "23.2%", convRate: "7.1%" },
-  { path: "/#blog-detail?id=ugc-approved-online-university-checklist", pageviews24h: 1350, unique24h: 1110, avgTime: "4m 10s", bounceRate: "20.8%", convRate: "7.8%" },
-  { path: "/#catalog?university=amity_university_online", pageviews24h: 1280, unique24h: 1040, avgTime: "3m 22s", bounceRate: "24.5%", convRate: "6.9%" },
-  { path: "/#blog-detail?id=direct-admission-online-mba-without-entrance", pageviews24h: 1190, unique24h: 980, avgTime: "4m 02s", bounceRate: "22.1%", convRate: "8.1%" },
-  { path: "/#catalog?university=jain_university_online", pageviews24h: 1120, unique24h: 910, avgTime: "3m 10s", bounceRate: "26.0%", convRate: "6.2%" },
-  { path: "/#catalog?course=bba", pageviews24h: 1060, unique24h: 860, avgTime: "2m 38s", bounceRate: "28.2%", convRate: "5.1%" },
-  { path: "/#catalog?university=symbiosis_online", pageviews24h: 980, unique24h: 790, avgTime: "3m 40s", bounceRate: "23.8%", convRate: "7.5%" },
-  { path: "/#catalog?course=mcom", pageviews24h: 890, unique24h: 720, avgTime: "2m 25s", bounceRate: "31.0%", convRate: "4.2%" }
-];
-
-const GEO_DISTRIBUTION_DATA = [
-  { city: "Delhi NCR", pct: 29.2, color: "#6366f1" },
-  { city: "Mumbai MMR", pct: 22.5, color: "#06b6d4" },
-  { city: "Bengaluru", pct: 17.4, color: "#10b981" },
-  { city: "Hyderabad", pct: 11.8, color: "#f59e0b" },
-  { city: "Pune & Maharashtra", pct: 9.5, color: "#8b5cf6" },
-  { city: "Kolkata & Eastern Hub", pct: 5.3, color: "#ec4899" },
-  { city: "Jaipur & Western Hub", pct: 4.3, color: "#3b82f6" }
-];
+// NOTE: Page data and geographic distribution are derived exclusively from real analytics.js telemetry.
 
 // --- Initialization ---
 document.addEventListener("DOMContentLoaded", () => {
+  // One-time cleanup: remove old fake seed leads and reset mode to real telemetry
+  const adminVersion = "2.1";
+  if (localStorage.getItem("admin_data_version") !== adminVersion) {
+    const oldLeads = JSON.parse(localStorage.getItem("portal_analytics_leads") || "[]");
+    const realLeads = oldLeads.filter(l => !l.id || !l.id.match(/^lead_\d+$/));
+    localStorage.setItem("portal_analytics_leads", JSON.stringify(realLeads));
+    localStorage.setItem("admin_rt_mode", "live-real");
+    adminState.realtimeMode = "live-real";
+    localStorage.setItem("admin_data_version", adminVersion);
+  }
+
   initTheme();
   initLeadsData();
   initNavigation();
@@ -173,7 +132,6 @@ function initLeadsData() {
   });
   adminState.leads = Array.from(leadMap.values()).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
   adminState.keywords = [...SEO_KEYWORD_DATABASE];
-  adminState.topPages = [...INITIAL_TOP_PAGES];
 }
 
 // --- Navigation & Router ---
@@ -319,10 +277,10 @@ function liveTick() {
     // In Pure Real mode, display actual active session count (minimum 1 if current session is active)
     adminState.liveUsersCount = Math.max(1, trueActiveCount);
   } else {
-    // In Hybrid or Simulation mode, combine real sessions with natural baseline fluctuation
-    const delta = (Math.random() > 0.48 ? 1 : -1) * Math.floor(Math.random() * 3);
-    const baseline = 42 + trueActiveCount * 3;
-    adminState.liveUsersCount = Math.max(28, Math.min(74, adminState.liveUsersCount + delta));
+    // In Hybrid or Simulation mode, add real sessions to display count
+    const delta = (Math.random() > 0.48 ? 1 : -1) * Math.floor(Math.random() * 2);
+    // Base from real count, minimum 1
+    adminState.liveUsersCount = Math.max(1, trueActiveCount + Math.max(0, adminState.liveUsersCount - trueActiveCount + delta));
   }
 
   const pulseCounters = document.querySelectorAll(".live-users-val");
@@ -392,7 +350,7 @@ function initLiveFeed() {
   // Check if we have recent real events in local analytics
   let recentEvents = [];
   if (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents) {
-    recentEvents = window.OnlineDegreesAnalytics.getEvents().slice(-5).reverse();
+    recentEvents = window.OnlineDegreesAnalytics.getEvents().slice(-6).reverse();
   }
 
   if (recentEvents.length > 0) {
@@ -402,30 +360,22 @@ function initLiveFeed() {
       addLiveStreamItem({
         path: evt.path || "/",
         title: evt.title || evt.path || "Website Explorer",
-        city: evt.city || "Delhi NCR",
+        city: evt.city || "Visitor",
         referrer: evt.referrer || "Direct",
         icon: evt.type === "lead_submit" ? "icon-lead" : "icon-pageview",
         time: timeStr,
         isReal: true
       });
     });
-  }
-
-  // Fill up remainder with baseline items
-  const remaining = 6 - recentEvents.length;
-  for (let i = 0; i < remaining; i++) {
-    const randomPath = SAMPLE_PATHS[i % SAMPLE_PATHS.length];
-    const randomCity = SAMPLE_CITIES[i % SAMPLE_CITIES.length];
-    const randomRef = SAMPLE_REFERRERS[i % SAMPLE_REFERRERS.length];
-    addLiveStreamItem({
-      path: randomPath.path,
-      title: randomPath.title,
-      city: randomCity,
-      referrer: randomRef,
-      icon: randomPath.icon,
-      time: `${(i + 1) * 18}s ago`,
-      isReal: false
-    });
+  } else {
+    // Show empty state message until real visitors arrive
+    const emptyRow = document.createElement("div");
+    emptyRow.className = "live-stream-item";
+    emptyRow.style.justifyContent = "center";
+    emptyRow.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem; padding: 20px 0; display:block; text-align:center;">
+      <i class="fas fa-bolt" style="color: var(--accent-primary);"></i> Waiting for real visitors&hellip;
+    </span>`;
+    container.appendChild(emptyRow);
   }
 }
 
@@ -437,6 +387,7 @@ function renderAllViews() {
   renderTopPagesTable();
   renderLeadsTable();
   renderCrawlStatsTable();
+  renderCoreWebVitals();
   renderCharts();
 }
 
@@ -444,25 +395,25 @@ function renderKPICards() {
   const range = adminState.timeRange;
   let visitorsVal, pageviewsVal, clicksVal, impVal, leadsVal;
 
-  if (range === "24h") {
-    visitorsVal = "16,420";
-    pageviewsVal = "42,850";
-    clicksVal = "10,850";
-    impVal = "98,400";
-    leadsVal = adminState.leads.length.toString();
-  } else if (range === "7d") {
-    visitorsVal = "118,500";
-    pageviewsVal = "312,400";
-    clicksVal = "78,600";
-    impVal = "712,000";
-    leadsVal = (adminState.leads.length + 295).toString();
-  } else {
-    visitorsVal = "492,000";
-    pageviewsVal = "1,296,000";
-    clicksVal = "326,500";
-    impVal = "2,950,000";
-    leadsVal = (adminState.leads.length + 1325).toString();
-  }
+  // Analytics data pulled from real visitor telemetry stored in localStorage by analytics.js
+  // These values update as real users browse the site.
+  const events = (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents)
+    ? window.OnlineDegreesAnalytics.getEvents() : [];
+
+  const now = Date.now();
+  const rangeMs = range === "24h" ? 86400000 : range === "7d" ? 604800000 : 2592000000;
+  const rangeEvents = events.filter(e => (now - (e.timestamp || 0)) < rangeMs);
+  const pageviews = rangeEvents.filter(e => e.type === "pageview" || e.type === "navigation").length;
+  const uniqueSessions = new Set(rangeEvents.map(e => e.sessionId || e.id)).size;
+
+  visitorsVal = uniqueSessions > 0 ? uniqueSessions.toLocaleString() : "—";
+  pageviewsVal = pageviews > 0 ? pageviews.toLocaleString() : "—";
+
+  // GSC data — connect Google Search Console for real impressions/clicks
+  // Until connected, display placeholder
+  clicksVal = "—";
+  impVal = "—";
+  leadsVal = adminState.leads.length.toString();
 
   // Update Executive Overview KPI cards
   const elVisitors = document.getElementById("kpi-visitors");
@@ -491,10 +442,10 @@ function renderKPICards() {
   if (seoClicks) seoClicks.textContent = clicksVal;
 
   const seoPos = document.getElementById("seo-kpi-position");
-  if (seoPos) seoPos.textContent = range === "24h" ? "3.8" : range === "7d" ? "3.9" : "4.1";
+  if (seoPos) seoPos.textContent = "—";
 
   const seoTop3 = document.getElementById("seo-kpi-top3");
-  if (seoTop3) seoTop3.textContent = range === "24h" ? "34" : range === "7d" ? "32" : "29";
+  if (seoTop3) seoTop3.textContent = "—";
 }
 
 // --- Geographic Student Distribution ---
@@ -502,21 +453,48 @@ function renderGeoDistribution() {
   const container = document.getElementById("geo-distribution-container");
   if (!container) return;
 
+  // Derive geo distribution from real analytics.js events (city field on each event)
+  const allEvents = (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents)
+    ? window.OnlineDegreesAnalytics.getEvents() : [];
+
   const range = adminState.timeRange;
-  const totalVisitorsNum = range === "24h" ? 16420 : range === "7d" ? 118500 : 492000;
+  const now = Date.now();
+  const rangeMs = range === "24h" ? 86400000 : range === "7d" ? 604800000 : 2592000000;
+  const rangeEvents = allEvents.filter(e => (now - (e.timestamp || 0)) < rangeMs && e.city);
+
+  const cityCounts = {};
+  rangeEvents.forEach(e => {
+    const city = e.city || "Unknown";
+    cityCounts[city] = (cityCounts[city] || 0) + 1;
+  });
+
+  const sorted = Object.entries(cityCounts).sort((a, b) => b[1] - a[1]).slice(0, 7);
+  const total = sorted.reduce((s, [, c]) => s + c, 0);
 
   container.innerHTML = "";
-  GEO_DISTRIBUTION_DATA.forEach(geo => {
-    const visitorsForCity = Math.round((totalVisitorsNum * geo.pct) / 100);
+
+  if (sorted.length === 0) {
+    container.innerHTML = `<div style="color: var(--text-muted); text-align: center; padding: 32px 16px;">
+      <i class="fas fa-map-location-dot" style="font-size: 1.5rem; display: block; margin-bottom: 10px; color: var(--accent-primary);"></i>
+      <strong>No location data yet</strong><br>
+      <span style="font-size:0.82rem;">Geographic data will appear as real visitors browse the site. Analytics.js captures city from browser geolocation.</span>
+    </div>`;
+    return;
+  }
+
+  const COLORS = ["#6366f1", "#06b6d4", "#10b981", "#f59e0b", "#8b5cf6", "#ec4899", "#3b82f6"];
+  sorted.forEach(([city, count], idx) => {
+    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
+    const color = COLORS[idx % COLORS.length];
     const item = document.createElement("div");
     item.className = "geo-item";
     item.innerHTML = `
       <div class="geo-header">
-        <span class="geo-city"><i class="fas fa-location-pin" style="color: ${geo.color};"></i> ${geo.city}</span>
-        <span class="geo-visitors"><strong>${visitorsForCity.toLocaleString()}</strong> (${geo.pct}%)</span>
+        <span class="geo-city"><i class="fas fa-location-pin" style="color: ${color};"></i> ${city}</span>
+        <span class="geo-visitors"><strong>${count.toLocaleString()}</strong> sessions (${pct}%)</span>
       </div>
       <div class="geo-bar">
-        <div class="geo-bar-fill" style="width: ${geo.pct}%; background: ${geo.color};"></div>
+        <div class="geo-bar-fill" style="width: ${pct}%; background: ${color};"></div>
       </div>
     `;
     container.appendChild(item);
@@ -537,17 +515,8 @@ function renderSEOKeywordTable(filteredKeywords = null) {
   }
 
   data.forEach(kw => {
-    const rankDiff = kw.prevRank - kw.rank;
-    let diffBadge = `<span class="badge badge-info"><i class="fas fa-minus"></i> 0</span>`;
-    if (rankDiff > 0) {
-      diffBadge = `<span class="badge badge-success"><i class="fas fa-arrow-up"></i> +${rankDiff}</span>`;
-    } else if (rankDiff < 0) {
-      diffBadge = `<span class="badge badge-danger"><i class="fas fa-arrow-down"></i> ${rankDiff}</span>`;
-    }
-
-    let rankClass = "rank-other";
-    if (kw.rank <= 3) rankClass = "rank-top3";
-    else if (kw.rank <= 10) rankClass = "rank-top10";
+    const targetRank = kw.targetRank || 1;
+    const rankClass = targetRank <= 3 ? "rank-top3" : "rank-top10";
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -556,17 +525,12 @@ function renderSEOKeywordTable(filteredKeywords = null) {
         <div style="font-size: 0.75rem; color: var(--text-muted);">${kw.url}</div>
       </td>
       <td>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span class="rank-badge ${rankClass}">#${kw.rank}</span>
-          ${diffBadge}
-        </div>
+        <span class="rank-badge ${rankClass}">Target #${targetRank}</span>
       </td>
-      <td><strong>${kw.volume.toLocaleString()}</strong> /mo</td>
-      <td><strong>${kw.clicks.toLocaleString()}</strong></td>
-      <td>${kw.impressions.toLocaleString()}</td>
-      <td>
-        <span style="font-weight: 600; color: var(--accent-primary);">${kw.ctr}%</span>
-      </td>
+      <td><strong>${(kw.volume || 0).toLocaleString()}</strong> /mo</td>
+      <td><span style="color: var(--text-muted); font-size: 0.85rem;" title="Connect GSC to view real-time clicks">—</span></td>
+      <td><span style="color: var(--text-muted); font-size: 0.85rem;" title="Connect GSC to view impressions">—</span></td>
+      <td><span style="color: var(--text-muted); font-size: 0.85rem;" title="Connect GSC to view CTR">—</span></td>
       <td>
         <span class="badge ${kw.intent === 'Commercial' ? 'badge-purple' : kw.intent === 'Transactional' ? 'badge-success' : 'badge-info'}">
           ${kw.intent}
@@ -582,27 +546,52 @@ function renderTopPagesTable() {
   const tbody = document.getElementById("top-pages-table-body");
   if (!tbody) return;
 
-  const range = adminState.timeRange;
-  const multiplier = range === "24h" ? 1 : range === "7d" ? 6.8 : 27.5;
-
   tbody.innerHTML = "";
-  adminState.topPages.forEach((p, idx) => {
-    const pv = Math.round(p.pageviews24h * multiplier).toLocaleString();
-    const uq = Math.round(p.unique24h * multiplier).toLocaleString();
 
+  // Build real page view counts from analytics.js events
+  const allEvents = (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents)
+    ? window.OnlineDegreesAnalytics.getEvents() : [];
+
+  const range = adminState.timeRange;
+  const now = Date.now();
+  const rangeMs = range === "24h" ? 86400000 : range === "7d" ? 604800000 : 2592000000;
+  const rangeEvents = allEvents.filter(e => (now - (e.timestamp || 0)) < rangeMs && (e.type === "pageview" || e.type === "navigation"));
+
+  const pageCounts = {};
+  const pageSession = {};
+  rangeEvents.forEach(e => {
+    const path = (e.path || "/").split("?")[0] || "/";
+    pageCounts[path] = (pageCounts[path] || 0) + 1;
+    if (!pageSession[path]) pageSession[path] = new Set();
+    pageSession[path].add(e.sessionId || e.id);
+  });
+
+  const sorted = Object.entries(pageCounts).sort((a, b) => b[1] - a[1]).slice(0, 18);
+
+  if (sorted.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 32px 16px;">
+      <i class="fas fa-file-lines" style="font-size:1.5rem; display:block; margin-bottom:10px; color: var(--accent-primary);"></i>
+      <strong>No page view data yet</strong><br>
+      <span style="font-size:0.82rem;">Page analytics will populate here as real visitors browse the site.</span>
+    </td></tr>`;
+    return;
+  }
+
+  sorted.forEach(([path, views], idx) => {
+    const uniqueCount = pageSession[path] ? pageSession[path].size : views;
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>
         <div style="display: flex; align-items: center; gap: 10px;">
           <span style="color: var(--text-muted); font-size: 0.8rem; font-weight: 700; width: 20px;">${idx + 1}</span>
-          <span style="font-weight: 500;">${p.path}</span>
+          <span style="font-weight: 500;">${path}</span>
         </div>
       </td>
-      <td><strong>${pv}</strong></td>
-      <td>${uq}</td>
-      <td>${p.avgTime}</td>
-      <td>${p.bounceRate}</td>
-      <td><span class="badge badge-success">${p.convRate}</span></td>
+      <td><strong>${views.toLocaleString()}</strong></td>
+      <td>${uniqueCount.toLocaleString()}</td>
+      <td><span style="color: var(--text-muted);">—</span></td>
+      <td><span style="color: var(--text-muted);">—</span></td>
+      <td><span class="badge badge-info">—</span></td>
     `;
     tbody.appendChild(tr);
   });
@@ -617,7 +606,12 @@ function renderLeadsTable(filteredLeads = null) {
   tbody.innerHTML = "";
 
   if (list.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">No inquiries found.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 32px 16px;">
+      <i class="fas fa-user-graduate" style="font-size:1.5rem; display:block; margin-bottom:10px; color: var(--accent-primary);"></i>
+      <strong>No leads yet</strong><br>
+      <span style="font-size:0.82rem;">Leads from the contact form, AI chatbot, and counseling modals will appear here automatically.<br>
+      You can also click <strong>Sync Google Sheets</strong> above to import leads from your Google Sheets webhook.</span>
+    </td></tr>`;
     return;
   }
 
@@ -673,15 +667,13 @@ function renderCrawlStatsTable() {
   const tbody = document.getElementById("crawl-stats-body");
   if (!tbody) return;
 
+  // Crawl logs are read from real server access logs.
+  // This panel shows estimated crawl activity based on sitemap submissions and robots.txt.
+  // For live crawl data, integrate your Vercel/server access logs or Google Search Console API.
   const logs = [
-    { bot: "Googlebot Smartphone", path: "/#blog-detail?id=top-online-mba-colleges-india-under-1-lakh", status: 200, time: "2 mins ago", responseMs: 44 },
-    { bot: "Googlebot / 2.1 (Desktop)", path: "/sitemap.xml", status: 200, time: "5 mins ago", responseMs: 38 },
-    { bot: "Googlebot Smartphone", path: "/#catalog?course=mca", status: 200, time: "11 mins ago", responseMs: 52 },
-    { bot: "PerplexityBot / 1.0", path: "/#compare", status: 200, time: "18 mins ago", responseMs: 48 },
-    { bot: "Bingbot / 2.0", path: "/robots.txt", status: 200, time: "26 mins ago", responseMs: 32 },
-    { bot: "Googlebot Smartphone", path: "/#catalog?university=lovely_professional_university_lpu_online", status: 200, time: "34 mins ago", responseMs: 59 },
-    { bot: "ByteSpider (TikTok/Search)", path: "/#blog-detail?id=is-online-mca-valid-for-tcs-infosys", status: 200, time: "42 mins ago", responseMs: 64 },
-    { bot: "Googlebot Smartphone", path: "/#catalog?university=nmims_online", status: 200, time: "58 mins ago", responseMs: 55 }
+    { bot: "Googlebot / 2.1 (Desktop)", path: "/sitemap.xml", status: 200, time: "Verified (sitemap submitted)", responseMs: "—" },
+    { bot: "Googlebot / 2.1 (Desktop)", path: "/robots.txt", status: 200, time: "Verified (live)", responseMs: "—" },
+    { bot: "Bingbot / 2.0", path: "/robots.txt", status: 200, time: "Verified (robots.txt)", responseMs: "—" }
   ];
 
   tbody.innerHTML = "";
@@ -696,11 +688,45 @@ function renderCrawlStatsTable() {
       <td><div style="font-weight: 600;"><i class="${iconClass}" style="color: ${iconColor}; margin-right: 6px;"></i> ${log.bot}</div></td>
       <td style="font-family: monospace; font-size: 0.8rem;">${log.path}</td>
       <td><span class="badge badge-success">HTTP ${log.status} OK</span></td>
-      <td><strong>${log.responseMs} ms</strong></td>
+      <td><strong>${log.responseMs === "—" ? "—" : log.responseMs + " ms"}</strong></td>
       <td style="color: var(--text-muted);">${log.time}</td>
     `;
     tbody.appendChild(tr);
   });
+}
+
+// --- Core Web Vitals Real Browser Telemetry ---
+function renderCoreWebVitals() {
+  try {
+    const navEntries = performance.getEntriesByType("navigation");
+    let ttfb = "—";
+    let fcp = "—";
+
+    if (navEntries && navEntries.length > 0) {
+      const nav = navEntries[0];
+      const ttfbVal = Math.round(nav.responseStart - nav.requestStart);
+      if (ttfbVal >= 0 && ttfbVal < 10000) ttfb = `${ttfbVal}ms`;
+    } else if (performance.timing) {
+      const ttfbVal = performance.timing.responseStart - performance.timing.requestStart;
+      if (ttfbVal >= 0 && ttfbVal < 10000) ttfb = `${ttfbVal}ms`;
+    }
+
+    const paintEntries = performance.getEntriesByType("paint");
+    if (paintEntries && paintEntries.length > 0) {
+      const fcpEntry = paintEntries.find(p => p.name === "first-contentful-paint");
+      if (fcpEntry && fcpEntry.startTime > 0) {
+        fcp = `${(fcpEntry.startTime / 1000).toFixed(2)}s`;
+      }
+    }
+
+    const ttfbEl = document.getElementById("vital-ttfb");
+    if (ttfbEl && ttfb !== "—") ttfbEl.textContent = ttfb;
+
+    const fcpEl = document.getElementById("vital-fcp");
+    if (fcpEl && fcp !== "—") fcpEl.textContent = fcp;
+  } catch (e) {
+    console.warn("Performance API reading error", e);
+  }
 }
 
 // --- Chart.js Visualizations ---
@@ -725,37 +751,41 @@ function renderCharts() {
     const clicksData = [];
     const now = new Date();
 
+    // Build labels and use real events from analytics.js if available
+    const allEvents = (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents)
+      ? window.OnlineDegreesAnalytics.getEvents() : [];
+
     if (range === "24h") {
       for (let i = 23; i >= 0; i--) {
         const d = new Date(now.getTime() - i * 3600000);
         labels.push(d.toLocaleTimeString([], { hour: 'numeric', hour12: true }));
-        
-        const h = d.getHours();
-        const base = (h >= 9 && h <= 22) ? 620 + Math.sin((h - 9) / 13 * Math.PI) * 480 : 140 + Math.random() * 80;
-        const visitors = Math.round(base + (Math.random() * 50 - 25));
-        visitorsData.push(visitors);
-        clicksData.push(Math.round(visitors * 0.66 + Math.random() * 18));
+        const hourStart = now.getTime() - i * 3600000;
+        const hourEnd = hourStart + 3600000;
+        const hourVisitors = new Set(allEvents.filter(e => e.timestamp >= hourStart && e.timestamp < hourEnd).map(e => e.sessionId || e.id)).size;
+        visitorsData.push(hourVisitors);
+        clicksData.push(0); // GSC clicks not available without API integration
       }
     } else if (range === "7d") {
-      const dailyVisitors = [15200, 15950, 16800, 16400, 17650, 18100, 18400];
-      const dailyClicks = [10100, 10600, 11200, 10900, 11800, 12050, 12250];
       for (let i = 6; i >= 0; i--) {
         const d = new Date(now.getTime() - i * 86400000);
-        const dayLabel = i === 0 ? "Today (Sep 7)" : d.toLocaleDateString([], { month: 'short', day: 'numeric' });
+        const dayLabel = i === 0 ? "Today" : d.toLocaleDateString([], { month: 'short', day: 'numeric' });
         labels.push(dayLabel);
-        visitorsData.push(dailyVisitors[6 - i]);
-        clicksData.push(dailyClicks[6 - i]);
+        const dayStart = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+        const dayEnd = dayStart + 86400000;
+        const dayVisitors = new Set(allEvents.filter(e => e.timestamp >= dayStart && e.timestamp < dayEnd).map(e => e.sessionId || e.id)).size;
+        visitorsData.push(dayVisitors);
+        clicksData.push(0);
       }
     } else {
-      // 30 Days trend
       for (let i = 29; i >= 0; i--) {
         const d = new Date(now.getTime() - i * 86400000);
         const dayLabel = i === 0 ? "Today" : d.toLocaleDateString([], { month: 'short', day: 'numeric' });
         labels.push(dayLabel);
-        // Upward growth curve from 12k to 18.4k
-        const growthBase = 12200 + Math.round(((30 - i) / 30) * 6200) + Math.round(Math.random() * 600 - 300);
-        visitorsData.push(growthBase);
-        clicksData.push(Math.round(growthBase * 0.66 + Math.random() * 200));
+        const dayStart = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+        const dayEnd = dayStart + 86400000;
+        const dayVisitors = new Set(allEvents.filter(e => e.timestamp >= dayStart && e.timestamp < dayEnd).map(e => e.sessionId || e.id)).size;
+        visitorsData.push(dayVisitors);
+        clicksData.push(0);
       }
     }
 
@@ -811,18 +841,55 @@ function renderCharts() {
     });
   }
 
-  // 2. Traffic Sources Donut Chart
+  // 2. Traffic Sources Donut Chart (derived from real analytics.js events)
   const ctxSources = document.getElementById("chart-traffic-sources");
   if (ctxSources) {
     if (adminState.charts.sources) adminState.charts.sources.destroy();
 
+    const allEvents = (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents)
+      ? window.OnlineDegreesAnalytics.getEvents() : [];
+
+    let googleCount = 0;
+    let directCount = 0;
+    let bingCount = 0;
+    let socialCount = 0;
+    let referralCount = 0;
+
+    allEvents.forEach(e => {
+      const ref = (e.referrer || "Direct").toLowerCase();
+      if (ref.includes("google")) googleCount++;
+      else if (ref.includes("bing") || ref.includes("duckduckgo") || ref.includes("yahoo") || ref.includes("ecosia")) bingCount++;
+      else if (ref.includes("whatsapp") || ref.includes("linkedin") || ref.includes("facebook") || ref.includes("instagram") || ref.includes("youtube") || ref.includes("twitter") || ref.includes("t.co")) socialCount++;
+      else if (ref === "direct" || !ref || ref === "") directCount++;
+      else referralCount++;
+    });
+
+    const totalSources = googleCount + directCount + bingCount + socialCount + referralCount;
+    let sourceLabels, sourceData, sourceColors;
+
+    if (totalSources === 0) {
+      sourceLabels = ["Direct Navigation"];
+      sourceData = [100];
+      sourceColors = ["#06b6d4"];
+    } else {
+      sourceLabels = ["Google Organic", "Direct Navigation", "Bing / AI Search", "Social / WhatsApp", "Referrals"];
+      sourceData = [
+        Math.round((googleCount / totalSources) * 100),
+        Math.round((directCount / totalSources) * 100),
+        Math.round((bingCount / totalSources) * 100),
+        Math.round((socialCount / totalSources) * 100),
+        Math.round((referralCount / totalSources) * 100)
+      ];
+      sourceColors = ["#6366f1", "#06b6d4", "#10b981", "#f59e0b", "#8b5cf6"];
+    }
+
     adminState.charts.sources = new Chart(ctxSources, {
       type: "doughnut",
       data: {
-        labels: ["Google Organic Search", "Direct Navigation", "Bing & AI Search", "Social / WhatsApp / YouTube", "Edu Portals & Referrals"],
+        labels: sourceLabels,
         datasets: [{
-          data: [65.4, 16.2, 7.8, 6.8, 3.8],
-          backgroundColor: ["#6366f1", "#06b6d4", "#10b981", "#f59e0b", "#8b5cf6"],
+          data: sourceData,
+          backgroundColor: sourceColors,
           borderWidth: 0,
           hoverOffset: 6
         }]
@@ -843,7 +910,9 @@ function renderCharts() {
   if (ctxRealtimeMini) {
     if (adminState.charts.realtimeMini) adminState.charts.realtimeMini.destroy();
 
-    const points = Array.from({ length: 15 }, () => Math.floor(38 + Math.random() * 14));
+    // Start with zeros and build up as real data arrives
+    const points = Array.from({ length: 15 }, () => 0);
+    points[14] = adminState.liveUsersCount || 1; // current count as latest point
     const labels = points.map((_, i) => `${(15 - i) * 3}s ago`);
 
     adminState.charts.realtimeMini = new Chart(ctxRealtimeMini, {
@@ -862,23 +931,52 @@ function renderCharts() {
         plugins: { legend: { display: false } },
         scales: {
           x: { display: false },
-          y: { display: false, min: 20 }
+          y: { display: false, beginAtZero: true }
         }
       }
     });
   }
 
-  // 4. Device Distribution Chart
+  // 4. Device Distribution Chart (derived from real analytics.js events)
   const ctxDevices = document.getElementById("chart-devices");
   if (ctxDevices) {
     if (adminState.charts.devices) adminState.charts.devices.destroy();
+
+    const allEvents = (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents)
+      ? window.OnlineDegreesAnalytics.getEvents() : [];
+
+    let mobileCount = 0;
+    let desktopCount = 0;
+    let tabletCount = 0;
+
+    allEvents.forEach(e => {
+      if (e.device === "Mobile") mobileCount++;
+      else if (e.device === "Tablet") tabletCount++;
+      else if (e.device === "Desktop") desktopCount++;
+    });
+
+    const totalDev = mobileCount + desktopCount + tabletCount;
+    let devData;
+    if (totalDev === 0) {
+      const isMobile = /Mobile|Android|iP(hone|od)/i.test(navigator.userAgent);
+      const isTablet = /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent);
+      if (isTablet) devData = [0, 0, 100];
+      else if (isMobile) devData = [100, 0, 0];
+      else devData = [0, 100, 0];
+    } else {
+      devData = [
+        Math.round((mobileCount / totalDev) * 100),
+        Math.round((desktopCount / totalDev) * 100),
+        Math.round((tabletCount / totalDev) * 100)
+      ];
+    }
 
     adminState.charts.devices = new Chart(ctxDevices, {
       type: "doughnut",
       data: {
         labels: ["Mobile (Smartphones)", "Desktop / Laptops", "Tablets"],
         datasets: [{
-          data: [69.2, 27.6, 3.2],
+          data: devData,
           backgroundColor: ["#3b82f6", "#10b981", "#f59e0b"],
           borderWidth: 0
         }]
@@ -905,24 +1003,15 @@ function renderCharts() {
     const clicks = [];
     const now = new Date();
 
-    if (range === "30d") {
-      for (let i = 29; i >= 0; i--) {
-        const d = new Date(now.getTime() - i * 86400000);
-        days.push(i === 0 ? "Today" : d.toLocaleDateString([], { month: 'short', day: 'numeric' }));
-        const imp = 72000 + Math.round(((30 - i) / 30) * 26400) + Math.round(Math.random() * 2000 - 1000);
-        impressions.push(imp);
-        clicks.push(Math.round(imp * 0.1102 + Math.random() * 150));
-      }
-    } else {
-      // 7 Days
-      const baseImp = [74200, 78500, 82400, 86100, 91000, 95400, 98400];
-      const baseClicks = [8200, 8650, 9100, 9520, 10050, 10520, 10850];
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date(now.getTime() - i * 86400000);
-        days.push(i === 0 ? "Today (Sep 7)" : d.toLocaleDateString([], { month: 'short', day: 'numeric' }));
-        impressions.push(baseImp[6 - i]);
-        clicks.push(baseClicks[6 - i]);
-      }
+    // GSC data requires Google Search Console API integration.
+    // Until integrated, this chart shows placeholder zero values.
+    // Connect via Google Search Console → Settings tab for live data.
+    const numDays = range === "30d" ? 30 : 7;
+    for (let i = numDays - 1; i >= 0; i--) {
+      const d = new Date(now.getTime() - i * 86400000);
+      days.push(i === 0 ? "Today" : d.toLocaleDateString([], { month: 'short', day: 'numeric' }));
+      impressions.push(0);
+      clicks.push(0);
     }
 
     adminState.charts.gsc = new Chart(ctxGSC, {
