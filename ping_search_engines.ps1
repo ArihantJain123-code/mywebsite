@@ -19,38 +19,61 @@ Write-Host "  -> Microsoft Bing & Yandex: Fully automated via IndexNow Protocol 
 Write-Host "  -> Google: Requires Google Search Console manual submission or backlinks (Pings deprecated)." -ForegroundColor Cyan
 
 # 2. IndexNow Batch Submission
-Write-Host "`n[2/3] Submitting Core URLs to IndexNow API (Bing/Yandex/Partners)..." -ForegroundColor Yellow
+Write-Host "`n[2/3] Extracting and Submitting All URLs to IndexNow API (Bing/Yandex/Partners)..." -ForegroundColor Yellow
 
-$coreUrls = @(
-    "https://$HostName/",
-    "https://$HostName/?view=catalog",
-    "https://$HostName/?view=catalog&course=mba",
-    "https://$HostName/?view=catalog&course=mca",
-    "https://$HostName/?view=catalog&course=bca",
-    "https://$HostName/?view=catalog&course=bba",
-    "https://$HostName/?view=catalog&course=mcom",
-    "https://$HostName/?view=compare",
-    "https://$HostName/?view=blog",
-    "https://$HostName/?view=resume-builder",
-    "https://$HostName/?view=contact",
-    "https://$HostName/sitemap.html",
-    "https://$HostName/llms.txt",
-    "https://$HostName/llms-full.txt"
-)
+$allUrls = [System.Collections.Generic.List[string]]::new()
+
+# Read URLs from sitemap.xml
+$sitemapPath = Join-Path $PSScriptRoot "sitemap.xml"
+if (Test-Path $sitemapPath) {
+    $sitemapContent = Get-Content -Path $sitemapPath -Raw
+    $locs = [System.Text.RegularExpressions.Regex]::Matches($sitemapContent, '<loc>(.*?)</loc>')
+    foreach ($m in $locs) {
+        $u = $m.Groups[1].Value.Trim().Replace("&amp;", "&")
+        if ($u -and -not $allUrls.Contains($u)) { $allUrls.Add($u) }
+    }
+}
+
+# Read URLs from sitemap_articles.xml
+$articlesPath = Join-Path $PSScriptRoot "sitemap_articles.xml"
+if (Test-Path $articlesPath) {
+    $articlesContent = Get-Content -Path $articlesPath -Raw
+    $locsArt = [System.Text.RegularExpressions.Regex]::Matches($articlesContent, '<loc>(.*?)</loc>')
+    foreach ($m in $locsArt) {
+        $u = $m.Groups[1].Value.Trim().Replace("&amp;", "&")
+        if ($u -and -not $allUrls.Contains($u)) { $allUrls.Add($u) }
+    }
+}
+
+# Add AI/LLM manifests
+$extraUrls = @("https://$HostName/llms.txt", "https://$HostName/llms-full.txt")
+foreach ($e in $extraUrls) {
+    if (-not $allUrls.Contains($e)) { $allUrls.Add($e) }
+}
+
+Write-Host "  -> Compiled $($allUrls.Count) total URLs across sitemaps." -ForegroundColor Cyan
 
 $indexNowPayload = @{
     host = $HostName
     key = $Key
     keyLocation = $KeyLocation
-    urlList = $coreUrls
+    urlList = $allUrls.ToArray()
 } | ConvertTo-Json -Depth 3
 
-try {
-    $indexNowRes = Invoke-RestMethod -Uri "https://api.indexnow.org/indexnow" -Method Post -Body $indexNowPayload -ContentType "application/json; charset=utf-8" -TimeoutSec 10
-    Write-Host "  -> IndexNow submission received HTTP 200 OK!" -ForegroundColor Green
-    Write-Host "  -> Submitted $($coreUrls.Count) primary URLs for instant indexing." -ForegroundColor Green
-} catch {
-    Write-Host "  -> IndexNow API response: $_ (Will succeed in production upon DNS/HTTPS deployment)" -ForegroundColor DarkGray
+$endpoints = @("https://www.bing.com/indexnow", "https://api.indexnow.org/indexnow")
+$submitted = $false
+
+foreach ($ep in $endpoints) {
+    if (-not $submitted) {
+        try {
+            $indexNowRes = Invoke-RestMethod -Uri $ep -Method Post -Body $indexNowPayload -ContentType "application/json; charset=utf-8" -TimeoutSec 25
+            Write-Host "  -> IndexNow submission received HTTP 200 OK via $ep!" -ForegroundColor Green
+            Write-Host "  -> Successfully pushed $($allUrls.Count) URLs to Microsoft Bing & partner engines." -ForegroundColor Green
+            $submitted = $true
+        } catch {
+            Write-Host "  -> Endpoint $ep response: $_" -ForegroundColor DarkGray
+        }
+    }
 }
 
 # 3. Local Verification Check
