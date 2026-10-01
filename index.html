@@ -371,7 +371,7 @@
           </a>
         </li>
         <li>
-          <a class="nav-link ai-nav-link" href="javascript:void(0);" onclick="if(window.openAiQuizModal) window.openAiQuizModal();">
+          <a class="nav-link ai-nav-link" href="javascript:void(0);" id="nav-ai-matcher-btn" onclick="if(window.openAiQuizModal){window.openAiQuizModal();}else{var m=document.getElementById('ai-quiz-modal');if(m){m.style.display='flex';document.body.style.overflow='hidden';}}return false;">
             <i class="fas fa-magic"></i> AI Matcher <span class="nav-pill-tag ai">60s Quiz</span>
           </a>
         </li>
@@ -447,7 +447,7 @@
               <button id="home-browse-cta" class="btn btn-primary btn-glow" type="button">
                 <i class="fas fa-compass"></i> Explore All Degrees
               </button>
-              <button class="btn btn-quiz-trigger" type="button" onclick="if(window.openAiQuizModal) window.openAiQuizModal();">
+              <button class="btn btn-quiz-trigger" id="hero-ai-matcher-btn" type="button" onclick="if(window.openAiQuizModal){window.openAiQuizModal();}else{var m=document.getElementById('ai-quiz-modal');if(m){m.style.display='flex';document.body.style.overflow='hidden';}}">
                 <i class="fas fa-magic"></i> 60-Sec AI Degree Matcher
               </button>
             </div>
@@ -1861,6 +1861,8 @@
         <button type="button" class="btn btn-secondary" id="inquiry-reset-btn" style="margin-top:16px;"><i class="fas fa-redo"></i> Submit Another Inquiry</button>
       </div>
     </div>
+  </div>
+
   <!-- AI Quiz Matcher Modal (Lead Generation) -->
   <div class="modal-overlay" id="ai-quiz-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="ai-quiz-modal-title">
     <div class="modal-content ai-quiz-modal-card">
@@ -2039,7 +2041,7 @@
   <!-- Telemetry Analytics Tracker & Application Scripts (Deferred for Fast Core Web Vitals) -->
   <script src="analytics.js" defer></script>
   <script src="data.js?v=7" defer></script>
-  <script src="app.js?v=7" defer></script>
+  <script src="app.js?v=8" defer></script>
   <!-- AI Chatbot Lead Generation Bot -->
   <script src="chatbot.js" defer></script>
 </body>

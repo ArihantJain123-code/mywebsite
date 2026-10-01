@@ -318,8 +318,8 @@ function setupEventListeners() {
     }
   });
 
-  // Navigation links fallback
-  document.querySelectorAll(".nav-link").forEach(link => {
+  // Navigation links fallback (skip the AI Matcher link – handled separately)
+  document.querySelectorAll(".nav-link:not(.ai-nav-link)").forEach(link => {
     link.addEventListener("click", (e) => {
       const linkEl = e.target.closest(".nav-link") || e.target.closest("[data-target]");
       const view = linkEl ? linkEl.getAttribute("data-target") : null;
@@ -330,6 +330,26 @@ function setupEventListeners() {
       }
       const navMenu = document.getElementById("nav-menu");
       if (navMenu) navMenu.classList.remove("show");
+    });
+  });
+
+  // AI Matcher button – navbar link
+  document.querySelectorAll(".ai-nav-link").forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const navMenu = document.getElementById("nav-menu");
+      if (navMenu) navMenu.classList.remove("show");
+      window.openAiQuizModal();
+    });
+  });
+
+  // AI Matcher button – hero CTA (btn-quiz-trigger)
+  document.querySelectorAll(".btn-quiz-trigger").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.openAiQuizModal();
     });
   });
 
@@ -847,6 +867,8 @@ function setupEventListeners() {
     if (e.key === "Escape") {
       closeInquiryModal();
       closeModal();
+      if (typeof window.closeAiQuizModal === "function") window.closeAiQuizModal();
+      if (typeof window.closeDownloadGuideModal === "function") window.closeDownloadGuideModal();
     }
   });
 
@@ -3833,6 +3855,28 @@ window.openAiQuizModal = function() {
   if (inq) inq.style.display = "none";
   const guideM = document.getElementById("download-guide-modal");
   if (guideM) guideM.style.display = "none";
+  const uniModal = document.getElementById("modal-overlay");
+  if (uniModal) uniModal.style.display = "none";
+
+  const navMenu = document.getElementById("nav-menu");
+  if (navMenu) navMenu.classList.remove("show");
+  const navBackdrop = document.getElementById("mobile-nav-backdrop");
+  if (navBackdrop) navBackdrop.classList.remove("show");
+
+  // Reset modal wizard to step 1
+  if (typeof window.advanceModalWizard === "function") {
+    window.advanceModalWizard(1);
+  }
+  const form = document.getElementById("modal-wizard-form");
+  const success = document.getElementById("m-wizard-success");
+  if (form) {
+    form.reset();
+    form.style.display = "";
+  }
+  if (success) {
+    success.style.display = "none";
+  }
+
   const modal = document.getElementById("ai-quiz-modal");
   if (modal) {
     modal.style.display = "flex";
@@ -3844,8 +3888,8 @@ window.closeAiQuizModal = function() {
   const modal = document.getElementById("ai-quiz-modal");
   if (modal) {
     modal.style.display = "none";
-    document.body.style.overflow = "";
   }
+  document.body.style.overflow = "";
 };
 
 window.advanceModalWizard = function(stepNum) {
@@ -4016,6 +4060,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
+
+  // Backdrop click dismissal for AI Quiz and Guide modals
+  const aiModal = document.getElementById("ai-quiz-modal");
+  if (aiModal) {
+    aiModal.addEventListener("click", (e) => {
+      if (e.target === aiModal) {
+        window.closeAiQuizModal();
+      }
+    });
+  }
+
+  const guideModal = document.getElementById("download-guide-modal");
+  if (guideModal) {
+    guideModal.addEventListener("click", (e) => {
+      if (e.target === guideModal) {
+        window.closeDownloadGuideModal();
+      }
+    });
+  }
 
   // Start Social Proof toast
   initSocialProofToast();
