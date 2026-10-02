@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
@@ -9,7 +9,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.getonlinedegrees.online/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -17,7 +17,7 @@
   <!-- Course Catalog (Find Degrees) -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -25,7 +25,7 @@
   <!-- Compare Board -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=compare</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- Blogs -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -41,7 +41,7 @@
   <!-- Contact Us -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=contact</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -49,7 +49,7 @@
   <!-- Interactive Resume Builder -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=resume-builder</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://www.getonlinedegrees.online/privacy.html</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -65,14 +65,14 @@
   <!-- Terms & Conditions -->
   <url>
     <loc>https://www.getonlinedegrees.online/terms.html</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <!-- HTML Sitemap Directory -->
   <url>
     <loc>https://www.getonlinedegrees.online/sitemap.html</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -82,7 +82,7 @@
   <!-- Online MBA -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;course=mba</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -90,7 +90,7 @@
   <!-- Online BCA -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;course=bca</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -98,7 +98,7 @@
   <!-- Online BBA -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;course=bba</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -106,7 +106,7 @@
   <!-- Online MCA -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;course=mca</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -114,7 +114,7 @@
   <!-- Online M.Com -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;course=mcom</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -123,133 +123,133 @@
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=amity_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=chandigarh_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=d_y_patil_university_online_pune</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=jain_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=lovely_professional_university_lpu_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=manipal_university_jaipur_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=jaipuria_institute_of_management_online_pgdm</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=sikkim_manipal_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=nmims_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=uttaranchal_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=manav_rachna_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=mody_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=kurukshetra_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=upes_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=symbiosis_centre_for_distance_learning_scdl</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=kl_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=golden_gate_university_usa</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=liverpool_john_moores_university_uk</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://www.getonlinedegrees.online/?view=catalog&amp;university=birchwood_university_usa</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -259,7 +259,7 @@
   <!-- Top Online MBA Colleges in Haryana Guide -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=online-mba-colleges-haryana-guide</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -267,7 +267,7 @@
   <!-- Kurukshetra University Online MBA Review -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=kuk-online-mba-haryana-review</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -275,7 +275,7 @@
   <!-- OP Jindal Global University Online MBA Review -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=op-jindal-online-mba-haryana-review</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -283,7 +283,7 @@
   <!-- Manav Rachna University Online MBA Review -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=manav-rachna-online-mba-haryana-review</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -291,7 +291,7 @@
   <!-- Govt vs Private Online MBA Haryana Comparison -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=govt-vs-private-online-mba-haryana</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -299,7 +299,7 @@
   <!-- Online MBA Gurgaon Faridabad Executive Guide -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=online-mba-gurgaon-faridabad-working-professionals</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -307,7 +307,7 @@
   <!-- Top Online MBA Colleges India Guide -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=top-online-mba-colleges-india</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -315,7 +315,7 @@
   <!-- Ultimate Guide to Online BBA Programs India -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=ultimate-guide-online-bba-programs-india</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -323,7 +323,7 @@
   <!-- Top Online MBA Colleges Under 1 Lakh India -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=online-mba-colleges-under-1-lakh-india</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -331,205 +331,205 @@
   <!-- University Reviews -->
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-amity_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-chandigarh_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-d_y_patil_university_online_pune</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-jain_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-lovely_professional_university_lpu_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-manipal_university_jaipur_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-jaipuria_institute_of_management_online_pgdm</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-sikkim_manipal_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-nmims_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-uttaranchal_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-vivekananda_global_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-parul_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-andhra_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-shoolini_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-srm_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-galgotias_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-vignan_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-kalinga_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-chitkara_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-op_jindal_global_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-jamia_hamdard_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-manav_rachna_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-mody_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-guru_kashi_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-sastra_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-kurukshetra_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-upes_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-symbiosis_centre_for_distance_learning_scdl</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-amrita_vishwa_vidyapeetham_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-kl_university_online</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-dy_patil_vidyapeeth_online_navi_mumbai</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-golden_gate_university_usa</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-liverpool_john_moores_university_uk</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.getonlinedegrees.online/?view=blog-detail&amp;id=review-birchwood_university_usa</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

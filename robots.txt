@@ -1,6 +1,6 @@
 # robots.txt for https://www.getonlinedegrees.online/
 # Technical SEO & Crawl Directive Configuration
-# Last updated: 2026-09-28
+# Last updated: 2026-10-02
 
 # =============================================
 # DEFAULT RULES FOR ALL WEB CRAWLERS
