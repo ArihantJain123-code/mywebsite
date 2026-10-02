@@ -8,8 +8,11 @@
 User-agent: *
 Allow: /
 Allow: /index.html
+Allow: /privacy
 Allow: /privacy.html
+Allow: /terms
 Allow: /terms.html
+Allow: /sitemap
 Allow: /sitemap.html
 Allow: /404.html
 
@@ -37,8 +40,11 @@ User-agent: Googlebot
 Allow: /
 Allow: /assets/
 Allow: /index.html
+Allow: /privacy
 Allow: /privacy.html
+Allow: /terms
 Allow: /terms.html
+Allow: /sitemap
 Allow: /sitemap.html
 
 # All catalog views
@@ -64,8 +70,11 @@ User-agent: Bingbot
 Allow: /
 Allow: /assets/
 Allow: /index.html
+Allow: /privacy
 Allow: /privacy.html
+Allow: /terms
 Allow: /terms.html
+Allow: /sitemap
 Allow: /sitemap.html
 Allow: /?view=catalog
 Allow: /?view=compare

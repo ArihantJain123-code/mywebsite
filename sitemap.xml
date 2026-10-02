@@ -56,7 +56,7 @@
 
   <!-- Privacy Policy -->
   <url>
-    <loc>https://www.getonlinedegrees.online/privacy.html</loc>
+    <loc>https://www.getonlinedegrees.online/privacy</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -64,14 +64,14 @@
 
   <!-- Terms & Conditions -->
   <url>
-    <loc>https://www.getonlinedegrees.online/terms.html</loc>
+    <loc>https://www.getonlinedegrees.online/terms</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <!-- HTML Sitemap Directory -->
   <url>
-    <loc>https://www.getonlinedegrees.online/sitemap.html</loc>
+    <loc>https://www.getonlinedegrees.online/sitemap</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

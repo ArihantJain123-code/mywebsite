@@ -27,6 +27,15 @@
 /
   Cache-Control: public, max-age=0, must-revalidate
 
+/privacy
+  Cache-Control: public, max-age=0, must-revalidate
+
+/terms
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sitemap
+  Cache-Control: public, max-age=0, must-revalidate
+
 # XML Sitemap & Robots.txt Directives
 /sitemap_index.xml
   Content-Type: application/xml; charset=utf-8
