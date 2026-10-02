@@ -150,10 +150,10 @@
 
       <ul class="nav-menu" id="nav-menu">
         <li><a class="nav-link" href="/">Home</a></li>
-        <li><a class="nav-link" href="/#catalog">Find Degrees</a></li>
-        <li><a class="nav-link" href="/#compare">Compare Board</a></li>
-        <li><a class="nav-link" href="/#blog">Blogs</a></li>
-        <li><a class="nav-link" href="/#contact">Contact Us</a></li>
+        <li><a class="nav-link" href="/?view=catalog">Find Degrees</a></li>
+        <li><a class="nav-link" href="/?view=compare">Compare Board</a></li>
+        <li><a class="nav-link" href="/?view=blog">Blogs</a></li>
+        <li><a class="nav-link" href="/?view=contact">Contact Us</a></li>
       </ul>
     </div>
     <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
@@ -168,7 +168,7 @@
       <p class="error-desc">We couldn't find the page you were looking for. The link may have changed, or the program details were updated. Use the search bar below or pick from our popular degree comparisons.</p>
       
       <!-- Quick Search -->
-      <form class="error-search-box" onsubmit="event.preventDefault(); const q = this.querySelector('input').value.trim(); window.location.href = q ? '/#catalog?search=' + encodeURIComponent(q) : '/#catalog';">
+      <form class="error-search-box" onsubmit="event.preventDefault(); const q = this.querySelector('input').value.trim(); window.location.href = q ? '/?view=catalog&search=' + encodeURIComponent(q) : '/?view=catalog';">
         <input type="text" placeholder="Search degrees, courses, or universities..." required>
         <button type="submit" class="btn btn-primary" style="padding: 10px 20px;"><i class="fas fa-search"></i> Search</button>
       </form>
@@ -176,13 +176,13 @@
       <!-- Popular Quick Links -->
       <div class="quick-links-title">Explore Popular Accredited Programs</div>
       <div class="quick-links-grid">
-        <a href="/#catalog?course=mba" class="quick-chip"><i class="fas fa-briefcase"></i> Online MBA</a>
-        <a href="/#catalog?course=mca" class="quick-chip"><i class="fas fa-laptop-code"></i> Online MCA</a>
-        <a href="/#catalog?course=bca" class="quick-chip"><i class="fas fa-code"></i> Online BCA</a>
-        <a href="/#catalog?course=bba" class="quick-chip"><i class="fas fa-chart-line"></i> Online BBA</a>
-        <a href="/#catalog?course=mcom" class="quick-chip"><i class="fas fa-calculator"></i> Online M.Com</a>
-        <a href="/#compare" class="quick-chip"><i class="fas fa-balance-scale"></i> Compare Universities</a>
-        <a href="/#blog" class="quick-chip"><i class="fas fa-book-open"></i> Career Blogs</a>
+        <a href="/?view=catalog&amp;course=mba" class="quick-chip"><i class="fas fa-briefcase"></i> Online MBA</a>
+        <a href="/?view=catalog&amp;course=mca" class="quick-chip"><i class="fas fa-laptop-code"></i> Online MCA</a>
+        <a href="/?view=catalog&amp;course=bca" class="quick-chip"><i class="fas fa-code"></i> Online BCA</a>
+        <a href="/?view=catalog&amp;course=bba" class="quick-chip"><i class="fas fa-chart-line"></i> Online BBA</a>
+        <a href="/?view=catalog&amp;course=mcom" class="quick-chip"><i class="fas fa-calculator"></i> Online M.Com</a>
+        <a href="/?view=compare" class="quick-chip"><i class="fas fa-balance-scale"></i> Compare Universities</a>
+        <a href="/?view=blog" class="quick-chip"><i class="fas fa-book-open"></i> Career Blogs</a>
         <a href="/" class="quick-chip" style="background:var(--primary); color:white;"><i class="fas fa-home" style="color:white;"></i> Back to Homepage</a>
       </div>
     </div>
@@ -201,17 +201,17 @@
       <div class="footer-links-col">
         <h4>Popular Programs</h4>
         <ul>
-          <li><a href="/#catalog?course=mba">Online MBA</a></li>
-          <li><a href="/#catalog?course=mca">Online MCA</a></li>
-          <li><a href="/#catalog?course=bca">Online BCA</a></li>
-          <li><a href="/#catalog?course=bba">Online BBA</a></li>
+          <li><a href="/?view=catalog&amp;course=mba">Online MBA</a></li>
+          <li><a href="/?view=catalog&amp;course=mca">Online MCA</a></li>
+          <li><a href="/?view=catalog&amp;course=bca">Online BCA</a></li>
+          <li><a href="/?view=catalog&amp;course=bba">Online BBA</a></li>
         </ul>
       </div>
       <div class="footer-links-col">
         <h4>Legal &amp; Policy</h4>
         <ul>
-          <li><a href="terms.html">Terms &amp; Conditions</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
         </ul>
       </div>
     </div>
