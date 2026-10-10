@@ -136,20 +136,66 @@ function initReviews() {
 }
 
 // --- Router ---
-// --- Router (SEO-friendly Query Param & Hash Support) ---
+// --- Router (Clean URLs, Query Param & Hash Support) ---
 function initRouter() {
   const handleRouteChange = () => {
     let viewName = "home";
     let params = {};
 
-    // 1. Check Query Parameters first (Crawlable URLs like /?view=catalog&course=mba or /?view=blog-detail&id=...)
+    // 0. Check Clean Pathname first (e.g. /online-mba, /compare, /blog, /contact, /resume-builder)
+    const rawPath = window.location.pathname.toLowerCase().replace(/\/$/, "");
+    if (rawPath === "/online-mba" || rawPath === "/online-mba.html") {
+      viewName = "catalog";
+      params.course = "mba";
+    } else if (rawPath === "/online-mca" || rawPath === "/online-mca.html") {
+      viewName = "catalog";
+      params.course = "mca";
+    } else if (rawPath === "/online-bca" || rawPath === "/online-bca.html") {
+      viewName = "catalog";
+      params.course = "bca";
+    } else if (rawPath === "/online-bba" || rawPath === "/online-bba.html") {
+      viewName = "catalog";
+      params.course = "bba";
+    } else if (rawPath === "/online-mcom" || rawPath === "/online-mcom.html") {
+      viewName = "catalog";
+      params.course = "mcom";
+    } else if (rawPath === "/compare" || rawPath === "/compare.html") {
+      viewName = "compare";
+    } else if (rawPath === "/blog" || rawPath === "/blog.html") {
+      viewName = "blog";
+    } else if (rawPath === "/contact" || rawPath === "/contact.html") {
+      viewName = "contact";
+    } else if (rawPath === "/resume-builder" || rawPath === "/resume-builder.html") {
+      viewName = "resume-builder";
+    } else if (rawPath === "/online-mba-colleges-haryana" || rawPath === "/online-mba-colleges-haryana.html") {
+      viewName = "blog-detail";
+      params.id = "online-mba-colleges-haryana-guide";
+    } else if (rawPath === "/online-mba-colleges-under-1-lakh" || rawPath === "/online-mba-colleges-under-1-lakh.html") {
+      viewName = "blog-detail";
+      params.id = "online-mba-colleges-under-1-lakh-india";
+    } else if (rawPath === "/ultimate-guide-online-bba-programs-india" || rawPath === "/ultimate-guide-online-bba-programs-india.html") {
+      viewName = "blog-detail";
+      params.id = "ultimate-guide-online-bba-programs-india";
+    } else {
+      const cleanSlug = rawPath.replace(/^\//, "").replace(/\.html$/, "");
+      if (typeof BLOGS_DATA !== "undefined" && BLOGS_DATA.some(b => b.id.toLowerCase() === cleanSlug)) {
+        viewName = "blog-detail";
+        params.id = BLOGS_DATA.find(b => b.id.toLowerCase() === cleanSlug).id;
+      }
+    }
+
+    // 1. Check Query Parameters (Crawlable URLs like /?view=catalog&course=mba or overrides)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("view") || urlParams.has("course") || urlParams.has("id") || urlParams.has("university")) {
-      viewName = urlParams.get("view") || (urlParams.has("course") || urlParams.has("university") ? "catalog" : (urlParams.has("id") ? "blog-detail" : "home"));
+      if (urlParams.has("view")) {
+        viewName = urlParams.get("view");
+      } else if (viewName === "home") {
+        viewName = (urlParams.has("course") || urlParams.has("university") ? "catalog" : (urlParams.has("id") ? "blog-detail" : "home"));
+      }
       for (const [key, value] of urlParams.entries()) {
         if (key !== "view") params[key] = value;
       }
-    } else {
+    } else if (viewName === "home") {
       // 2. Fall back to hash routing (SPA Navigation #catalog, #blog-detail?id=...)
       const hash = window.location.hash || "#home";
       const parts = hash.split("?");
@@ -3445,11 +3491,9 @@ function updateSEO(viewName, params = {}) {
     description = `Compare top UGC-DEB approved ${courseName} degrees in India. Check eligibility, semester fees, placement assistance, and accredited university options.`;
     
     if (params.university) {
-      canonicalUrl = `https://www.getonlinedegrees.online/?view=catalog&university=${encodeURIComponent(params.university)}`;
-    } else if (params.course) {
-      canonicalUrl = `https://www.getonlinedegrees.online/?view=catalog&course=${encodeURIComponent(params.course.toLowerCase())}`;
+      canonicalUrl = `https://www.getonlinedegrees.online/online-${courseCode}?university=${encodeURIComponent(params.university)}`;
     } else {
-      canonicalUrl = `https://www.getonlinedegrees.online/?view=catalog`;
+      canonicalUrl = `https://www.getonlinedegrees.online/online-${courseCode}`;
     }
 
     // Course Schema
@@ -3490,7 +3534,7 @@ function updateSEO(viewName, params = {}) {
           "@type": "ListItem",
           "position": 2,
           "name": "Find Degrees",
-          "item": "https://www.getonlinedegrees.online/?view=catalog"
+          "item": "https://www.getonlinedegrees.online/online-mba"
         },
         {
           "@type": "ListItem",
@@ -3504,7 +3548,7 @@ function updateSEO(viewName, params = {}) {
   } else if (viewName === "compare") {
     title = "Compare Online Universities Side-by-Side | OnlineDegrees";
     description = "Compare up to 3 online degree universities side-by-side on fees, NAAC grade, UGC approval, placement rating, and LMS features.";
-    canonicalUrl = "https://www.getonlinedegrees.online/?view=compare";
+    canonicalUrl = "https://www.getonlinedegrees.online/compare";
 
     jsonLdSchemas.push({
       "@context": "https://schema.org",
@@ -3528,7 +3572,7 @@ function updateSEO(viewName, params = {}) {
   } else if (viewName === "blog") {
     title = "Online Education Blog, Career Roadmaps & University Reviews | OnlineDegrees";
     description = "Read expert insights, detailed UGC university reviews, tech career transition guides, and online degree admission tips.";
-    canonicalUrl = "https://www.getonlinedegrees.online/?view=blog";
+    canonicalUrl = "https://www.getonlinedegrees.online/blog";
 
     jsonLdSchemas.push({
       "@context": "https://schema.org",
@@ -3549,6 +3593,54 @@ function updateSEO(viewName, params = {}) {
       ]
     });
 
+  } else if (viewName === "contact") {
+    title = "Contact Our Academic Advising Experts | OnlineDegrees";
+    description = "Reach out for unbiased guidance on UGC-DEB approved degrees, admission criteria, and scholarship schemes.";
+    canonicalUrl = "https://www.getonlinedegrees.online/contact";
+
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.getonlinedegrees.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact Us",
+          "item": canonicalUrl
+        }
+      ]
+    });
+
+  } else if (viewName === "resume-builder") {
+    title = "Interactive ATS Resume Builder for Tech & Management Careers | OnlineDegrees";
+    description = "Craft a professional ATS-compliant resume with customized templates for IT and management degrees.";
+    canonicalUrl = "https://www.getonlinedegrees.online/resume-builder";
+
+    jsonLdSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.getonlinedegrees.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "ATS Resume Builder",
+          "item": canonicalUrl
+        }
+      ]
+    });
+
   } else if (viewName === "blog-detail" && params.id) {
     let post = null;
     if (typeof BLOGS_DATA !== "undefined") {
@@ -3561,7 +3653,15 @@ function updateSEO(viewName, params = {}) {
       if (post.image) {
         imageUrl = post.image.startsWith("http") ? post.image : `https://www.getonlinedegrees.online/${post.image}`;
       }
-      canonicalUrl = `https://www.getonlinedegrees.online/?view=blog-detail&id=${encodeURIComponent(params.id)}`;
+      if (params.id === "online-mba-colleges-haryana-guide") {
+        canonicalUrl = "https://www.getonlinedegrees.online/online-mba-colleges-haryana";
+      } else if (params.id === "online-mba-colleges-under-1-lakh-india") {
+        canonicalUrl = "https://www.getonlinedegrees.online/online-mba-colleges-under-1-lakh";
+      } else if (params.id === "ultimate-guide-online-bba-programs-india") {
+        canonicalUrl = "https://www.getonlinedegrees.online/ultimate-guide-online-bba-programs-india";
+      } else {
+        canonicalUrl = `https://www.getonlinedegrees.online/${encodeURIComponent(params.id)}`;
+      }
 
       jsonLdSchemas.push({
         "@context": "https://schema.org",
@@ -3597,7 +3697,7 @@ function updateSEO(viewName, params = {}) {
             "@type": "ListItem",
             "position": 2,
             "name": "Blogs",
-            "item": "https://www.getonlinedegrees.online/?view=blog"
+            "item": "https://www.getonlinedegrees.online/blog"
           },
           {
             "@type": "ListItem",

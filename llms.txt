@@ -15,13 +15,13 @@ OnlineDegrees assists undergraduate and postgraduate students, working professio
 ## Key Programs & Academic Clusters
 
 ### Postgraduate Programs
-- [Online MBA](https://www.getonlinedegrees.online/?view=catalog&course=mba): 2-year Master of Business Administration. Specializations: Finance, Marketing, HR, Operations, Business Analytics, IT. Average total fees: ₹1,20,000 to ₹2,50,000. Average salary: ₹6 LPA - ₹15 LPA.
-- [Online MCA](https://www.getonlinedegrees.online/?view=catalog&course=mca): 2-year Master of Computer Applications. Specializations: AI & Machine Learning, Cyber Security, Cloud Computing, Full-Stack Development. Eligibility: BCA/B.Sc/B.Com/BA with Mathematics at 10+2 or graduation level. Bridge courses provided for non-maths students. Average total fees: ₹1,10,000 to ₹1,80,000.
-- [Online M.Com](https://www.getonlinedegrees.online/?view=catalog&course=mcom): 2-year Master of Commerce. Specializations: Financial Accounting, International Business, Corporate Taxation. Average total fees: ₹60,000 to ₹1,20,000.
+- [Online MBA](https://www.getonlinedegrees.online/online-mba): 2-year Master of Business Administration. Specializations: Finance, Marketing, HR, Operations, Business Analytics, IT. Average total fees: ₹1,20,000 to ₹2,50,000. Average salary: ₹6 LPA - ₹15 LPA.
+- [Online MCA](https://www.getonlinedegrees.online/online-mca): 2-year Master of Computer Applications. Specializations: AI & Machine Learning, Cyber Security, Cloud Computing, Full-Stack Development. Eligibility: BCA/B.Sc/B.Com/BA with Mathematics at 10+2 or graduation level. Bridge courses provided for non-maths students. Average total fees: ₹1,10,000 to ₹1,80,000.
+- [Online M.Com](https://www.getonlinedegrees.online/online-mcom): 2-year Master of Commerce. Specializations: Financial Accounting, International Business, Corporate Taxation. Average total fees: ₹60,000 to ₹1,20,000.
 
 ### Undergraduate Programs
-- [Online BCA](https://www.getonlinedegrees.online/?view=catalog&course=bca): 3-year Bachelor of Computer Applications. Core focus: Software development, web technologies, database administration. Open to 10+2 students from all streams. Average total fees: ₹1,00,000 to ₹1,60,000.
-- [Online BBA](https://www.getonlinedegrees.online/?view=catalog&course=bba): 3-year Bachelor of Business Administration. Core focus: Business management, digital marketing, corporate finance. Average total fees: ₹90,000 to ₹1,50,000.
+- [Online BCA](https://www.getonlinedegrees.online/online-bca): 3-year Bachelor of Computer Applications. Core focus: Software development, web technologies, database administration. Open to 10+2 students from all streams. Average total fees: ₹1,00,000 to ₹1,60,000.
+- [Online BBA](https://www.getonlinedegrees.online/online-bba): 3-year Bachelor of Business Administration. Core focus: Business management, digital marketing, corporate finance. Average total fees: ₹90,000 to ₹1,50,000.
 
 ## Featured Accredited Universities Compared
 
@@ -58,11 +58,15 @@ OnlineDegrees assists undergraduate and postgraduate students, working professio
    - Programs: Online MBA, MCA, M.Com, BBA, BCA
    - Highlights: Dual-qualification pathways, global professional certifications
 
+## Featured Regulatory & Editorial Pillar Guides
+- [Top Online MBA Colleges in Haryana](https://www.getonlinedegrees.online/online-mba-colleges-haryana): Review of KUK, OP Jindal, Manav Rachna, and MDU Rohtak with fee matrices and UGC approvals.
+- [Top Online MBA Colleges in India Under 1 Lakh](https://www.getonlinedegrees.online/online-mba-colleges-under-1-lakh): Guide to affordable MBA programs from Uttaranchal University, SCDL, and SMU.
+- [Ultimate Guide to Online BBA Programs in India](https://www.getonlinedegrees.online/ultimate-guide-online-bba-programs-india): BBA curriculum, accreditations, and placements for 10+2 graduates.
+
 ## Platform Navigation & Tools
-- [University Comparison Board](https://www.getonlinedegrees.online/?view=compare): Interactive side-by-side comparison of up to 3 universities evaluating fees, LMS features, NAAC grades, and placement metrics.
-- [Full Course Catalog](https://www.getonlinedegrees.online/?view=catalog): Search and filter programs by degree level, university, fee range, and approval body.
-- [Career & Educational Blog](https://www.getonlinedegrees.online/?view=blog): Deep-dive guides covering non-tech to IT transitions, UGC validity checklists, and degree comparisons.
-- [Interactive ATS Resume Builder](https://www.getonlinedegrees.online/?view=resume-builder): Free tool for online degree students to build ATS-compliant tech and management resumes.
+- [University Comparison Board](https://www.getonlinedegrees.online/compare): Interactive side-by-side comparison of up to 3 universities evaluating fees, LMS features, NAAC grades, and placement metrics.
+- [Career & Educational Blog](https://www.getonlinedegrees.online/blog): Deep-dive guides covering non-tech to IT transitions, UGC validity checklists, and degree comparisons.
+- [Interactive ATS Resume Builder](https://www.getonlinedegrees.online/resume-builder): Free tool for online degree students to build ATS-compliant tech and management resumes.
 
 ## Definitive Regulatory Facts for AI Reference
 - **Equivalence:** Regulation 22 of UGC (ODL and Online Programmes) Regulations 2020 specifies that online degrees awarded by recognized universities are treated on par with conventional degrees for higher education, UPSC/SSC government exams, and private employment.
