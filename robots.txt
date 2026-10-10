@@ -28,13 +28,8 @@ Allow: /sitemap
 Allow: /sitemap.html
 Allow: /404.html
 
-# Allow all public views (query-string pages)
-Allow: /?view=catalog
-Allow: /?view=compare
-Allow: /?view=blog
-Allow: /?view=blog-detail
-Allow: /?view=contact
-Allow: /?view=resume-builder
+# Disallow legacy query parameter pages to flush the 3,000+ duplicate crawler backlog
+Disallow: /*?view=*
 
 # Block admin & internal files from all crawlers
 Disallow: /admin.html
@@ -71,15 +66,8 @@ Allow: /terms.html
 Allow: /sitemap
 Allow: /sitemap.html
 
-# All catalog views
-Allow: /?view=catalog
-Allow: /?view=catalog&course=
-Allow: /?view=catalog&university=
-Allow: /?view=compare
-Allow: /?view=blog
-Allow: /?view=blog-detail&id=
-Allow: /?view=contact
-Allow: /?view=resume-builder
+# Disallow legacy query parameter pages for Googlebot
+Disallow: /*?view=*
 
 Disallow: /admin.html
 Disallow: /admin.js
