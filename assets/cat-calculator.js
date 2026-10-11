@@ -24,6 +24,7 @@
     activeSlot: 'general', // 'general', 'slot1', 'slot2', 'slot3'
     activeSection: 'varc', // 'varc', 'dilr', 'qa'
     category: 'general', // 'general', 'nc-obc', 'sc', 'st', 'ews'
+    isUnlocked: false,
     attempts: {
       varc: { correctMcq: 14, wrongMcq: 4, correctTita: 2, wrongTita: 1 },
       dilr: { correctMcq: 8, wrongMcq: 2, correctTita: 1, wrongTita: 1 },
@@ -902,6 +903,14 @@
     const copySummaryBtn = document.getElementById('copy-scorecard-summary-btn');
     if (copySummaryBtn) {
       copySummaryBtn.addEventListener('click', () => {
+        if (!state.isUnlocked) {
+          alert('Please unlock your scorecard with your details first.');
+          const resultsEl = document.getElementById('results-dashboard');
+          if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth' });
+          const nameInput = document.getElementById('gate-lead-name');
+          if (nameInput) nameInput.focus();
+          return;
+        }
         const s = calculateAllScores();
         const text = 
 `🏆 CAT 2026 Scorecard Summary (Calculated on OnlineDegrees)
@@ -928,6 +937,14 @@ Calculate yours at: https://www.getonlinedegrees.online/cat-score-calculator`;
     const printBtn = document.getElementById('print-scorecard-btn');
     if (printBtn) {
       printBtn.addEventListener('click', () => {
+        if (!state.isUnlocked) {
+          alert('Please unlock your scorecard with your details first.');
+          const resultsEl = document.getElementById('results-dashboard');
+          if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth' });
+          const nameInput = document.getElementById('gate-lead-name');
+          if (nameInput) nameInput.focus();
+          return;
+        }
         window.print();
       });
     }
@@ -943,9 +960,200 @@ Calculate yours at: https://www.getonlinedegrees.online/cat-score-calculator`;
     });
   }
 
-  // --- 11. INITIALIZATION ON DOM READY ---
+  // --- 11. LEAD GATING & SCORECARD UNLOCK ENGINE ---
+  function lockScorecardUI() {
+    state.isUnlocked = false;
+    const resultsEl = document.getElementById('results-dashboard');
+    if (resultsEl) {
+      resultsEl.classList.remove('is-unlocked');
+      resultsEl.classList.add('is-locked');
+    }
+    const badgeBar = document.getElementById('cat-candidate-badge-bar');
+    if (badgeBar) badgeBar.style.display = 'none';
+  }
+
+  function unlockScorecardUI(lead, showNotice) {
+    state.isUnlocked = true;
+    const resultsEl = document.getElementById('results-dashboard');
+    if (resultsEl) {
+      resultsEl.classList.remove('is-locked');
+      resultsEl.classList.add('is-unlocked');
+    }
+
+    const badgeBar = document.getElementById('cat-candidate-badge-bar');
+    const avatarEl = document.getElementById('cat-candidate-avatar');
+    const nameEl = document.getElementById('cat-candidate-name-display');
+    const metaEl = document.getElementById('cat-candidate-meta-display');
+
+    if (badgeBar) badgeBar.style.display = 'flex';
+    if (avatarEl && lead.name) {
+      avatarEl.textContent = lead.name.trim().charAt(0).toUpperCase();
+    }
+    if (nameEl && lead.name) {
+      nameEl.textContent = lead.name;
+    }
+    if (metaEl) {
+      const loc = lead.location || lead.city || 'Verified Student';
+      const maskedPhone = lead.phone && lead.phone.length >= 10 ? `••••••${lead.phone.slice(-4)}` : '';
+      metaEl.textContent = `• ${loc}${maskedPhone ? ' • ' + maskedPhone : ''}`;
+    }
+
+    if (showNotice) {
+      showToast('🎉 Scorecard Unlocked! Showing full marks, percentiles & IIM call forecasts.');
+      if (resultsEl) {
+        setTimeout(() => {
+          resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }
+
+  function checkStoredLeadUnlock() {
+    try {
+      const stored = localStorage.getItem('cat_student_lead');
+      if (stored) {
+        const lead = JSON.parse(stored);
+        if (lead && lead.name && lead.phone) {
+          unlockScorecardUI(lead, false);
+          return true;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not read stored CAT student lead', e);
+    }
+    lockScorecardUI();
+    return false;
+  }
+
+  function setupGateForm() {
+    const form = document.getElementById('cat-unlock-form');
+    const errBox = document.getElementById('gate-form-error');
+    const submitBtn = document.getElementById('gate-unlock-btn');
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (errBox) {
+          errBox.style.display = 'none';
+          errBox.textContent = '';
+        }
+
+        const nameInput = document.getElementById('gate-lead-name');
+        const phoneInput = document.getElementById('gate-lead-phone');
+        const emailInput = document.getElementById('gate-lead-email');
+        const locInput = document.getElementById('gate-lead-location');
+
+        const name = nameInput ? nameInput.value.trim() : '';
+        const rawPhone = phoneInput ? phoneInput.value.trim() : '';
+        const cleanPhone = rawPhone.replace(/\D/g, '');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const location = locInput ? locInput.value.trim() : '';
+
+        // Validation: Name, Phone (10-digits), Email, Location
+        if (!name || name.length < 2) {
+          showError('Please enter your full name (at least 2 characters).', nameInput);
+          return;
+        }
+        if (!cleanPhone || cleanPhone.length !== 10) {
+          showError('Please enter a valid 10-digit mobile number.', phoneInput);
+          return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+          showError('Please enter a valid email address.', emailInput);
+          return;
+        }
+        if (!location || location.length < 2) {
+          showError('Please enter your city/location.', locInput);
+          return;
+        }
+
+        // Show loading state
+        const origBtnHtml = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Unlocking Your Scorecard...</span>';
+        submitBtn.disabled = true;
+
+        const scores = calculateAllScores();
+        const leadData = {
+          name,
+          phone: cleanPhone,
+          email: email.toLowerCase(),
+          location,
+          city: location,
+          formType: 'CAT 2026 Score Calculator Lead Gate',
+          source: 'CAT Score Calculator',
+          course: 'MBA / CAT 2026',
+          page: window.location.pathname,
+          date: new Date().toISOString(),
+          timestamp: new Date().toLocaleString('en-IN'),
+          scoreRaw: scores.raw.total,
+          scoreScaled: scores.scaled.total,
+          percentile: scores.percentiles.overall,
+          slot: state.activeSlot,
+          message: `CAT 2026 Prediction: Raw Score ${scores.raw.total}/198, Scaled ${scores.scaled.total}, Percentile ~${scores.percentiles.overall}%ile (VARC: ${scores.raw.varc}, DILR: ${scores.raw.dilr}, QA: ${scores.raw.qa}, Slot: ${state.activeSlot.toUpperCase()}, Category: ${state.category})`
+        };
+
+        // Persist lead in localStorage
+        try {
+          localStorage.setItem('cat_student_lead', JSON.stringify(leadData));
+        } catch (err) {
+          console.warn('Could not save CAT lead to localStorage', err);
+        }
+
+        // Unified dispatch to portal backend / webhooks / integrations
+        try {
+          if (typeof window.submitLeadToIntegrations === 'function') {
+            window.submitLeadToIntegrations(leadData);
+          }
+        } catch (err) {
+          console.error('Integration dispatch error:', err);
+        }
+
+        // Unlock UI
+        setTimeout(() => {
+          submitBtn.innerHTML = origBtnHtml;
+          submitBtn.disabled = false;
+          unlockScorecardUI(leadData, true);
+        }, 400);
+      });
+    }
+
+    function showError(msg, elToFocus) {
+      if (errBox) {
+        errBox.textContent = msg;
+        errBox.style.display = 'block';
+      }
+      if (elToFocus) {
+        elToFocus.focus();
+        elToFocus.style.borderColor = '#F43F5E';
+        setTimeout(() => {
+          elToFocus.style.borderColor = '';
+        }, 3000);
+      }
+    }
+
+    // Switch student / Change details button
+    const switchBtn = document.getElementById('cat-candidate-switch-btn');
+    if (switchBtn) {
+      switchBtn.addEventListener('click', () => {
+        try {
+          localStorage.removeItem('cat_student_lead');
+        } catch (err) {}
+        lockScorecardUI();
+        showToast('Scorecard locked. You can now calculate for another student.');
+        const resultsEl = document.getElementById('results-dashboard');
+        if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth' });
+        const nameInput = document.getElementById('gate-lead-name');
+        if (nameInput) nameInput.focus();
+      });
+    }
+  }
+
+  // --- 12. INITIALIZATION ON DOM READY ---
   document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
+    setupGateForm();
+    checkStoredLeadUnlock();
     updateUI();
   });
 

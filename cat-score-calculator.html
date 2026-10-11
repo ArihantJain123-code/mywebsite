@@ -645,136 +645,217 @@
         <!-- ================================================================
              RESULTS DASHBOARD (REAL-TIME METRICS)
              ================================================================ -->
-        <section class="cat-results-container" id="results-dashboard" aria-label="CAT 2026 Score Results Dashboard">
+        <section class="cat-results-container is-locked" id="results-dashboard" aria-label="CAT 2026 Score Results Dashboard">
           <div class="cat-results-bg-glow"></div>
 
-          <div class="cat-results-header">
-            <div class="cat-results-title-group">
-              <div class="cat-results-trophy-badge">
-                <i class="fas fa-trophy"></i>
+          <!-- UNLOCK GATE OVERLAY (Shown if locked) -->
+          <div class="cat-unlock-gate-overlay" id="cat-unlock-gate-overlay">
+            <div class="cat-gate-card">
+              <div class="cat-gate-lock-icon">
+                <i class="fas fa-lock"></i>
               </div>
+              <h3 class="cat-gate-title">Unlock Your CAT 2026 Scorecard</h3>
+              <p class="cat-gate-subtitle">
+                Enter your details to instantly view your calculated raw score, slot-normalized scaled score, sectional percentiles, and personalized IIM call forecasts.
+              </p>
+              
+              <form id="cat-unlock-form" novalidate>
+                <div class="cat-gate-form-grid">
+                  <div class="cat-gate-form-group">
+                    <label class="cat-gate-label" for="gate-lead-name">Full Name *</label>
+                    <div class="cat-gate-input-wrapper">
+                      <i class="fas fa-user"></i>
+                      <input type="text" id="gate-lead-name" class="cat-gate-input" placeholder="e.g. Rahul Sharma" required autocomplete="name" />
+                    </div>
+                  </div>
+
+                  <div class="cat-gate-form-group">
+                    <label class="cat-gate-label" for="gate-lead-phone">WhatsApp / Mobile *</label>
+                    <div class="cat-gate-input-wrapper">
+                      <i class="fas fa-phone-alt"></i>
+                      <input type="tel" id="gate-lead-phone" class="cat-gate-input" placeholder="10-digit mobile number" required pattern="[0-9]{10}" maxlength="10" autocomplete="tel" />
+                    </div>
+                  </div>
+
+                  <div class="cat-gate-form-group">
+                    <label class="cat-gate-label" for="gate-lead-email">Email Address *</label>
+                    <div class="cat-gate-input-wrapper">
+                      <i class="fas fa-envelope"></i>
+                      <input type="email" id="gate-lead-email" class="cat-gate-input" placeholder="name@example.com" required autocomplete="email" />
+                    </div>
+                  </div>
+
+                  <div class="cat-gate-form-group">
+                    <label class="cat-gate-label" for="gate-lead-location">City / Location *</label>
+                    <div class="cat-gate-input-wrapper">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <input type="text" id="gate-lead-location" class="cat-gate-input" placeholder="e.g. Mumbai, Bangalore" required autocomplete="address-level2" />
+                    </div>
+                  </div>
+                </div>
+
+                <div id="gate-form-error" style="display:none;color:#F43F5E;font-size:0.8rem;margin-bottom:12px;font-weight:600;text-align:center;"></div>
+
+                <button type="submit" class="cat-gate-unlock-btn" id="gate-unlock-btn">
+                  <i class="fas fa-unlock-alt"></i>
+                  <span>Unlock My Complete Scorecard Now</span>
+                </button>
+
+                <div class="cat-gate-trust-strip">
+                  <span><i class="fas fa-shield-alt" style="color:var(--cat-green);"></i> 100% Confidential</span>
+                  <span>•</span>
+                  <span><i class="fas fa-bolt" style="color:var(--cat-cyan);"></i> Instant Score Calculation</span>
+                  <span>•</span>
+                  <span><i class="fas fa-graduation-cap" style="color:var(--cat-purple);"></i> Free IIM Call Prediction</span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- VERIFIED CANDIDATE BADGE (Shown when unlocked) -->
+          <div class="cat-candidate-badge-bar" id="cat-candidate-badge-bar" style="display:none;">
+            <div class="cat-candidate-info">
+              <div class="cat-candidate-avatar" id="cat-candidate-avatar">R</div>
               <div>
-                <h3>Your Predicted CAT 2026 Scorecard</h3>
-                <p>Slot-normalized marks, sectional percentile breakdown &amp; IIM call forecasts</p>
+                <strong id="cat-candidate-name-display" style="color:#FFFFFF;">Candidate Verified</strong>
+                <span id="cat-candidate-meta-display" style="color:#94A3B8;font-size:0.75rem;margin-left:6px;"></span>
               </div>
             </div>
-            <div class="cat-action-btn-group">
-              <button type="button" id="copy-scorecard-summary-btn" class="cat-btn-outline-glow">
-                <i class="fas fa-copy"></i> Copy Summary
-              </button>
-              <button type="button" id="print-scorecard-btn" class="cat-btn-outline-glow">
-                <i class="fas fa-print"></i> Print / PDF
-              </button>
-            </div>
-          </div>
-
-          <!-- 3 Big Master Cards -->
-          <div class="cat-master-score-grid">
-            <!-- Raw Score -->
-            <div class="cat-score-card">
-              <span class="cat-score-card-tag raw">Overall Raw Score</span>
-              <div class="cat-score-number" id="res-overall-raw">84 <span class="max-label">/ 198</span></div>
-              <div class="cat-score-card-sub">Literal sum of correct (+3) &amp; negative (−1)</div>
-            </div>
-
-            <!-- Scaled Normalized Score -->
-            <div class="cat-score-card">
-              <span class="cat-score-card-tag scaled">Normalized Scaled Score</span>
-              <div class="cat-score-number" id="res-overall-scaled">86.2 <span class="max-label">/ 198</span></div>
-              <div class="cat-score-card-sub" id="res-slot-desc">Slot 2 equipercentile equating applied</div>
-            </div>
-
-            <!-- Predicted Percentile -->
-            <div class="cat-score-card" style="border-color:rgba(0,255,136,0.3);box-shadow:0 0 25px rgba(0,255,136,0.15);">
-              <span class="cat-score-card-tag percentile">Predicted CAT Percentile</span>
-              <div class="cat-score-number" id="res-overall-pct" style="color:var(--cat-green);">99.12<span class="max-label">%ile</span></div>
-              <div class="cat-score-card-sub" id="res-pct-range" style="color:#A7F3D0;">Predicted Range: 98.7%ile — 99.4%ile</div>
-            </div>
-          </div>
-
-          <!-- Sectional Breakdown Cards (VARC, DILR, QA) -->
-          <div class="cat-sec-results-grid">
-            <!-- VARC Card -->
-            <div class="cat-sec-result-card">
-              <div class="cat-sec-result-top">
-                <span class="cat-sec-result-name">VARC (72 Marks)</span>
-                <span class="cat-sec-result-percentile-pill" id="sec-card-pct-varc">98.5%ile</span>
-              </div>
-              <div class="cat-sec-result-marks" id="sec-card-marks-varc">38 M</div>
-              <div class="cat-sec-stat-mini-row">
-                <span>Scaled Score:</span>
-                <strong id="sec-card-scaled-varc">39.6 Scaled</strong>
-              </div>
-              <div class="cat-sec-stat-mini-row">
-                <span>Attempts &amp; Accuracy:</span>
-                <strong id="sec-card-attempts-varc">21/24 Attempted (76%)</strong>
-              </div>
-            </div>
-
-            <!-- DILR Card -->
-            <div class="cat-sec-result-card">
-              <div class="cat-sec-result-top">
-                <span class="cat-sec-result-name">DILR (60 Marks)</span>
-                <span class="cat-sec-result-percentile-pill" id="sec-card-pct-dilr">98.8%ile</span>
-              </div>
-              <div class="cat-sec-result-marks" id="sec-card-marks-dilr">25 M</div>
-              <div class="cat-sec-stat-mini-row">
-                <span>Scaled Score:</span>
-                <strong id="sec-card-scaled-dilr">25.5 Scaled</strong>
-              </div>
-              <div class="cat-sec-stat-mini-row">
-                <span>Attempts &amp; Accuracy:</span>
-                <strong id="sec-card-attempts-dilr">12/20 Attempted (82%)</strong>
-              </div>
-            </div>
-
-            <!-- QA Card -->
-            <div class="cat-sec-result-card">
-              <div class="cat-sec-result-top">
-                <span class="cat-sec-result-name">QA (66 Marks)</span>
-                <span class="cat-sec-result-percentile-pill" id="sec-card-pct-qa">97.8%ile</span>
-              </div>
-              <div class="cat-sec-result-marks" id="sec-card-marks-qa">21 M</div>
-              <div class="cat-sec-stat-mini-row">
-                <span>Scaled Score:</span>
-                <strong id="sec-card-scaled-qa">22.5 Scaled</strong>
-              </div>
-              <div class="cat-sec-stat-mini-row">
-                <span>Attempts &amp; Accuracy:</span>
-                <strong id="sec-card-attempts-qa">13/22 Attempted (85%)</strong>
-              </div>
-            </div>
-          </div>
-
-          <!-- Overall Attempts & Accuracy Analytics Bar -->
-          <div class="cat-analytics-bar-grid">
-            <div class="cat-analytic-item">
-              <div class="cat-analytic-item-label">Total Attempted</div>
-              <div class="cat-analytic-item-val" id="kpi-total-attempted">46 / 66</div>
-            </div>
-            <div class="cat-analytic-item">
-              <div class="cat-analytic-item-label">Total Correct</div>
-              <div class="cat-analytic-item-val pos" id="kpi-total-correct">36</div>
-            </div>
-            <div class="cat-analytic-item">
-              <div class="cat-analytic-item-label">Total Incorrect</div>
-              <div class="cat-analytic-item-val neg" id="kpi-total-incorrect">10</div>
-            </div>
-            <div class="cat-analytic-item">
-              <div class="cat-analytic-item-label">Net Accuracy</div>
-              <div class="cat-analytic-item-val amber" id="kpi-accuracy-pct">78.3%</div>
-            </div>
-          </div>
-
-          <!-- Call to Action Banner inside Results -->
-          <div class="cat-result-actions-row">
-            <div>
-              <h4 style="font-size:1.05rem;font-weight:900;color:#FFFFFF;margin:0;">Eligible for Top B-School GD-PI Calls?</h4>
-              <p style="font-size:0.8rem;color:#94A3B8;margin:3px 0 0 0;">Check your admission probability and scholarship eligibility across 50+ approved universities.</p>
-            </div>
-            <button type="button" class="cat-btn-counseling" onclick="if(window.openInquiryModal){window.openInquiryModal();}else{var m=document.getElementById('inquiry-modal');if(m)m.style.display='flex';}">
-              <i class="fas fa-headset"></i> <span>Get Free B-School Counseling</span>
+            <button type="button" class="cat-candidate-switch-btn" id="cat-candidate-switch-btn">
+              <i class="fas fa-user-edit"></i> Change Details / Switch Student
             </button>
+          </div>
+
+          <!-- GATED RESULTS CONTENT WRAPPER -->
+          <div class="cat-results-content-wrap">
+            <div class="cat-results-header">
+              <div class="cat-results-title-group">
+                <div class="cat-results-trophy-badge">
+                  <i class="fas fa-trophy"></i>
+                </div>
+                <div>
+                  <h3>Your Predicted CAT 2026 Scorecard</h3>
+                  <p>Slot-normalized marks, sectional percentile breakdown &amp; IIM call forecasts</p>
+                </div>
+              </div>
+              <div class="cat-action-btn-group">
+                <button type="button" id="copy-scorecard-summary-btn" class="cat-btn-outline-glow">
+                  <i class="fas fa-copy"></i> Copy Summary
+                </button>
+                <button type="button" id="print-scorecard-btn" class="cat-btn-outline-glow">
+                  <i class="fas fa-print"></i> Print / PDF
+                </button>
+              </div>
+            </div>
+
+            <!-- 3 Big Master Cards -->
+            <div class="cat-master-score-grid">
+              <!-- Raw Score -->
+              <div class="cat-score-card">
+                <span class="cat-score-card-tag raw">Overall Raw Score</span>
+                <div class="cat-score-number" id="res-overall-raw">84 <span class="max-label">/ 198</span></div>
+                <div class="cat-score-card-sub">Literal sum of correct (+3) &amp; negative (−1)</div>
+              </div>
+
+              <!-- Scaled Normalized Score -->
+              <div class="cat-score-card">
+                <span class="cat-score-card-tag scaled">Normalized Scaled Score</span>
+                <div class="cat-score-number" id="res-overall-scaled">86.2 <span class="max-label">/ 198</span></div>
+                <div class="cat-score-card-sub" id="res-slot-desc">Slot 2 equipercentile equating applied</div>
+              </div>
+
+              <!-- Predicted Percentile -->
+              <div class="cat-score-card" style="border-color:rgba(0,255,136,0.3);box-shadow:0 0 25px rgba(0,255,136,0.15);">
+                <span class="cat-score-card-tag percentile">Predicted CAT Percentile</span>
+                <div class="cat-score-number" id="res-overall-pct" style="color:var(--cat-green);">99.12<span class="max-label">%ile</span></div>
+                <div class="cat-score-card-sub" id="res-pct-range" style="color:#A7F3D0;">Predicted Range: 98.7%ile — 99.4%ile</div>
+              </div>
+            </div>
+
+            <!-- Sectional Breakdown Cards (VARC, DILR, QA) -->
+            <div class="cat-sec-results-grid">
+              <!-- VARC Card -->
+              <div class="cat-sec-result-card">
+                <div class="cat-sec-result-top">
+                  <span class="cat-sec-result-name">VARC (72 Marks)</span>
+                  <span class="cat-sec-result-percentile-pill" id="sec-card-pct-varc">98.5%ile</span>
+                </div>
+                <div class="cat-sec-result-marks" id="sec-card-marks-varc">38 M</div>
+                <div class="cat-sec-stat-mini-row">
+                  <span>Scaled Score:</span>
+                  <strong id="sec-card-scaled-varc">39.6 Scaled</strong>
+                </div>
+                <div class="cat-sec-stat-mini-row">
+                  <span>Attempts &amp; Accuracy:</span>
+                  <strong id="sec-card-attempts-varc">21/24 Attempted (76%)</strong>
+                </div>
+              </div>
+
+              <!-- DILR Card -->
+              <div class="cat-sec-result-card">
+                <div class="cat-sec-result-top">
+                  <span class="cat-sec-result-name">DILR (60 Marks)</span>
+                  <span class="cat-sec-result-percentile-pill" id="sec-card-pct-dilr">98.8%ile</span>
+                </div>
+                <div class="cat-sec-result-marks" id="sec-card-marks-dilr">25 M</div>
+                <div class="cat-sec-stat-mini-row">
+                  <span>Scaled Score:</span>
+                  <strong id="sec-card-scaled-dilr">25.5 Scaled</strong>
+                </div>
+                <div class="cat-sec-stat-mini-row">
+                  <span>Attempts &amp; Accuracy:</span>
+                  <strong id="sec-card-attempts-dilr">12/20 Attempted (82%)</strong>
+                </div>
+              </div>
+
+              <!-- QA Card -->
+              <div class="cat-sec-result-card">
+                <div class="cat-sec-result-top">
+                  <span class="cat-sec-result-name">QA (66 Marks)</span>
+                  <span class="cat-sec-result-percentile-pill" id="sec-card-pct-qa">97.8%ile</span>
+                </div>
+                <div class="cat-sec-result-marks" id="sec-card-marks-qa">21 M</div>
+                <div class="cat-sec-stat-mini-row">
+                  <span>Scaled Score:</span>
+                  <strong id="sec-card-scaled-qa">22.5 Scaled</strong>
+                </div>
+                <div class="cat-sec-stat-mini-row">
+                  <span>Attempts &amp; Accuracy:</span>
+                  <strong id="sec-card-attempts-qa">13/22 Attempted (85%)</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Overall Attempts & Accuracy Analytics Bar -->
+            <div class="cat-analytics-bar-grid">
+              <div class="cat-analytic-item">
+                <div class="cat-analytic-item-label">Total Attempted</div>
+                <div class="cat-analytic-item-val" id="kpi-total-attempted">46 / 66</div>
+              </div>
+              <div class="cat-analytic-item">
+                <div class="cat-analytic-item-label">Total Correct</div>
+                <div class="cat-analytic-item-val pos" id="kpi-total-correct">36</div>
+              </div>
+              <div class="cat-analytic-item">
+                <div class="cat-analytic-item-label">Total Incorrect</div>
+                <div class="cat-analytic-item-val neg" id="kpi-total-incorrect">10</div>
+              </div>
+              <div class="cat-analytic-item">
+                <div class="cat-analytic-item-label">Net Accuracy</div>
+                <div class="cat-analytic-item-val amber" id="kpi-accuracy-pct">78.3%</div>
+              </div>
+            </div>
+
+            <!-- Call to Action Banner inside Results -->
+            <div class="cat-result-actions-row">
+              <div>
+                <h4 style="font-size:1.05rem;font-weight:900;color:#FFFFFF;margin:0;">Eligible for Top B-School GD-PI Calls?</h4>
+                <p style="font-size:0.8rem;color:#94A3B8;margin:3px 0 0 0;">Check your admission probability and scholarship eligibility across 50+ approved universities.</p>
+              </div>
+              <button type="button" class="cat-btn-counseling" onclick="if(window.openInquiryModal){window.openInquiryModal();}else{var m=document.getElementById('inquiry-modal');if(m)m.style.display='flex';}">
+                <i class="fas fa-headset"></i> <span>Get Free B-School Counseling</span>
+              </button>
+            </div>
           </div>
         </section>
 
