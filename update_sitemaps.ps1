@@ -150,6 +150,14 @@ $xmlCore = @"
     <priority>0.85</priority>
   </url>
 
+  <!-- CAT 2026 Score Calculator & Response Sheet Checker -->
+  <url>
+    <loc>https://www.getonlinedegrees.online/cat-score-calculator</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+
   <!-- Academic Counselor Contact Hotline -->
   <url>
     <loc>https://www.getonlinedegrees.online/contact</loc>

@@ -18,6 +18,9 @@ try {
             }
             
             $fullPath = Join-Path $root $localPath
+            if (-not (Test-Path $fullPath -PathType Leaf) -and (Test-Path "$fullPath.html" -PathType Leaf)) {
+                $fullPath = "$fullPath.html"
+            }
             if (Test-Path $fullPath -PathType Leaf) {
                 $ext = [System.IO.Path]::GetExtension($fullPath).ToLower()
                 switch ($ext) {

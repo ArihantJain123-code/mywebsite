@@ -17,6 +17,7 @@ Allow: /compare
 Allow: /blog
 Allow: /contact
 Allow: /resume-builder
+Allow: /cat-score-calculator
 Allow: /online-mba-colleges-haryana
 Allow: /online-mba-colleges-under-1-lakh
 Allow: /ultimate-guide-online-bba-programs-india
@@ -56,6 +57,7 @@ Allow: /compare
 Allow: /blog
 Allow: /contact
 Allow: /resume-builder
+Allow: /cat-score-calculator
 Allow: /online-mba-colleges-haryana
 Allow: /online-mba-colleges-under-1-lakh
 Allow: /ultimate-guide-online-bba-programs-india
