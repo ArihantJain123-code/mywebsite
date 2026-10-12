@@ -126,6 +126,20 @@
     },
     {
       "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "CAT 2026 Score Calculator & Response Sheet Percentile Predictor",
+      "url": "https://www.getonlinedegrees.online/cat-score-calculator",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".cat-hero-sub",
+          ".cat-faq-body",
+          ".guide-box p"
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
         {
@@ -158,6 +172,38 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "You can paste your official Digialm response sheet URL, use our 1-click DevTools console script to auto-copy your sheet, or paste your HTML page source directly into the calculator to generate an instant question-by-question score breakdown."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between CAT raw score and scaled score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The raw score is the literal sum of correct (+3) and incorrect (-1/0) marks out of 198. Because CAT is conducted across Slot 1, Slot 2, and Slot 3 with varying difficulty levels, IIMs employ an equipercentile equating formula to generate the Scaled Score, which is used to calculate your final percentile."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which top MBA colleges accept 80 to 90 percentile in CAT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Candidates scoring between 80 and 90 percentile (raw score of 35 to 55 marks) can target reputed B-schools such as FORE School of Management, GIM Goa, TAPMI Manipal, Great Lakes, BIMTECH, LBSIM, and K J Somaiya."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my CAT score is below 80 percentile? What are the best alternatives?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Candidates scoring below 80 percentile or working professionals can pursue UGC-DEB approved Online MBA programs from premier universities (Amity Online, Manipal University Jaipur, Chandigarh University, Jain University). Under UGC 2020 Regulations, online degrees have 100% legal equivalence to campus degrees for corporate jobs, UPSC, and Ph.D. studies, while costing ₹1,20,000 to ₹2,50,000 total with 0% EMI."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is CAT score required for top Online MBA programs in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, competitive entrance exams like CAT, MAT, or XAT are not mandatory for admission to UGC-DEB approved Online MBA programs. Admissions are granted directly based on graduation marks (minimum 50%), making it an accessible, zero-salary-sacrifice pathway."
           }
         }
       ]
@@ -242,7 +288,7 @@
           🎯 Free 1-on-1 Profile &amp; B-School Assessment with Top Mentors
         </span>
       </div>
-      <a href="javascript:void(0);" onclick="if(window.openInquiryModal){window.openInquiryModal();}else{var m=document.getElementById('inquiry-modal');if(m)m.style.display='flex';}" class="cat-demo-btn" style="background:#0F172A;color:#00F0FF;border-color:rgba(0,240,255,0.3);font-size:0.72rem;padding:4px 12px;">
+      <a href="javascript:void(0);" onclick="if(window.openInquiryModal){window.openInquiryModal();}else{var m=document.getElementById('inquiry-modal');if(m)m.style.display='flex';}" class="cat-demo-btn" style="background:#EEF2FF;color:var(--cat-primary);border-color:var(--cat-primary-border);font-size:0.72rem;padding:4px 12px;">
         <i class="fas fa-video"></i> <span>Book 1-on-1 Meet</span>
       </a>
     </div>
@@ -278,7 +324,7 @@
       <!-- Direct AI Answer Summary -->
       <div class="cat-ai-summary-card" id="direct-ai-answer-summary">
         <div class="cat-ai-summary-header">
-          <i class="fas fa-sparkles" style="color:var(--cat-cyan);"></i>
+          <i class="fas fa-sparkles" style="color:var(--cat-primary);"></i>
           <span>Direct AI Answer Summary</span>
         </div>
         <p class="cat-ai-summary-text">
@@ -342,7 +388,7 @@
                 <span class="cat-rule-pill pos" style="font-size:0.68rem;padding:2px 10px;">
                   <span class="radar-pulse-dot" style="width:6px;height:6px;"></span> CAT 2026 Engine
                 </span>
-                <span style="font-family:var(--font-mono);font-size:0.75rem;color:#94A3B8;">
+                <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cat-slate-500);">
                   66 Qs · 198 Max Marks · Equipercentile Scaling
                 </span>
               </div>
@@ -447,7 +493,7 @@
             <div class="cat-console-shortcut-box">
               <div class="cat-console-shortcut-header">
                 <span class="cat-console-title">
-                  <i class="fas fa-terminal" style="color:var(--cat-cyan);"></i> Fast Shortcut: 1-Click Console Auto-Copy
+                  <i class="fas fa-terminal" style="color:var(--cat-primary);"></i> Fast Shortcut: 1-Click Console Auto-Copy
                 </span>
                 <button type="button" id="copy-console-script-btn" class="cat-copy-code-btn">
                   <i class="fas fa-copy"></i> <span>Copy 1-Click Script</span>
@@ -717,8 +763,8 @@
             <div class="cat-candidate-info">
               <div class="cat-candidate-avatar" id="cat-candidate-avatar">R</div>
               <div>
-                <strong id="cat-candidate-name-display" style="color:#FFFFFF;">Candidate Verified</strong>
-                <span id="cat-candidate-meta-display" style="color:#94A3B8;font-size:0.75rem;margin-left:6px;"></span>
+                <strong id="cat-candidate-name-display" style="color:var(--cat-slate-900);">Candidate Verified</strong>
+                <span id="cat-candidate-meta-display" style="color:var(--cat-slate-600);font-size:0.75rem;margin-left:6px;"></span>
               </div>
             </div>
             <button type="button" class="cat-candidate-switch-btn" id="cat-candidate-switch-btn">
@@ -765,10 +811,10 @@
               </div>
 
               <!-- Predicted Percentile -->
-              <div class="cat-score-card" style="border-color:rgba(0,255,136,0.3);box-shadow:0 0 25px rgba(0,255,136,0.15);">
+              <div class="cat-score-card cat-percentile-card" style="border:2px solid var(--cat-green);background:linear-gradient(180deg,#FFFFFF 0%,#F0FDF4 100%);box-shadow:0 10px 30px -5px rgba(16,185,129,0.2);">
                 <span class="cat-score-card-tag percentile">Predicted CAT Percentile</span>
-                <div class="cat-score-number" id="res-overall-pct" style="color:var(--cat-green);">99.12<span class="max-label">%ile</span></div>
-                <div class="cat-score-card-sub" id="res-pct-range" style="color:#A7F3D0;">Predicted Range: 98.7%ile — 99.4%ile</div>
+                <div class="cat-score-number" id="res-overall-pct" style="color:var(--cat-green-dark);">99.12<span class="max-label">%ile</span></div>
+                <div class="cat-score-card-sub" id="res-pct-range" style="color:var(--cat-green-dark);font-weight:700;">Predicted Range: 98.7%ile — 99.4%ile</div>
               </div>
             </div>
 
@@ -849,8 +895,8 @@
             <!-- Call to Action Banner inside Results -->
             <div class="cat-result-actions-row">
               <div>
-                <h4 style="font-size:1.05rem;font-weight:900;color:#FFFFFF;margin:0;">Eligible for Top B-School GD-PI Calls?</h4>
-                <p style="font-size:0.8rem;color:#94A3B8;margin:3px 0 0 0;">Check your admission probability and scholarship eligibility across 50+ approved universities.</p>
+                <h4 style="font-size:1.05rem;font-weight:900;color:var(--cat-slate-900);margin:0;">Eligible for Top B-School GD-PI Calls?</h4>
+                <p style="font-size:0.8rem;color:var(--cat-slate-600);margin:3px 0 0 0;">Check your admission probability and scholarship eligibility across 50+ approved universities.</p>
               </div>
               <button type="button" class="cat-btn-counseling" onclick="if(window.openInquiryModal){window.openInquiryModal();}else{var m=document.getElementById('inquiry-modal');if(m)m.style.display='flex';}">
                 <i class="fas fa-headset"></i> <span>Get Free B-School Counseling</span>
@@ -1293,19 +1339,39 @@
             Candidates scoring between 80 and 90 percentile (raw score of 35 to 55 marks) can target reputed B-schools such as FORE School of Management (Delhi), GIM Goa, TAPMI Manipal, Great Lakes (Chennai/Gurgaon), BIMTECH (Greater Noida), LBSIM (Delhi), K J Somaiya (Mumbai), and LIBA (Chennai).
           </div>
         </details>
+
+        <details class="cat-faq-item">
+          <summary class="cat-faq-summary">
+            <span>What if my CAT score is below 80 percentile? What are the best alternatives?</span>
+            <i class="fas fa-chevron-down cat-faq-chevron"></i>
+          </summary>
+          <div class="cat-faq-body">
+            If your CAT score is below 80 percentile or if you are a working professional unwilling to quit your job, UGC-DEB approved Online MBA programs from premier universities (such as <a href="/online-mba" style="color:var(--primary);font-weight:700;">Amity Online, Manipal University Jaipur, Chandigarh University, and NMIMS</a>) offer direct admission based on graduation marks (min 50%). Under UGC 2020 Regulations Clause 22, an Online MBA carries 100% legal equivalence to an on-campus MBA for corporate hiring, UPSC, and Ph.D. studies, while saving ₹10-25 Lakhs in tuition and living costs with 0% EMI financing.
+          </div>
+        </details>
+
+        <details class="cat-faq-item">
+          <summary class="cat-faq-summary">
+            <span>Is CAT score required for top Online MBA programs in India?</span>
+            <i class="fas fa-chevron-down cat-faq-chevron"></i>
+          </summary>
+          <div class="cat-faq-body">
+            No, competitive entrance exams like CAT, MAT, or XAT are not mandatory for admission to UGC-DEB approved Online MBA programs in India. Admissions are granted directly based on graduation marks (minimum 50% for general, 45% for reserved categories), making it an accessible, zero-salary-sacrifice pathway for professionals. You can <a href="/compare" style="color:var(--primary);font-weight:700;">compare top universities side-by-side</a> or explore our <a href="/online-mba" style="color:var(--primary);font-weight:700;">Online MBA Hub</a>.
+          </div>
+        </details>
       </div>
     </article>
 
     <!-- FREE COUNSELING HERO CTA BANNER -->
-    <div style="background:linear-gradient(135deg,#061124 0%,#1E3A8A 50%,#0D9488 100%);border-radius:32px;padding:48px 36px;color:#FFFFFF;text-align:center;position:relative;overflow:hidden;box-shadow:0 25px 60px -20px rgba(37,99,235,0.4);">
+    <div style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 50%,#0D9488 100%);border-radius:32px;padding:48px 36px;color:#FFFFFF;text-align:center;position:relative;overflow:hidden;box-shadow:0 25px 60px -20px rgba(37,99,235,0.35);">
       <div style="position:relative;z-index:10;max-width:680px;margin:0 auto;">
-        <span style="background:rgba(255,255,255,0.15);padding:4px 14px;border-radius:9999px;font-family:var(--font-mono);font-size:0.75rem;font-weight:700;text-transform:uppercase;color:#FDE047;display:inline-block;margin-bottom:14px;">
+        <span style="background:rgba(255,255,255,0.2);padding:4px 14px;border-radius:9999px;font-family:var(--font-mono);font-size:0.75rem;font-weight:800;text-transform:uppercase;color:#FEF08A;display:inline-block;margin-bottom:14px;">
           <i class="fas fa-sparkles"></i> Free 1-on-1 MBA Advisory
         </span>
         <h3 style="font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:900;line-height:1.2;margin-bottom:12px;color:#fff;">
           Not sure which B-schools you should apply to with your score?
         </h3>
-        <p style="font-size:0.95rem;color:#E2E8F0;line-height:1.6;margin-bottom:24px;">
+        <p style="font-size:0.95rem;color:#F1F5F9;line-height:1.6;margin-bottom:24px;">
           Talk through your score, sectional percentiles, and academic background with certified MBA education counselors. Get personalized dream, safe &amp; high-ROI recommendations.
         </p>
         <button type="button" class="cat-btn-counseling" style="font-size:0.95rem;padding:14px 32px;" onclick="if(window.openInquiryModal){window.openInquiryModal();}else{var m=document.getElementById('inquiry-modal');if(m)m.style.display='flex';}">

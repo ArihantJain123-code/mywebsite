@@ -49,19 +49,42 @@
           var v = sp.get('view');
           if (v === 'home') canonical = 'https://www.getonlinedegrees.online/';
           else if (v === 'catalog') {
-            if (sp.has('course')) canonical = 'https://www.getonlinedegrees.online/?view=catalog&course=' + encodeURIComponent(sp.get('course').toLowerCase());
-            else if (sp.has('university')) canonical = 'https://www.getonlinedegrees.online/?view=catalog&university=' + encodeURIComponent(sp.get('university'));
-            else canonical = 'https://www.getonlinedegrees.online/?view=catalog';
+            if (sp.has('course')) {
+              var c = sp.get('course').toLowerCase();
+              if (c === 'mba') canonical = 'https://www.getonlinedegrees.online/online-mba';
+              else if (c === 'mca') canonical = 'https://www.getonlinedegrees.online/online-mca';
+              else if (c === 'bca') canonical = 'https://www.getonlinedegrees.online/online-bca';
+              else if (c === 'bba') canonical = 'https://www.getonlinedegrees.online/online-bba';
+              else if (c === 'mcom') canonical = 'https://www.getonlinedegrees.online/online-mcom';
+              else canonical = 'https://www.getonlinedegrees.online/online-mba';
+            } else if (sp.has('university')) {
+              canonical = 'https://www.getonlinedegrees.online/review-' + encodeURIComponent(sp.get('university'));
+            } else {
+              canonical = 'https://www.getonlinedegrees.online/online-mba';
+            }
+          } else if (v === 'compare') {
+            canonical = 'https://www.getonlinedegrees.online/compare';
+          } else if (v === 'blog') {
+            canonical = 'https://www.getonlinedegrees.online/blog';
+          } else if (v === 'contact') {
+            canonical = 'https://www.getonlinedegrees.online/contact';
+          } else if (v === 'resume-builder') {
+            canonical = 'https://www.getonlinedegrees.online/resume-builder';
+          } else if (v === 'cat-score-calculator') {
+            canonical = 'https://www.getonlinedegrees.online/cat-score-calculator';
           } else if (v === 'blog-detail' && sp.has('id')) {
             var bId = sp.get('id');
-            if (validBlogIds.indexOf(bId) !== -1) {
-              canonical = 'https://www.getonlinedegrees.online/?view=blog-detail&id=' + encodeURIComponent(bId);
+            if (bId === 'online-mba-colleges-haryana-guide') canonical = 'https://www.getonlinedegrees.online/online-mba-colleges-haryana';
+            else if (bId === 'online-mba-colleges-under-1-lakh-india') canonical = 'https://www.getonlinedegrees.online/online-mba-colleges-under-1-lakh';
+            else if (bId === 'ultimate-guide-online-bba-programs-india') canonical = 'https://www.getonlinedegrees.online/ultimate-guide-online-bba-programs-india';
+            else if (validBlogIds.indexOf(bId) !== -1) {
+              canonical = 'https://www.getonlinedegrees.online/' + encodeURIComponent(bId);
             } else {
               isRemovedOrInvalid = true;
-              canonical = 'https://www.getonlinedegrees.online/?view=blog';
+              canonical = 'https://www.getonlinedegrees.online/blog';
             }
           } else {
-            canonical = 'https://www.getonlinedegrees.online/?view=' + encodeURIComponent(v);
+            canonical = 'https://www.getonlinedegrees.online/';
           }
         }
         if (isRemovedOrInvalid) {
@@ -131,8 +154,16 @@
       "inLanguage": "en",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://www.getonlinedegrees.online/?view=catalog&search={search_term_string}",
+        "target": "https://www.getonlinedegrees.online/online-mba?search={search_term_string}",
         "query-input": "required name=search_term_string"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".genz-hero-subtitle",
+          ".faq-answer-inner",
+          ".trust-card-body"
+        ]
       }
     },
     {
@@ -211,58 +242,70 @@
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "name": "Top UGC-DEB Approved Online Degree Programs in India",
-      "description": "Featured online undergraduate and postgraduate degree courses available from top accredited Indian universities.",
+      "name": "Top UGC-DEB Approved Online Degree Programs & Decision Tools in India",
+      "description": "Featured online undergraduate and postgraduate degree courses and decision tools available on OnlineDegrees.",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Online MBA (Master of Business Administration)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=mba"
+          "url": "https://www.getonlinedegrees.online/online-mba"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Online MCA (Master of Computer Applications)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=mca"
+          "name": "CAT 2026 Score Calculator & Response Sheet Percentile Predictor",
+          "url": "https://www.getonlinedegrees.online/cat-score-calculator"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Online BCA (Bachelor of Computer Applications)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=bca"
+          "name": "Online MCA (Master of Computer Applications)",
+          "url": "https://www.getonlinedegrees.online/online-mca"
         },
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Online BBA (Bachelor of Business Administration)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=bba"
+          "name": "Online BCA (Bachelor of Computer Applications)",
+          "url": "https://www.getonlinedegrees.online/online-bca"
         },
         {
           "@type": "ListItem",
           "position": 5,
-          "name": "Online M.Com (Master of Commerce)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=mcom"
+          "name": "Online BBA (Bachelor of Business Administration)",
+          "url": "https://www.getonlinedegrees.online/online-bba"
         },
         {
           "@type": "ListItem",
           "position": 6,
-          "name": "Online B.Com (Bachelor of Commerce)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=bcom"
+          "name": "Online M.Com (Master of Commerce)",
+          "url": "https://www.getonlinedegrees.online/online-mcom"
         },
         {
           "@type": "ListItem",
           "position": 7,
-          "name": "Online MA (Master of Arts)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=ma"
+          "name": "Side-by-Side University Comparison Board",
+          "url": "https://www.getonlinedegrees.online/compare"
         },
         {
           "@type": "ListItem",
           "position": 8,
-          "name": "Online BA (Bachelor of Arts)",
-          "url": "https://www.getonlinedegrees.online/?view=catalog&course=ba"
+          "name": "Interactive ATS Resume Builder",
+          "url": "https://www.getonlinedegrees.online/resume-builder"
         }
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "OnlineDegrees Higher Education Portal",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      }
     },
     {
       "@context": "https://schema.org",
@@ -345,7 +388,7 @@
       </div>
     </div>
     <div class="container navbar">
-      <div class="logo-container" id="navbar-logo" onclick="window.location.href='/?view=home';">
+      <div class="logo-container" id="navbar-logo" onclick="window.location.href='/';">
         <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
         <div class="logo-text-group">
           <div class="logo-text">Online<span class="logo-subtext">Degrees</span></div>

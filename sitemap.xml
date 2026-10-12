@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
@@ -9,7 +9,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.getonlinedegrees.online/</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -17,7 +17,7 @@
   <!-- Online MBA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-mba</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -25,7 +25,7 @@
   <!-- Online MCA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-mca</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- Online BCA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-bca</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -41,7 +41,7 @@
   <!-- Online BBA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-bba</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -49,7 +49,7 @@
   <!-- Online M.Com Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-mcom</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- Interactive University Compare Matrix -->
   <url>
     <loc>https://www.getonlinedegrees.online/compare</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- Editorial Blogs & Guides Directory -->
   <url>
     <loc>https://www.getonlinedegrees.online/blog</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- Interactive ATS Resume Builder -->
   <url>
     <loc>https://www.getonlinedegrees.online/resume-builder</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -81,7 +81,7 @@
   <!-- CAT 2026 Score Calculator & Response Sheet Checker -->
   <url>
     <loc>https://www.getonlinedegrees.online/cat-score-calculator</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -89,7 +89,7 @@
   <!-- Academic Counselor Contact Hotline -->
   <url>
     <loc>https://www.getonlinedegrees.online/contact</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
@@ -97,7 +97,7 @@
   <!-- HTML Sitemap Directory -->
   <url>
     <loc>https://www.getonlinedegrees.online/sitemap</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.70</priority>
   </url>
@@ -105,7 +105,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://www.getonlinedegrees.online/privacy</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
@@ -113,7 +113,7 @@
   <!-- Terms & Conditions -->
   <url>
     <loc>https://www.getonlinedegrees.online/terms</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>

@@ -51,12 +51,14 @@ $xmlArticles = @"
   <!-- ================================================================= -->
 "@
 
+$today = (Get-Date -Format 'yyyy-MM-dd')
+
 foreach ($item in $articlesUrls) {
     $xmlArticles += @"
 
   <url>
     <loc>$($item.Loc)</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>weekly</changefreq>
     <priority>$($item.Priority)</priority>
   </url>
@@ -81,7 +83,7 @@ $xmlCore = @"
   <!-- Homepage -->
   <url>
     <loc>https://www.getonlinedegrees.online/</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -89,7 +91,7 @@ $xmlCore = @"
   <!-- Online MBA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-mba</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -97,7 +99,7 @@ $xmlCore = @"
   <!-- Online MCA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-mca</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -105,7 +107,7 @@ $xmlCore = @"
   <!-- Online BCA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-bca</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -113,7 +115,7 @@ $xmlCore = @"
   <!-- Online BBA Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-bba</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -121,7 +123,7 @@ $xmlCore = @"
   <!-- Online M.Com Hub -->
   <url>
     <loc>https://www.getonlinedegrees.online/online-mcom</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
@@ -129,7 +131,7 @@ $xmlCore = @"
   <!-- Interactive University Compare Matrix -->
   <url>
     <loc>https://www.getonlinedegrees.online/compare</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -137,7 +139,7 @@ $xmlCore = @"
   <!-- Editorial Blogs & Guides Directory -->
   <url>
     <loc>https://www.getonlinedegrees.online/blog</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
@@ -145,7 +147,7 @@ $xmlCore = @"
   <!-- Interactive ATS Resume Builder -->
   <url>
     <loc>https://www.getonlinedegrees.online/resume-builder</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -153,7 +155,7 @@ $xmlCore = @"
   <!-- CAT 2026 Score Calculator & Response Sheet Checker -->
   <url>
     <loc>https://www.getonlinedegrees.online/cat-score-calculator</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
@@ -161,7 +163,7 @@ $xmlCore = @"
   <!-- Academic Counselor Contact Hotline -->
   <url>
     <loc>https://www.getonlinedegrees.online/contact</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
@@ -169,7 +171,7 @@ $xmlCore = @"
   <!-- HTML Sitemap Directory -->
   <url>
     <loc>https://www.getonlinedegrees.online/sitemap</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.70</priority>
   </url>
@@ -177,7 +179,7 @@ $xmlCore = @"
   <!-- Privacy Policy -->
   <url>
     <loc>https://www.getonlinedegrees.online/privacy</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
@@ -185,7 +187,7 @@ $xmlCore = @"
   <!-- Terms & Conditions -->
   <url>
     <loc>https://www.getonlinedegrees.online/terms</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
@@ -202,11 +204,11 @@ $xmlIndex = @"
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://www.getonlinedegrees.online/sitemap.xml</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://www.getonlinedegrees.online/sitemap_articles.xml</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>$today</lastmod>
   </sitemap>
 </sitemapindex>
 "@

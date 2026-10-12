@@ -180,6 +180,20 @@ $compareLdJson = @"
   },
   {
     "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Compare Online Universities Side-by-Side: Fees, Approvals & Placements",
+    "url": "https://www.getonlinedegrees.online/compare",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        "h1",
+        ".compare-header p",
+        ".compare-matrix"
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.getonlinedegrees.online/" },
@@ -208,6 +222,19 @@ $blogLdJson = @"
     "@type": "WebSite",
     "name": "OnlineDegrees",
     "url": "https://www.getonlinedegrees.online/"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Educational Guides, UGC Approvals Checklist & University Reviews",
+    "url": "https://www.getonlinedegrees.online/blog",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        "h1",
+        ".blog-header p"
+      ]
+    }
   },
   {
     "@context": "https://schema.org",
@@ -271,6 +298,19 @@ $resumeLdJson = @"
     "url": "https://www.getonlinedegrees.online/resume-builder",
     "applicationCategory": "EducationalApplication",
     "operatingSystem": "All"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Free ATS Resume Builder for Tech & Management Graduates",
+    "url": "https://www.getonlinedegrees.online/resume-builder",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        "h1",
+        ".resume-builder-header p"
+      ]
+    }
   },
   {
     "@context": "https://schema.org",
@@ -350,9 +390,23 @@ function Build-ArticlePage($id, $title, $desc, $category, $author, $readTime, $d
       }
     },
     "datePublished": "$date",
+    "dateModified": "2026-10-12",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://www.getonlinedegrees.online/$canonicalPath"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "$title",
+    "url": "https://www.getonlinedegrees.online/$canonicalPath",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        "h1",
+        ".article-body p:first-of-type"
+      ]
     }
   },
   {

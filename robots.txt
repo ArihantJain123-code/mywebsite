@@ -1,12 +1,13 @@
 # robots.txt for https://www.getonlinedegrees.online/
-# Technical SEO & Crawl Directive Configuration
-# Last updated: 2026-10-10
+# Technical SEO, AEO & GEO (Generative Engine Optimization) Configuration
+# Last updated: 2026-10-12
 
 # =============================================
 # DEFAULT RULES FOR ALL WEB CRAWLERS
 # =============================================
 User-agent: *
 Allow: /
+Allow: /assets/
 Allow: /index.html
 Allow: /online-mba
 Allow: /online-mca
@@ -21,18 +22,22 @@ Allow: /cat-score-calculator
 Allow: /online-mba-colleges-haryana
 Allow: /online-mba-colleges-under-1-lakh
 Allow: /ultimate-guide-online-bba-programs-india
+Allow: /top-online-mba-colleges-india
+Allow: /review-*
 Allow: /privacy
 Allow: /privacy.html
 Allow: /terms
 Allow: /terms.html
 Allow: /sitemap
 Allow: /sitemap.html
+Allow: /llms.txt
+Allow: /llms-full.txt
 Allow: /404.html
 
-# Disallow legacy query parameter pages to flush the 3,000+ duplicate crawler backlog
+# Disallow legacy query parameter pages to flush duplicate crawler backlog
 Disallow: /*?view=*
 
-# Block admin & internal files from all crawlers
+# Block administrative, build, and script files from indexing
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
@@ -42,7 +47,7 @@ Disallow: /*.ps1$
 Disallow: /*.md$
 
 # =============================================
-# GOOGLEBOT — Full Access
+# GOOGLEBOT — Full Access to Public Content
 # =============================================
 User-agent: Googlebot
 Allow: /
@@ -61,12 +66,16 @@ Allow: /cat-score-calculator
 Allow: /online-mba-colleges-haryana
 Allow: /online-mba-colleges-under-1-lakh
 Allow: /ultimate-guide-online-bba-programs-india
+Allow: /top-online-mba-colleges-india
+Allow: /review-*
 Allow: /privacy
 Allow: /privacy.html
 Allow: /terms
 Allow: /terms.html
 Allow: /sitemap
 Allow: /sitemap.html
+Allow: /llms.txt
+Allow: /llms-full.txt
 
 # Disallow legacy query parameter pages for Googlebot
 Disallow: /*?view=*
@@ -78,51 +87,69 @@ Disallow: /*.ps1$
 Disallow: /*.md$
 
 # =============================================
-# BINGBOT — Full Access
+# BINGBOT — Full Access to Clean URLs
 # =============================================
 User-agent: Bingbot
 Allow: /
 Allow: /assets/
 Allow: /index.html
+Allow: /online-mba
+Allow: /online-mca
+Allow: /online-bca
+Allow: /online-bba
+Allow: /online-mcom
+Allow: /compare
+Allow: /blog
+Allow: /contact
+Allow: /resume-builder
+Allow: /cat-score-calculator
+Allow: /online-mba-colleges-haryana
+Allow: /online-mba-colleges-under-1-lakh
+Allow: /ultimate-guide-online-bba-programs-india
+Allow: /top-online-mba-colleges-india
+Allow: /review-*
 Allow: /privacy
 Allow: /privacy.html
 Allow: /terms
 Allow: /terms.html
 Allow: /sitemap
 Allow: /sitemap.html
-Allow: /?view=catalog
-Allow: /?view=compare
-Allow: /?view=blog
-Allow: /?view=blog-detail&id=
-Allow: /?view=contact
-Allow: /?view=resume-builder
+Allow: /llms.txt
+Allow: /llms-full.txt
 
+Disallow: /*?view=*
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 Disallow: /*.ps1$
 Disallow: /*.md$
 
-# =============================================
-# GENERATIVE ENGINE OPTIMIZATION (GEO)
-# Allow AI crawlers to index all public content
-# =============================================
+# =======================================================
+# GENERATIVE ENGINE OPTIMIZATION (GEO) & AI AGENT CRAWLERS
+# Grant AI search and RAG agents unrestricted index access
+# =======================================================
 
 # OpenAI (ChatGPT / SearchGPT)
 User-agent: GPTBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 
 User-agent: OAI-SearchBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 
 User-agent: ChatGPT-User
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
@@ -130,12 +157,16 @@ Disallow: /admin.css
 # Anthropic Claude
 User-agent: ClaudeBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 
 User-agent: anthropic-ai
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
@@ -143,6 +174,8 @@ Disallow: /admin.css
 # Perplexity AI
 User-agent: PerplexityBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
@@ -150,12 +183,16 @@ Disallow: /admin.css
 # Google Gemini & Extended AI Crawlers
 User-agent: Google-Extended
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
 
 User-agent: GoogleOther
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
@@ -163,6 +200,62 @@ Disallow: /admin.css
 # Meta AI
 User-agent: Meta-ExternalAgent
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Amazon AI & Alexa
+User-agent: Amazonbot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# ByteDance AI (TikTok / Doubao)
+User-agent: ByteSpider
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Common Crawl (Foundational Dataset for AI Training)
+User-agent: CCBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Diffbot (Structured Knowledge Graph Extraction)
+User-agent: Diffbot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /admin.html
 Disallow: /admin.js
 Disallow: /admin.css
@@ -177,8 +270,9 @@ User-agent: Baiduspider
 Crawl-delay: 3
 
 # =============================================
-# LLM MANIFEST (GEO)
+# LLM MANIFESTS FOR GENERATIVE SEARCH (GEO)
 # =============================================
+# Standard AI discovery files:
 # https://www.getonlinedegrees.online/llms.txt
 # https://www.getonlinedegrees.online/llms-full.txt
 

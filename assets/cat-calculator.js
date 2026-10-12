@@ -516,7 +516,7 @@
         <td style="font-family:var(--font-mono);">${q.type}</td>
         <td><strong>${q.chosen}</strong></td>
         <td><span class="cat-status-pill ${q.status}">${q.status.toUpperCase()}</span></td>
-        <td style="font-family:var(--font-mono);font-weight:900;color:${q.marks > 0 ? '#10B981' : (q.marks < 0 ? '#FF007A' : '#64748B')};">
+        <td style="font-family:var(--font-mono);font-weight:900;color:${q.marks > 0 ? '#059669' : (q.marks < 0 ? '#E11D48' : '#64748B')};">
           ${q.marks > 0 ? '+' + q.marks : q.marks}
         </td>
       </tr>
@@ -607,16 +607,16 @@
         position: fixed;
         bottom: 24px;
         right: 24px;
-        background: #061124;
-        color: #00F0FF;
-        border: 1px solid rgba(0, 240, 255, 0.4);
+        background: #FFFFFF;
+        color: #0F172A;
+        border: 1.5px solid #E2E8F0;
         border-radius: 14px;
         padding: 12px 20px;
         font-family: var(--font-body);
         font-size: 0.85rem;
         font-weight: 700;
         z-index: 99999;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.15);
         display: flex;
         align-items: center;
         gap: 10px;
@@ -627,7 +627,7 @@
       document.body.appendChild(toast);
     }
 
-    toast.innerHTML = `<i class="fas fa-check-circle" style="color:#00FF88;"></i> ${msg}`;
+    toast.innerHTML = `<i class="fas fa-check-circle" style="color:#10B981;"></i> ${msg}`;
     toast.style.transform = 'translateY(0)';
     toast.style.opacity = '1';
 

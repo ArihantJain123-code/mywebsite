@@ -97,7 +97,24 @@ for ($i = 1; $i -lt $blocks.Length; $i++) {
     if ($cleanDesc.Length -gt 155) { $cleanDesc = $cleanDesc.Substring(0, 155) + "..." }
     $cleanTitle = $title -replace '"', '&quot;'
 
-    # JSON-LD Schemas
+    # JSON-LD Schemas (AEO / GEO / Knowledge Graph)
+    $speakableSchema = @"
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "$cleanTitle",
+    "url": "https://www.getonlinedegrees.online/$canonicalPath",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        ".blog-article h1",
+        ".aeo-answer-block p",
+        "#blog-article-body p:first-of-type"
+      ]
+    }
+  }
+"@
+
     $articleLdJson = @"
 [
   {
@@ -118,7 +135,7 @@ for ($i = 1; $i -lt $blocks.Length; $i++) {
       }
     },
     "datePublished": "$date",
-    "dateModified": "2026-10-10",
+    "dateModified": "2026-10-12",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://www.getonlinedegrees.online/$canonicalPath"
@@ -132,9 +149,31 @@ for ($i = 1; $i -lt $blocks.Length; $i++) {
       { "@type": "ListItem", "position": 2, "name": "Blogs", "item": "https://www.getonlinedegrees.online/blog" },
       { "@type": "ListItem", "position": 3, "name": "$cleanTitle", "item": "https://www.getonlinedegrees.online/$canonicalPath" }
     ]
-  }
-]
+  },
+$speakableSchema
 "@
+
+    if ($canonicalPath -like "review-*") {
+        $uniName = $cleanTitle -replace "( Review.*| Online Review.*|:.*)", ""
+        $uniLd = @"
+,
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "$uniName",
+    "url": "https://www.getonlinedegrees.online/$canonicalPath",
+    "description": "$cleanDesc",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "OnlineDegrees Verified University Index",
+      "url": "https://www.getonlinedegrees.online/"
+    }
+  }
+"@
+        $articleLdJson += $uniLd
+    }
+
+    $articleLdJson += "`n]"
 
     # Construct HTML
     $fullHtml = @"
