@@ -10,15 +10,31 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-# Static Assets Caching (1 Year Cache for Static CSS/JS/Images)
-/assets/*
+# Static Assets Caching (1 Year Cache for Static Images)
+/assets/*.png
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS & JS Caching - Always Fresh Revalidation
+/assets/*.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /*.css
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+  Cache-Control: public, max-age=0, must-revalidate
 
 /*.js
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+  Cache-Control: public, max-age=0, must-revalidate
 
 # HTML Pages - Always Fresh Revalidation
 /*.html
