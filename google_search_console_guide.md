@@ -21,15 +21,17 @@
 
 ---
 
-### Step 2: Submit Your Prioritized Core Sitemap
+### Step 2: Submit Your Prioritized Sitemaps
 1. In the left navigation menu, click **Sitemaps** (under *Indexing*).
-2. Under **Add a new sitemap**, type:
+2. Under **Add a new sitemap**, submit your parent sitemap index:
    ```text
-   sitemap.xml
+   sitemap_index.xml
    ```
 3. Click **Submit**.
-4. **Why this matters:** We structured `sitemap.xml` into a focused, high-authority sitemap of **74 primary URLs** (Homepage, MBA, MCA, BCA, BBA, M.Com, 20+ accredited universities, and comprehensive guides). This ensures Googlebot doesn't get overwhelmed and indexes your core pages first.
-5. *(Optional for later)*: You can also submit `sitemap_articles.xml` once the core pages are indexed.
+4. You can also submit the two sub-sitemaps directly:
+   * `sitemap.xml` (14 core landing pages and degree hubs)
+   * `sitemap_articles.xml` (43 verified university reviews and pillar guides)
+5. **Why this matters:** Submitting `sitemap_index.xml` informs Googlebot of all canonical static HTML pages, ensuring immediate discovery of pre-rendered reviews and calculators.
 
 ---
 
@@ -37,20 +39,49 @@
 Googlebot queues websites based on demand. To jump to the front of the crawling queue:
 
 1. Click on the search bar at the very top of Google Search Console: **"Inspect any URL in https://www.getonlinedegrees.online/"**.
-2. Type or paste:
+2. Type or paste your homepage:
    ```text
    https://www.getonlinedegrees.online/
    ```
    and press **Enter**.
-3. Google will show *"URL is not on Google"*.
-4. Click the white button: **Test Live URL**.
+3. If Google shows *"URL is not on Google"*, click the white button: **Test Live URL**.
    * Googlebot will perform an instant live fetch using modern headless Chromium.
-5. Once the test completes, click **REQUEST INDEXING**.
-6. Repeat this exact test-and-request process for your 4 primary hubs:
-   * `https://www.getonlinedegrees.online/?view=catalog`
-   * `https://www.getonlinedegrees.online/?view=catalog&course=mba`
-   * `https://www.getonlinedegrees.online/?view=catalog&course=mca`
-   * `https://www.getonlinedegrees.online/sitemap.html`
+4. Once the test completes, click **REQUEST INDEXING**.
+5. Repeat this exact test-and-request process for your 5 primary clean landing pages:
+   * `https://www.getonlinedegrees.online/cat-score-calculator`
+   * `https://www.getonlinedegrees.online/online-mba`
+   * `https://www.getonlinedegrees.online/compare`
+   * `https://www.getonlinedegrees.online/online-mca`
+   * `https://www.getonlinedegrees.online/blog`
+
+---
+
+## 🤖 Tracking & Optimizing for Google AI Overviews (Gemini in Search)
+
+Google Search Console tracks when your content appears in **AI Overviews** (the generative AI answer box powered by Gemini at the top of Google search results).
+
+### How to Monitor AI Overviews in GSC:
+1. Open Google Search Console &rarr; click **Performance** &rarr; **Search results**.
+2. Click the **+ New** filter at the top &rarr; select **Search Appearance**.
+3. Select **AI Overviews** or **Good Page Experience**.
+4. Review the queries triggering AI Overviews. Google Gemini cites pages that:
+   * Have pre-rendered `SpeakableSpecification` and `FAQPage` schema (already active across your site).
+   * Feature the 45–60 word concise **Snippet Formula** in the first paragraph.
+   * Provide exact numerical tables for fees and percentiles.
+
+---
+
+## ⚡ Connecting Bing Webmaster Tools (Powers ChatGPT Search)
+
+OpenAI's **ChatGPT Search** and **Copilot** pull real-time web results directly from the Microsoft Bing index.
+
+### 2-Minute Bing Setup:
+1. Go to **[Bing Webmaster Tools](https://www.bing.com/webmasters)** and sign in with Microsoft or Google.
+2. Click **Import from Google Search Console** (1-click verification; no DNS or meta tag editing required).
+3. Under **IndexNow**, verify your automated key status:
+   * Your key is already deployed: `https://www.getonlinedegrees.online/e7f2b1a8c9d4e5f6a7b8c9d0e1f2a3b4.txt`
+   * Your automated PowerShell script (`ping_search_engines.ps1`) pushes all 59 URLs to Bing with HTTP 200 OK.
+4. Once Bing indexes your clean URLs, **ChatGPT Search** will begin citing OnlineDegrees in student queries.
 
 ---
 
