@@ -1,4 +1,4 @@
-﻿# build_all_blogs.ps1
+# build_all_blogs.ps1
 # Pre-renders all 43 editorial articles and verified university reviews into clean static HTML
 
 $ErrorActionPreference = "Stop"
