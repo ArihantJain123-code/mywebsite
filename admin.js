@@ -261,7 +261,17 @@ const SAMPLE_PATHS = [
 ];
 
 const SAMPLE_CITIES = ["Delhi NCR", "Mumbai", "Bengaluru", "Hyderabad", "Pune", "Chennai", "Kolkata", "Jaipur", "Lucknow", "Chandigarh", "Ahmedabad"];
-const SAMPLE_REFERRERS = ["Google Organic (Search)", "Google Organic (Discover)", "Direct", "Bing Organic", "LinkedIn Edu", "WhatsApp Share"];
+const SAMPLE_REFERRERS = [
+  "Google Organic (Search)",
+  "ChatGPT Search (GEO)",
+  "Perplexity AI Citation",
+  "Google Gemini AI Overview",
+  "Claude (Anthropic)",
+  "Direct",
+  "Bing Organic",
+  "LinkedIn Edu",
+  "WhatsApp Share"
+];
 
 function liveTick() {
   if (!adminState.liveStreamActive) return;
@@ -325,11 +335,22 @@ function addLiveStreamItem(item) {
     ? `<span class="badge-live-event" style="margin-left: 6px;"><span class="pulse-dot status-green" style="display:inline-block; width:6px; height:6px; margin-right:4px;"></span>LIVE</span>` 
     : '';
 
+  const isAI = item.isAI || (item.referrer && (
+    item.referrer.includes("ChatGPT") || 
+    item.referrer.includes("Perplexity") || 
+    item.referrer.includes("Claude") || 
+    item.referrer.includes("Gemini") || 
+    item.referrer.includes("Copilot")
+  ));
+  const aiBadge = isAI 
+    ? `<span class="badge" style="background:#ec4899; color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:4px; font-weight:700;"><i class="fas fa-robot"></i> AI SEARCH</span>` 
+    : '';
+
   row.innerHTML = `
     <div class="live-stream-left">
-      <div class="live-stream-icon ${item.icon}"><i class="fas ${item.icon === 'icon-lead' ? 'fa-user-graduate' : 'fa-compass'}"></i></div>
+      <div class="live-stream-icon ${item.icon}"><i class="fas ${item.icon === 'icon-lead' ? 'fa-user-graduate' : (isAI ? 'fa-robot' : 'fa-compass')}"></i></div>
       <div class="live-stream-details">
-        <span class="live-stream-path">${item.title} ${liveBadge}</span>
+        <span class="live-stream-path">${item.title} ${liveBadge} ${aiBadge}</span>
         <span class="live-stream-meta"><i class="fas fa-map-marker-alt"></i> ${item.city} &bull; <i class="fas fa-search"></i> ${item.referrer}</span>
       </div>
     </div>
@@ -357,14 +378,16 @@ function initLiveFeed() {
     recentEvents.forEach(evt => {
       const timeDiff = Math.max(1, Math.round((Date.now() - evt.timestamp) / 1000));
       const timeStr = timeDiff < 60 ? `${timeDiff}s ago` : `${Math.round(timeDiff / 60)}m ago`;
+      const refName = evt.referrerSource || evt.referrer || "Direct";
       addLiveStreamItem({
         path: evt.path || "/",
         title: evt.title || evt.path || "Website Explorer",
         city: evt.city || "Visitor",
-        referrer: evt.referrer || "Direct",
+        referrer: refName,
         icon: evt.type === "lead_submit" ? "icon-lead" : "icon-pageview",
         time: timeStr,
-        isReal: true
+        isReal: true,
+        isAI: !!evt.isAIReferral
       });
     });
   } else {
@@ -849,6 +872,7 @@ function renderCharts() {
     const allEvents = (typeof window.OnlineDegreesAnalytics !== "undefined" && window.OnlineDegreesAnalytics.getEvents)
       ? window.OnlineDegreesAnalytics.getEvents() : [];
 
+    let aiCount = 0;
     let googleCount = 0;
     let directCount = 0;
     let bingCount = 0;
@@ -856,15 +880,27 @@ function renderCharts() {
     let referralCount = 0;
 
     allEvents.forEach(e => {
-      const ref = (e.referrer || "Direct").toLowerCase();
-      if (ref.includes("google")) googleCount++;
-      else if (ref.includes("bing") || ref.includes("duckduckgo") || ref.includes("yahoo") || ref.includes("ecosia")) bingCount++;
-      else if (ref.includes("whatsapp") || ref.includes("linkedin") || ref.includes("facebook") || ref.includes("instagram") || ref.includes("youtube") || ref.includes("twitter") || ref.includes("t.co")) socialCount++;
-      else if (ref === "direct" || !ref || ref === "") directCount++;
-      else referralCount++;
+      if (e.isAIReferral || e.referrerCategory === "AI_SEARCH") {
+        aiCount++;
+      } else {
+        const ref = (e.referrer || "Direct").toLowerCase();
+        if (ref.includes("chatgpt") || ref.includes("perplexity") || ref.includes("claude") || ref.includes("gemini") || ref.includes("copilot")) {
+          aiCount++;
+        } else if (ref.includes("google")) {
+          googleCount++;
+        } else if (ref.includes("bing") || ref.includes("duckduckgo") || ref.includes("yahoo") || ref.includes("ecosia")) {
+          bingCount++;
+        } else if (ref.includes("whatsapp") || ref.includes("linkedin") || ref.includes("facebook") || ref.includes("instagram") || ref.includes("youtube") || ref.includes("twitter") || ref.includes("t.co")) {
+          socialCount++;
+        } else if (ref === "direct" || !ref || ref === "") {
+          directCount++;
+        } else {
+          referralCount++;
+        }
+      }
     });
 
-    const totalSources = googleCount + directCount + bingCount + socialCount + referralCount;
+    const totalSources = aiCount + googleCount + directCount + bingCount + socialCount + referralCount;
     let sourceLabels, sourceData, sourceColors;
 
     if (totalSources === 0) {
@@ -872,15 +908,16 @@ function renderCharts() {
       sourceData = [100];
       sourceColors = ["#06b6d4"];
     } else {
-      sourceLabels = ["Google Organic", "Direct Navigation", "Bing / AI Search", "Social / WhatsApp", "Referrals"];
+      sourceLabels = ["Generative AI (GEO)", "Google Organic", "Direct Navigation", "Bing Organic", "Social / WhatsApp", "Referrals"];
       sourceData = [
+        Math.round((aiCount / totalSources) * 100),
         Math.round((googleCount / totalSources) * 100),
         Math.round((directCount / totalSources) * 100),
         Math.round((bingCount / totalSources) * 100),
         Math.round((socialCount / totalSources) * 100),
         Math.round((referralCount / totalSources) * 100)
       ];
-      sourceColors = ["#6366f1", "#06b6d4", "#10b981", "#f59e0b", "#8b5cf6"];
+      sourceColors = ["#ec4899", "#6366f1", "#06b6d4", "#10b981", "#f59e0b", "#8b5cf6"];
     }
 
     adminState.charts.sources = new Chart(ctxSources, {

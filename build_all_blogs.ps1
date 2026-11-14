@@ -46,6 +46,35 @@ function Get-CleanFooter($html) {
 $cleanNav = Get-CleanNav $headerHtml
 $cleanFoot = Get-CleanFooter $footerHtml
 
+# Knowledge Graph Entity Map for Generative Engine Optimization (GEO & Google Knowledge Vault)
+$wikiMap = @{
+    "review-amity_university_online" = @("https://en.wikipedia.org/wiki/Amity_University", "https://www.wikidata.org/wiki/Q4746979")
+    "review-chandigarh_university_online" = @("https://en.wikipedia.org/wiki/Chandigarh_University", "https://www.wikidata.org/wiki/Q16955891")
+    "review-manipal_university_jaipur_online" = @("https://en.wikipedia.org/wiki/Manipal_University_Jaipur", "https://www.wikidata.org/wiki/Q6749969")
+    "review-lovely_professional_university_lpu_online" = @("https://en.wikipedia.org/wiki/Lovely_Professional_University", "https://www.wikidata.org/wiki/Q3631980")
+    "review-jain_university_online" = @("https://en.wikipedia.org/wiki/Jain_University", "https://www.wikidata.org/wiki/Q6123861")
+    "review-d_y_patil_university_online_pune" = @("https://en.wikipedia.org/wiki/Dr._D._Y._Patil_Vidyapeeth", "https://www.wikidata.org/wiki/Q16960113")
+    "review-dy_patil_vidyapeeth_online_navi_mumbai" = @("https://en.wikipedia.org/wiki/Dr._D._Y._Patil_Vidyapeeth", "https://www.wikidata.org/wiki/Q16960113")
+    "review-nmims_online" = @("https://en.wikipedia.org/wiki/NMIMS", "https://www.wikidata.org/wiki/Q6954203")
+    "review-symbiosis_centre_for_distance_learning_scdl" = @("https://en.wikipedia.org/wiki/Symbiosis_Centre_for_Distance_Learning", "https://www.wikidata.org/wiki/Q7661144")
+    "review-uttaranchal_university_online" = @("https://en.wikipedia.org/wiki/Uttaranchal_University", "https://www.wikidata.org/wiki/Q7903429")
+    "review-kurukshetra_university_online" = @("https://en.wikipedia.org/wiki/Kurukshetra_University", "https://www.wikidata.org/wiki/Q6447477")
+    "review-sikkim_manipal_university_online" = @("https://en.wikipedia.org/wiki/Sikkim_Manipal_University", "https://www.wikidata.org/wiki/Q7513753")
+    "review-op_jindal_global_university_online" = @("https://en.wikipedia.org/wiki/O._P._Jindal_Global_University", "https://www.wikidata.org/wiki/Q7072147")
+    "review-jamia_hamdard_university_online" = @("https://en.wikipedia.org/wiki/Jamia_Hamdard", "https://www.wikidata.org/wiki/Q1681387")
+    "review-srm_university_online" = @("https://en.wikipedia.org/wiki/SRM_Institute_of_Science_and_Technology", "https://www.wikidata.org/wiki/Q2567425")
+    "review-sastra_university_online" = @("https://en.wikipedia.org/wiki/Shanmugha_Arts,_Science,_Technology_%26_Research_Academy", "https://www.wikidata.org/wiki/Q7488812")
+    "review-upes_online" = @("https://en.wikipedia.org/wiki/University_of_Petroleum_and_Energy_Studies", "https://www.wikidata.org/wiki/Q7896131")
+    "review-amrita_vishwa_vidyapeetham_online" = @("https://en.wikipedia.org/wiki/Amrita_Vishwa_Vidyapeetham", "https://www.wikidata.org/wiki/Q4748685")
+    "review-kl_university_online" = @("https://en.wikipedia.org/wiki/K_L_University", "https://www.wikidata.org/wiki/Q6327311")
+    "review-golden_gate_university_usa" = @("https://en.wikipedia.org/wiki/Golden_Gate_University", "https://www.wikidata.org/wiki/Q1535492")
+    "review-liverpool_john_moores_university_uk" = @("https://en.wikipedia.org/wiki/Liverpool_John_Moores_University", "https://www.wikidata.org/wiki/Q1866497")
+    "review-andhra_university_online" = @("https://en.wikipedia.org/wiki/Andhra_University", "https://www.wikidata.org/wiki/Q492348")
+    "review-shoolini_university_online" = @("https://en.wikipedia.org/wiki/Shoolini_University_of_Biotechnology_and_Management_Sciences", "https://www.wikidata.org/wiki/Q7500588")
+    "review-galgotias_university_online" = @("https://en.wikipedia.org/wiki/Galgotias_University", "https://www.wikidata.org/wiki/Q5518491")
+    "review-chitkara_university_online" = @("https://en.wikipedia.org/wiki/Chitkara_University,_Punjab", "https://www.wikidata.org/wiki/Q5102287")
+}
+
 # Read data.js
 $raw = [System.IO.File]::ReadAllText("$PSScriptRoot\data.js", [System.Text.Encoding]::UTF8)
 $startMarker = "const BLOGS_DATA = ["
@@ -172,13 +201,19 @@ $speakableSchema
 
     if ($canonicalPath -like "review-*") {
         $uniName = $cleanTitle -replace "( Review.*| Online Review.*|:.*)", ""
+        $sameAsBlock = ""
+        if ($wikiMap.ContainsKey($canonicalPath)) {
+            $urls = $wikiMap[$canonicalPath] | ForEach-Object { "`"$_`"" }
+            $sameAsList = $urls -join ", "
+            $sameAsBlock = "`n    `"sameAs`": [ $sameAsList ],"
+        }
         $uniLd = @"
 ,
   {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": "$uniName",
-    "url": "https://www.getonlinedegrees.online/$canonicalPath",
+    "url": "https://www.getonlinedegrees.online/$canonicalPath",$sameAsBlock
     "description": "$cleanDesc",
     "parentOrganization": {
       "@type": "Organization",
@@ -214,6 +249,10 @@ $speakableSchema
   <link rel="canonical" href="https://www.getonlinedegrees.online/$canonicalPath">
   <link rel="alternate" hreflang="en-IN" href="https://www.getonlinedegrees.online/$canonicalPath">
   <link rel="alternate" hreflang="x-default" href="https://www.getonlinedegrees.online/$canonicalPath">
+
+  <!-- LLM & AI Generative Search Discovery (GEO Standard) -->
+  <link rel="help" type="text/plain" href="https://www.getonlinedegrees.online/llms.txt" title="LLM Knowledge Digest">
+  <link rel="alternate" type="text/plain" href="https://www.getonlinedegrees.online/llms-full.txt" title="Full AI Grounding Manifest">
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="article">

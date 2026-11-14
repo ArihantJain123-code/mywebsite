@@ -59,6 +59,16 @@ foreach ($h in $hubs) {
         $html = $html -replace '(?s)("\@type":\s*"WebSite"[^}]+},)', "`$1`n$speakableBlock"
     }
 
+    # 4. Add LLM discovery links if not present
+    if ($html -notmatch 'rel="help"[^>]*llms\.txt') {
+        $llmLinks = @"
+  <!-- LLM & AI Generative Search Discovery (GEO Standard) -->
+  <link rel="help" type="text/plain" href="https://www.getonlinedegrees.online/llms.txt" title="LLM Knowledge Digest">
+  <link rel="alternate" type="text/plain" href="https://www.getonlinedegrees.online/llms-full.txt" title="Full AI Grounding Manifest">
+"@
+        $html = $html -replace '(<link rel="alternate" hreflang="x-default"[^>]*>)', "`$1`n$llmLinks"
+    }
+
     [System.IO.File]::WriteAllText($filePath, $html, [System.Text.Encoding]::UTF8)
     Write-Host "Synchronized SEO & AEO for $($h.File)" -ForegroundColor Green
 }

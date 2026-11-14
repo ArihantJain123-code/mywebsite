@@ -18,6 +18,37 @@
     return window.location.pathname + (window.location.search || window.location.hash || "");
   }
 
+  // Detect AI Search Engines, Organic Search, and Direct Referrers (GEO Telemetry)
+  function detectReferrerSource(ref) {
+    if (!ref || ref === "Direct") return { source: "Direct", category: "Direct", isAI: false };
+    try {
+      const lower = ref.toLowerCase();
+      if (lower.includes("chatgpt.com") || lower.includes("com.openai.chat") || lower.includes("oaistatic.com")) {
+        return { source: "ChatGPT / OpenAI Search", category: "AI_SEARCH", isAI: true };
+      }
+      if (lower.includes("perplexity.ai")) {
+        return { source: "Perplexity AI", category: "AI_SEARCH", isAI: true };
+      }
+      if (lower.includes("claude.ai") || lower.includes("anthropic.com")) {
+        return { source: "Claude (Anthropic)", category: "AI_SEARCH", isAI: true };
+      }
+      if (lower.includes("gemini.google.com") || (lower.includes("google.") && (lower.includes("/ai") || lower.includes("ai_overview")))) {
+        return { source: "Google Gemini / AI Overview", category: "AI_SEARCH", isAI: true };
+      }
+      if (lower.includes("copilot.microsoft.com")) {
+        return { source: "Microsoft Copilot", category: "AI_SEARCH", isAI: true };
+      }
+      if (lower.includes("google.")) return { source: "Google Organic", category: "Search", isAI: false };
+      if (lower.includes("bing.")) return { source: "Bing Organic", category: "Search", isAI: false };
+      if (lower.includes("yahoo.")) return { source: "Yahoo", category: "Search", isAI: false };
+      if (lower.includes("duckduckgo.")) return { source: "DuckDuckGo", category: "Search", isAI: false };
+      const parsedUrl = new URL(ref, window.location.origin);
+      return { source: parsedUrl.hostname, category: "Referral", isAI: false };
+    } catch(e) {
+      return { source: ref, category: "Referral", isAI: false };
+    }
+  }
+
   // Get or initialize session
   function getSession() {
     let session = null;
@@ -27,12 +58,17 @@
     } catch (e) { }
 
     if (!session || Date.now() - session.lastActivity > 30 * 60 * 1000) {
+      const rawRef = document.referrer || "Direct";
+      const refInfo = detectReferrerSource(rawRef);
       session = {
         id: generateId("sess"),
         startTime: Date.now(),
         lastActivity: Date.now(),
         pageviews: 0,
-        referrer: document.referrer || "Direct",
+        referrer: rawRef,
+        referrerSource: refInfo.source,
+        referrerCategory: refInfo.category,
+        isAIReferral: refInfo.isAI,
         device: getDeviceType(),
         browser: getBrowserInfo(),
         os: getOSInfo(),
@@ -105,6 +141,8 @@
   // Record an event
   function trackEvent(eventType, eventData = {}) {
     const session = getSession();
+    const rawRef = document.referrer || session.referrer || "Direct";
+    const refInfo = detectReferrerSource(rawRef);
     const event = {
       id: generateId("evt"),
       type: eventType,
@@ -112,7 +150,10 @@
       sessionId: session.id,
       path: getCurrentTrackPath(),
       title: document.title,
-      referrer: document.referrer || "Direct",
+      referrer: rawRef,
+      referrerSource: refInfo.source,
+      referrerCategory: refInfo.category,
+      isAIReferral: refInfo.isAI,
       device: session.device,
       city: session.city,
       data: eventData
