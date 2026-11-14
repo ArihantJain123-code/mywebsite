@@ -1,4 +1,4 @@
-﻿// Mock Database for Online Degree Education Portal
+// Mock Database for Online Degree Education Portal
 
 const COURSES_DATA = {
   "mba": {
