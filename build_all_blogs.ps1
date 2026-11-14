@@ -1,4 +1,4 @@
-# build_all_blogs.ps1
+﻿# build_all_blogs.ps1
 # Pre-renders all 43 editorial articles and verified university reviews into clean static HTML
 
 $ErrorActionPreference = "Stop"
@@ -77,8 +77,25 @@ for ($i = 1; $i -lt $blocks.Length; $i++) {
     }
 
     $bodyHtml = $contentMatch.Groups[1].Value -replace '\\"', '"' -replace '\\/', '/'
-    # Fix Rupee symbol if any
-    $bodyHtml = $bodyHtml -replace 'â‚¹', [char]0x20B9
+
+    # Transform legacy query URLs inside blog body to clean static URLs
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&amp;course=mba', '/online-mba'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&amp;course=mca', '/online-mca'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&amp;course=bca', '/online-bca'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&amp;course=bba', '/online-bba'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&amp;course=mcom', '/online-mcom'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&course=mba', '/online-mba'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&course=mca', '/online-mca'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&course=bca', '/online-bca'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&course=bba', '/online-bba'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&course=mcom', '/online-mcom'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&amp;university=([a-zA-Z0-9_]+)', '/review-$1'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog&university=([a-zA-Z0-9_]+)', '/review-$1'
+    $bodyHtml = $bodyHtml -replace '/\?view=catalog', '/online-mba'
+    $bodyHtml = $bodyHtml -replace '/\?view=compare', '/compare'
+    $bodyHtml = $bodyHtml -replace '/\?view=blog', '/blog'
+    $bodyHtml = $bodyHtml -replace '/\?view=contact', '/contact'
+    $bodyHtml = $bodyHtml -replace '/\?view=resume-builder', '/resume-builder'
 
     # Determine canonical path and filename
     $canonicalPath = $id
