@@ -337,12 +337,31 @@ Write-Host "Generated resume-builder.html" -ForegroundColor Green
 function Build-ArticlePage($id, $title, $desc, $category, $author, $readTime, $date, $bodyHtml, $canonicalPath) {
     # Replace contents inside blogDetailBaseHtml
     $articleSection = $blogDetailBaseHtml
+    # Transform legacy query URLs inside blog body to clean static URLs
+    $cleanBody = $bodyHtml -replace '/\?view=catalog&amp;course=mba', '/online-mba'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&amp;course=mca', '/online-mca'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&amp;course=bca', '/online-bca'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&amp;course=bba', '/online-bba'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&amp;course=mcom', '/online-mcom'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&course=mba', '/online-mba'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&course=mca', '/online-mca'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&course=bca', '/online-bca'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&course=bba', '/online-bba'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&course=mcom', '/online-mcom'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&amp;university=([a-zA-Z0-9_]+)', '/review-$1'
+    $cleanBody = $cleanBody -replace '/\?view=catalog&university=([a-zA-Z0-9_]+)', '/review-$1'
+    $cleanBody = $cleanBody -replace '/\?view=catalog', '/online-mba'
+    $cleanBody = $cleanBody -replace '/\?view=compare', '/compare'
+    $cleanBody = $cleanBody -replace '/\?view=blog', '/blog'
+    $cleanBody = $cleanBody -replace '/\?view=contact', '/contact'
+    $cleanBody = $cleanBody -replace '/\?view=resume-builder', '/resume-builder'
+
     $articleSection = $articleSection -replace '<h1 class="blog-article-title" id="blog-article-title">.*?</h1>', "<h1 class=`"blog-article-title`" id=`"blog-article-title`">$title</h1>"
     $articleSection = $articleSection -replace '<span class="blog-article-category-tag" id="blog-article-category">.*?</span>', "<span class=`"blog-article-category-tag`" id=`"blog-article-category`">$category</span>"
     $articleSection = $articleSection -replace '<span class="blog-article-read-time" id="blog-article-readtime">.*?</span>', "<span class=`"blog-article-read-time`" id=`"blog-article-readtime`"><i class=`"far fa-clock`"></i> $readTime</span>"
     $articleSection = $articleSection -replace '<h4 id="blog-article-author">.*?</h4>', "<h4 id=`"blog-article-author`">$author</h4>"
     $articleSection = $articleSection -replace '<p id="blog-article-date">.*?</li>|<p id="blog-article-date">.*?</p>', "<p id=`"blog-article-date`">Posted on $date</p>"
-    $articleSection = $articleSection -replace '<!-- Article html copy injected -->', $bodyHtml
+    $articleSection = $articleSection -replace '<!-- Article html copy injected -->', $cleanBody
     $articleSection = $articleSection -replace 'id="blog-breadcrumb-active".*?>Article<', "id=`"blog-breadcrumb-active`">$title<"
     $articleSection = $articleSection -replace '<div class="related-posts-grid" id="blog-related-grid">.*?</div>', @"
 <div class="related-posts-grid" id="blog-related-grid">
