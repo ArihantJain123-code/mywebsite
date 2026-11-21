@@ -30,7 +30,7 @@
 3. Click **Submit**.
 4. You can also submit the two sub-sitemaps directly:
    * `sitemap.xml` (14 core landing pages and degree hubs)
-   * `sitemap_articles.xml` (43 verified university reviews and pillar guides)
+   * `sitemap_articles.xml` (46 verified university reviews and editorial pillar guides)
 5. **Why this matters:** Submitting `sitemap_index.xml` informs Googlebot of all canonical static HTML pages, ensuring immediate discovery of pre-rendered reviews and calculators.
 
 ---
@@ -80,7 +80,7 @@ OpenAI's **ChatGPT Search** and **Copilot** pull real-time web results directly 
 2. Click **Import from Google Search Console** (1-click verification; no DNS or meta tag editing required).
 3. Under **IndexNow**, verify your automated key status:
    * Your key is already deployed: `https://www.getonlinedegrees.online/e7f2b1a8c9d4e5f6a7b8c9d0e1f2a3b4.txt`
-   * Your automated PowerShell script (`ping_search_engines.ps1`) pushes all 59 URLs to Bing with HTTP 200 OK.
+   * Your automated PowerShell script (`ping_search_engines.ps1`) pushes all 62 clean URLs to Bing with HTTP 200 OK.
 4. Once Bing indexes your clean URLs, **ChatGPT Search** will begin citing OnlineDegrees in student queries.
 
 ---
